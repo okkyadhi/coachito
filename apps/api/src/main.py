@@ -145,7 +145,7 @@ async def health_check() -> JSONResponse:
     HTTP 200 when all green, 503 with the failure detail otherwise.
     """
     result = await collect_health()
-    code = 200 if result["status"] == "ok" else 503
+    code = 503 if result["status"] == "fail" else 200
     return JSONResponse(content=result, status_code=code)
 
 

@@ -90,7 +90,13 @@ def _short(e: Exception) -> str:
 
 
 async def collect() -> dict[str, Any]:
-    """Run all four probes concurrently; return shape suited for /healthz."""
+    """Run all four probes concurrently; return shape suited for /healthz.
+
+    HTTP 200 ("ok" or "degraded") when DB + Redis are healthy.
+    HTTP 503 ("fail") only when a critical subsystem (DB or Redis) is down.
+    S3 and SMTP failures are shown in the body but don't block the deploy —
+    those services are optional at launch and may not be configured yet.
+    """
     db, redis, s3, smtp = await asyncio.gather(
         probe_db(), probe_redis(), probe_s3(), probe_smtp()
     )
@@ -100,8 +106,15 @@ async def collect() -> dict[str, Any]:
         "s3": _to_dict(s3),
         "smtp": _to_dict(smtp),
     }
-    ok = all(c["status"] == "ok" for c in checks.values())
-    return {"status": "ok" if ok else "degraded", "checks": checks}
+    critical_ok = checks["db"]["status"] == "ok" and checks["redis"]["status"] == "ok"
+    all_ok = critical_ok and all(c["status"] == "ok" for c in checks.values())
+    if not critical_ok:
+        status = "fail"
+    elif all_ok:
+        status = "ok"
+    else:
+        status = "degraded"
+    return {"status": status, "checks": checks}
 
 
 def _to_dict(probe: ProbeResult) -> dict[str, str | None]:
