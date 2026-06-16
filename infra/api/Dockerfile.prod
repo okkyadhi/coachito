@@ -1,0 +1,48 @@
+# Production API image (Railway / VPS).
+#
+# Differences from the dev image:
+#   - source is copied IN, not bind-mounted
+#   - no --reload / uvicorn hot reload
+#   - listens on $PORT (Railway sets this; falls back to 8000)
+#   - same start command serves both the API service (uvicorn) and the
+#     worker service (rq) — the platform overrides CMD for the worker.
+
+FROM python:3.12-slim
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        curl \
+        libpango-1.0-0 \
+        libpangoft2-1.0-0 \
+        libcairo2 \
+        libgdk-pixbuf-2.0-0 \
+        libharfbuzz-subset0 \
+        libffi8 \
+        shared-mime-info \
+        fonts-dejavu-core \
+        fonts-liberation \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+WORKDIR /app/apps/api
+
+# Install deps in a layer that only changes when manifests change
+COPY apps/api/pyproject.toml apps/api/uv.lock apps/api/alembic.ini ./
+RUN uv sync --frozen --no-dev
+
+# Now copy source — invalidates only when src/alembic actually change
+COPY apps/api/src ./src
+COPY apps/api/alembic ./alembic
+COPY apps/api/scripts ./scripts
+COPY apps/api/templates ./templates
+COPY apps/api/data ./data
+
+ENV PATH="/app/apps/api/.venv/bin:$PATH"
+ENV PYTHONUNBUFFERED=1
+
+# Railway / Fly / Render set $PORT; default to 8000 for local prod test
+ENV PORT=8000
+EXPOSE 8000
+
+CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"]

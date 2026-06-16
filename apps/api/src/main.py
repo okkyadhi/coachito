@@ -1,7 +1,9 @@
+import os
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from src.middleware.request_id import RequestIdMiddleware
@@ -42,6 +44,7 @@ from src.workspaces.members import router as workspaces_members_router
 from src.workspaces.public import router as workspaces_public_router
 from src.workspaces.router import router as workspaces_router
 from src.workspaces.settings import router as workspaces_settings_router
+from src.admin.router import router as admin_router
 
 
 @asynccontextmanager
@@ -58,6 +61,24 @@ app = FastAPI(
     lifespan=lifespan,
 )
 app.add_middleware(RequestIdMiddleware)
+
+# CORS — read from env so each deployment lists only its own FE origins.
+# In dev, the Vite proxy handles same-origin so no entries are needed;
+# in prod (Railway, Fly, etc.) where the FE is on a separate origin, set
+# ALLOWED_ORIGINS to a comma-separated list of full URLs.
+_allowed_origins = [
+    o.strip()
+    for o in os.environ.get("ALLOWED_ORIGINS", "").split(",")
+    if o.strip()
+]
+if _allowed_origins:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=_allowed_origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 app.include_router(auth_router)
 app.include_router(workspaces_router)
@@ -87,6 +108,7 @@ app.include_router(curriculum_router)  # /curriculum/skills, /tiers, /feedback
 app.include_router(invites_trainees_router)  # POST /trainees/{id}/invite
 app.include_router(invites_router)           # POST /invites/{token}/claim
 app.include_router(invites_public_router)    # GET  /i/{token}
+app.include_router(admin_router)             # /admin/* — platform admin dashboard
 
 
 @app.get("/healthz")

@@ -2,7 +2,11 @@
 // auth store, and surfaces the FastAPI `detail` field on errors.
 import { useAuthStore } from '@/features/auth/auth-store';
 
-const BASE_URL = '/api';
+// In dev, Vite proxies /api/* → http://api:8000 (see vite.config.ts).
+// In prod, set VITE_API_BASE_URL at build time to point at the API service
+// directly (e.g. "https://coachito-api.up.railway.app").  Defaults to /api
+// so behind-a-reverse-proxy deployments keep working unchanged.
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
 export class ApiError extends Error {
   constructor(public status: number, message: string) {

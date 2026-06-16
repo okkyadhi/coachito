@@ -1,0 +1,46 @@
+# Production web image — Vite build served by nginx-alpine.
+#
+# Build-time env vars (must be passed via --build-arg):
+#   VITE_API_BASE_URL  — typically "/api" if proxied behind a reverse proxy,
+#                        or the absolute https URL of the API service on
+#                        Railway/Fly (e.g. "https://coachito-api.up.railway.app")
+#   VITE_SENTRY_DSN    — optional Sentry DSN for the FE
+#   VITE_GOOGLE_CLIENT_ID — optional, only if ENABLE_GOOGLE_OAUTH
+
+FROM node:20-alpine AS build
+
+RUN corepack enable && corepack prepare pnpm@9.6.0 --activate
+
+WORKDIR /app
+
+# Workspace manifests
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml tsconfig.base.json ./
+COPY packages/types/ ./packages/types/
+COPY apps/web/package.json apps/web/tsconfig.json ./apps/web/
+
+# Deps from a frozen lockfile so the build is reproducible
+RUN pnpm install --frozen-lockfile
+
+# Source
+COPY apps/web/ ./apps/web/
+
+ARG VITE_API_BASE_URL=/api
+ARG VITE_SENTRY_DSN=
+ARG VITE_GOOGLE_CLIENT_ID=
+ENV VITE_API_BASE_URL=${VITE_API_BASE_URL} \
+    VITE_SENTRY_DSN=${VITE_SENTRY_DSN} \
+    VITE_GOOGLE_CLIENT_ID=${VITE_GOOGLE_CLIENT_ID}
+
+RUN pnpm --filter @coachito/web build
+
+# ── runtime ──────────────────────────────────────────────────────
+FROM nginx:1.27-alpine
+
+COPY infra/web/nginx.prod.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/apps/web/dist /usr/share/nginx/html
+
+# Railway sets $PORT; rewrite the listen directive at container start.
+ENV PORT=80
+EXPOSE 80
+
+CMD ["/bin/sh", "-c", "sed -i \"s/listen 80;/listen ${PORT:-80};/\" /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
