@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Logo } from '@/components/Logo';
+import { PhoneInput } from '@/components/PhoneInput';
 import { PrimaryButton } from '@/components/PrimaryButton';
 import { TextInput } from '@/components/TextInput';
 
@@ -13,6 +14,15 @@ import { useAuthStore } from './auth-store';
 
 const SPORTS: SportCode[] = ['padel', 'tennis'];
 
+// Strip whitespace + ensure leading "+".  Returns null if the user left
+// only the prefix (e.g. "+62") or cleared it.
+function normalizePhone(raw: string): string | null {
+  const stripped = raw.replace(/\s+/g, '');
+  const withPlus = stripped.startsWith('+') ? stripped : `+${stripped}`;
+  // "+" alone or "+" + ≤2 digits = country code only; treat as not provided.
+  return withPlus.length > 4 ? withPlus : null;
+}
+
 export function SignUpCoachScreen() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -20,6 +30,7 @@ export function SignUpCoachScreen() {
 
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('+62 ');
   const [password, setPassword] = useState('');
   const [sportCode, setSportCode] = useState<SportCode>('padel');
   const [loading, setLoading] = useState(false);
@@ -36,6 +47,7 @@ export function SignUpCoachScreen() {
         email: email.trim(),
         password,
         sportCode,
+        phoneE164: normalizePhone(phone),
       });
       signIn(result);
       navigate(result.redirectTo, { replace: true });
@@ -77,6 +89,12 @@ export function SignUpCoachScreen() {
             placeholder={t('signin.emailPlaceholder')}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+          />
+          <PhoneInput
+            label={t('signup.fields.phoneLabel')}
+            placeholder="+62 812 3456 7890"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
           />
           <TextInput
             type="password"

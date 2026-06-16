@@ -28,8 +28,10 @@ class UpgradeRequestOut(BaseModel):
     requester_user_id: str | None
     requester_email: str | None
     requester_display_name: str | None
+    requester_phone_e164: str | None
     owner_email: str | None
     owner_display_name: str | None
+    owner_phone_e164: str | None
     status: str
     note: str | None
     created_at: datetime

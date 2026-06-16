@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Check, Mail, X } from 'lucide-react';
+import { Check, Mail, MessageCircle, X } from 'lucide-react';
 import { useState } from 'react';
 
 import { ApiError } from '@/lib/api';
@@ -132,6 +132,13 @@ export function AdminUpgradeRequestsScreen() {
   );
 }
 
+// wa.me requires a digits-only phone (no leading "+").
+function waNumber(phone: string | null): string | null {
+  if (!phone) return null;
+  const digits = phone.replace(/\D+/g, '');
+  return digits.length > 0 ? digits : null;
+}
+
 function Row({
   row,
   onAction,
@@ -142,6 +149,12 @@ function Row({
   pending: boolean;
 }) {
   const followUpEmail = row.requester_email ?? row.owner_email;
+  const wa = waNumber(row.requester_phone_e164 ?? row.owner_phone_e164);
+  const waMsg = encodeURIComponent(
+    `Halo, terkait permintaan upgrade workspace "${row.workspace_name}" ke plan ${
+      PLAN_LABELS[row.requested_plan] ?? row.requested_plan
+    }. Saya dari Coachito, mohon konfirmasi pembayaran ya.`,
+  );
   return (
     <tr>
       <td className="px-4 py-3">
@@ -161,6 +174,11 @@ function Row({
         <p className="text-caption text-text-color-secondary">
           {row.requester_email ?? '—'}
         </p>
+        {row.requester_phone_e164 ? (
+          <p className="text-caption text-text-color-secondary">
+            {row.requester_phone_e164}
+          </p>
+        ) : null}
       </td>
       <td className="px-4 py-3 text-body text-text-color-primary">
         {PLAN_LABELS[row.requested_plan] ?? row.requested_plan}
@@ -178,6 +196,18 @@ function Row({
       </td>
       <td className="px-4 py-3">
         <div className="flex items-center justify-end gap-2">
+          {wa ? (
+            <a
+              href={`https://wa.me/${wa}?text=${waMsg}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-8 items-center gap-1.5 rounded-md bg-green-50 px-2.5 text-caption font-medium text-green-700 hover:bg-green-100"
+              title={`WhatsApp ${row.requester_phone_e164 ?? row.owner_phone_e164}`}
+            >
+              <MessageCircle size={14} strokeWidth={1.75} />
+              WhatsApp
+            </a>
+          ) : null}
           {followUpEmail ? (
             <a
               href={`mailto:${followUpEmail}?subject=${encodeURIComponent(

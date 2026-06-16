@@ -73,6 +73,10 @@ class SignupCoachIn(BaseModel):
     email: EmailStr
     password: str = Field(min_length=8, max_length=1024)
     sport_code: SportCode = "padel"
+    # E.164 (e.g. "+6281234567890") — kept loose so we don't reject
+    # quirks; the admin upgrade-requests UI only uses it as a wa.me
+    # deep link.
+    phone_e164: str | None = Field(default=None, max_length=20)
 
 
 class SignupClubIn(BaseModel):
@@ -85,6 +89,7 @@ class SignupClubIn(BaseModel):
     club_name: str = Field(min_length=2, max_length=120)
     city: str | None = Field(default=None, max_length=100)
     sport_codes: list[SportCode] = Field(min_length=1, max_length=2)
+    phone_e164: str | None = Field(default=None, max_length=20)
 
 
 class SignupOut(BaseModel):

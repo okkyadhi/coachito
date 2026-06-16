@@ -467,6 +467,7 @@ async def signup_coach(
 
     user = User(
         email=email,
+        phone_e164=body.phone_e164.strip() if body.phone_e164 and body.phone_e164.strip() else None,
         display_name=body.display_name.strip(),
         password_hash=password_hash,
     )
@@ -537,6 +538,7 @@ async def signup_club(
 
     user = User(
         email=email,
+        phone_e164=body.phone_e164.strip() if body.phone_e164 and body.phone_e164.strip() else None,
         display_name=body.display_name.strip(),
         password_hash=password_hash,
     )

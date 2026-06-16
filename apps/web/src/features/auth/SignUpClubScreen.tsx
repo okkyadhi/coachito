@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Logo } from '@/components/Logo';
+import { PhoneInput } from '@/components/PhoneInput';
 import { PrimaryButton } from '@/components/PrimaryButton';
 import { TextInput } from '@/components/TextInput';
 
@@ -13,6 +14,12 @@ import { useAuthStore } from './auth-store';
 
 const SPORTS: SportCode[] = ['padel', 'tennis'];
 
+function normalizePhone(raw: string): string | null {
+  const stripped = raw.replace(/\s+/g, '');
+  const withPlus = stripped.startsWith('+') ? stripped : `+${stripped}`;
+  return withPlus.length > 4 ? withPlus : null;
+}
+
 export function SignUpClubScreen() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -20,6 +27,7 @@ export function SignUpClubScreen() {
 
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('+62 ');
   const [password, setPassword] = useState('');
   const [clubName, setClubName] = useState('');
   const [city, setCity] = useState('');
@@ -60,6 +68,7 @@ export function SignUpClubScreen() {
         clubName: clubName.trim(),
         city: city.trim() || null,
         sportCodes: Array.from(sports),
+        phoneE164: normalizePhone(phone),
       });
       signIn(result);
       navigate(result.redirectTo, { replace: true });
@@ -101,6 +110,12 @@ export function SignUpClubScreen() {
             placeholder={t('signin.emailPlaceholder')}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+          />
+          <PhoneInput
+            label={t('signup.fields.phoneLabel')}
+            placeholder="+62 812 3456 7890"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
           />
           <TextInput
             type="password"

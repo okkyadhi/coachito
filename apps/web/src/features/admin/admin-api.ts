@@ -138,8 +138,10 @@ export interface UpgradeRequestRow {
   requester_user_id: string | null;
   requester_email: string | null;
   requester_display_name: string | null;
+  requester_phone_e164: string | null;
   owner_email: string | null;
   owner_display_name: string | null;
+  owner_phone_e164: string | null;
   status: UpgradeRequestStatus;
   note: string | null;
   created_at: string;

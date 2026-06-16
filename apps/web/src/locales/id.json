@@ -524,7 +524,8 @@
       "cityOptional": "Kota (opsional)",
       "cityPlaceholder": "mis. Jakarta",
       "sportLabel": "Olahraga utama",
-      "sportsLabel": "Olahraga yang ditawarkan"
+      "sportsLabel": "Olahraga yang ditawarkan",
+      "phoneLabel": "WhatsApp (opsional)"
     }
   },
   "sports": {

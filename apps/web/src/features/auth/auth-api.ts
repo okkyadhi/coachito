@@ -112,6 +112,7 @@ export interface SignUpCoachInput {
   email: string;
   password: string;
   sportCode: SportCode;
+  phoneE164?: string | null;
 }
 
 export interface SignUpClubInput {
@@ -121,6 +122,7 @@ export interface SignUpClubInput {
   clubName: string;
   city: string | null;
   sportCodes: SportCode[];
+  phoneE164?: string | null;
 }
 
 export interface SignUpResult extends AuthResult {
@@ -143,6 +145,7 @@ export async function signUpCoach(input: SignUpCoachInput): Promise<SignUpResult
       email: input.email,
       password: input.password,
       sport_code: input.sportCode,
+      phone_e164: input.phoneE164 ?? null,
     },
     { authenticated: false },
   );
@@ -204,6 +207,7 @@ export async function signUpClub(input: SignUpClubInput): Promise<SignUpResult> 
       club_name: input.clubName,
       city: input.city,
       sport_codes: input.sportCodes,
+      phone_e164: input.phoneE164 ?? null,
     },
     { authenticated: false },
   );
