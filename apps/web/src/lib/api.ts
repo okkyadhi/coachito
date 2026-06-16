@@ -24,10 +24,65 @@ interface RequestOptions {
   authenticated?: boolean;
   /** Use the refresh token instead of access.  Used by /auth/refresh only. */
   useRefreshToken?: boolean;
+  /** Internal: skip the 401 → refresh retry to avoid infinite loops. */
+  _isRetry?: boolean;
+}
+
+// Singleton promise so concurrent 401s all wait on the same refresh call.
+let _refreshingPromise: Promise<string | null> | null = null;
+
+async function _tryRefresh(): Promise<string | null> {
+  if (_refreshingPromise) return _refreshingPromise;
+
+  _refreshingPromise = (async () => {
+    const state = useAuthStore.getState();
+    if (!state.refreshToken) {
+      state.signOut();
+      return null;
+    }
+    try {
+      const res = await fetch(`${BASE_URL}/auth/refresh`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${state.refreshToken}` },
+      });
+      if (!res.ok) throw new Error('refresh failed');
+      const pair = (await res.json()) as {
+        access_token: string;
+        refresh_token: string;
+        workspace_id: string | null;
+        role: string | null;
+      };
+      // Re-use the existing user object — only token + workspace context changes.
+      const current = useAuthStore.getState();
+      if (current.user) {
+        useAuthStore.getState().signIn({
+          token: pair.access_token,
+          refreshToken: pair.refresh_token,
+          user: current.user,
+          workspaceId: pair.workspace_id ?? current.currentWorkspaceId,
+        });
+      }
+      return pair.access_token;
+    } catch {
+      useAuthStore.getState().signOut();
+      return null;
+    } finally {
+      _refreshingPromise = null;
+    }
+  })();
+
+  return _refreshingPromise;
 }
 
 async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
-  const { method = 'GET', body, headers, authenticated = true, useRefreshToken = false } = options;
+  const {
+    method = 'GET',
+    body,
+    headers,
+    authenticated = true,
+    useRefreshToken = false,
+    _isRetry = false,
+  } = options;
 
   const finalHeaders = new Headers(headers);
   if (body !== undefined) {
@@ -45,6 +100,16 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   const res = await fetch(`${BASE_URL}${path}`, init);
 
   if (res.status === 204) return undefined as T;
+
+  // On 401, attempt a silent token refresh and retry once.
+  if (res.status === 401 && authenticated && !useRefreshToken && !_isRetry) {
+    const newToken = await _tryRefresh();
+    if (newToken) {
+      return request<T>(path, { ...options, _isRetry: true });
+    }
+    // Refresh failed; signOut already called — throw so callers see the error.
+    throw new ApiError(401, 'Session expired. Please sign in again.');
+  }
 
   if (!res.ok) {
     let detail: string = res.statusText;
