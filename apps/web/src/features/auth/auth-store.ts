@@ -15,6 +15,7 @@ export interface AuthUser {
   preferredLocale: string;
   isMinor: boolean;
   role: WorkspaceRole | null;
+  isPlatformAdmin: boolean;
 }
 
 interface AuthState {

@@ -9,6 +9,7 @@ interface ApiUser {
   display_name: string;
   preferred_locale: string;
   is_minor: boolean;
+  is_platform_admin: boolean;
   current_workspace_id: string | null;
   role: WorkspaceRole | null;
 }
@@ -35,6 +36,7 @@ function toUser(u: ApiUser): AuthUser {
     displayName: u.display_name,
     preferredLocale: u.preferred_locale,
     isMinor: u.is_minor,
+    isPlatformAdmin: u.is_platform_admin ?? false,
     role: u.role ?? null,
   };
 }

@@ -1,6 +1,11 @@
 import type { ReactElement } from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
+import { AdminShell } from '@/features/admin/AdminShell';
+import { AdminUsersScreen } from '@/features/admin/AdminUsersScreen';
+import { AdminWorkspaceDetailScreen } from '@/features/admin/AdminWorkspaceDetailScreen';
+import { AdminWorkspacesScreen } from '@/features/admin/AdminWorkspacesScreen';
+
 import { AssessmentScreen } from '@/features/assessment/AssessmentScreen';
 import { CurriculumFeedbackInboxScreen } from '@/features/curriculum/CurriculumFeedbackInboxScreen';
 import { CurriculumScreen } from '@/features/curriculum/CurriculumScreen';
@@ -98,6 +103,14 @@ function SharedShellGate() {
   return (role === 'trainee' || role === 'parent')
     ? <TraineeShell />
     : <CoachShell />;
+}
+
+function AdminShellGate() {
+  const token = useAuthStore((s) => s.token);
+  const isPlatformAdmin = useAuthStore((s) => s.user?.isPlatformAdmin ?? false);
+  if (!token) return <Navigate to="/signin" replace />;
+  if (!isPlatformAdmin) return <Navigate to="/today" replace />;
+  return <AdminShell />;
 }
 
 function PublicOnly({ children }: { children: ReactElement }) {
@@ -208,6 +221,14 @@ export function Router() {
           </RequireWorkspace>
         }
       />
+
+      {/* Platform admin shell */}
+      <Route element={<AdminShellGate />}>
+        <Route path="/admin" element={<Navigate to="/admin/workspaces" replace />} />
+        <Route path="/admin/workspaces" element={<AdminWorkspacesScreen />} />
+        <Route path="/admin/workspaces/:id" element={<AdminWorkspaceDetailScreen />} />
+        <Route path="/admin/users" element={<AdminUsersScreen />} />
+      </Route>
 
       {/* Catch-all */}
       <Route path="*" element={<Navigate to="/signin" replace />} />

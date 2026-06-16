@@ -61,6 +61,7 @@ function toUser(u: ApiUser): AuthUser {
     displayName: u.display_name,
     preferredLocale: u.preferred_locale,
     isMinor: u.is_minor,
+    isPlatformAdmin: (u as { is_platform_admin?: boolean }).is_platform_admin ?? false,
     role: u.role ?? null,
   };
 }
