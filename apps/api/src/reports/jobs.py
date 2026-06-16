@@ -4,6 +4,12 @@ The worker is sync (rq), so the job wraps the asyncpg + Jinja + WeasyPrint
 work in ``asyncio.run`` and persists the result.  We bypass RLS because the
 worker has no JWT context — that's fine, the job is system-level and the
 inputs are validated by the enqueuing endpoint.
+
+Storage strategy: when S3 credentials are configured (S3_ENDPOINT differs
+from the MinIO dev default), the PDF is uploaded to object storage and
+pdf_url is set to the public URL.  Otherwise (Railway without S3), the
+bytes are stored in the ``pdf_bytes`` column and pdf_url is set to the
+authenticated API path ``/reports/{id}/pdf``.
 """
 
 from __future__ import annotations
@@ -19,7 +25,6 @@ from src.config import settings
 from src.invites.og_landing import _superuser_dsn
 from src.reports.emails import maybe_send_report_ready_email
 from src.reports.template import build_report_context, render_report_pdf
-from src.uploads.s3 import put_object
 
 log = logging.getLogger(__name__)
 
@@ -99,30 +104,57 @@ async def _run(report_id: str) -> dict[str, Any]:
             timeout=90,
         )
         log.info("report_upload_start", extra={"report_id": report_id, "bytes": len(pdf_bytes)})
-        key = (
-            f"workspaces/{report['workspace_id']}/reports/"
-            f"{report['athlete_id']}-{report['period_start'].strftime('%Y-%m')}-"
-            f"{report_id[:8]}.pdf"
-        )
-        url = await asyncio.wait_for(
-            asyncio.to_thread(put_object, key=key, body=pdf_bytes, content_type="application/pdf"),
-            timeout=30,
-        )
 
-        await conn.execute(
-            """
-            UPDATE reports
-               SET status = 'completed',
-                   pdf_url = $2,
-                   pdf_size_bytes = $3,
-                   generated_at = $4
-             WHERE id = $1
-            """,
-            report_id,
-            url,
-            len(pdf_bytes),
-            datetime.now(UTC),
-        )
+        # S3 is optional: use it when the endpoint has been overridden from the
+        # MinIO dev default, otherwise store bytes directly in the DB and serve
+        # via the authenticated /reports/{id}/pdf endpoint.
+        _use_s3 = settings.s3_endpoint != "http://minio:9000" and settings.s3_access_key != "minioadmin"
+        if _use_s3:
+            from src.uploads.s3 import put_object
+            key = (
+                f"workspaces/{report['workspace_id']}/reports/"
+                f"{report['athlete_id']}-{report['period_start'].strftime('%Y-%m')}-"
+                f"{report_id[:8]}.pdf"
+            )
+            pdf_url = await asyncio.wait_for(
+                asyncio.to_thread(put_object, key=key, body=pdf_bytes, content_type="application/pdf"),
+                timeout=30,
+            )
+            await conn.execute(
+                """
+                UPDATE reports
+                   SET status = 'completed',
+                       pdf_url = $2,
+                       pdf_size_bytes = $3,
+                       generated_at = $4
+                 WHERE id = $1
+                """,
+                report_id,
+                pdf_url,
+                len(pdf_bytes),
+                datetime.now(UTC),
+            )
+        else:
+            # No S3 — persist bytes in the reports row.
+            # The GET /reports/{id}/pdf endpoint serves them with Bearer auth.
+            pdf_url = f"/reports/{report_id}/pdf"
+            await conn.execute(
+                """
+                UPDATE reports
+                   SET status = 'completed',
+                       pdf_bytes = $2,
+                       pdf_url = $3,
+                       pdf_size_bytes = $4,
+                       generated_at = $5
+                 WHERE id = $1
+                """,
+                report_id,
+                pdf_bytes,
+                pdf_url,
+                len(pdf_bytes),
+                datetime.now(UTC),
+            )
+
         log.info("report_generated", extra={"report_id": report_id, "bytes": len(pdf_bytes)})
 
         # Best-effort: notify the trainee by email if they have an account
@@ -136,7 +168,7 @@ async def _run(report_id: str) -> dict[str, Any]:
                 extra={"report_id": report_id},
             )
 
-        return {"status": "completed", "pdf_url": url, "bytes": len(pdf_bytes)}
+        return {"status": "completed", "pdf_url": pdf_url, "bytes": len(pdf_bytes)}
     except Exception as e:  # pragma: no cover - hard failure path
         log.exception("report_generation_failed", extra={"report_id": report_id})
         await conn.execute(

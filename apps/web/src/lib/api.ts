@@ -132,6 +132,23 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   return (await res.json()) as T;
 }
 
+/** Fetch a binary response with Bearer auth — for PDF/file downloads. */
+export async function fetchAuthBlob(path: string): Promise<Blob> {
+  const state = useAuthStore.getState();
+  const res = await fetch(`${BASE_URL}${path}`, {
+    headers: state.token ? { Authorization: `Bearer ${state.token}` } : {},
+  });
+  if (!res.ok) {
+    let detail = res.statusText;
+    try {
+      const data = (await res.json()) as { detail?: string };
+      if (data.detail) detail = data.detail;
+    } catch { /* keep statusText */ }
+    throw new ApiError(res.status, detail);
+  }
+  return res.blob();
+}
+
 export const api = {
   get: <T>(path: string, options?: Omit<RequestOptions, 'method' | 'body'>) =>
     request<T>(path, { ...options, method: 'GET' }),

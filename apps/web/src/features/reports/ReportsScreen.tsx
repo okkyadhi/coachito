@@ -14,6 +14,7 @@ import {
   generateReport,
   incrementViewCount,
   listReports,
+  openReportPdf,
 } from './reports-api';
 
 export function ReportsScreen() {
@@ -39,7 +40,7 @@ export function ReportsScreen() {
     void incrementViewCount(id).then(() =>
       queryClient.invalidateQueries({ queryKey: ['reports'] }),
     );
-    window.open(pdfUrl, '_blank', 'noopener');
+    void openReportPdf(pdfUrl);
   };
 
   const handleGenerate = async (args: {

@@ -2,7 +2,7 @@
 // (BE step 18).  Generation is async on the server — the FE polls the list
 // every few seconds while at least one row is still generating.
 
-import { api } from '@/lib/api';
+import { api, fetchAuthBlob } from '@/lib/api';
 
 export type ReportStatus = 'pending' | 'generating' | 'completed' | 'failed';
 
@@ -142,4 +142,23 @@ export function anyPending(reports: Report[]): boolean {
 export function isErrorReport(r: Report): boolean {
   return r.status === 'failed' || (r.status === 'pending' && !!r.generatedAt
     && Date.now() - new Date(r.generatedAt).getTime() >= STALE_PENDING_MS);
+}
+
+/**
+ * Open a report PDF in a new tab.
+ *
+ * When pdf_url is an absolute URL (S3/R2), open it directly.
+ * When it starts with "/" (DB-backed endpoint), fetch with Bearer auth
+ * and open a blob URL so the browser shows/downloads the PDF.
+ */
+export async function openReportPdf(pdfUrl: string): Promise<void> {
+  if (!pdfUrl.startsWith('/')) {
+    window.open(pdfUrl, '_blank', 'noopener');
+    return;
+  }
+  const blob = await fetchAuthBlob(pdfUrl);
+  const blobUrl = URL.createObjectURL(blob);
+  window.open(blobUrl, '_blank', 'noopener');
+  // Revoke after a minute — browser will have navigated by then.
+  setTimeout(() => URL.revokeObjectURL(blobUrl), 60_000);
 }

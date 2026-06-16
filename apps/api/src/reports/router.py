@@ -14,6 +14,7 @@ from typing import Annotated
 from uuid import UUID, uuid4
 
 from fastapi import APIRouter, Depends, HTTPException, Response, status
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from redis import Redis as SyncRedis
 from rq import Queue
@@ -302,6 +303,39 @@ async def get_report(
         pdf_url=row["pdf_url"],
         view_count=int(row["view_count"]),
         error_message=row["error_message"],
+    )
+
+
+@router.get("/{report_id}/pdf")
+async def download_report_pdf(
+    report_id: UUID,
+    _user_id: Annotated[UUID, Depends(get_current_user_id)],
+    workspace_id: Annotated[UUID | None, Depends(get_current_workspace_id)],
+    db: Annotated[AsyncSession, Depends(db_with_rls)],
+) -> StreamingResponse:
+    """Stream the in-DB PDF bytes.  Only set when S3 is not configured."""
+    if workspace_id is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="No active workspace."
+        )
+    row = (
+        await db.execute(
+            text(
+                "SELECT pdf_bytes FROM reports WHERE id = :rid"
+            ),
+            {"rid": report_id},
+        )
+    ).mappings().first()
+    if row is None or not row["pdf_bytes"]:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="PDF not available. It may be stored externally — use the pdf_url field.",
+        )
+    import io
+    return StreamingResponse(
+        io.BytesIO(row["pdf_bytes"]),
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'inline; filename="report-{report_id}.pdf"'},
     )
 
 
