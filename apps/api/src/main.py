@@ -51,21 +51,28 @@ from src.admin.router import router as admin_router
 
 
 def _start_inprocess_worker() -> None:
-    """Spawn an RQ SimpleWorker on a daemon thread so the single-container
-    deploy can process the small number of background jobs we have (PDF
-    report generation) without a dedicated worker container.
+    """Spawn an RQ worker on a daemon thread.
 
-    SimpleWorker (no fork) is required: standard RQ Worker forks per job,
+    SimpleWorker (no fork) is required: the standard RQ Worker forks per job
     which is incompatible with asyncio/uvicorn in the same process.
+
+    Python only allows signal.signal() calls from the main thread, so we
+    subclass SimpleWorker and skip _install_signal_handlers entirely — the
+    daemon thread exits automatically when the main process ends, so graceful
+    shutdown via signals isn't needed here anyway.
     """
     from redis import Redis as SyncRedis
     from rq import Queue, SimpleWorker
 
     from src.config import settings
 
+    class _ThreadSafeWorker(SimpleWorker):
+        def _install_signal_handlers(self) -> None:
+            pass  # cannot install signal handlers from a non-main thread
+
     def _run() -> None:
         conn = SyncRedis.from_url(settings.redis_url)
-        worker = SimpleWorker(
+        worker = _ThreadSafeWorker(
             [Queue("default", connection=conn)], connection=conn
         )
         worker.work(with_scheduler=False)

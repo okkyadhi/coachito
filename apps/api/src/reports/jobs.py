@@ -80,20 +80,34 @@ async def _run(report_id: str) -> dict[str, Any]:
         raise early_exc
 
     try:
-        ctx = await build_report_context(
-            workspace_id=report["workspace_id"],
-            athlete_id=report["athlete_id"],
-            period_start=report["period_start"],
-            period_end=report["period_end"],
-            session_id=report["session_id"],
+        log.info("report_build_context_start", extra={"report_id": report_id})
+        ctx = await asyncio.wait_for(
+            build_report_context(
+                workspace_id=report["workspace_id"],
+                athlete_id=report["athlete_id"],
+                period_start=report["period_start"],
+                period_end=report["period_end"],
+                session_id=report["session_id"],
+            ),
+            timeout=30,
         )
-        pdf_bytes = render_report_pdf(ctx)
+        log.info("report_render_start", extra={"report_id": report_id})
+        # render_report_pdf is synchronous (WeasyPrint); run in a thread so the
+        # asyncio timeout can fire even if WeasyPrint hangs.
+        pdf_bytes = await asyncio.wait_for(
+            asyncio.to_thread(render_report_pdf, ctx),
+            timeout=90,
+        )
+        log.info("report_upload_start", extra={"report_id": report_id, "bytes": len(pdf_bytes)})
         key = (
             f"workspaces/{report['workspace_id']}/reports/"
             f"{report['athlete_id']}-{report['period_start'].strftime('%Y-%m')}-"
             f"{report_id[:8]}.pdf"
         )
-        url = put_object(key=key, body=pdf_bytes, content_type="application/pdf")
+        url = await asyncio.wait_for(
+            asyncio.to_thread(put_object, key=key, body=pdf_bytes, content_type="application/pdf"),
+            timeout=30,
+        )
 
         await conn.execute(
             """
