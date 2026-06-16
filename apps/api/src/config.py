@@ -1,3 +1,4 @@
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -59,6 +60,13 @@ class Settings(BaseSettings):
 
     # ── Runtime ───────────────────────────────────────────────────
     environment: str = "development"
+
+    @field_validator("web_url", "s3_endpoint", "s3_public_endpoint", mode="before")
+    @classmethod
+    def _strip_trailing_slash(cls, v: str) -> str:
+        # Railway-style env values often include a trailing "/", which made
+        # invite links render as "https://host//i/{token}".
+        return v.rstrip("/") if isinstance(v, str) else v
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

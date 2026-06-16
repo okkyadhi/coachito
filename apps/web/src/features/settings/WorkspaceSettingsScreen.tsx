@@ -11,6 +11,7 @@ import { useAuthStore } from '@/features/auth/auth-store';
 import { BrandingSection } from './BrandingSection';
 import { LivePreviewCard } from './LivePreviewCard';
 import { PlanBillingCard } from './PlanBillingCard';
+import { PlanPickerSheet } from './PlanPickerSheet';
 import { SportsSection } from './SportsSection';
 import { SetPasswordSheet } from './SetPasswordSheet';
 import { TiersCurriculumSection } from './TiersCurriculumSection';
@@ -104,6 +105,7 @@ export function WorkspaceSettingsScreen() {
   const [pwSheetOpen, setPwSheetOpen] = useState(false);
   const [pwHasExisting, setPwHasExisting] = useState(false);
   const [pwToast, setPwToast] = useState(false);
+  const [planPickerOpen, setPlanPickerOpen] = useState(false);
 
   const handleSignOut = () => {
     signOut();
@@ -155,7 +157,10 @@ export function WorkspaceSettingsScreen() {
 
         <SportsSection readOnly={!canEditWorkspace} />
 
-        <PlanBillingCard settings={settings} />
+        <PlanBillingCard
+          settings={settings}
+          onManage={() => setPlanPickerOpen(true)}
+        />
 
         {/* Members */}
         <section className="flex flex-col gap-2">
@@ -257,6 +262,12 @@ export function WorkspaceSettingsScreen() {
             setPwSheetOpen(false);
             setPwToast(true);
           }}
+        />
+
+        <PlanPickerSheet
+          open={planPickerOpen}
+          onClose={() => setPlanPickerOpen(false)}
+          settings={settings}
         />
       </div>
     </div>

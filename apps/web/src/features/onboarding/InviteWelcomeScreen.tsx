@@ -175,18 +175,18 @@ export function InviteWelcomeScreen() {
             <PrimaryButton
               onClick={() => {
                 stashPendingInvite(meta.token);
-                navigate(`/signin?invite_token=${encodeURIComponent(meta.token)}`);
+                navigate(`/invite/${encodeURIComponent(meta.token)}/signup`);
               }}
             >
-              {t('signin.continueWithGoogle')}
+              {t('inviteWelcome.createAccountCta')}
             </PrimaryButton>
             <SecondaryButton
               onClick={() => {
                 stashPendingInvite(meta.token);
-                navigate(`/invite/${encodeURIComponent(meta.token)}/signup`);
+                navigate(`/signin?invite_token=${encodeURIComponent(meta.token)}`);
               }}
             >
-              {t('signin.continueWithEmail')}
+              {t('inviteWelcome.haveAccountCta')}
             </SecondaryButton>
             <p className="mt-2 text-center text-footnote text-text-color-tertiary">
               {t('signin.terms')}

@@ -24,9 +24,13 @@ else:
 
 engine = create_async_engine(
     DATABASE_URL,
-    pool_pre_ping=True,
     pool_size=10,
     max_overflow=20,
+    # Recycle long-idle conns instead of paying a SELECT 1 roundtrip per
+    # checkout — pre-ping adds 50–150 ms per request when DB is on a
+    # different host.
+    pool_recycle=1800,
+    pool_pre_ping=False,
     echo=os.environ.get("ENVIRONMENT") == "development",
 )
 

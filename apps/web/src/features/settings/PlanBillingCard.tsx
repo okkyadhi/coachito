@@ -1,32 +1,44 @@
 import { format } from 'date-fns';
 import { enUS, id as idLocale } from 'date-fns/locale';
-import { ChevronRight, Sparkles, UserCircle2, Users } from 'lucide-react';
+import { Sparkles, UserCircle2, Users } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-import type { Plan, WorkspaceSettings } from './settings-api';
+import {
+  type Plan,
+  type WorkspaceSettings,
+  isTrial,
+  trialDaysLeft,
+} from './settings-api';
 
 interface Props {
   settings: WorkspaceSettings;
   onManage?: () => void;
-  onUpgrade?: () => void;
 }
 
 function planIcon(plan: Plan): typeof Sparkles {
-  if (plan === 'club_pro') return Sparkles;
-  if (plan === 'club_starter') return Users;
+  if (plan === 'club_pro' || plan === 'club_starter') return Users;
+  if (plan === 'solo_coach_unlimited') return Sparkles;
   return UserCircle2;
 }
 
-export function PlanBillingCard({ settings, onManage, onUpgrade }: Props) {
+const TRIAL_WARN_THRESHOLD_DAYS = 7;
+
+export function PlanBillingCard({ settings, onManage }: Props) {
   const { t, i18n } = useTranslation();
   const locale = i18n.language === 'id' ? idLocale : enUS;
   const Icon = planIcon(settings.plan);
+  const trial = isTrial(settings);
+  const daysLeft = trial ? trialDaysLeft(settings.renewsAt) : null;
+  const endingSoon = daysLeft !== null && daysLeft <= TRIAL_WARN_THRESHOLD_DAYS;
 
-  const renewsLabel = settings.renewsAt
-    ? t('settings.plan.renews', {
-        date: format(new Date(settings.renewsAt), 'd MMM', { locale }),
-      })
-    : t('settings.plan.trial');
+  const subline = trial
+    ? settings.renewsAt && daysLeft !== null
+      ? t('settings.plan.daysLeft', {
+          days: Math.max(daysLeft, 0),
+          date: format(new Date(settings.renewsAt), 'd MMM', { locale }),
+        })
+      : t('settings.plans.free_trial_price')
+    : `${t(`settings.plans.${settings.plan}_price`)} · ${t('settings.plan.activeStatus')}`;
 
   return (
     <section className="flex flex-col gap-2">
@@ -42,49 +54,38 @@ export function PlanBillingCard({ settings, onManage, onUpgrade }: Props) {
             <Icon size={20} strokeWidth={1.75} aria-hidden />
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-body text-text-color-primary">
-              {t(`settings.plans.${settings.plan}`)}
-            </p>
-            <p className="text-footnote text-text-color-secondary">
-              {t(`settings.plans.${settings.plan}_price`)} · {renewsLabel}
-            </p>
+            <div className="flex items-center gap-2">
+              <p className="text-body text-text-color-primary">
+                {t(`settings.plans.${settings.plan}`)}
+              </p>
+              {trial ? (
+                <span
+                  className={
+                    endingSoon
+                      ? 'rounded-full bg-warning-bg px-2 py-0.5 text-caption font-medium text-warning-text'
+                      : 'rounded-full bg-accent-bg px-2 py-0.5 text-caption font-medium text-accent'
+                  }
+                >
+                  {t('settings.plan.trialBadge')}
+                </span>
+              ) : null}
+            </div>
+            <p className="text-footnote text-text-color-secondary">{subline}</p>
+            {trial && endingSoon ? (
+              <p className="mt-0.5 text-caption text-warning-text">
+                {t('settings.plan.trialEndingSoon')}
+              </p>
+            ) : null}
           </div>
           <button
             type="button"
             onClick={onManage}
             className="text-caption font-medium text-accent"
           >
-            {t('settings.plan.manage')}
+            {t('settings.plan.viewPlans')}
           </button>
         </div>
       </div>
-
-      {settings.type === 'personal' ? (
-        <button
-          type="button"
-          onClick={onUpgrade}
-          className="flex items-center gap-3 rounded-xl border-[0.5px] border-border-hairline p-4 text-left"
-          style={{ background: 'var(--accent-bg)' }}
-        >
-          <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-bg-primary text-accent">
-            <Sparkles size={18} strokeWidth={1.75} aria-hidden />
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="text-body text-text-color-primary">
-              {t('settings.upsell.title')}
-            </p>
-            <p className="mt-0.5 text-caption text-text-color-secondary">
-              {t('settings.upsell.body')}
-            </p>
-          </div>
-          <ChevronRight
-            size={18}
-            strokeWidth={1.75}
-            className="text-accent"
-            aria-hidden
-          />
-        </button>
-      ) : null}
     </section>
   );
 }

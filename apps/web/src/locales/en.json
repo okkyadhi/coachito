@@ -605,7 +605,9 @@
     "signedInAs": "Signed in as {{email}}",
     "acceptCta": "Accept invite",
     "useDifferentAccount": "Use a different account",
-    "acceptError": "Couldn't accept the invite. Try again."
+    "acceptError": "Couldn't accept the invite. Try again.",
+    "createAccountCta": "Create account",
+    "haveAccountCta": "I already have an account"
   },
   "inviteSignup": {
     "title": "Create your account",
@@ -772,23 +774,39 @@
     },
     "plan": {
       "title": "Plan & billing",
-      "manage": "Manage",
-      "renews": "Renews {{date}}",
-      "trial": "Free trial"
+      "viewPlans": "View plans",
+      "trialBadge": "Trial",
+      "daysLeft": "{{days}} days left · ends {{date}}",
+      "trialEndingSoon": "Trial ending soon",
+      "activeStatus": "Active"
     },
     "plans": {
-      "free_trial": "Free trial",
-      "free_trial_price": "No card",
-      "solo_coach": "Solo Coach",
-      "solo_coach_price": "Rp 100k / month",
-      "club_starter": "Club Starter",
-      "club_starter_price": "Rp 500k / month",
-      "club_pro": "Club Pro",
-      "club_pro_price": "Rp 1.5jt / month"
+      "free_trial": "Trial",
+      "free_trial_price": "Free for 30 days",
+      "solo_coach": "Personal",
+      "solo_coach_price": "Rp 75k / month",
+      "solo_coach_unlimited": "Personal Unlimited",
+      "solo_coach_unlimited_price": "Rp 129k / month",
+      "club_starter": "Club",
+      "club_starter_price": "Rp 200k / month",
+      "club_pro": "Club Annual",
+      "club_pro_price": "Rp 1.9jt / year"
     },
-    "upsell": {
-      "title": "Coaching with a team?",
-      "body": "Upgrade to a Club workspace to invite other coaches, share trainees, and manage them together."
+    "picker": {
+      "title": "Choose a plan",
+      "subtitlePersonal": "Personal workspace",
+      "subtitleClub": "Club workspace",
+      "mostPopular": "Most popular",
+      "savingsBadge": "Save Rp 500k/yr",
+      "currentPlan": "Current plan",
+      "choose": "Choose plan",
+      "footer": "Manual payment via transfer. Our team will help you set up.",
+      "features": {
+        "soloCoach": ["20 active trainees", "Assessment + report", "1 sport"],
+        "soloCoachUnlimited": ["Unlimited trainees", "Assessment + report", "1 sport", "Priority support"],
+        "clubStarter": ["3 coaches included", "+ Rp 49k / extra coach", "Unlimited trainees", "Multi-sport (Padel + Tennis)"],
+        "clubPro": ["Everything in Club", "Billed annually", "Save Rp 500k/yr", "Priority support"]
+      }
     },
     "members": {
       "title": "Members",

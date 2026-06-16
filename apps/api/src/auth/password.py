@@ -22,7 +22,15 @@ from redis.asyncio import Redis
 log = logging.getLogger(__name__)
 
 # Single shared hasher — instantiating is cheap but pointless to repeat.
-_hasher: Final[PasswordHasher] = PasswordHasher()
+# Params tuned for small VPS (1 vCPU / ~1 GB RAM): OWASP ASVS minimum
+# (t=2, m=19 MiB, p=1) — defaults (m=64 MiB, p=4) burn ~1s per verify on a
+# single-core host and just contend for the GIL.  Existing hashes stay valid
+# (Argon2 stores its params); `needs_rehash()` rotates them on next login.
+_hasher: Final[PasswordHasher] = PasswordHasher(
+    time_cost=2,
+    memory_cost=19456,
+    parallelism=1,
+)
 
 # OWASP ASVS-friendly minimum.  No max length (argon2 handles arbitrary
 # strings; setting one introduces a DoS / truncation footgun).

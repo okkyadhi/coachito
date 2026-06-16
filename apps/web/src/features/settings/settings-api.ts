@@ -9,7 +9,15 @@ import { api } from '@/lib/api';
 
 export type TierStyle = 'game' | 'skill' | 'custom';
 export type WorkspaceType = 'club' | 'personal';
-export type Plan = 'free_trial' | 'solo_coach' | 'club_starter' | 'club_pro';
+// `solo_coach_unlimited` is a FE-only distinction (display + WA upgrade copy).
+// BE still stores `solo_coach` for both tiers — billing is manual at MVP, so
+// quota enforcement lives off-platform.
+export type Plan =
+  | 'free_trial'
+  | 'solo_coach'
+  | 'solo_coach_unlimited'
+  | 'club_starter'
+  | 'club_pro';
 
 export interface WorkspaceSettings {
   id: string;
@@ -81,7 +89,13 @@ interface ApiMemberCounts {
 }
 
 export async function getMyWorkspace(): Promise<WorkspaceSettings | null> {
-  const list = await api.get<ApiMineList>('/workspaces/mine');
+  // Fire both in parallel — they're independent, but used to be sequential
+  // awaits.  Members may 403 for non-admins; swallow so the workspace fetch
+  // still resolves.
+  const [list, counts] = await Promise.all([
+    api.get<ApiMineList>('/workspaces/mine'),
+    api.get<ApiMemberCounts>('/workspaces/me/members').catch(() => null),
+  ]);
   // Pick the membership for the currently-active workspace — not just the
   // first active one.  Without this, a hybrid coach who switches workspaces
   // would still see the old workspace's settings here.
@@ -94,15 +108,29 @@ export async function getMyWorkspace(): Promise<WorkspaceSettings | null> {
   const active = match ?? list.workspaces.find((r) => r.status === 'active');
   if (!active) return null;
   const base = toSettings(active.workspace);
-  // Real counts come from the members endpoint; non-admins still see them.
-  try {
-    const counts = await api.get<ApiMemberCounts>('/workspaces/me/members');
+  if (counts) {
     base.coachCount = counts.coach_count;
     base.traineeCount = counts.trainee_count;
-  } catch {
-    // Non-member or transient — leave at 0.
   }
   return base;
+}
+
+// ── Trial helpers ─────────────────────────────────────────────────
+
+export function isTrial(settings: Pick<WorkspaceSettings, 'plan'>): boolean {
+  return settings.plan === 'free_trial';
+}
+
+export function trialDaysLeft(renewsAt: string | null): number | null {
+  if (!renewsAt) return null;
+  const end = new Date(renewsAt);
+  if (Number.isNaN(end.getTime())) return null;
+  const today = new Date();
+  // Calendar-day delta so "today" reads as 0 instead of -0.x.
+  const msPerDay = 24 * 60 * 60 * 1000;
+  const startOf = (d: Date) =>
+    Date.UTC(d.getFullYear(), d.getMonth(), d.getDate());
+  return Math.round((startOf(end) - startOf(today)) / msPerDay);
 }
 
 // ── PATCH /workspaces/me ──────────────────────────────────────────

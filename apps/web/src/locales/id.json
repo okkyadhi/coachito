@@ -623,7 +623,9 @@
     "signedInAs": "Masuk sebagai {{email}}",
     "acceptCta": "Terima undangan",
     "useDifferentAccount": "Pakai akun lain",
-    "acceptError": "Gagal menerima undangan. Coba lagi."
+    "acceptError": "Gagal menerima undangan. Coba lagi.",
+    "createAccountCta": "Buat akun",
+    "haveAccountCta": "Saya sudah punya akun"
   },
   "publicLanding": {
     "heroGeneric": "Kamu diundang ke Coachito",
@@ -772,23 +774,39 @@
     },
     "plan": {
       "title": "Paket & tagihan",
-      "manage": "Kelola",
-      "renews": "Diperpanjang {{date}}",
-      "trial": "Free trial"
+      "viewPlans": "Lihat paket",
+      "trialBadge": "Trial",
+      "daysLeft": "{{days}} hari tersisa · berakhir {{date}}",
+      "trialEndingSoon": "Trial hampir berakhir",
+      "activeStatus": "Aktif"
     },
     "plans": {
-      "free_trial": "Free trial",
-      "free_trial_price": "Tanpa kartu",
-      "solo_coach": "Solo Coach",
-      "solo_coach_price": "Rp 100rb / bulan",
-      "club_starter": "Club Starter",
-      "club_starter_price": "Rp 500rb / bulan",
-      "club_pro": "Club Pro",
-      "club_pro_price": "Rp 1,5jt / bulan"
+      "free_trial": "Trial",
+      "free_trial_price": "Gratis 30 hari",
+      "solo_coach": "Personal",
+      "solo_coach_price": "Rp 75rb / bulan",
+      "solo_coach_unlimited": "Personal Unlimited",
+      "solo_coach_unlimited_price": "Rp 129rb / bulan",
+      "club_starter": "Club",
+      "club_starter_price": "Rp 200rb / bulan",
+      "club_pro": "Club Annual",
+      "club_pro_price": "Rp 1,9jt / tahun"
     },
-    "upsell": {
-      "title": "Coaching dengan tim?",
-      "body": "Upgrade ke workspace Club untuk mengundang coach lain, berbagi trainee, dan mengelola bersama."
+    "picker": {
+      "title": "Pilih paket",
+      "subtitlePersonal": "Workspace personal",
+      "subtitleClub": "Workspace club",
+      "mostPopular": "Paling populer",
+      "savingsBadge": "Hemat Rp 500rb/thn",
+      "currentPlan": "Paket saat ini",
+      "choose": "Pilih paket",
+      "footer": "Pembayaran manual via transfer. Tim kami akan bantu setup.",
+      "features": {
+        "soloCoach": ["20 trainee aktif", "Assessment + report", "1 sport"],
+        "soloCoachUnlimited": ["Trainee unlimited", "Assessment + report", "1 sport", "Priority support"],
+        "clubStarter": ["3 coach termasuk", "+ Rp 49rb / coach tambahan", "Trainee unlimited", "Multi-sport (Padel + Tennis)"],
+        "clubPro": ["Semua fitur Club", "Bayar tahunan", "Hemat Rp 500rb/thn", "Priority support"]
+      }
     },
     "members": {
       "title": "Anggota",
