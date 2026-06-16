@@ -500,7 +500,7 @@ async def get_workspace_members(
             text(
                 """
                 SELECT a.id, u.display_name, u.email,
-                       t.name_en          AS tier_name,
+                       COALESCE(t.name_game_en, t.name_skill_en, t.name_custom_en) AS tier_name,
                        MAX(s.scheduled_at) AS last_session_at
                 FROM athletes a
                 JOIN users u ON u.id = a.user_id
@@ -508,7 +508,8 @@ async def get_workspace_members(
                 LEFT JOIN sessions s
                        ON s.athlete_id = a.id AND s.workspace_id = :wid
                 WHERE a.workspace_id = :wid AND a.archived_at IS NULL
-                GROUP BY a.id, u.display_name, u.email, t.name_en
+                GROUP BY a.id, u.display_name, u.email,
+                         COALESCE(t.name_game_en, t.name_skill_en, t.name_custom_en)
                 ORDER BY u.display_name
                 """
             ),

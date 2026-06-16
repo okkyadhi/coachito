@@ -121,8 +121,22 @@ export async function incrementViewCount(id: string): Promise<void> {
   await api.post(`/reports/${id}/view`);
 }
 
-/** True when at least one row is still in flight — the UI uses this to
- *  decide whether to keep polling. */
+const STALE_PENDING_MS = 5 * 60 * 1000; // stop polling after 5 min stuck
+
+/** True when at least one report is still actively generating (not stale). */
 export function anyPending(reports: Report[]): boolean {
-  return reports.some((r) => r.status === 'pending' || r.status === 'generating');
+  const now = Date.now();
+  return reports.some((r) => {
+    if (r.status !== 'pending' && r.status !== 'generating') return false;
+    // generatedAt is populated at creation time on the server; use it to
+    // detect reports stuck in pending for too long and stop polling for them.
+    if (!r.generatedAt) return true;
+    return now - new Date(r.generatedAt).getTime() < STALE_PENDING_MS;
+  });
+}
+
+/** True when the report is stuck/failed and has no PDF. */
+export function isErrorReport(r: Report): boolean {
+  return r.status === 'failed' || (r.status === 'pending' && !!r.generatedAt
+    && Date.now() - new Date(r.generatedAt).getTime() >= STALE_PENDING_MS);
 }

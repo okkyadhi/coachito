@@ -37,8 +37,10 @@ async def generate_report_pdf_async(report_id: str) -> dict[str, Any]:
 
 
 async def _run(report_id: str) -> dict[str, Any]:
-    conn = await asyncpg.connect(_superuser_dsn())
+    dsn = _superuser_dsn()
+    conn: asyncpg.Connection | None = None
     try:
+        conn = await asyncpg.connect(dsn)
         report = await conn.fetchrow(
             """
             SELECT workspace_id::text, athlete_id::text,
@@ -49,15 +51,33 @@ async def _run(report_id: str) -> dict[str, Any]:
             report_id,
         )
         if report is None:
+            await conn.close()
             return {"status": "failed", "error": "report row not found"}
 
         await conn.execute(
             "UPDATE reports SET status = 'generating' WHERE id = $1",
             report_id,
         )
-    except Exception:
-        await conn.close()
-        raise
+    except Exception as early_exc:
+        log.exception("report_setup_failed", extra={"report_id": report_id})
+        if conn is not None:
+            try:
+                await conn.close()
+            except Exception:
+                pass
+        # Best-effort: open a fresh connection to mark the row as failed so the
+        # UI doesn't poll forever.
+        try:
+            fallback = await asyncpg.connect(dsn)
+            await fallback.execute(
+                "UPDATE reports SET status = 'failed', error_message = $2 WHERE id = $1",
+                report_id,
+                f"Setup error: {str(early_exc)[:480]}",
+            )
+            await fallback.close()
+        except Exception:
+            log.exception("report_fallback_mark_failed", extra={"report_id": report_id})
+        raise early_exc
 
     try:
         ctx = await build_report_context(

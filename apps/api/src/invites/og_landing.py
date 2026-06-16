@@ -19,7 +19,11 @@ from src.config import settings
 
 
 def _superuser_dsn() -> str:
-    raw = settings.alembic_database_url or settings.database_url
+    # Always use database_url (internal host). alembic_database_url may be
+    # set to the external/public proxy endpoint for running migrations from a
+    # dev machine — that host isn't reliably reachable from inside the
+    # container and may have different SSL requirements.
+    raw = settings.database_url
     return raw.replace("postgresql+asyncpg://", "postgresql://")
 
 
