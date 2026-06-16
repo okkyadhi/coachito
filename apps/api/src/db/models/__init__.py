@@ -15,6 +15,7 @@ from src.db.models.skill import Skill, SkillLevelDescriptor
 from src.db.models.sport import Sport
 from src.db.models.subscription import Subscription
 from src.db.models.tier import Tier, TierRequirement
+from src.db.models.upgrade_request import UpgradeRequest
 from src.db.models.user import User, UserGuardian
 from src.db.models.workspace import Workspace, WorkspaceMembership
 
@@ -36,6 +37,7 @@ __all__ = [
     "Subscription",
     "Tier",
     "TierRequirement",
+    "UpgradeRequest",
     "User",
     "UserGuardian",
     "Workspace",

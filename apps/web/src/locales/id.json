@@ -800,6 +800,11 @@
       "savingsBadge": "Hemat Rp 500rb/thn",
       "currentPlan": "Paket saat ini",
       "choose": "Pilih paket",
+      "sending": "Mengirim…",
+      "requested": "Permintaan terkirim",
+      "requestSent": "Permintaan upgrade ke {{plan}} berhasil dikirim",
+      "requestSentBody": "Tim kami akan menghubungi kamu untuk pembayaran.",
+      "requestError": "Gagal mengirim permintaan. Coba lagi.",
       "footer": "Pembayaran manual via transfer. Tim kami akan bantu setup.",
       "features": {
         "soloCoach": ["20 trainee aktif", "Assessment + report", "1 sport"],
@@ -1100,6 +1105,7 @@
     "emptyBody": "Laporan bulanan dibuat otomatis tiap tanggal 1. Kamu juga bisa buat kapan saja.",
     "create": "Buat laporan manual",
     "generating": "Membuat…",
+    "generationFailed": "Gagal dibuat",
     "generatedOn": "Dibuat {{date}}",
     "sheet": {
       "title": "Buat laporan",

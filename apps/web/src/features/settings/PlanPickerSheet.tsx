@@ -1,9 +1,17 @@
+import { useMutation } from '@tanstack/react-query';
 import { Check, X } from 'lucide-react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { openUpgradeChat } from '@/lib/wa-support';
+import { ApiError } from '@/lib/api';
 
-import type { Plan, WorkspaceSettings } from './settings-api';
+import {
+  isTrial,
+  requestPlanUpgrade,
+  type Plan,
+  type UpgradeablePlan,
+  type WorkspaceSettings,
+} from './settings-api';
 
 interface Props {
   open: boolean;
@@ -12,7 +20,7 @@ interface Props {
 }
 
 interface PlanCardData {
-  code: Plan;
+  code: UpgradeablePlan;
   badge?: 'popular' | 'savings';
   featuresKey: string;
 }
@@ -37,6 +45,22 @@ const CLUB_PLANS: PlanCardData[] = [
 
 export function PlanPickerSheet({ open, onClose, settings }: Props) {
   const { t } = useTranslation();
+  const [submittedPlan, setSubmittedPlan] = useState<Plan | null>(null);
+
+  const mutation = useMutation({
+    mutationFn: (plan: UpgradeablePlan) => requestPlanUpgrade(plan),
+    onSuccess: (_data, plan) => {
+      setSubmittedPlan(plan);
+    },
+  });
+
+  const handleClose = () => {
+    // Reset request state on close so reopening the sheet shows the
+    // picker again, not a stale "request sent" banner.
+    setSubmittedPlan(null);
+    mutation.reset();
+    onClose();
+  };
 
   if (!open) return null;
 
@@ -46,7 +70,7 @@ export function PlanPickerSheet({ open, onClose, settings }: Props) {
       aria-modal="true"
       aria-label={t('settings.picker.title')}
       className="fixed inset-0 z-40 flex items-end justify-center bg-black/40 sm:items-center"
-      onClick={onClose}
+      onClick={handleClose}
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -55,7 +79,7 @@ export function PlanPickerSheet({ open, onClose, settings }: Props) {
         <header className="flex items-center justify-between border-b-[0.5px] border-border-hairline bg-bg-primary px-4 py-3 sm:rounded-t-2xl">
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             aria-label={t('common.cancel')}
             className="flex size-9 items-center justify-center rounded-full text-text-color-secondary"
           >
@@ -68,15 +92,44 @@ export function PlanPickerSheet({ open, onClose, settings }: Props) {
         </header>
 
         <div className="flex flex-col gap-5 overflow-y-auto p-4">
+          {submittedPlan ? (
+            <div className="rounded-xl border-[0.5px] border-success-text bg-success-bg p-4 text-center">
+              <p className="text-body font-medium text-success-text">
+                {t('settings.picker.requestSent', {
+                  plan: t(`settings.plans.${submittedPlan}`),
+                })}
+              </p>
+              <p className="mt-1 text-caption text-text-color-secondary">
+                {t('settings.picker.requestSentBody')}
+              </p>
+            </div>
+          ) : null}
+
+          {mutation.error && !submittedPlan ? (
+            <div className="rounded-xl border-[0.5px] border-danger-text bg-danger-bg p-3">
+              <p className="text-caption text-danger-text">
+                {mutation.error instanceof ApiError
+                  ? mutation.error.message
+                  : t('settings.picker.requestError')}
+              </p>
+            </div>
+          ) : null}
+
           <PlanGroup
             title={t('settings.picker.subtitlePersonal')}
             plans={PERSONAL_PLANS}
             settings={settings}
+            submittedPlan={submittedPlan}
+            pending={mutation.isPending}
+            onChoose={(p) => mutation.mutate(p)}
           />
           <PlanGroup
             title={t('settings.picker.subtitleClub')}
             plans={CLUB_PLANS}
             settings={settings}
+            submittedPlan={submittedPlan}
+            pending={mutation.isPending}
+            onChoose={(p) => mutation.mutate(p)}
           />
           <p className="px-1 text-footnote text-text-color-tertiary">
             {t('settings.picker.footer')}
@@ -91,9 +144,19 @@ interface PlanGroupProps {
   title: string;
   plans: PlanCardData[];
   settings: WorkspaceSettings;
+  submittedPlan: Plan | null;
+  pending: boolean;
+  onChoose: (plan: UpgradeablePlan) => void;
 }
 
-function PlanGroup({ title, plans, settings }: PlanGroupProps) {
+function PlanGroup({
+  title,
+  plans,
+  settings,
+  submittedPlan,
+  pending,
+  onChoose,
+}: PlanGroupProps) {
   return (
     <div className="flex flex-col gap-2">
       <h4 className="px-1 text-section uppercase tracking-wide text-text-color-secondary">
@@ -101,7 +164,14 @@ function PlanGroup({ title, plans, settings }: PlanGroupProps) {
       </h4>
       <div className="flex flex-col gap-3">
         {plans.map((p) => (
-          <PlanCard key={p.code} data={p} settings={settings} />
+          <PlanCard
+            key={p.code}
+            data={p}
+            settings={settings}
+            submittedPlan={submittedPlan}
+            pending={pending}
+            onChoose={onChoose}
+          />
         ))}
       </div>
     </div>
@@ -111,26 +181,46 @@ function PlanGroup({ title, plans, settings }: PlanGroupProps) {
 interface PlanCardProps {
   data: PlanCardData;
   settings: WorkspaceSettings;
+  submittedPlan: Plan | null;
+  pending: boolean;
+  onChoose: (plan: UpgradeablePlan) => void;
 }
 
-function PlanCard({ data, settings }: PlanCardProps) {
+function PlanCard({
+  data,
+  settings,
+  submittedPlan,
+  pending,
+  onChoose,
+}: PlanCardProps) {
   const { t } = useTranslation();
-  const isCurrent = settings.plan === data.code;
+  // While on trial, settings.plan is the *target* paid plan — don't mark it
+  // as "current" or the upgrade button gets disabled and the trial user is
+  // stuck.
+  const isCurrent = !isTrial(settings) && settings.plan === data.code;
+  const isSubmitted = submittedPlan === data.code;
   const planLabel = t(`settings.plans.${data.code}`);
   const price = t(`settings.plans.${data.code}_price`);
   // Feature keys are arrays in the locale JSON — i18next can resolve them
   // via { returnObjects: true }.
   const features = t(data.featuresKey, { returnObjects: true }) as string[];
 
-  const handleChoose = () => {
-    openUpgradeChat(settings.name, planLabel);
-  };
-
   const borderClass = isCurrent
     ? 'border-accent'
-    : data.badge === 'savings'
+    : isSubmitted
       ? 'border-success-text'
-      : 'border-border-hairline';
+      : data.badge === 'savings'
+        ? 'border-success-text'
+        : 'border-border-hairline';
+
+  const buttonDisabled = isCurrent || pending || submittedPlan !== null;
+  const buttonLabel = isCurrent
+    ? t('settings.picker.currentPlan')
+    : isSubmitted
+      ? t('settings.picker.requested')
+      : pending
+        ? t('settings.picker.sending')
+        : t('settings.picker.choose');
 
   return (
     <div
@@ -177,15 +267,15 @@ function PlanCard({ data, settings }: PlanCardProps) {
 
       <button
         type="button"
-        onClick={handleChoose}
-        disabled={isCurrent}
+        onClick={() => onChoose(data.code)}
+        disabled={buttonDisabled}
         className={
-          isCurrent
+          buttonDisabled
             ? 'mt-4 flex min-h-tap w-full items-center justify-center rounded-lg border-[0.5px] border-border-hairline text-body text-text-color-tertiary'
             : 'mt-4 flex min-h-tap w-full items-center justify-center rounded-lg bg-accent text-body font-medium text-white'
         }
       >
-        {isCurrent ? t('settings.picker.currentPlan') : t('settings.picker.choose')}
+        {buttonLabel}
       </button>
     </div>
   );

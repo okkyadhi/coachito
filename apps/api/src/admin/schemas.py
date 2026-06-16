@@ -122,6 +122,7 @@ class AdminStatsOut(BaseModel):
     users_total: int
     users_new_this_month: int
     trainees_total: int
+    upgrade_requests_pending: int
 
 
 class AdminToggleAdminOut(BaseModel):

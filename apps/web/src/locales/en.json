@@ -800,6 +800,11 @@
       "savingsBadge": "Save Rp 500k/yr",
       "currentPlan": "Current plan",
       "choose": "Choose plan",
+      "sending": "Sending…",
+      "requested": "Request sent",
+      "requestSent": "Upgrade request to {{plan}} sent",
+      "requestSentBody": "Our team will contact you about payment.",
+      "requestError": "Failed to send request. Please try again.",
       "footer": "Manual payment via transfer. Our team will help you set up.",
       "features": {
         "soloCoach": ["20 active trainees", "Assessment + report", "1 sport"],
@@ -1100,6 +1105,7 @@
     "emptyBody": "Monthly reports generate automatically on the 1st. You can also create one anytime.",
     "create": "Create report manually",
     "generating": "Generating…",
+    "generationFailed": "Generation failed",
     "generatedOn": "Generated {{date}}",
     "sheet": {
       "title": "Create report",

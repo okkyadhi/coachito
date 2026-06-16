@@ -26,6 +26,10 @@ interface RequestOptions {
   useRefreshToken?: boolean;
   /** Internal: skip the 401 → refresh retry to avoid infinite loops. */
   _isRetry?: boolean;
+  /** Internal: use this token directly instead of reading from the store.
+   *  Set by the 401 retry so the fresh token is used even when the store
+   *  update was skipped (e.g. user object absent in an edge case). */
+  _overrideToken?: string;
 }
 
 // Singleton promise so concurrent 401s all wait on the same refresh call.
@@ -82,6 +86,7 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
     authenticated = true,
     useRefreshToken = false,
     _isRetry = false,
+    _overrideToken,
   } = options;
 
   const finalHeaders = new Headers(headers);
@@ -91,7 +96,7 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
 
   if (authenticated) {
     const state = useAuthStore.getState();
-    const token = useRefreshToken ? state.refreshToken : state.token;
+    const token = _overrideToken ?? (useRefreshToken ? state.refreshToken : state.token);
     if (token) finalHeaders.set('Authorization', `Bearer ${token}`);
   }
 
@@ -105,7 +110,9 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   if (res.status === 401 && authenticated && !useRefreshToken && !_isRetry) {
     const newToken = await _tryRefresh();
     if (newToken) {
-      return request<T>(path, { ...options, _isRetry: true });
+      // Pass the fresh token directly so the retry works even if the store
+      // update inside _tryRefresh was skipped.
+      return request<T>(path, { ...options, _isRetry: true, _overrideToken: newToken });
     }
     // Refresh failed; signOut already called — throw so callers see the error.
     throw new ApiError(401, 'Session expired. Please sign in again.');

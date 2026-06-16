@@ -25,6 +25,11 @@ const AdminOverviewScreen = lazy(() =>
 const AdminShell = lazy(() =>
   import('@/features/admin/AdminShell').then((m) => ({ default: m.AdminShell })),
 );
+const AdminUpgradeRequestsScreen = lazy(() =>
+  import('@/features/admin/AdminUpgradeRequestsScreen').then((m) => ({
+    default: m.AdminUpgradeRequestsScreen,
+  })),
+);
 const AdminUsersScreen = lazy(() =>
   import('@/features/admin/AdminUsersScreen').then((m) => ({ default: m.AdminUsersScreen })),
 );
@@ -340,6 +345,7 @@ export function Router() {
           <Route path="/admin/workspaces" element={<AdminWorkspacesScreen />} />
           <Route path="/admin/workspaces/:id" element={<AdminWorkspaceDetailScreen />} />
           <Route path="/admin/users" element={<AdminUsersScreen />} />
+          <Route path="/admin/upgrade-requests" element={<AdminUpgradeRequestsScreen />} />
         </Route>
 
         {/* Catch-all */}

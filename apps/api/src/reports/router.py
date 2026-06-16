@@ -42,6 +42,7 @@ class ReportOut(BaseModel):
     generated_at: datetime | None
     pdf_url: str | None
     view_count: int
+    error_message: str | None = None
 
 
 class ReportListOut(BaseModel):
@@ -97,7 +98,7 @@ async def list_reports(
                 """
                 SELECT r.id, r.athlete_id, a.display_name AS trainee_name,
                        r.period_start, r.period_end, r.status::text AS status,
-                       r.generated_at, r.pdf_url, r.view_count
+                       r.generated_at, r.pdf_url, r.view_count, r.error_message
                 FROM reports r
                 JOIN athletes a ON a.id = r.athlete_id
                 ORDER BY COALESCE(r.generated_at, NOW()) DESC, r.period_end DESC
@@ -118,6 +119,7 @@ async def list_reports(
                 generated_at=r["generated_at"],
                 pdf_url=r["pdf_url"],
                 view_count=int(r["view_count"]),
+                error_message=r["error_message"],
             )
             for r in rows
         ]
@@ -276,7 +278,7 @@ async def get_report(
                 """
                 SELECT r.id, r.athlete_id, a.display_name AS trainee_name,
                        r.period_start, r.period_end, r.status::text AS status,
-                       r.generated_at, r.pdf_url, r.view_count
+                       r.generated_at, r.pdf_url, r.view_count, r.error_message
                 FROM reports r
                 JOIN athletes a ON a.id = r.athlete_id
                 WHERE r.id = :rid
@@ -299,6 +301,7 @@ async def get_report(
         generated_at=row["generated_at"],
         pdf_url=row["pdf_url"],
         view_count=int(row["view_count"]),
+        error_message=row["error_message"],
     )
 
 

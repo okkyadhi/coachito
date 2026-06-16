@@ -45,7 +45,11 @@ export function ReportRow({ report, locale, onOpen }: Props) {
         </p>
         <p className={`truncate text-caption ${isError ? 'text-danger-text' : 'text-text-color-secondary'}`}>
           {periodLabel}
-          {isError ? ' · Generation failed' : generatedLabel ? ` · ${generatedLabel}` : ''}
+          {isError
+            ? ` · ${report.errorMessage ?? t('reports.generationFailed')}`
+            : generatedLabel
+              ? ` · ${generatedLabel}`
+              : ''}
         </p>
       </div>
       {isError ? (

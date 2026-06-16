@@ -117,8 +117,20 @@ export async function getMyWorkspace(): Promise<WorkspaceSettings | null> {
 
 // ── Trial helpers ─────────────────────────────────────────────────
 
-export function isTrial(settings: Pick<WorkspaceSettings, 'plan'>): boolean {
-  return settings.plan === 'free_trial';
+// Workspace is "on trial" if either:
+//   - plan literally stores 'free_trial' (legacy / admin-set), OR
+//   - the paid plan was provisioned with a future trial_ends_at (the normal
+//     signup path — BE stores e.g. plan='club_pro' + trial_ends_at=now+30d).
+//
+// We need the BE-derived trial_ends_at (exposed here as `renewsAt`) because
+// `plan` alone lies: a brand-new club workspace ships with plan='club_pro'.
+export function isTrial(
+  settings: Pick<WorkspaceSettings, 'plan' | 'renewsAt'>,
+): boolean {
+  if (settings.plan === 'free_trial') return true;
+  if (!settings.renewsAt) return false;
+  const end = new Date(settings.renewsAt);
+  return !Number.isNaN(end.getTime()) && end.getTime() > Date.now();
 }
 
 export function trialDaysLeft(renewsAt: string | null): number | null {
@@ -131,6 +143,24 @@ export function trialDaysLeft(renewsAt: string | null): number | null {
   const startOf = (d: Date) =>
     Date.UTC(d.getFullYear(), d.getMonth(), d.getDate());
   return Math.round((startOf(end) - startOf(today)) / msPerDay);
+}
+
+// ── POST /me/upgrade-requests ─────────────────────────────────────
+//
+// In-app "I want to upgrade" intent.  No payment is taken — the
+// platform admin gets a queue entry on the /admin/upgrade-requests
+// screen and reaches out manually (Coachito has no Stripe yet, see
+// CLAUDE.md decision #18).  BE dedups multiple taps for the same
+// workspace, so re-submitting a different plan just updates the
+// pending row instead of spamming the queue.
+
+// Plan codes accepted by the BE — `free_trial` deliberately excluded.
+export type UpgradeablePlan = Exclude<Plan, 'free_trial'>;
+
+export async function requestPlanUpgrade(
+  requestedPlan: UpgradeablePlan,
+): Promise<void> {
+  await api.post('/me/upgrade-requests', { requested_plan: requestedPlan });
 }
 
 // ── PATCH /workspaces/me ──────────────────────────────────────────

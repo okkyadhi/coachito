@@ -432,6 +432,16 @@ async def get_stats(
         )
     ).scalar_one()
 
+    # 4. Pending upgrade requests
+    upgrade_pending: int = (
+        await db.execute(
+            text(
+                "SELECT COUNT(*)::int FROM upgrade_requests "
+                "WHERE status = 'pending'"
+            )
+        )
+    ).scalar_one()
+
     ws = dict(ws_rows)  # type: ignore[arg-type]
     usr = dict(user_rows)  # type: ignore[arg-type]
     return AdminStatsOut(
@@ -447,6 +457,7 @@ async def get_stats(
         users_total=usr["total"],
         users_new_this_month=usr["new_this_month"],
         trainees_total=int(trainee_total or 0),
+        upgrade_requests_pending=int(upgrade_pending or 0),
     )
 
 

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AlertTriangle, Building2, TrendingUp, Users } from 'lucide-react';
+import { AlertTriangle, ArrowUpCircle, Building2, TrendingUp, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 import { getAdminStats } from './admin-api';
@@ -99,6 +99,14 @@ export function AdminOverviewScreen() {
               sub="within 7 days"
               alert={data.trials_expiring_soon > 0}
               onClick={() => navigate('/admin/workspaces')}
+            />
+            <StatCard
+              icon={ArrowUpCircle}
+              label="Upgrade requests"
+              value={data.upgrade_requests_pending}
+              sub="pending"
+              alert={data.upgrade_requests_pending > 0}
+              onClick={() => navigate('/admin/upgrade-requests')}
             />
           </div>
 

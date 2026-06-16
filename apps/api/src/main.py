@@ -8,6 +8,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.types import ASGIApp, Receive, Scope, Send
 
 from src.middleware.request_id import RequestIdMiddleware
 from src.observability.health import collect as collect_health
@@ -48,6 +49,48 @@ from src.workspaces.public import router as workspaces_public_router
 from src.workspaces.router import router as workspaces_router
 from src.workspaces.settings import router as workspaces_settings_router
 from src.admin.router import router as admin_router
+from src.upgrade_requests.router import router as upgrade_requests_router
+
+
+# Detect static dir early — needed both for the SPA middleware and the
+# file-serving routes registered at the bottom.
+_STATIC_DIR = Path(os.environ.get("STATIC_DIR", ""))
+_SPA_ACTIVE = _STATIC_DIR.is_dir() and (_STATIC_DIR / "index.html").exists()
+
+
+class _SPABrowserMiddleware:
+    """In single-container prod the browser hard-refreshing a SPA route (e.g.
+    /reports) sends GET /reports with no Authorization header.  FastAPI
+    matches the API route first and returns 401 before the SPA JS even loads.
+
+    This middleware intercepts GET requests that look like browser navigations
+    (Accept: text/html, no Bearer token) and serves index.html directly so the
+    SPA loads and handles auth and routing client-side.
+
+    API calls always carry Authorization: Bearer, so they are unaffected.
+    """
+
+    _SKIP = ("/healthz", "/_debug/", "/assets/")
+
+    def __init__(self, app: ASGIApp, index_html: str) -> None:
+        self.app = app
+        self._index = index_html
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] == "http" and scope["method"] == "GET":
+            path: str = scope.get("path", "")
+            if not any(path.startswith(p) for p in self._SKIP):
+                hdr: dict[bytes, bytes] = dict(scope["headers"])
+                accept = hdr.get(b"accept", b"").decode("latin-1")
+                auth = hdr.get(b"authorization", b"").decode("latin-1")
+                # Browser navigation sends Accept: text/html but never an
+                # Authorization header — serve the SPA shell so React Router
+                # takes over client-side.
+                if "text/html" in accept and not auth:
+                    from starlette.responses import FileResponse as _FR
+                    await _FR(self._index)(scope, receive, send)
+                    return
+        await self.app(scope, receive, send)
 
 
 def _start_inprocess_worker() -> None:
@@ -132,6 +175,14 @@ if _allowed_origins:
         allow_headers=["*"],
     )
 
+# SPA browser-navigation fallback — must be added AFTER CORS so it is the
+# outermost wrapper and intercepts before FastAPI's route matching.
+if _SPA_ACTIVE:
+    app.add_middleware(
+        _SPABrowserMiddleware,
+        index_html=str(_STATIC_DIR / "index.html"),
+    )
+
 app.include_router(auth_router)
 app.include_router(workspaces_router)
 app.include_router(workspaces_settings_router)  # PATCH /workspaces/me
@@ -161,6 +212,7 @@ app.include_router(invites_trainees_router)  # POST /trainees/{id}/invite
 app.include_router(invites_router)           # POST /invites/{token}/claim
 app.include_router(invites_public_router)    # GET  /i/{token}
 app.include_router(admin_router)             # /admin/* — platform admin dashboard
+app.include_router(upgrade_requests_router)  # POST /me/upgrade-requests + /admin/upgrade-requests
 
 
 @app.get("/healthz")
@@ -186,8 +238,11 @@ async def debug_boom() -> None:
 # unmatched path falls back to index.html so React Router can take over.
 # In dev compose, STATIC_DIR isn't set → these routes are inert and the
 # FE is served by the separate `web` container.
-_STATIC_DIR = Path(os.environ.get("STATIC_DIR", ""))
-if _STATIC_DIR.is_dir() and (_STATIC_DIR / "index.html").exists():
+#
+# Browser hard-refresh of SPA routes (e.g. /reports) is handled by
+# _SPABrowserMiddleware above — it intercepts before route matching so
+# the API endpoint never sees the unauthenticated browser GET.
+if _SPA_ACTIVE:
     _ASSETS_DIR = _STATIC_DIR / "assets"
     if _ASSETS_DIR.is_dir():
         app.mount(

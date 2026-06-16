@@ -16,6 +16,7 @@ export interface Report {
   generatedAt: string | null;
   viewCount: number;
   pdfUrl: string | null;
+  errorMessage: string | null;
 }
 
 interface ApiReport {
@@ -28,6 +29,7 @@ interface ApiReport {
   generated_at: string | null;
   view_count: number;
   pdf_url: string | null;
+  error_message: string | null;
 }
 
 interface ApiList {
@@ -50,6 +52,7 @@ function toReport(r: ApiReport): Report {
     generatedAt: r.generated_at,
     viewCount: r.view_count,
     pdfUrl: r.pdf_url,
+    errorMessage: r.error_message,
   };
 }
 

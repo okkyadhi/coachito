@@ -119,10 +119,52 @@ export interface AdminStats {
   users_total: number;
   users_new_this_month: number;
   trainees_total: number;
+  upgrade_requests_pending: number;
 }
 
 export function getAdminStats(): Promise<AdminStats> {
   return api.get<AdminStats>('/admin/stats');
+}
+
+// ── Upgrade requests ───────────────────────────────────────────
+
+export type UpgradeRequestStatus = 'pending' | 'resolved' | 'dismissed';
+
+export interface UpgradeRequestRow {
+  id: string;
+  workspace_id: string;
+  workspace_name: string;
+  requested_plan: string;
+  requester_user_id: string | null;
+  requester_email: string | null;
+  requester_display_name: string | null;
+  owner_email: string | null;
+  owner_display_name: string | null;
+  status: UpgradeRequestStatus;
+  note: string | null;
+  created_at: string;
+  resolved_at: string | null;
+  resolved_by_user_id: string | null;
+}
+
+export interface UpgradeRequestListOut {
+  total: number;
+  requests: UpgradeRequestRow[];
+}
+
+export function listUpgradeRequests(
+  status: UpgradeRequestStatus | 'all' = 'pending',
+): Promise<UpgradeRequestListOut> {
+  return api.get<UpgradeRequestListOut>(
+    `/admin/upgrade-requests?status=${status}`,
+  );
+}
+
+export function patchUpgradeRequest(
+  id: string,
+  body: { status: UpgradeRequestStatus; note?: string | null },
+): Promise<UpgradeRequestRow> {
+  return api.patch<UpgradeRequestRow>(`/admin/upgrade-requests/${id}`, body);
 }
 
 export interface AdminCoachMember {

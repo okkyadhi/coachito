@@ -1,4 +1,4 @@
-import { BarChart2, Building2, LogOut, Users } from 'lucide-react';
+import { ArrowUpCircle, BarChart2, Building2, LogOut, Users } from 'lucide-react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 
 import { Logo } from '@/components/Logo';
@@ -48,6 +48,7 @@ export function AdminShell() {
           <NavItem to="/admin" icon={BarChart2} label="Overview" end />
           <NavItem to="/admin/workspaces" icon={Building2} label="Workspaces" />
           <NavItem to="/admin/users" icon={Users} label="Users" />
+          <NavItem to="/admin/upgrade-requests" icon={ArrowUpCircle} label="Upgrade requests" />
         </nav>
 
         <div className="border-t-[0.5px] border-border-hairline p-3">
