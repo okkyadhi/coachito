@@ -27,16 +27,11 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
 WORKDIR /app/apps/api
 
-# Install deps in a layer that only changes when manifests change
-COPY apps/api/pyproject.toml apps/api/uv.lock apps/api/alembic.ini ./
+# Copy the whole api tree — uv's workspace resolution wants every member
+# present even with --no-install-project, so layer-caching deps separately
+# isn't workable here.  Rebuilds are still fast because uv caches downloads.
+COPY apps/api/ ./
 RUN uv sync --frozen --no-dev
-
-# Now copy source — invalidates only when src/alembic actually change
-COPY apps/api/src ./src
-COPY apps/api/alembic ./alembic
-COPY apps/api/scripts ./scripts
-COPY apps/api/templates ./templates
-COPY apps/api/data ./data
 
 ENV PATH="/app/apps/api/.venv/bin:$PATH"
 ENV PYTHONUNBUFFERED=1
