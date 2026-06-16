@@ -90,3 +90,40 @@ class AdminResetPasswordIn(BaseModel):
 class AdminResetPasswordOut(BaseModel):
     user_id: str
     email: EmailStr | None
+
+
+class AdminCoachMember(BaseModel):
+    id: str
+    display_name: str
+    email: str | None
+    role: str
+    distinct_trainee_count: int
+    session_count: int
+
+
+class AdminTraineeMember(BaseModel):
+    id: str
+    display_name: str
+    email: str | None
+    tier_name: str | None
+    last_session_at: datetime | None
+
+
+class AdminWorkspaceMembersOut(BaseModel):
+    coaches: list[AdminCoachMember]
+    trainees: list[AdminTraineeMember]
+
+
+class AdminStatsOut(BaseModel):
+    workspaces_total: int
+    workspaces_by_plan: dict[str, int]
+    trials_expiring_soon: int
+    workspaces_new_this_month: int
+    users_total: int
+    users_new_this_month: int
+    trainees_total: int
+
+
+class AdminToggleAdminOut(BaseModel):
+    user_id: str
+    is_platform_admin: bool

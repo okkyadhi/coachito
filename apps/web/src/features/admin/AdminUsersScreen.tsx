@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { KeyRound, Shield, ShieldOff } from 'lucide-react';
 import { useState } from 'react';
 
@@ -7,7 +7,7 @@ import { TextInput } from '@/components/TextInput';
 import { ApiError } from '@/lib/api';
 
 import type { AdminUserRow } from './admin-api';
-import { listAdminUsers, resetAdminUserPassword } from './admin-api';
+import { listAdminUsers, resetAdminUserPassword, toggleAdminUser } from './admin-api';
 
 function fmtDate(iso: string | null) {
   if (!iso) return 'Never';
@@ -90,8 +90,21 @@ function ResetPasswordModal({
 export function AdminUsersScreen() {
   const [q, setQ] = useState('');
   const [resetTarget, setResetTarget] = useState<AdminUserRow | null>(null);
+  const queryClient = useQueryClient();
 
   const trimmedQ = q.trim();
+
+  const toggleMutation = useMutation({
+    mutationFn: (userId: string) => toggleAdminUser(userId),
+    onSuccess: (result) => {
+      queryClient.setQueriesData<{ total: number; users: AdminUserRow[] }>(
+        { queryKey: ['admin', 'users'] },
+        (old) => old
+          ? { ...old, users: old.users.map((u) => u.id === result.user_id ? { ...u, is_platform_admin: result.is_platform_admin } : u) }
+          : old,
+      );
+    },
+  });
 
   const { data, isPending } = useQuery({
     queryKey: ['admin', 'users', trimmedQ],
@@ -166,14 +179,28 @@ export function AdminUsersScreen() {
                     )}
                   </td>
                   <td className="px-4 py-3">
-                    <button
-                      type="button"
-                      onClick={() => setResetTarget(u)}
-                      className="flex items-center gap-1.5 text-caption text-accent hover:underline"
-                    >
-                      <KeyRound size={14} strokeWidth={1.5} />
-                      Reset password
-                    </button>
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setResetTarget(u)}
+                        className="flex items-center gap-1.5 text-caption text-accent hover:underline"
+                      >
+                        <KeyRound size={14} strokeWidth={1.5} />
+                        Reset password
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => toggleMutation.mutate(u.id)}
+                        disabled={toggleMutation.isPending}
+                        className="flex items-center gap-1.5 text-caption text-text-color-secondary hover:text-text-color-primary hover:underline disabled:opacity-40"
+                      >
+                        {u.is_platform_admin ? (
+                          <><ShieldOff size={14} strokeWidth={1.5} />Revoke admin</>
+                        ) : (
+                          <><Shield size={14} strokeWidth={1.5} />Make admin</>
+                        )}
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

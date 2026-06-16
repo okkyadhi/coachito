@@ -106,3 +106,47 @@ export function resetAdminUserPassword(
 ): Promise<{ user_id: string; email: string | null }> {
   return api.post(`/admin/users/${userId}/reset-password`, { new_password: newPassword });
 }
+
+export function toggleAdminUser(userId: string): Promise<{ user_id: string; is_platform_admin: boolean }> {
+  return api.post(`/admin/users/${userId}/toggle-admin`);
+}
+
+export interface AdminStats {
+  workspaces_total: number;
+  workspaces_by_plan: Record<string, number>;
+  trials_expiring_soon: number;
+  workspaces_new_this_month: number;
+  users_total: number;
+  users_new_this_month: number;
+  trainees_total: number;
+}
+
+export function getAdminStats(): Promise<AdminStats> {
+  return api.get<AdminStats>('/admin/stats');
+}
+
+export interface AdminCoachMember {
+  id: string;
+  display_name: string;
+  email: string | null;
+  role: string;
+  distinct_trainee_count: number;
+  session_count: number;
+}
+
+export interface AdminTraineeMember {
+  id: string;
+  display_name: string;
+  email: string | null;
+  tier_name: string | null;
+  last_session_at: string | null;
+}
+
+export interface AdminWorkspaceMembers {
+  coaches: AdminCoachMember[];
+  trainees: AdminTraineeMember[];
+}
+
+export function getAdminWorkspaceMembers(workspaceId: string): Promise<AdminWorkspaceMembers> {
+  return api.get<AdminWorkspaceMembers>(`/admin/workspaces/${workspaceId}/members`);
+}

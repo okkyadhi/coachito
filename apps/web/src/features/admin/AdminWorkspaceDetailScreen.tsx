@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, Users, UserCheck, Calendar } from 'lucide-react';
+import { ArrowLeft, Calendar, UserCheck, Users } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -7,7 +7,11 @@ import { PrimaryButton } from '@/components/PrimaryButton';
 import { ApiError } from '@/lib/api';
 
 import type { AdminWorkspacePatch, BillingStatus, WorkspacePlan } from './admin-api';
-import { getAdminWorkspace, patchAdminWorkspace } from './admin-api';
+import {
+  getAdminWorkspace,
+  getAdminWorkspaceMembers,
+  patchAdminWorkspace,
+} from './admin-api';
 
 const PLAN_LABELS: Record<WorkspacePlan, string> = {
   free_trial: 'Free trial',
@@ -22,6 +26,12 @@ const BILLING_BADGE: Record<BillingStatus, { label: string; cls: string }> = {
   lapsed:   { label: 'Lapsed',   cls: 'bg-red-50 text-red-700' },
   archived: { label: 'Archived', cls: 'bg-bg-tertiary text-text-color-tertiary' },
   unknown:  { label: 'Unknown',  cls: 'bg-bg-tertiary text-text-color-tertiary' },
+};
+
+const ROLE_LABELS: Record<string, string> = {
+  club_admin: 'Club admin',
+  head_coach: 'Head coach',
+  coach: 'Coach',
 };
 
 function toDateInput(iso: string | null) {
@@ -48,15 +58,25 @@ function StatCard({ icon: Icon, label, value }: { icon: typeof Users; label: str
   );
 }
 
+type Tab = 'billing' | 'members';
+
 export function AdminWorkspaceDetailScreen() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [tab, setTab] = useState<Tab>('billing');
 
   const { data: ws, isPending } = useQuery({
     queryKey: ['admin', 'workspace', id],
     queryFn: () => getAdminWorkspace(id!),
     enabled: !!id,
+  });
+
+  const { data: members, isPending: membersPending } = useQuery({
+    queryKey: ['admin', 'workspace-members', id],
+    queryFn: () => getAdminWorkspaceMembers(id!),
+    enabled: !!id && tab === 'members',
+    staleTime: 60_000,
   });
 
   const [plan, setPlan] = useState<WorkspacePlan | ''>('');
@@ -67,7 +87,6 @@ export function AdminWorkspaceDetailScreen() {
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
 
-  // Populate form once data loads (only on first load)
   const [initialized, setInitialized] = useState(false);
   if (ws && !initialized) {
     setPlan(ws.plan);
@@ -83,6 +102,7 @@ export function AdminWorkspaceDetailScreen() {
     onSuccess: (updated) => {
       queryClient.setQueryData(['admin', 'workspace', id], updated);
       queryClient.invalidateQueries({ queryKey: ['admin', 'workspaces'] });
+      queryClient.invalidateQueries({ queryKey: ['admin', 'stats'] });
       setSaved(true);
       setTimeout(() => setSaved(false), 2000);
       setError(null);
@@ -95,11 +115,13 @@ export function AdminWorkspaceDetailScreen() {
     const patch: AdminWorkspacePatch = {};
     if (plan && plan !== ws.plan) patch.plan = plan as WorkspacePlan;
     const trialIso = trialEndsAt ? new Date(trialEndsAt).toISOString() : null;
-    if (trialIso !== (ws.trial_ends_at ? ws.trial_ends_at.slice(0, 10) === trialEndsAt ? ws.trial_ends_at : trialIso : null))
-      patch.trial_ends_at = trialIso;
+    if (trialIso !== (ws.trial_ends_at
+      ? ws.trial_ends_at.slice(0, 10) === trialEndsAt ? ws.trial_ends_at : trialIso
+      : null)) patch.trial_ends_at = trialIso;
     const paidIso = paidUntil ? new Date(paidUntil).toISOString() : null;
-    if (paidIso !== (ws.paid_until ? ws.paid_until.slice(0, 10) === paidUntil ? ws.paid_until : paidIso : null))
-      patch.paid_until = paidIso;
+    if (paidIso !== (ws.paid_until
+      ? ws.paid_until.slice(0, 10) === paidUntil ? ws.paid_until : paidIso
+      : null)) patch.paid_until = paidIso;
     const quotaNum = parseInt(quota, 10);
     if (!isNaN(quotaNum) && quotaNum !== ws.active_trainee_quota) patch.active_trainee_quota = quotaNum;
     const isArchived = ws.archived_at !== null;
@@ -108,22 +130,13 @@ export function AdminWorkspaceDetailScreen() {
     mutation.mutate(patch);
   }
 
-  if (isPending) {
-    return (
-      <div className="p-6 text-body text-text-color-secondary">Loading…</div>
-    );
-  }
-  if (!ws) {
-    return (
-      <div className="p-6 text-body text-text-color-secondary">Workspace not found.</div>
-    );
-  }
+  if (isPending) return <div className="p-6 text-body text-text-color-secondary">Loading…</div>;
+  if (!ws) return <div className="p-6 text-body text-text-color-secondary">Workspace not found.</div>;
 
   const badge = BILLING_BADGE[ws.billing_status];
 
   return (
     <div className="p-6">
-      {/* Header */}
       <button
         type="button"
         onClick={() => navigate('/admin/workspaces')}
@@ -154,89 +167,167 @@ export function AdminWorkspaceDetailScreen() {
         <StatCard icon={Calendar} label="Last session" value={fmtDate(ws.last_session_at)} />
       </div>
 
-      {/* Edit form */}
-      <div className="rounded-xl border-[0.5px] border-border-hairline bg-bg-primary p-5">
-        <h2 className="mb-4 text-headline text-text-color-primary">Billing & settings</h2>
-
-        <div className="grid grid-cols-2 gap-4">
-          {/* Plan */}
-          <div>
-            <label className="mb-1 block text-caption text-text-color-secondary">Plan</label>
-            <select
-              value={plan}
-              onChange={(e) => setPlan(e.target.value as WorkspacePlan)}
-              className="h-11 w-full rounded-lg border-[0.5px] border-border-hairline bg-bg-primary px-3 text-body text-text-color-primary focus:outline-none focus:ring-1 focus:ring-accent"
-            >
-              {(Object.entries(PLAN_LABELS) as [WorkspacePlan, string][]).map(([v, l]) => (
-                <option key={v} value={v}>{l}</option>
-              ))}
-            </select>
-          </div>
-
-          {/* Quota */}
-          <div>
-            <label className="mb-1 block text-caption text-text-color-secondary">Trainee quota</label>
-            <input
-              type="number"
-              min={0}
-              max={100000}
-              value={quota}
-              onChange={(e) => setQuota(e.target.value)}
-              className="h-11 w-full rounded-lg border-[0.5px] border-border-hairline bg-bg-primary px-3 text-body text-text-color-primary focus:outline-none focus:ring-1 focus:ring-accent"
-            />
-          </div>
-
-          {/* Trial ends */}
-          <div>
-            <label className="mb-1 block text-caption text-text-color-secondary">Trial ends</label>
-            <input
-              type="date"
-              value={trialEndsAt}
-              onChange={(e) => setTrialEndsAt(e.target.value)}
-              className="h-11 w-full rounded-lg border-[0.5px] border-border-hairline bg-bg-primary px-3 text-body text-text-color-primary focus:outline-none focus:ring-1 focus:ring-accent"
-            />
-          </div>
-
-          {/* Paid until */}
-          <div>
-            <label className="mb-1 block text-caption text-text-color-secondary">Paid until</label>
-            <input
-              type="date"
-              value={paidUntil}
-              onChange={(e) => setPaidUntil(e.target.value)}
-              className="h-11 w-full rounded-lg border-[0.5px] border-border-hairline bg-bg-primary px-3 text-body text-text-color-primary focus:outline-none focus:ring-1 focus:ring-accent"
-            />
-          </div>
-        </div>
-
-        {/* Archive toggle */}
-        <div className="mt-4 flex items-center gap-3">
-          <label className="flex cursor-pointer items-center gap-2 text-body text-text-color-secondary">
-            <input
-              type="checkbox"
-              checked={archived ?? false}
-              onChange={(e) => setArchived(e.target.checked)}
-              className="h-4 w-4 rounded border-border-hairline accent-accent"
-            />
-            Archived (hides workspace from active list)
-          </label>
-        </div>
-
-        {error ? (
-          <p className="mt-3 text-caption text-danger-text">{error}</p>
-        ) : null}
-
-        <div className="mt-4 flex items-center gap-3">
-          <PrimaryButton
+      {/* Tabs */}
+      <div className="mb-4 flex gap-1 rounded-lg border-[0.5px] border-border-hairline bg-bg-tertiary p-1 w-fit">
+        {(['billing', 'members'] as Tab[]).map((t) => (
+          <button
+            key={t}
             type="button"
-            onClick={handleSave}
-            loading={mutation.isPending}
-            className="w-auto px-6"
+            onClick={() => setTab(t)}
+            className={`rounded-md px-4 py-1.5 text-body transition-colors capitalize ${
+              tab === t
+                ? 'bg-bg-primary text-text-color-primary shadow-sm'
+                : 'text-text-color-secondary hover:text-text-color-primary'
+            }`}
           >
-            {saved ? 'Saved' : 'Save changes'}
-          </PrimaryButton>
-        </div>
+            {t}
+          </button>
+        ))}
       </div>
+
+      {tab === 'billing' ? (
+        <div className="rounded-xl border-[0.5px] border-border-hairline bg-bg-primary p-5">
+          <h2 className="mb-4 text-headline text-text-color-primary">Billing & settings</h2>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="mb-1 block text-caption text-text-color-secondary">Plan</label>
+              <select
+                value={plan}
+                onChange={(e) => setPlan(e.target.value as WorkspacePlan)}
+                className="h-11 w-full rounded-lg border-[0.5px] border-border-hairline bg-bg-primary px-3 text-body text-text-color-primary focus:outline-none focus:ring-1 focus:ring-accent"
+              >
+                {(Object.entries(PLAN_LABELS) as [WorkspacePlan, string][]).map(([v, l]) => (
+                  <option key={v} value={v}>{l}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="mb-1 block text-caption text-text-color-secondary">Trainee quota</label>
+              <input
+                type="number"
+                min={0}
+                max={100000}
+                value={quota}
+                onChange={(e) => setQuota(e.target.value)}
+                className="h-11 w-full rounded-lg border-[0.5px] border-border-hairline bg-bg-primary px-3 text-body text-text-color-primary focus:outline-none focus:ring-1 focus:ring-accent"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-caption text-text-color-secondary">Trial ends</label>
+              <input
+                type="date"
+                value={trialEndsAt}
+                onChange={(e) => setTrialEndsAt(e.target.value)}
+                className="h-11 w-full rounded-lg border-[0.5px] border-border-hairline bg-bg-primary px-3 text-body text-text-color-primary focus:outline-none focus:ring-1 focus:ring-accent"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-caption text-text-color-secondary">Paid until</label>
+              <input
+                type="date"
+                value={paidUntil}
+                onChange={(e) => setPaidUntil(e.target.value)}
+                className="h-11 w-full rounded-lg border-[0.5px] border-border-hairline bg-bg-primary px-3 text-body text-text-color-primary focus:outline-none focus:ring-1 focus:ring-accent"
+              />
+            </div>
+          </div>
+          <div className="mt-4 flex items-center gap-3">
+            <label className="flex cursor-pointer items-center gap-2 text-body text-text-color-secondary">
+              <input
+                type="checkbox"
+                checked={archived ?? false}
+                onChange={(e) => setArchived(e.target.checked)}
+                className="h-4 w-4 rounded border-border-hairline accent-accent"
+              />
+              Archived
+            </label>
+          </div>
+          {error ? <p className="mt-3 text-caption text-danger-text">{error}</p> : null}
+          <div className="mt-4">
+            <PrimaryButton type="button" onClick={handleSave} loading={mutation.isPending} className="w-auto px-6">
+              {saved ? 'Saved' : 'Save changes'}
+            </PrimaryButton>
+          </div>
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {/* Coaches */}
+          <div className="rounded-xl border-[0.5px] border-border-hairline bg-bg-primary">
+            <div className="border-b-[0.5px] border-border-hairline px-5 py-3">
+              <h2 className="text-headline text-text-color-primary">Coaches</h2>
+            </div>
+            {membersPending ? (
+              <div className="px-5 py-8 text-center text-body text-text-color-secondary">Loading…</div>
+            ) : !members?.coaches.length ? (
+              <div className="px-5 py-8 text-center text-body text-text-color-secondary">No coaches.</div>
+            ) : (
+              <table className="w-full text-left">
+                <thead className="border-b-[0.5px] border-border-hairline">
+                  <tr>
+                    {['Name', 'Role', 'Trainees coached', 'Sessions'].map((h) => (
+                      <th key={h} className="px-5 py-3 text-caption font-medium text-text-color-secondary">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y-[0.5px] divide-border-hairline">
+                  {members.coaches.map((c) => (
+                    <tr key={c.id}>
+                      <td className="px-5 py-3">
+                        <p className="text-body font-medium text-text-color-primary">{c.display_name}</p>
+                        <p className="text-caption text-text-color-secondary">{c.email ?? '—'}</p>
+                      </td>
+                      <td className="px-5 py-3 text-body text-text-color-secondary">
+                        {ROLE_LABELS[c.role] ?? c.role}
+                      </td>
+                      <td className="px-5 py-3 text-body text-text-color-primary">{c.distinct_trainee_count}</td>
+                      <td className="px-5 py-3 text-body text-text-color-primary">{c.session_count}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+
+          {/* Trainees */}
+          <div className="rounded-xl border-[0.5px] border-border-hairline bg-bg-primary">
+            <div className="border-b-[0.5px] border-border-hairline px-5 py-3">
+              <h2 className="text-headline text-text-color-primary">
+                Trainees
+                {members ? <span className="ml-2 text-body font-normal text-text-color-secondary">({members.trainees.length})</span> : null}
+              </h2>
+            </div>
+            {membersPending ? (
+              <div className="px-5 py-8 text-center text-body text-text-color-secondary">Loading…</div>
+            ) : !members?.trainees.length ? (
+              <div className="px-5 py-8 text-center text-body text-text-color-secondary">No trainees yet.</div>
+            ) : (
+              <table className="w-full text-left">
+                <thead className="border-b-[0.5px] border-border-hairline">
+                  <tr>
+                    {['Name', 'Tier', 'Last session'].map((h) => (
+                      <th key={h} className="px-5 py-3 text-caption font-medium text-text-color-secondary">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y-[0.5px] divide-border-hairline">
+                  {members.trainees.map((t) => (
+                    <tr key={t.id}>
+                      <td className="px-5 py-3">
+                        <p className="text-body font-medium text-text-color-primary">{t.display_name}</p>
+                        <p className="text-caption text-text-color-secondary">{t.email ?? '—'}</p>
+                      </td>
+                      <td className="px-5 py-3 text-body text-text-color-secondary">
+                        {t.tier_name ?? 'Untiered'}
+                      </td>
+                      <td className="px-5 py-3 text-body text-text-color-secondary">{fmtDate(t.last_session_at)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,13 +1,14 @@
-import { Building2, LogOut, Users } from 'lucide-react';
+import { BarChart2, Building2, LogOut, Users } from 'lucide-react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 
 import { Logo } from '@/components/Logo';
 import { useAuthStore } from '@/features/auth/auth-store';
 
-function NavItem({ to, icon: Icon, label }: { to: string; icon: typeof Building2; label: string }) {
+function NavItem({ to, icon: Icon, label, end }: { to: string; icon: typeof Building2; label: string; end?: boolean }) {
   return (
     <NavLink
       to={to}
+      end={end ?? false}
       className={({ isActive }) =>
         `flex items-center gap-2.5 rounded-lg px-3 py-2 text-body transition-colors ${
           isActive
@@ -44,6 +45,7 @@ export function AdminShell() {
         </div>
 
         <nav className="flex-1 space-y-0.5 p-3">
+          <NavItem to="/admin" icon={BarChart2} label="Overview" end />
           <NavItem to="/admin/workspaces" icon={Building2} label="Workspaces" />
           <NavItem to="/admin/users" icon={Users} label="Users" />
         </nav>

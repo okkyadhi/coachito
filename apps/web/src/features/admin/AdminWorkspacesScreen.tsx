@@ -1,11 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { TextInput } from '@/components/TextInput';
 
 import type { WorkspacePlan, WorkspaceType, AdminWorkspaceRow } from './admin-api';
-import { listAdminWorkspaces } from './admin-api';
+import { listAdminWorkspaces, patchAdminWorkspace } from './admin-api';
 
 const PLAN_LABELS: Record<WorkspacePlan, string> = {
   free_trial: 'Free trial',
@@ -36,10 +36,21 @@ type TypeFilter = '' | WorkspaceType;
 
 export function AdminWorkspacesScreen() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [q, setQ] = useState('');
   const [planFilter, setPlanFilter] = useState<PlanFilter>('');
   const [typeFilter, setTypeFilter] = useState<TypeFilter>('');
   const [showArchived, setShowArchived] = useState(false);
+
+  const extendTrialMutation = useMutation({
+    mutationFn: (wsId: string) => {
+      const trialEndsAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+      return patchAdminWorkspace(wsId, { trial_ends_at: trialEndsAt });
+    },
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['admin', 'workspaces'] });
+    },
+  });
 
   const trimmedQ = q.trim();
 
@@ -123,7 +134,7 @@ export function AdminWorkspacesScreen() {
           <table className="w-full text-left">
             <thead className="border-b-[0.5px] border-border-hairline">
               <tr>
-                {['Workspace', 'Type', 'Plan', 'Coaches', 'Trainees', 'Status', 'Created'].map((h) => (
+                {['Workspace', 'Type', 'Plan', 'Coaches', 'Trainees', 'Status', 'Created', ''].map((h) => (
                   <th key={h} className="px-4 py-3 text-caption font-medium text-text-color-secondary">{h}</th>
                 ))}
               </tr>
@@ -151,6 +162,16 @@ export function AdminWorkspacesScreen() {
                       </span>
                     </td>
                     <td className="px-4 py-3 text-body text-text-color-secondary">{fmtDate(ws.created_at)}</td>
+                    <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
+                      <button
+                        type="button"
+                        onClick={() => extendTrialMutation.mutate(ws.id)}
+                        disabled={extendTrialMutation.isPending}
+                        className="whitespace-nowrap text-caption text-accent hover:underline disabled:opacity-40"
+                      >
+                        +30 days
+                      </button>
+                    </td>
                   </tr>
                 );
               })}
