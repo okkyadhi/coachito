@@ -1,5 +1,6 @@
 """Auth endpoints: Google id_token verify, magic-link request/consume, refresh."""
 
+import asyncio
 from typing import Annotated, Any
 from uuid import UUID
 
@@ -491,18 +492,15 @@ async def signup_coach(
     tokens = await _issue(user, workspace.id, redis)
     await db.commit()
 
-    # Best-effort welcome email — SMTP failure shouldn't roll back the signup.
-    try:
-        await send_welcome_email(
+    # Fire-and-forget — don't block the signup response on SMTP.
+    asyncio.create_task(
+        send_welcome_email(
             email=user.email or email,
             display_name=user.display_name,
             role="coach",
             workspace_name=workspace.name,
         )
-    except Exception:
-        log.exception(
-            "welcome_email_send_failed", email=user.email, role="coach"
-        )
+    )
 
     return _signup_response(user, workspace.id, tokens, "coach", "/today")
 
@@ -571,17 +569,14 @@ async def signup_club(
     tokens = await _issue(user, workspace.id, redis)
     await db.commit()
 
-    try:
-        await send_welcome_email(
+    asyncio.create_task(
+        send_welcome_email(
             email=user.email or email,
             display_name=user.display_name,
             role="club_admin",
             workspace_name=workspace.name,
         )
-    except Exception:
-        log.exception(
-            "welcome_email_send_failed", email=user.email, role="club_admin"
-        )
+    )
 
     return _signup_response(
         user, workspace.id, tokens, "club_admin", "/settings/coaches"

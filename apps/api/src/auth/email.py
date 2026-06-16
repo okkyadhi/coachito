@@ -5,6 +5,8 @@ Prod: Gmail SMTP (smtp.gmail.com:587 + App Password) or any other relay.
 Configure via SMTP_* env vars in .env — see .env.example for Gmail setup.
 """
 
+import asyncio
+import logging
 from email.message import EmailMessage
 from typing import Literal
 
@@ -48,22 +50,31 @@ def _signature() -> str:
     return f'<p style="color:{_INK_MUTED};font-size:12px;margin-top:32px;">— Coachito</p>'
 
 
+_log = logging.getLogger(__name__)
+
+
 async def _send(msg: EmailMessage) -> None:
     """Send via configured SMTP, with auth + TLS when env says so.
 
     Mailpit (dev): no auth, no TLS. Gmail: username + app-password +
     STARTTLS on 587 (or implicit TLS on 465).
+    Hard timeout of 10 s so a missing/misconfigured SMTP host never
+    blocks the request for a full TCP-timeout minute.
     """
     kwargs: dict[str, object] = {
         "hostname": settings.smtp_host,
         "port": settings.smtp_port,
         "use_tls": settings.smtp_use_tls,
         "start_tls": settings.smtp_start_tls,
+        "timeout": 10,
     }
     if settings.smtp_username:
         kwargs["username"] = settings.smtp_username
         kwargs["password"] = settings.smtp_password
-    await aiosmtplib.send(msg, **kwargs)  # type: ignore[arg-type]
+    try:
+        await aiosmtplib.send(msg, **kwargs)  # type: ignore[arg-type]
+    except Exception as exc:
+        _log.warning("SMTP send failed (to=%s): %s", msg["To"], exc)
 
 
 # ── Magic-link (existing flow, retained) ─────────────────────────
