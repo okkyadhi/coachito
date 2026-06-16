@@ -218,7 +218,13 @@ def upgrade() -> None:
             """
         )
         op.execute(
-            f"GRANT SELECT, INSERT, UPDATE, DELETE ON {table} TO coachito_api"
+            f"""
+            DO $$ BEGIN
+              IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'coachito_api') THEN
+                GRANT SELECT, INSERT, UPDATE, DELETE ON {table} TO coachito_api;
+              END IF;
+            END $$
+            """
         )
 
 

@@ -138,13 +138,19 @@ def upgrade() -> None:
     )
 
     # ── Grants for the runtime app role ─────────────────────────────
-    # ALTER DEFAULT PRIVILEGES set in the init script applies to objects
-    # created by that role only; tables created by the migration owner
-    # (``coachito``) need an explicit GRANT for ``coachito_api`` to use them.
+    # Wrapped in a DO block so the GRANT is silently skipped on managed
+    # Postgres hosts (Railway, Render) where coachito_api doesn't exist.
+    # Local dev (Docker init script creates the role) still picks it up.
     op.execute(
-        "GRANT SELECT, INSERT, UPDATE, DELETE ON "
-        "  assessments, assessment_scores, assessment_edits, feedbacks "
-        "TO coachito_api"
+        """
+        DO $$ BEGIN
+          IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'coachito_api') THEN
+            GRANT SELECT, INSERT, UPDATE, DELETE ON
+              assessments, assessment_scores, assessment_edits, feedbacks
+            TO coachito_api;
+          END IF;
+        END $$
+        """
     )
 
     # ── RLS ─────────────────────────────────────────────────────────

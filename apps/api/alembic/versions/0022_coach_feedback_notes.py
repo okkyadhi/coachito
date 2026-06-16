@@ -45,9 +45,15 @@ def upgrade() -> None:
         "WHERE subject_skill_id IS NOT NULL"
     )
 
-    # Grant DML to the runtime app role (migration owner is coachito).
+    # Grant DML to the runtime app role — skip silently if role absent (Railway).
     op.execute(
-        "GRANT SELECT, INSERT, UPDATE, DELETE ON coach_feedback_notes TO coachito_api"
+        """
+        DO $$ BEGIN
+          IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'coachito_api') THEN
+            GRANT SELECT, INSERT, UPDATE, DELETE ON coach_feedback_notes TO coachito_api;
+          END IF;
+        END $$
+        """
     )
 
     # RLS — workspace tenant isolation, mirroring feedbacks.

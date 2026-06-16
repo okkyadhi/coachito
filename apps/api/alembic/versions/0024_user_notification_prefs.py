@@ -46,7 +46,15 @@ def upgrade() -> None:
         )
         """
     )
-    op.execute("GRANT SELECT, INSERT, UPDATE, DELETE ON user_notification_prefs TO coachito_api")
+    op.execute(
+        """
+        DO $$ BEGIN
+          IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'coachito_api') THEN
+            GRANT SELECT, INSERT, UPDATE, DELETE ON user_notification_prefs TO coachito_api;
+          END IF;
+        END $$
+        """
+    )
 
 
 def downgrade() -> None:

@@ -35,9 +35,15 @@ def upgrade() -> None:
         "ON session_focuses (workspace_id, focus)"
     )
 
-    # Grant DML to the runtime app role (migration owner is coachito).
+    # Grant DML to the runtime app role — skip silently if role absent (Railway).
     op.execute(
-        "GRANT SELECT, INSERT, UPDATE, DELETE ON session_focuses TO coachito_api"
+        """
+        DO $$ BEGIN
+          IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'coachito_api') THEN
+            GRANT SELECT, INSERT, UPDATE, DELETE ON session_focuses TO coachito_api;
+          END IF;
+        END $$
+        """
     )
 
     # RLS — same tenant-isolation shape as the other tables in this codebase.
