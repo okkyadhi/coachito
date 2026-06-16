@@ -1,0 +1,32 @@
+[
+  {"code": "PADEL_TECH_FH",       "category": "technical", "name_en": "Forehand Drive",                  "name_id": "Forehand Drive",                  "short_label_en": "Forehand",   "short_label_id": "Forehand",    "display_order": 1},
+  {"code": "PADEL_TECH_BH",       "category": "technical", "name_en": "Backhand Drive",                  "name_id": "Backhand Drive",                  "short_label_en": "Backhand",   "short_label_id": "Backhand",    "display_order": 2},
+  {"code": "PADEL_TECH_FH_VOLLEY","category": "technical", "name_en": "Forehand Volley",                 "name_id": "Forehand Volley",                 "short_label_en": "FH volley",  "short_label_id": "Voli FH",     "display_order": 3},
+  {"code": "PADEL_TECH_BH_VOLLEY","category": "technical", "name_en": "Backhand Volley",                 "name_id": "Backhand Volley",                 "short_label_en": "BH volley",  "short_label_id": "Voli BH",     "display_order": 4},
+  {"code": "PADEL_TECH_SERVE",    "category": "technical", "name_en": "Serve",                           "name_id": "Serve",                           "short_label_en": "Serve",      "short_label_id": "Servis",      "display_order": 5},
+  {"code": "PADEL_TECH_RETURN",   "category": "technical", "name_en": "Return of Serve",                 "name_id": "Return of Serve",                 "short_label_en": "Return",     "short_label_id": "Return",      "display_order": 6},
+  {"code": "PADEL_TECH_LOB",      "category": "technical", "name_en": "Defensive Lob (Globo)",           "name_id": "Defensive Lob (Globo)",           "short_label_en": "Lob",        "short_label_id": "Lob",         "display_order": 7},
+  {"code": "PADEL_TECH_BANDEJA",  "category": "technical", "name_en": "Bandeja",                         "name_id": "Bandeja",                         "short_label_en": "Bandeja",    "short_label_id": "Bandeja",     "display_order": 8},
+  {"code": "PADEL_TECH_VIBORA",   "category": "technical", "name_en": "Víbora",                          "name_id": "Víbora",                          "short_label_en": "Víbora",     "short_label_id": "Víbora",      "display_order": 9},
+  {"code": "PADEL_TECH_SMASH",    "category": "technical", "name_en": "Smash (Remate)",                  "name_id": "Smash (Remate)",                  "short_label_en": "Smash",      "short_label_id": "Smash",       "display_order": 10},
+  {"code": "PADEL_TECH_WALL_BACK","category": "technical", "name_en": "Back Wall Exit",                  "name_id": "Back Wall Exit",                  "short_label_en": "Back wall",  "short_label_id": "Dinding bel.","display_order": 11},
+  {"code": "PADEL_TECH_WALL_SIDE","category": "technical", "name_en": "Side Wall Play",                  "name_id": "Side Wall Play",                  "short_label_en": "Side wall",  "short_label_id": "Dinding sm.", "display_order": 12},
+  {"code": "PADEL_TECH_DROP",     "category": "technical", "name_en": "Chiquita / Drop Shot",            "name_id": "Chiquita / Drop Shot",            "short_label_en": "Chiquita",   "short_label_id": "Chiquita",    "display_order": 13},
+
+  {"code": "PADEL_TACT_NET_POS",  "category": "tactical",  "name_en": "Net Positioning (Offensive)",     "name_id": "Net Positioning (Offensive)",     "short_label_en": "Net pos.",   "short_label_id": "Posisi net",  "display_order": 14},
+  {"code": "PADEL_TACT_DEF_POS",  "category": "tactical",  "name_en": "Defensive Positioning",           "name_id": "Defensive Positioning",           "short_label_en": "Def pos.",   "short_label_id": "Bertahan",    "display_order": 15},
+  {"code": "PADEL_TACT_SHOT_SEL", "category": "tactical",  "name_en": "Shot Selection",                  "name_id": "Shot Selection",                  "short_label_en": "Shot sel.",  "short_label_id": "Pilih shot",  "display_order": 16},
+  {"code": "PADEL_TACT_PARTNER",  "category": "tactical",  "name_en": "Partner Coordination",            "name_id": "Partner Coordination",            "short_label_en": "Partner",    "short_label_id": "Pasangan",    "display_order": 17},
+  {"code": "PADEL_TACT_TRANSITION","category": "tactical", "name_en": "Transition Play",                 "name_id": "Transition Play",                 "short_label_en": "Transition", "short_label_id": "Transisi",    "display_order": 18},
+  {"code": "PADEL_TACT_READING",  "category": "tactical",  "name_en": "Reading the Game",                "name_id": "Reading the Game",                "short_label_en": "Reading",    "short_label_id": "Membaca",     "display_order": 19},
+
+  {"code": "PADEL_PHYS_FOOTWORK", "category": "physical",  "name_en": "Footwork & Court Coverage",       "name_id": "Footwork & Court Coverage",       "short_label_en": "Footwork",   "short_label_id": "Footwork",    "display_order": 20},
+  {"code": "PADEL_PHYS_SPLIT",    "category": "physical",  "name_en": "Split Step & Reaction",           "name_id": "Split Step & Reaction",           "short_label_en": "Split step", "short_label_id": "Split step",  "display_order": 21},
+  {"code": "PADEL_PHYS_ENDURANCE","category": "physical",  "name_en": "Endurance",                       "name_id": "Endurance",                       "short_label_en": "Endurance",  "short_label_id": "Stamina",     "display_order": 22},
+  {"code": "PADEL_PHYS_POWER",    "category": "physical",  "name_en": "Power & Explosiveness",           "name_id": "Power & Explosiveness",           "short_label_en": "Power",      "short_label_id": "Power",       "display_order": 23},
+
+  {"code": "PADEL_MENT_FOCUS",    "category": "mental",    "name_en": "Focus & Concentration",           "name_id": "Focus & Concentration",           "short_label_en": "Focus",      "short_label_id": "Fokus",       "display_order": 24},
+  {"code": "PADEL_MENT_COMPOSURE","category": "mental",    "name_en": "Composure Under Pressure",        "name_id": "Composure Under Pressure",        "short_label_en": "Composure",  "short_label_id": "Tenang",      "display_order": 25},
+  {"code": "PADEL_MENT_DECISION", "category": "mental",    "name_en": "Decision-Making Speed",           "name_id": "Decision-Making Speed",           "short_label_en": "Decision",   "short_label_id": "Keputusan",   "display_order": 26},
+  {"code": "PADEL_MENT_RESILIENCE","category": "mental",   "name_en": "Resilience After Errors",         "name_id": "Resilience After Errors",         "short_label_en": "Resilience", "short_label_id": "Bangkit",     "display_order": 27}
+]

@@ -1,0 +1,365 @@
+/* Print stylesheet for monthly progress reports.
+ *
+ * Coachito palette: clay (#C66B47) is the accent (overridable per workspace
+ * via brand_color), ink (#1F1B16) is the text colour, cream (#F5EBD9) is
+ * the warm secondary surface, hairlines are 0.5pt rgba(31,27,22,…). No
+ * shadows, sentence case, Georgia → Fraunces fallback for display type. */
+
+@page {
+  size: A4;
+  margin: 18mm 16mm 16mm;
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-family: "DejaVu Sans", "Liberation Sans", sans-serif;
+    font-size: 8pt;
+    color: rgba(31, 27, 22, 0.4);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "DejaVu Sans", "Liberation Sans", "SF Pro Text", sans-serif;
+  /* Ink — Coachito's near-black with a warm undertone. */
+  color: #1F1B16;
+  font-size: 10pt;
+  line-height: 1.45;
+}
+
+/* ── Letterhead ───────────────────────────────────────────────── */
+.letterhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 10pt;
+  margin-bottom: 14pt;
+  border-bottom: 0.5pt solid rgba(31, 27, 22, 0.1);
+}
+.letterhead .left {
+  display: flex;
+  gap: 10pt;
+  align-items: center;
+}
+.club-mark {
+  width: 32pt;
+  height: 32pt;
+  border-radius: 4pt;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14pt;
+  font-weight: 500;
+  overflow: hidden;
+}
+.club-mark img { width: 100%; height: 100%; object-fit: cover; }
+.club-name { margin: 0; font-size: 12pt; font-weight: 500; }
+.club-tagline { margin: 0; font-size: 8.5pt; color: rgba(31, 27, 22, 0.55); }
+.letterhead .right { text-align: right; }
+.period-tag {
+  margin: 0;
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.8pt;
+  color: var(--accent);
+}
+.period-label {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18pt;
+  font-weight: 500;
+  letter-spacing: -0.2pt;
+}
+
+/* ── Trainee hero ─────────────────────────────────────────────── */
+.trainee-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14pt;
+}
+.trainee-hero h1 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  font-size: 20pt;
+  letter-spacing: -0.2pt;
+}
+.trainee-hero .meta {
+  margin: 2pt 0 0;
+  font-size: 9pt;
+  color: rgba(31, 27, 22, 0.55);
+}
+.tier-pill {
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-radius: 999pt;
+  padding: 2pt 8pt;
+  font-size: 8.5pt;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ── Section scaffolding ──────────────────────────────────────── */
+.section { margin-bottom: 14pt; }
+.section-label {
+  margin: 0 0 6pt;
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.7pt;
+  color: rgba(31, 27, 22, 0.5);
+}
+
+/* ── Coach note ────────────────────────────────────────────────── */
+.note-card {
+  background: var(--accent-bg);
+  border-radius: 6pt;
+  padding: 12pt 14pt;
+}
+.note-card .quote {
+  margin: 0 0 8pt;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 10.5pt;
+  line-height: 1.5;
+  color: #1F1B16;
+}
+.note-card .byline {
+  margin: 0;
+  font-size: 8.5pt;
+  color: rgba(31, 27, 22, 0.6);
+}
+
+/* ── Tier progress ───────────────────────────────────────────── */
+.tier-progress {
+  border: 0.5pt solid rgba(31, 27, 22, 0.1);
+  border-radius: 6pt;
+  padding: 10pt 12pt;
+}
+.tier-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6pt;
+}
+.tier-current { margin: 0; font-size: 11pt; font-weight: 500; }
+.tier-pct { font-size: 9pt; color: rgba(31, 27, 22, 0.55); }
+.tier-bar {
+  background: rgba(31, 27, 22, 0.06);
+  border-radius: 999pt;
+  height: 4pt;
+  overflow: hidden;
+}
+.tier-bar span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999pt;
+}
+.tier-foot {
+  margin: 6pt 0 0;
+  font-size: 8.5pt;
+  color: rgba(31, 27, 22, 0.55);
+}
+
+/* ── Stats grid ─────────────────────────────────────────────── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 0.5pt solid rgba(31, 27, 22, 0.1);
+  border-radius: 6pt;
+  overflow: hidden;
+}
+.stat {
+  padding: 10pt 12pt;
+  border-bottom: 0.5pt solid rgba(31, 27, 22, 0.06);
+  border-right: 0.5pt solid rgba(31, 27, 22, 0.06);
+}
+.stat:nth-child(2n) { border-right: 0; }
+.stat:nth-last-child(-n+2) { border-bottom: 0; }
+.stat-num {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18pt;
+  font-weight: 500;
+  letter-spacing: -0.2pt;
+}
+.stat-label {
+  margin: 2pt 0 0;
+  font-size: 8.5pt;
+  color: rgba(31, 27, 22, 0.55);
+}
+
+/* ── Radar ──────────────────────────────────────────────────── */
+.radar-block {
+  display: flex;
+  align-items: center;
+  gap: 14pt;
+  border: 0.5pt solid rgba(31, 27, 22, 0.1);
+  border-radius: 6pt;
+  padding: 10pt 12pt;
+}
+.radar-svg { flex: 0 0 auto; }
+.radar-legend {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.radar-legend li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.5pt solid rgba(31, 27, 22, 0.06);
+  padding: 5pt 0;
+  font-size: 9.5pt;
+}
+.radar-legend li:last-child { border-bottom: 0; }
+.radar-legend .cat { color: rgba(31, 27, 22, 0.7); }
+.radar-legend .avg { font-weight: 500; }
+
+/* ── Wins ───────────────────────────────────────────────────── */
+.wins { list-style: none; margin: 0; padding: 0; }
+.wins li {
+  display: flex;
+  align-items: center;
+  gap: 8pt;
+  padding: 6pt 0;
+  border-bottom: 0.5pt solid rgba(31, 27, 22, 0.06);
+  font-size: 9.5pt;
+}
+.wins li:last-child { border-bottom: 0; }
+.wins .arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18pt;
+  height: 18pt;
+  border-radius: 999pt;
+  background: rgba(26, 127, 75, 0.1);
+  color: #1a7f4b;
+  font-weight: 500;
+}
+.wins .skill { flex: 1; }
+.wins .delta { color: var(--accent); font-weight: 500; }
+.wins .when { color: rgba(31, 27, 22, 0.45); font-size: 8.5pt; }
+
+/* ── Sessions ───────────────────────────────────────────────── */
+.sessions { list-style: none; margin: 0; padding: 0; }
+.sessions li {
+  border-bottom: 0.5pt solid rgba(31, 27, 22, 0.08);
+  padding: 8pt 0;
+}
+.sessions li:last-child { border-bottom: 0; }
+.sessions .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sessions .when { font-size: 9pt; color: rgba(31, 27, 22, 0.6); }
+.focus-pill {
+  background: rgba(31, 27, 22, 0.04);
+  border-radius: 999pt;
+  padding: 2pt 8pt;
+  font-size: 8pt;
+  color: rgba(31, 27, 22, 0.7);
+}
+.sessions .summary {
+  margin: 4pt 0 0;
+  font-size: 9.5pt;
+  color: #3A332B;
+  line-height: 1.5;
+}
+
+/* ── Session report banner ───────────────────────────────── */
+.session-banner {
+  margin: -8pt 0 14pt;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-radius: 4pt;
+  padding: 6pt 10pt;
+  font-size: 9pt;
+  font-weight: 500;
+}
+
+/* ── Skill detail ────────────────────────────────────────── */
+.page-break-before { page-break-before: always; }
+.skill-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12pt;
+}
+.skill-group {
+  border: 0.5pt solid rgba(31, 27, 22, 0.1);
+  border-radius: 6pt;
+  padding: 8pt 10pt;
+  page-break-inside: avoid;
+}
+.cat-heading {
+  margin: 0 0 6pt;
+  font-size: 9pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5pt;
+  color: var(--accent);
+}
+.skills { list-style: none; margin: 0; padding: 0; }
+.skills li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  column-gap: 8pt;
+  padding: 4pt 0;
+  border-bottom: 0.5pt solid rgba(31, 27, 22, 0.05);
+  align-items: center;
+}
+.skills li:last-child { border-bottom: 0; }
+.skill-name {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: 9pt;
+  color: #1F1B16;
+}
+.level-bar {
+  grid-column: 1;
+  grid-row: 2;
+  display: inline-flex;
+  gap: 1.5pt;
+  margin-top: 2pt;
+}
+.level-bar .seg {
+  display: inline-block;
+  width: 12pt;
+  height: 3pt;
+  border-radius: 1.5pt;
+  background: rgba(31, 27, 22, 0.06);
+}
+.level-bar .seg.on { background: var(--accent); }
+.level-text {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-size: 8pt;
+  color: rgba(31, 27, 22, 0.6);
+  white-space: nowrap;
+}
+.level-text.muted { color: rgba(31, 27, 22, 0.35); }
+
+/* ── Footer ────────────────────────────────────────────────── */
+.report-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10pt;
+  margin-top: 16pt;
+  border-top: 0.5pt solid rgba(31, 27, 22, 0.1);
+  font-size: 8pt;
+  color: rgba(31, 27, 22, 0.55);
+}
+.report-footer p { margin: 0; }
+.report-footer .muted { color: rgba(31, 27, 22, 0.4); }
+.report-footer .right { text-align: right; }

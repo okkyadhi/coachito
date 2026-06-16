@@ -1,0 +1,58 @@
+[
+  {
+    "code": "BEGINNER",
+    "display_order": 1,
+    "name_game_en":  "Beginner",       "name_game_id":  "Beginner",
+    "name_skill_en": "Beginner",       "name_skill_id": "Beginner",
+    "color_hex": "#9E9E9E",
+    "icon_name": "circle"
+  },
+  {
+    "code": "LOWER_BRONZE",
+    "display_order": 2,
+    "name_game_en":  "Lower Bronze",   "name_game_id":  "Lower Bronze",
+    "name_skill_en": "Elementary",     "name_skill_id": "Elementary",
+    "color_hex": "#CD853F",
+    "icon_name": "circle"
+  },
+  {
+    "code": "BRONZE",
+    "display_order": 3,
+    "name_game_en":  "Bronze",         "name_game_id":  "Bronze",
+    "name_skill_en": "Intermediate",   "name_skill_id": "Intermediate",
+    "color_hex": "#CD7F32",
+    "icon_name": "shield"
+  },
+  {
+    "code": "SILVER",
+    "display_order": 4,
+    "name_game_en":  "Silver",         "name_game_id":  "Silver",
+    "name_skill_en": "Upper Intermediate", "name_skill_id": "Upper Intermediate",
+    "color_hex": "#C0C0C0",
+    "icon_name": "shield"
+  },
+  {
+    "code": "GOLD",
+    "display_order": 5,
+    "name_game_en":  "Gold",           "name_game_id":  "Gold",
+    "name_skill_en": "Advanced",       "name_skill_id": "Advanced",
+    "color_hex": "#FFD700",
+    "icon_name": "star"
+  },
+  {
+    "code": "PLATINUM",
+    "display_order": 6,
+    "name_game_en":  "Platinum",       "name_game_id":  "Platinum",
+    "name_skill_en": "Expert",         "name_skill_id": "Expert",
+    "color_hex": "#E5E4E2",
+    "icon_name": "star"
+  },
+  {
+    "code": "DIAMOND",
+    "display_order": 7,
+    "name_game_en":  "Diamond",        "name_game_id":  "Diamond",
+    "name_skill_en": "Elite",          "name_skill_id": "Elite",
+    "color_hex": "#B9F2FF",
+    "icon_name": "gem"
+  }
+]

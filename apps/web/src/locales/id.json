@@ -1,0 +1,1216 @@
+{
+  "common": {
+    "back": "Kembali",
+    "cancel": "Batal",
+    "done": "Selesai",
+    "edit": "Edit",
+    "signOut": "Keluar",
+    "loading": "Memuat…"
+  },
+  "phone": {
+    "invalid": "Masukkan nomor telepon dengan kode negara yang valid."
+  },
+  "dob": {
+    "invalid": "Format: YYYY-MM-DD."
+  },
+  "name": {
+    "required": "Nama wajib diisi."
+  },
+  "nav": {
+    "label": "Navigasi utama",
+    "today": "Hari ini",
+    "trainees": "Trainee",
+    "sessions": "Sesi",
+    "events": "Event",
+    "reports": "Laporan",
+    "settings": "Setelan"
+  },
+  "events": {
+    "title": "Event",
+    "subtitle": "Americano, Mexicano, King of the Hill.",
+    "newCta": "Event baru",
+    "emptyTitle": "Belum ada event",
+    "emptyBody": "Bikin Americano sama temen atau trainee — undian pasangan + pencatat skor otomatis.",
+    "players_one": "{{count}} pemain",
+    "players_other": "{{count}} pemain",
+    "courts_one": "{{count}} lapangan",
+    "courts_other": "{{count}} lapangan",
+    "tagTeam": "Tim",
+    "tagMix": "Mix",
+    "tagSoon": "Segera",
+    "family": {
+      "americano": "Americano",
+      "mexicano": "Mexicano",
+      "koth": "King of the Hill"
+    },
+    "format": {
+      "americano": "Americano",
+      "team_americano": "Team Americano",
+      "mix_americano": "Mix Americano",
+      "mexicano": "Mexicano",
+      "team_mexicano": "Team Mexicano",
+      "mixicano": "Mixicano",
+      "koth": "King of the Hill",
+      "team_koth": "Team King of the Hill"
+    },
+    "statusGroup": {
+      "active": "Berlangsung",
+      "draft": "Draf",
+      "completed": "Selesai",
+      "cancelled": "Dibatalkan"
+    },
+    "statusPill": {
+      "draft": "Draf",
+      "active": "Berlangsung",
+      "completed": "Selesai",
+      "cancelled": "Dibatalkan"
+    },
+    "scoring": {
+      "point": "Poin",
+      "firstTo": "Pertama ke",
+      "totalOf": "Total",
+      "untimed": "Tanpa target"
+    },
+    "sort": {
+      "points": "Poin",
+      "wins": "Menang"
+    },
+    "create": {
+      "title": "Event baru",
+      "basicsTitle": "Dasar",
+      "titlePlaceholder": "Nama event (mis. Americano Minggu)",
+      "venuePlaceholder": "Venue (opsional)",
+      "formatTitle": "Format",
+      "scoringTitle": "Skoring",
+      "scoringHint": "Skoring gaya game tersedia di rilis berikutnya.",
+      "courtsTitle": "Lapangan",
+      "pairingTitle": "Pasangan dalam lapangan",
+      "sortTitle": "Urutan klasemen",
+      "continue": "Simpan draf",
+      "failed": "Gagal menyimpan event. Coba lagi."
+    },
+    "detail": {
+      "draftHint": "Draf",
+      "draftBody": "Tambah minimal 4 pemain, lalu mulai event — kami yang atur undian + skor.",
+      "rosterTitle": "Daftar pemain",
+      "rosterEmpty": "Belum ada pemain — tambahin di bawah.",
+      "cancelCta": "Batalkan event",
+      "cancelledNote": "Event ini sudah dibatalkan. Hanya bisa dilihat.",
+      "startCta": "Mulai event",
+      "startNeedFour": "Butuh minimal 4 pemain",
+      "startFailed": "Gagal memulai event. Coba lagi.",
+      "addPlaceholder": "Nama pemain",
+      "addCta": "Tambah",
+      "roundOfTotal": "Babak {{n}} dari {{m}}",
+      "roundLabel": "Babak {{n}} dari {{m}}",
+      "courtN": "Lapangan {{n}}",
+      "vs": "vs",
+      "scored": "Tercatat",
+      "saveScore": "Simpan skor",
+      "saving": "Menyimpan…",
+      "nextRoundCta": "Selesai babak → lanjut",
+      "scoreAllFirst": "Isi semua skor dulu",
+      "completeCta": "Selesaikan event",
+      "noActiveRound": "Belum ada babak aktif.",
+      "leaderboardEmpty": "Klasemen muncul setelah skor pertama masuk.",
+      "withdrewAt": "Mundur setelah babak {{n}}",
+      "notStarted": "Belum dimulai",
+      "tapToScore": "Ketuk untuk isi skor",
+      "pickWinner": "Pemenang",
+      "loserScore": "Skor yang kalah (menang dapat {{target}})",
+      "renameCourt": "Ganti nama lapangan",
+      "renameCourtPlaceholder": "mis. Center Court",
+      "renameCourtClear": "Kembalikan default",
+      "renameSave": "Simpan",
+      "reshuffleCta": "Acak ulang pasangan",
+      "reshuffleHint": "Pasangkan ulang babak ini. Bisa selama belum ada skor.",
+      "reshuffleConfirm": "Acak ulang pasangan babak ini?",
+      "reshuffleBlocked": "Acak ulang tidak tersedia — skor sudah ada.",
+      "reshuffleFailed": "Gagal acak ulang. Coba lagi.",
+      "restingTitle": "Istirahat di babak ini",
+      "restingNone": "Semua main.",
+      "lbColG": "M",
+      "lbColW": "W",
+      "lbColL": "L",
+      "lbColT": "S",
+      "lbColDiff": "Selisih",
+      "lbColComp": "+M",
+      "lbColPts": "Poin"
+    },
+    "tabs": {
+      "courts": "Lapangan",
+      "leaderboard": "Klasemen",
+      "roster": "Daftar pemain"
+    }
+  },
+  "tiers": {
+    "BEGINNER": "Beginner",
+    "LOWER_BRONZE": "Lower Bronze",
+    "BRONZE": "Bronze",
+    "SILVER": "Silver",
+    "GOLD": "Gold",
+    "PLATINUM": "Platinum",
+    "DIAMOND": "Diamond"
+  },
+  "sessionFocus": {
+    "drilling": "Drill",
+    "match_play": "Match play",
+    "conditioning": "Conditioning",
+    "mental_training": "Latihan mental",
+    "technique_focus": "Teknik",
+    "general": "Umum"
+  },
+  "sessionDetails": {
+    "sheetTitle": "Detail sesi",
+    "today": "Hari ini",
+    "dateTime": "Tanggal & jam",
+    "duration": "Durasi",
+    "minutes_one": "{{count}} menit",
+    "minutes_other": "{{count}} menit",
+    "court": "Lapangan",
+    "courtPlaceholder": "Lapangan 1",
+    "focus": "Fokus",
+    "addCourt": "+ Lapangan",
+    "addFocus": "+ Fokus",
+    "save": "Simpan detail"
+  },
+  "today": {
+    "greeting": "Halo, Coach {{name}}",
+    "sessionCount_one": "{{count}} sesi",
+    "sessionCount_other": "{{count}} sesi",
+    "workspaceCount_one": "{{count}} workspace",
+    "workspaceCount_other": "{{count}} workspace",
+    "upNext": "Sesi berikutnya",
+    "traineesToday": "Trainee hari ini",
+    "minutes_one": "{{count}} menit",
+    "minutes_other": "{{count}} menit",
+    "notAssessed": "Belum dinilai",
+    "emptyTitle": "Tidak ada sesi hari ini",
+    "emptyBody": "Saat kamu menjadwalkan sesi dengan trainee, mereka akan muncul di sini.",
+    "scheduleSession": "Jadwalkan sesi",
+    "addTraineeFirst": "Tambah trainee dulu",
+    "timeOfDay": {
+      "morning": "Pagi",
+      "afternoon": "Siang",
+      "evening": "Malam"
+    },
+    "feedbackBadge_one": "{{count}} masukan baru",
+    "feedbackBadge_other": "{{count}} masukan baru",
+    "toAssessBadge_one": "{{count}} sesi perlu dinilai",
+    "toAssessBadge_other": "{{count}} sesi perlu dinilai",
+    "scope": {
+      "mine": "Saya",
+      "all": "Semua"
+    }
+  },
+  "comingSoon": {
+    "body": "Layar ini sedang dibangun. Cek lagi setelah build berikutnya."
+  },
+  "assessment": {
+    "placeholderTitle": "Penilaian baru",
+    "title": "Penilaian baru",
+    "save": "Simpan",
+    "saving": "Menyimpan…",
+    "saved": "Tersimpan",
+    "savedOffline": "Tersimpan offline",
+    "saveDraft": "Simpan draf",
+    "saveChanges": "Simpan",
+    "publish": "Terbitkan",
+    "prefillFromLast": "Mulai dari skor terakhir",
+    "savedDraft": "Draf tersimpan",
+    "publishedToast": "Terbit",
+    "publishedTierToast": "Terbit · {{tier}}",
+    "publishedToAssessHint_one": "Terbit · {{count}} sesi lagi perlu dinilai",
+    "publishedToAssessHint_other": "Terbit · {{count}} sesi lagi perlu dinilai",
+    "editedToast": "Tersimpan",
+    "editedTierToast": "Tersimpan · {{tier}}",
+    "viewHistory": "Riwayat edit",
+    "genericError": "Gagal menyimpan. Coba lagi.",
+    "status": {
+      "unsaved": "Belum tersimpan",
+      "saving": "Menyimpan…",
+      "draftDirty": "Draf · ada perubahan",
+      "draftSaved": "Draf tersimpan",
+      "published": "Terbit {{when}} · Trainee diberi tahu",
+      "edited": "Diedit {{when}}",
+      "traineeViewed": "Dilihat trainee {{when}}",
+      "traineeNotViewed": "Trainee belum melihat"
+    },
+    "publishConfirm": {
+      "title": "Terbitkan penilaian ini?",
+      "summary": "{{count}} skill dinilai · ringkasan {{chars}} karakter",
+      "notifyHint": "Trainee dan orang tua akan diberi tahu.",
+      "offline": "Kamu sedang offline. Sambungkan untuk menerbitkan — draf sudah tersimpan.",
+      "forceEmpty": "Terbitkan kosong (hanya observasi — tanpa skor / ringkasan).",
+      "diff": {
+        "ups_one": "{{count}} naik",
+        "ups_other": "{{count}} naik",
+        "downs_one": "{{count}} turun",
+        "downs_other": "{{count}} turun",
+        "news_one": "{{count}} baru",
+        "news_other": "{{count}} baru",
+        "unchanged_one": "{{count}} tetap",
+        "unchanged_other": "{{count}} tetap"
+      }
+    },
+    "history": {
+      "title": "Riwayat edit",
+      "empty": "Belum ada edit.",
+      "summary": "Ringkasan",
+      "score": "{{skill}}: {{from}} → {{to}}"
+    },
+    "tierUp": {
+      "title": "{{tier}} tercapai 🎉",
+      "body": "{{name}} baru saja mencapai {{tier}}. Bagikan momen ini ke orang tua.",
+      "shareCta": "Bagikan ke orang tua",
+      "shareTitle": "Tier {{tier}} tercapai",
+      "shareText": "{{name}} baru aja dapat tier {{tier}} di padel — bangga banget! 🎉",
+      "dismiss": "Tutup",
+      "traineeFallback": "Trainee kamu"
+    },
+    "discardConfirm": "Buang perubahan?",
+    "discardConfirmBody": "Editan kamu tidak akan tersimpan.",
+    "discard": "Buang",
+    "keepEditing": "Lanjut edit",
+    "ratedCount_one": "{{count}} dari {{total}} skill dinilai",
+    "ratedCount_other": "{{count}} dari {{total}} skill dinilai",
+    "levels": {
+      "1": "Belajar",
+      "2": "Berkembang",
+      "3": "Fungsional",
+      "4": "Mampu",
+      "5": "Mahir"
+    },
+    "notRated": "Belum dinilai",
+    "showDescriptors": "Lihat deskripsi",
+    "hideDescriptors": "Tutup deskripsi",
+    "noteLabel": "Catatan (opsional)",
+    "notePlaceholder": "Observasi untuk {{skill}}…",
+    "summary": {
+      "title": "Ringkasan sesi",
+      "draftFromScores": "Buat draf dari skor",
+      "placeholder": "Bagaimana sesi berjalan secara keseluruhan?",
+      "visibility": "Terlihat oleh trainee dan orang tua"
+    },
+    "draft": {
+      "cta": "Bantu draft",
+      "loading": "Membuat draft…",
+      "needsScores": "Nilai minimal satu skill dulu.",
+      "saveFirst": "Simpan asesmen dulu.",
+      "successPill": "Draft dibuat",
+      "undo": "Batalkan",
+      "failed": "Gagal membuat draft. Coba lagi.",
+      "notConfigured": "Fitur AI draft belum aktif untuk workspace ini.",
+      "confirmReplaceTitle": "Ganti ringkasan kamu?",
+      "confirmReplaceBody": "Ringkasan yang sudah kamu tulis akan diganti dengan draft AI. Bisa dibatalkan dalam beberapa detik.",
+      "confirmReplaceConfirm": "Ganti"
+    }
+  },
+  "offline": {
+    "title": "Kamu sedang offline",
+    "body": "Perubahan tersimpan lokal dan akan sinkronisasi saat online lagi.",
+    "allCaughtUp": "Semua tersinkron"
+  },
+  "profile": {
+    "backLabel": "Trainee",
+    "joinedDate": "Bergabung {{date}}",
+    "stats": {
+      "sessions": "Sesi",
+      "hours": "Jam coaching",
+      "sinceLast": "Sejak terakhir"
+    },
+    "tierProgress": {
+      "title": "Progres tier",
+      "met_one": "{{count}} dari {{total}} skill terpenuhi",
+      "met_other": "{{count}} dari {{total}} skill terpenuhi",
+      "blocking_one": "{{count}} skill belum mencapai {{tier}}",
+      "blocking_other": "{{count}} skill belum mencapai {{tier}}",
+      "topTier": "Tier tertinggi di kurikulum saat ini — terus perbaiki."
+    },
+    "blockers": {
+      "title": "Untuk capai {{tier}}, fokus ke",
+      "gap": "{{current}} → {{required}}"
+    },
+    "radar": {
+      "title": "Profil skill"
+    },
+    "categories": {
+      "technical": "Technical",
+      "tactical": "Tactical",
+      "physical": "Physical",
+      "mental": "Mental"
+    },
+    "gains": {
+      "title": "Kenaikan terbaru",
+      "entry": "{{from}} → {{to}}"
+    },
+    "allSkills": {
+      "title": "Semua skill",
+      "expandAll": "Buka semua",
+      "collapseAll": "Tutup semua",
+      "notRated": "Belum dinilai"
+    },
+    "sessions": {
+      "title": "Sesi terbaru",
+      "skillsUpdated_one": "{{count}} skill diperbarui",
+      "skillsUpdated_other": "{{count}} skill diperbarui"
+    },
+    "actions": {
+      "newAssessment": "Penilaian baru",
+      "schedule": "Jadwalkan",
+      "generateReport": "Buat laporan"
+    },
+    "empty": {
+      "title": "Belum ada penilaian",
+      "body": "Skill, progres tier, dan radar muncul setelah sesi pertama yang kamu nilai.",
+      "startCta": "Mulai penilaian pertama"
+    }
+  },
+  "trainees": {
+    "addAction": "Tambah trainee",
+    "searchPlaceholder": "Cari trainee",
+    "noResults": "Tidak ada trainee yang cocok dengan \"{{q}}\".",
+    "emptyTitle": "Tambah trainee pertamamu",
+    "emptyBody": "Kirim undangan WhatsApp atau simpan trainee dulu. Sekitar 30 detik.",
+    "addAndInvite": "Tambah dan undang",
+    "addWithoutInvite": "Tambah tanpa undang",
+    "addTitle": "Tambah trainee",
+    "detailsSection": "Data trainee",
+    "parentSection": "Orang tua atau wali",
+    "coachingSection": "Coaching",
+    "nameLabel": "Nama",
+    "namePlaceholder": "Andi Pratama",
+    "phoneLabel": "WhatsApp",
+    "phonePlaceholder": "+62 812 3456 7890",
+    "dobLabel": "Tanggal lahir (opsional)",
+    "parentPhoneLabel": "WhatsApp orang tua (opsional)",
+    "startingTierLabel": "Tier awal",
+    "leadCoachLabel": "Coach utama",
+    "defaultCoachName": "Kamu",
+    "defaultWorkspaceName": "Coachito",
+    "fieldsHint": "Hanya nama dan WhatsApp yang wajib. Trainee mengisi sisanya setelah masuk.",
+    "sendWhatsAppInvite": "Kirim undangan WhatsApp",
+    "saveWithoutInvite": "Simpan tanpa undangan",
+    "createError": "Gagal menambah trainee. Cek input dan coba lagi.",
+    "inviteMessage": "Halo {{name}}! Coach {{coach}} dari {{workspace}} di sini. Kamu diundang untuk track progres padel-mu bersama kami.\n\nTap link di bawah untuk gabung — sekitar 30 detik:\n{{link}}",
+    "linkedTitle": "Trainee ditambahkan",
+    "linkedHeadline": "Terhubung ke {{name}}",
+    "linkedBody": "Nomor ini cocok dengan akun Coachito yang sudah ada ({{email}}). Dia akan lihat undangan saat buka app berikutnya — tidak perlu WhatsApp."
+  },
+  "pendingInvites": {
+    "title": "Undangan",
+    "subtitle_one": "{{count}} club mau menambahkan kamu.",
+    "subtitle_other": "{{count}} club mau menambahkan kamu.",
+    "inviteFrom": "Dari {{coach}}",
+    "accept": "Terima",
+    "decline": "Tolak",
+    "acceptedToast": "Kamu sudah masuk {{workspace}}.",
+    "declinedToast": "Undangan dari {{workspace}} ditolak.",
+    "acceptError": "Gagal terima undangan. Coba lagi.",
+    "declineError": "Gagal menolak undangan. Coba lagi.",
+    "asTrainee": "Sebagai trainee",
+    "switcherHint": "Pakai switcher workspace di atas untuk melihatnya."
+  },
+  "signin": {
+    "title": "Masuk ke Coachito",
+    "subtitle": "Lacak perjalanan coaching kamu.",
+    "continueWithGoogle": "Lanjut dengan Google",
+    "continueWithEmail": "Lanjut dengan email",
+    "emailLabel": "Email",
+    "emailPlaceholder": "kamu@contoh.com",
+    "sendMagicLink": "Kirim magic link",
+    "checkYourEmail": "Cek email kamu",
+    "checkYourEmailBody": "Kami mengirim link masuk ke {{email}}. Tap link untuk lanjut.",
+    "checkSpam": "Belum dapat? Cek spam atau coba lagi.",
+    "tryAnotherEmail": "Coba email lain",
+    "terms": "Dengan melanjutkan kamu menyetujui Syarat & Kebijakan Privasi Coachito.",
+    "noAccount": "Belum punya akun?",
+    "signUpLink": "Daftar",
+    "googleError": "Tidak bisa masuk dengan Google. Coba pakai email.",
+    "sendError": "Gagal mengirim link. Cek email dan coba lagi.",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Password kamu",
+    "signInWithPassword": "Masuk dengan password",
+    "passwordError": "Tidak bisa masuk. Cek password dan coba lagi.",
+    "forgotPassword": "Lupa password?",
+    "backToPassword": "Kembali ke login password"
+  },
+  "forgot": {
+    "title": "Reset password kamu",
+    "subtitle": "Masukkan email, kami kirim link reset.",
+    "cta": "Kirim link reset",
+    "sentTitle": "Cek email kamu",
+    "sentBody": "Kalau akun untuk {{email}} ada, link reset sedang kami kirim.",
+    "checkSpam": "Belum dapat? Cek spam atau coba lagi.",
+    "tryAnother": "Coba email lain",
+    "error": "Gagal mengirim link. Coba lagi.",
+    "backToSignIn": "Kembali ke login"
+  },
+  "reset": {
+    "title": "Buat password baru",
+    "subtitle": "Pilih password baru untuk akun Coachito kamu.",
+    "missingToken": "Link reset ini tidak valid atau kosong. Minta yang baru.",
+    "requestNew": "Minta link baru",
+    "newPasswordLabel": "Password baru",
+    "newPasswordHint": "Minimal 8 karakter",
+    "confirmLabel": "Konfirmasi password baru",
+    "mismatch": "Kedua password tidak sama.",
+    "cta": "Ganti password",
+    "error": "Gagal reset password. Link mungkin sudah kedaluwarsa."
+  },
+  "setPassword": {
+    "title": "Buat password",
+    "titleChange": "Ganti password",
+    "currentPasswordLabel": "Password sekarang",
+    "newPasswordLabel": "Password baru",
+    "confirmPasswordLabel": "Konfirmasi password baru",
+    "hint": "Minimal 8 karakter. Boleh gabungan kata.",
+    "setCta": "Buat password",
+    "updateCta": "Ganti password",
+    "minLengthError": "Password minimal 8 karakter.",
+    "mismatchError": "Password baru tidak cocok.",
+    "genericError": "Gagal menyimpan password. Coba lagi."
+  },
+  "onboarding": {
+    "createWorkspaceTitle": "Buat workspace kamu",
+    "createWorkspaceBody": "Siapkan tempat untuk melacak trainee dan sesi kamu.",
+    "typeLabel": "Tipe workspace",
+    "typeClub": "Klub",
+    "typePersonal": "Solo coach",
+    "typeClubHint": "Institusi multi-coach. Kamu jadi admin klub.",
+    "typePersonalHint": "Hanya kamu. Setup lebih simpel, paket lebih kecil.",
+    "clubName": "Nama klub",
+    "clubNamePlaceholder": "Senayan Padel Club",
+    "coachName": "Nama tampilan",
+    "coachNamePlaceholder": "Coach Novia",
+    "cityLabel": "Kota (opsional)",
+    "cityPlaceholder": "Jakarta",
+    "localeLabel": "Bahasa utama",
+    "createCta": "Buat workspace",
+    "createError": "Gagal membuat workspace. Coba lagi.",
+    "signedInAs": "Masuk sebagai {{email}}"
+  },
+  "signup": {
+    "title": "Buat akun Coachito",
+    "subtitle": "Pilih jenis akun yang ingin kamu buat.",
+    "alreadyHave": "Sudah punya akun?",
+    "signInLink": "Masuk",
+    "genericError": "Gagal membuat akun. Coba lagi.",
+    "roleCoach": {
+      "title": "Saya coach solo",
+      "subtitle": "Saya mengajar privat atau freelance, sendirian."
+    },
+    "roleClub": {
+      "title": "Saya kelola club",
+      "subtitle": "Saya owner atau admin club padel atau tennis."
+    },
+    "coach": {
+      "title": "Mulai sebagai coach solo",
+      "subtitle": "Kami buatkan workspace pribadi dengan namamu.",
+      "cta": "Buat akun"
+    },
+    "club": {
+      "title": "Siapkan club kamu",
+      "subtitle": "Kamu jadi admin di workspace club yang baru.",
+      "cta": "Buat club"
+    },
+    "fields": {
+      "displayName": "Nama lengkap",
+      "displayNamePlaceholder": "mis. Okky Adhi",
+      "passwordLabel": "Password",
+      "passwordHint": "Minimal 8 karakter",
+      "clubName": "Nama club",
+      "clubNamePlaceholder": "mis. Senayan Padel Club",
+      "cityOptional": "Kota (opsional)",
+      "cityPlaceholder": "mis. Jakarta",
+      "sportLabel": "Olahraga utama",
+      "sportsLabel": "Olahraga yang ditawarkan"
+    }
+  },
+  "sports": {
+    "padel": "Padel",
+    "tennis": "Tennis"
+  },
+  "magic": {
+    "signingIn": "Sedang masuk…",
+    "invalidTitle": "Link ini sudah tidak berlaku",
+    "invalidBody": "Magic link kedaluwarsa setelah 15 menit. Minta yang baru untuk melanjutkan."
+  },
+  "traineeNav": {
+    "home": "Beranda",
+    "progress": "Progres",
+    "sessions": "Sesi",
+    "events": "Event",
+    "coach": "Coach",
+    "profile": "Profil"
+  },
+  "traineeHome": {
+    "greeting": "Halo, {{name}}",
+    "welcomeName": "Selamat datang, {{name}}",
+    "welcomeBody": "Yuk mulai perjalananmu.",
+    "notifications": "Notifikasi",
+    "tracking": "Perkembanganmu",
+    "wins": "Pencapaian bulan ini",
+    "achievement": {
+      "tag": "Pencapaian baru",
+      "viewSkill": "Lihat skill",
+      "share": "Bagikan"
+    },
+    "tier": {
+      "skillsToGo_one": "{{count}} skill lagi",
+      "skillsToGo_other": "{{count}} skill lagi",
+      "topTier": "Tier tertinggi — terus diasah."
+    },
+    "upcoming": {
+      "title": "Sesi berikutnya",
+      "today": "Hari ini",
+      "tomorrow": "Besok",
+      "noneTitle": "Belum ada sesi terjadwal",
+      "noneBody": "Minta coach untuk menjadwalkan."
+    },
+    "coachNote": {
+      "title": "Dari {{coach}}",
+      "after": "Setelah sesi {{date}}"
+    },
+    "rhythm": {
+      "title": "Ritmemu",
+      "count_one": "{{count}} sesi dalam 14 hari",
+      "count_other": "{{count}} sesi dalam 14 hari",
+      "body": "Periode paling konsisten sejauh ini.",
+      "footer": "Besok lanjutkan ritme ini."
+    },
+    "emptyRadar": {
+      "title": "Skill-mu akan muncul di sini",
+      "body": "Setelah sesi pertama, coach akan menilai skill-mu dan kamu lihat di sini."
+    },
+    "whatNext": {
+      "title": "Apa yang akan terjadi",
+      "s1": "Datang ke sesi pertamamu.",
+      "s2": "Coach menilai skill-mu selama sesi.",
+      "s3": "Buka app setelahnya untuk melihat progres dan tier."
+    },
+    "firstRunFooter": "Radar dan tier akan muncul begitu coach selesai penilaian pertamamu."
+  },
+  "inviteSignup": {
+    "title": "Buat akun kamu",
+    "subtitleWithWorkspace": "Gabung {{workspace}} sebagai trainee.",
+    "subtitle": "Gabung sebagai trainee.",
+    "displayNameLabel": "Nama kamu",
+    "displayNamePlaceholder": "Nama depan & belakang",
+    "emailLabel": "Email",
+    "emailPlaceholder": "kamu@contoh.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Minimal 8 karakter",
+    "submit": "Buat akun",
+    "submitting": "Membuat akun…",
+    "alreadyHave": "Sudah punya akun?",
+    "signInLink": "Masuk",
+    "genericError": "Gagal membuat akun. Cek form dan coba lagi.",
+    "emailTakenError": "Akun dengan email ini sudah ada. Silakan masuk.",
+    "inviteInvalidError": "Invite ini sudah tidak berlaku. Minta coach mengirim ulang."
+  },
+  "inviteWelcome": {
+    "greetingGeneric": "Kamu diundang",
+    "greetingWithName": "Kamu diundang, {{name}}",
+    "subtitle": "Coach {{coach}} mengundangmu untuk track progres padel bersama {{workspace}}.",
+    "invitedBy": "Diundang oleh Coach {{coach}}",
+    "yourCoach": "coach kamu",
+    "expiredTitle": "Undangan ini sudah kedaluwarsa",
+    "expiredBody": "Minta coach untuk mengirim yang baru.",
+    "invalidTitle": "Undangan tidak ditemukan",
+    "invalidBody": "Link mungkin salah ketik, atau undangan dicabut.",
+    "signInLink": "Saya sudah punya akun",
+    "signedInAs": "Masuk sebagai {{email}}",
+    "acceptCta": "Terima undangan",
+    "useDifferentAccount": "Pakai akun lain",
+    "acceptError": "Gagal menerima undangan. Coba lagi."
+  },
+  "publicLanding": {
+    "heroGeneric": "Kamu diundang ke Coachito",
+    "heroWithName": "Halo {{name}} — kamu diundang",
+    "description": "Track progres padel-mu bersama {{workspace}}. Lihat skill, ikuti perjalanan tier, dan baca catatan coach setelah setiap sesi.",
+    "invitedYou": "Mengundang kamu",
+    "osIos": "Kamu pakai iPhone — ini cara paling mudah.",
+    "osAndroid": "Kamu pakai Android — ini cara paling mudah.",
+    "getOnAppStore": "Dapatkan app di App Store",
+    "getOnPlay": "Dapatkan app di Google Play",
+    "alsoIos": "Atau download untuk iPhone",
+    "alsoAndroid": "Atau download untuk Android",
+    "continueInBrowser": "Lanjut di browser",
+    "expiresInDays_one": "Undangan ini kedaluwarsa dalam {{count}} hari",
+    "expiresInDays_other": "Undangan ini kedaluwarsa dalam {{count}} hari",
+    "notMe": "Bukan {{name}}? Ini bukan untuk saya",
+    "poweredBy": "Didukung oleh Coachito"
+  },
+  "settings": {
+    "title": {
+      "club": "Workspace",
+      "personal": "Workspace saya"
+    },
+    "savePill": {
+      "saving": "Menyimpan…",
+      "saved": "Tersimpan",
+      "failed": "Gagal · Coba lagi"
+    },
+    "preview": {
+      "tag": "Pratinjau langsung",
+      "placeholder": "Workspace kamu",
+      "soloCoach": "Solo coach",
+      "coachCount_one": "{{count}} coach",
+      "coachCount_other": "{{count}} coach",
+      "traineeCount_one": "{{count}} trainee",
+      "traineeCount_other": "{{count}} trainee",
+      "sampleCta": "Buat laporan",
+      "footer": "Beginilah tampilan yang dilihat coach, trainee, dan orang tua di app dan laporan."
+    },
+    "branding": {
+      "title": "Branding",
+      "clubName": "Nama klub",
+      "clubNamePlaceholder": "Senayan Padel Club",
+      "displayName": "Nama tampilan",
+      "displayNamePlaceholder": "Coach Novia",
+      "city": "Kota",
+      "cityPlaceholder": "Jakarta",
+      "accent": "Warna aksen",
+      "custom": "Kustom",
+      "logoLabel": "Logo klub",
+      "logoHint": "Persegi, minimal 200×200 px",
+      "profilePhotoLabel": "Foto profil",
+      "profilePhotoHint": "Opsional. Trainee akan melihat ini di app.",
+      "change": "Ganti",
+      "add": "Tambah",
+      "uploading": "Mengunggah {{pct}}%"
+    },
+    "tiers": {
+      "title": "Tier & kurikulum",
+      "naming": "Penamaan tier",
+      "options": {
+        "game": "Game",
+        "skill": "Skill",
+        "custom": "Kustom"
+      },
+      "namingHint": {
+        "game": "Game pakai Bronze, Silver, Gold.",
+        "skill": "Skill pakai Pemula, Menengah, Mahir.",
+        "custom": "Custom memungkinkan kamu menamai tiap tier sendiri."
+      },
+      "list": "Nama tier",
+      "tierNumber": "Tier {{n}}",
+      "empty": "Belum ada tier.",
+      "footnote": "Nama ini muncul di profil trainee, laporan PDF, dan layar yang dilihat orang tua.",
+      "curriculum": "Kurikulum default",
+      "allowOverrides": "Izinkan override coach"
+    },
+    "curriculum": {
+      "title": "Kurikulum",
+      "search": "Cari skill",
+      "addCustom": "Tambah skill kustom",
+      "addCustomSoon": "Segera hadir",
+      "managedByAdmin": "Dikelola oleh admin klub kamu.",
+      "viewOnly": "Hanya lihat",
+      "proRequired": "Kustomisasi kurikulum perlu Club Pro.",
+      "upgrade": "Upgrade paket",
+      "enabledOfTotal": "{{count}} dari {{total}} aktif",
+      "skillCount_one": "{{count}} skill",
+      "skillCount_other": "{{count}} skill",
+      "disabledLabel": "Nonaktif",
+      "disabledSection_one": "{{count}} skill dimatikan admin",
+      "disabledSection_other": "{{count}} skill dimatikan admin",
+      "updatedBadge": "Terbaru",
+      "disable": {
+        "title": "Nonaktifkan {{skill}}?",
+        "body_one": "{{count}} trainee sedang dinilai dengan skill ini. Menonaktifkan akan:",
+        "body_other": "{{count}} trainee sedang dinilai dengan skill ini. Menonaktifkan akan:",
+        "bodyNone": "Belum ada trainee yang dinilai dengan skill ini. Menonaktifkan akan:",
+        "effect1": "Menyembunyikan dari assessment baru.",
+        "effect2": "Tetap menyimpan skor yang sudah ada.",
+        "effect3": "Menjeda progresi tier trainee yang butuh.",
+        "confirm": "Nonaktifkan"
+      },
+      "skill": {
+        "descriptors": "Deskriptor level",
+        "tapExpand": "Tap untuk buka",
+        "level": "Level {{level}}",
+        "noDescriptors": "Belum ada deskriptor untuk skill ini.",
+        "edit": "Edit deskriptor",
+        "editStubTitle": "Edit {{skill}} · level {{level}}",
+        "editSoon": "Edit deskriptor akan rilis di update berikutnya. Simpan teks kamu di dokumen dulu, nanti kami import.",
+        "disabledNote": "Skill ini dinonaktifkan untuk workspace kamu.",
+        "requiredFor": "Diperlukan untuk",
+        "requiredForHint": "Trainee perlu skill ini di level berikut untuk mencapai tiap tier.",
+        "minLevel": "L{{level}}"
+      },
+      "feedback": {
+        "title": "Feedback kurikulum",
+        "titleAbout": "Feedback tentang {{skill}}",
+        "sendAbout": "Kirim feedback tentang {{skill}}",
+        "send": "Kirim feedback ke admin",
+        "placeholder": "Apa yang mau kamu ubah, tambah, atau pisah?",
+        "hint": "Admin klub kamu akan baca dan bisa update deskriptor atau skill.",
+        "submit": "Kirim",
+        "sent": "Terkirim. Admin akan lihat di settings.",
+        "error": "Gagal kirim. Coba lagi.",
+        "inboxTitle": "Feedback coach",
+        "emptyTitle": "Belum ada feedback",
+        "emptyBody": "Kalau coach kirim catatan tentang kurikulum, akan muncul di sini.",
+        "about": "Tentang {{skill}}",
+        "unread": "Belum dibaca",
+        "unreadCount_one": "{{count}} belum dibaca",
+        "unreadCount_other": "{{count}} belum dibaca",
+        "seen": "Sudah dibaca",
+        "adminOnly": "Hanya admin workspace yang bisa lihat feedback kurikulum.",
+        "mySentCount_one": "{{count}} terkirim",
+        "mySentCount_other": "{{count}} terkirim",
+        "mineTitle": "Feedback saya",
+        "mineEmptyTitle": "Kamu belum kirim feedback",
+        "mineEmptyBody": "Kirim catatan dari halaman skill detail — admin akan lihat di inbox.",
+        "mineEmptyOwner": "Kamu owner workspace ini, jadi nggak ada admin di atas kamu untuk dikirimi feedback kurikulum.",
+        "general": "Feedback umum",
+        "seenByAdmin": "Dibaca admin",
+        "awaitingRead": "Menunggu dibaca"
+      }
+    },
+    "plan": {
+      "title": "Paket & tagihan",
+      "manage": "Kelola",
+      "renews": "Diperpanjang {{date}}",
+      "trial": "Free trial"
+    },
+    "plans": {
+      "free_trial": "Free trial",
+      "free_trial_price": "Tanpa kartu",
+      "solo_coach": "Solo Coach",
+      "solo_coach_price": "Rp 100rb / bulan",
+      "club_starter": "Club Starter",
+      "club_starter_price": "Rp 500rb / bulan",
+      "club_pro": "Club Pro",
+      "club_pro_price": "Rp 1,5jt / bulan"
+    },
+    "upsell": {
+      "title": "Coaching dengan tim?",
+      "body": "Upgrade ke workspace Club untuk mengundang coach lain, berbagi trainee, dan mengelola bersama."
+    },
+    "members": {
+      "title": "Anggota",
+      "coaches": "Coach",
+      "trainees": "Trainee",
+      "activeTrainees": "Trainee aktif"
+    },
+    "danger": {
+      "title": "Zona berbahaya",
+      "delete": "Hapus workspace"
+    },
+    "account": {
+      "title": "Akun",
+      "setPassword": "Buat password",
+      "changePassword": "Ganti password",
+      "passwordSaved": "Password tersimpan."
+    }
+  },
+  "switcher": {
+    "pillLabel": "Ganti workspace",
+    "sheetTitle": "Workspace kamu",
+    "fallback": "Workspace",
+    "error": "Gagal ganti workspace. Coba lagi.",
+    "type": {
+      "club": "Klub",
+      "personal": "Personal"
+    }
+  },
+  "multisport": {
+    "title": "Cabang olahraga",
+    "switcherLabel": "Ganti olahraga",
+    "switcherTitle": "Olahraga",
+    "curriculumLabel": "Kurikulum: {{code}}",
+    "addNamed": "Tambah {{name}}",
+    "removeCta": "Hapus olahraga",
+    "addFailed": "Gagal menambah olahraga. Coba lagi.",
+    "removeFailed": "Gagal menghapus olahraga. Coba lagi."
+  },
+  "coaches": {
+    "title": "Coach",
+    "loadError": "Gagal memuat data coach. Coba lagi.",
+    "you": "kamu",
+    "readOnlyHint": "Hanya admin workspace yang bisa undang atau hapus coach.",
+    "inviteCta": "Undang coach",
+    "active": {
+      "title_one": "{{count}} coach aktif",
+      "title_other": "{{count}} coach aktif"
+    },
+    "pending": {
+      "title_one": "{{count}} undangan tertunda",
+      "title_other": "{{count}} undangan tertunda",
+      "label": "Diundang — menunggu sign-in",
+      "copyLabel": "Salin link undangan",
+      "revokeLabel": "Batalkan undangan"
+    },
+    "role": {
+      "club_admin": "Admin",
+      "head_coach": "Head coach",
+      "coach": "Coach"
+    },
+    "menu": {
+      "label": "Aksi untuk {{name}}",
+      "promoteHead": "Naikkan ke head coach",
+      "demoteCoach": "Ubah ke coach",
+      "remove": "Keluarkan dari workspace"
+    },
+    "invite": {
+      "title": "Undang coach",
+      "successTitle": "Undangan siap",
+      "nameLabel": "Nama lengkap",
+      "emailLabel": "Email",
+      "roleLabel": "Role",
+      "coachHint": "Bisa nilai trainee dan catat sesi.",
+      "headHint": "Izin coach plus pengawasan tim (V1.5).",
+      "submitCta": "Buat undangan",
+      "shareCta": "Bagikan undangan",
+      "copyCta": "Salin link",
+      "copied": "Link tersalin",
+      "linkLabel": "Link undangan",
+      "shareTitle": "Gabung workspace coaching padel kami",
+      "shareBody": "Halo {{name}}, klik link berikut untuk gabung workspace.",
+      "successBody": "Undangan untuk {{email}} sudah dibuat. Bagikan link di bawah — berlaku 7 hari.",
+      "successHint": "Email otomatis ke coach belum tersedia. Kirim link via WhatsApp, email, atau channel lain seperti biasa.",
+      "genericError": "Gagal membuat undangan. Coba lagi."
+    },
+    "actions": {
+      "genericError": "Gagal. Coba lagi."
+    },
+    "remove": {
+      "title": "Keluarkan coach?",
+      "body": "{{name}} akan kehilangan akses ke workspace ini. Sesi dan asesmen yang sudah dibuat tetap tersimpan.",
+      "confirmCta": "Keluarkan"
+    },
+    "revoke": {
+      "title": "Batalkan undangan?",
+      "body": "Link yang dikirim ke {{email}} akan tidak berfungsi lagi.",
+      "confirmCta": "Batalkan"
+    }
+  },
+  "trainee": {
+    "reports": {
+      "title": "Laporan",
+      "subtitle": "Progres bulanan, dari pelatihmu.",
+      "viewCta": "Buka PDF",
+      "emptyTitle": "Belum ada laporan",
+      "emptyBody": "Laporan otomatis muncul tiap tanggal 1 — dan pelatih bisa buat kapan saja.",
+      "viewCountLabel_one": "Dibuka {{count}} kali",
+      "viewCountLabel_other": "Dibuka {{count}} kali",
+      "byCoach": "Oleh {{name}}",
+      "perSessionTag": "Per sesi",
+      "monthlyTag": "Bulanan"
+    },
+    "home": {
+      "newReportBanner": "Laporan baru — {{label}}"
+    },
+    "feedback": {
+      "title": "Bagaimana sesi tadi?",
+      "context": "Dari {{coach}} · {{date}}",
+      "body": "Bagikan masukan singkat tentang sesi pada {{date}}.",
+      "cta": "Bagikan masukan",
+      "viewSession": "Lihat detail sesi",
+      "sharedAnon": "(dikirim tanpa nama)",
+      "edit": "Edit",
+      "withdraw": {
+        "cta": "Tarik kembali",
+        "title": "Tarik masukan?",
+        "body": "Coach kamu tidak akan melihat masukan ini lagi.",
+        "confirm": "Tarik"
+      },
+      "sheet": {
+        "title": "Bagikan masukan",
+        "overallLabel": "Secara keseluruhan, sesi tadi gimana?",
+        "overallRequired": "Pilih rating dulu sebelum kirim.",
+        "fairnessLabel": "Apakah penilaiannya terasa adil?",
+        "commentLabel": "Ada yang ingin ditambahkan? (opsional)",
+        "anonymousLabel": "Kirim tanpa nama",
+        "anonymousHint": "Coach kamu melihat namamu kecuali ini dinyalakan. Platform tetap mengenali kamu untuk menjaga keamanan.",
+        "submitCta": "Kirim",
+        "updateCta": "Ubah",
+        "genericError": "Gagal kirim masukan. Coba lagi.",
+        "rating": {
+          "1": "Kurang banget",
+          "2": "Di bawah ekspektasi",
+          "3": "Lumayan",
+          "4": "Bagus",
+          "5": "Suka banget"
+        }
+      }
+    }
+  },
+  "traineeSession": {
+    "title": "Detail sesi",
+    "minutes_one": "{{count}} menit",
+    "minutes_other": "{{count}} menit",
+    "coachNote": "Catatan dari {{coach}}",
+    "scoredSkills_one": "{{count}} skill dinilai",
+    "scoredSkills_other": "{{count}} skill dinilai",
+    "noScores": "Tidak ada skill yang dinilai di sesi ini — observasi saja.",
+    "editedNote": "Penilaian ini sudah diperbarui oleh coach."
+  },
+  "traineeSessions": {
+    "title": "Sesi saya",
+    "upcoming": "Akan datang",
+    "past": "Sudah lalu",
+    "emptyTitle": "Belum ada sesi",
+    "emptyBody": "Sesi muncul di sini setelah coach kamu menjadwalkannya.",
+    "scored_one": "{{count}} skill",
+    "scored_other": "{{count}} skill",
+    "feedbackGiven": "Sudah kasih masukan",
+    "viewable": "Catatan siap",
+    "awaitingNotes": "Menunggu catatan"
+  },
+  "calendar": {
+    "prevMonth": "Bulan sebelumnya",
+    "nextMonth": "Bulan berikutnya",
+    "jumpToday": "Ke hari ini",
+    "weekStartsSunday": "Minggu mulai hari Minggu"
+  },
+  "sessions": {
+    "title": "Sesi",
+    "scheduleCta": "Jadwalkan",
+    "upcoming_one": "Akan datang · {{count}}",
+    "upcoming_other": "Akan datang · {{count}}",
+    "past_one": "Sudah lalu · {{count}}",
+    "past_other": "Sudah lalu · {{count}}",
+    "pastEmpty": "Sesi yang sudah selesai akan muncul di sini.",
+    "emptyUpcomingTitle": "Belum ada jadwal",
+    "emptyUpcomingBody": "Jadwalkan sesi berikutnya supaya tampil di Today.",
+    "emptyToAssess": "Tidak ada sesi yang menunggu dinilai.",
+    "emptyDrafts": "Tidak ada draf aktif.",
+    "emptyPublished": "Penilaian terbit akan muncul di sini.",
+    "emptyCancelled": "Tidak ada sesi yang dibatalkan.",
+    "emptyDay": "Tidak ada sesi di hari ini.",
+    "agendaCount_one": "{{count}} sesi",
+    "agendaCount_other": "{{count}} sesi",
+    "legend": {
+      "upcoming": "Mendatang",
+      "toAssess": "Perlu nilai",
+      "done": "Selesai"
+    },
+    "menu": {
+      "label": "Aksi untuk {{name}}",
+      "notAssignedHint": "Hanya {{coach}} yang bisa edit sesi ini."
+    },
+    "status": {
+      "scheduled": "Terjadwal",
+      "completed": "Selesai",
+      "cancelled": "Dibatalkan",
+      "noShow": "Tidak hadir",
+      "draft": "Draf",
+      "published": "Terbit",
+      "toAssess": "Perlu dinilai"
+    },
+    "funnel": {
+      "upcoming": "Akan datang",
+      "toAssess": "Perlu dinilai",
+      "draft": "Draf",
+      "published": "Terbit",
+      "cancelled": "Dibatalkan"
+    },
+    "complete": {
+      "cta": "Tandai selesai"
+    },
+    "noShow": {
+      "cta": "Tandai tidak hadir"
+    },
+    "conflicts": {
+      "coach": "Ada sesi lain kamu yang bentrok di jam ini.",
+      "trainee": "{{name}} punya sesi lain yang bentrok di jam ini."
+    },
+    "readonly": {
+      "banner": "Baca-saja — dinilai oleh {{coach}} pada {{date}}.",
+      "draftBanner": "{{coach}} sedang membuat draf penilaian ini."
+    },
+    "cancel": {
+      "cta": "Batalkan",
+      "title": "Batalkan sesi ini?",
+      "body": "Sesi dengan {{name}} tidak akan muncul di jadwal lagi. Draf penilaian yang ada akan dihapus.",
+      "confirm": "Batalkan sesi"
+    },
+    "sheet": {
+      "title": "Jadwalkan sesi",
+      "editTitle": "Edit sesi",
+      "athleteLabel": "Trainee",
+      "athletePick": "Pilih trainee",
+      "athletePlaceholder": "Cari trainee",
+      "athleteEmpty": "Tidak ada trainee cocok",
+      "athleteRecent": "Terbaru",
+      "athleteAddNew": "Tambah trainee baru",
+      "athleteRequired": "Pilih trainee dulu.",
+      "whenLabel": "Kapan",
+      "durationLabel": "Durasi",
+      "courtLabel": "Lapangan",
+      "focusLabel": "Fokus",
+      "focusHint": "Maks 4 fokus.",
+      "notesLabel": "Catatan (private)",
+      "notesPlaceholder": "Hal-hal yang ingin diingat soal sesi ini…",
+      "scheduleCta": "Jadwalkan",
+      "saveCta": "Simpan perubahan",
+      "genericError": "Gagal menyimpan. Coba lagi.",
+      "coachLabel": "Tugaskan ke",
+      "coachSelf": "kamu"
+    },
+    "scope": {
+      "mine": "Saya",
+      "all": "Semua coach"
+    }
+  },
+  "category": {
+    "technical": "Teknik",
+    "tactical": "Taktik",
+    "physical": "Fisik",
+    "mental": "Mental"
+  },
+  "feedback": {
+    "inbox": {
+      "title": "Masukan",
+      "emptyTitle": "Belum ada masukan",
+      "emptyBody": "Setelah kamu menerbitkan penilaian, trainee bisa berbagi pendapat tentang sesinya."
+    },
+    "anon": {
+      "trainee": "Trainee anonim",
+      "parent": "Orang tua anonim"
+    },
+    "fairness": "Keadilan: {{score}}/5",
+    "markRead": "Terima kasih · dilihat",
+    "seen": "Dilihat"
+  },
+  "reports": {
+    "emptyTitle": "Belum ada laporan",
+    "emptyBody": "Laporan bulanan dibuat otomatis tiap tanggal 1. Kamu juga bisa buat kapan saja.",
+    "create": "Buat laporan manual",
+    "generating": "Membuat…",
+    "generatedOn": "Dibuat {{date}}",
+    "sheet": {
+      "title": "Buat laporan",
+      "modeLabel": "Cakupan laporan",
+      "mode_monthly": "Bulanan",
+      "mode_session": "Per sesi",
+      "trainee": "Trainee",
+      "forTrainee": "Untuk {{name}}",
+      "period": "Periode",
+      "session": "Sesi",
+      "pickTraineeFirst": "Pilih trainee dulu untuk melihat sesinya.",
+      "noSessions": "Trainee ini belum punya sesi.",
+      "noTrainees": "Tambah trainee dulu.",
+      "generate": "Buat"
+    }
+  },
+  "coach": {
+    "list": {
+      "title": "Pelatihmu",
+      "subtitle": "Semua yang pernah melatihmu, terbaru di atas.",
+      "upcomingDot": "Ada sesi denganmu sebentar lagi",
+      "sessionCount_one": "{{count}} sesi",
+      "sessionCount_other": "{{count}} sesi",
+      "lastCoached": "terakhir melatih {{ago}}",
+      "emptyTitle": "Belum ada pelatih",
+      "emptyBody": "Pelatihmu akan muncul di sini setelah sesi pertamamu."
+    },
+    "bio": {
+      "backLabel": "Pelatih",
+      "memberSince": "Bergabung sejak {{date}}",
+      "aboutTitle": "Tentang",
+      "readMore": "Baca selengkapnya",
+      "readLess": "Tutup",
+      "credentialsTitle": "Kredensial",
+      "yearsCoaching_one": "tahun melatih",
+      "yearsCoaching_other": "tahun melatih",
+      "specialtiesTitle": "Spesialisasi",
+      "coachedCount_one": "Melatih {{count}} trainee di workspace ini.",
+      "coachedCount_other": "Melatih {{count}} trainee di workspace ini."
+    }
+  },
+  "me": {
+    "title": "Profil",
+    "identity": {
+      "title": "Kamu",
+      "displayNameLabel": "Nama tampilan",
+      "changeAvatar": "Ganti foto",
+      "edit": "Ubah",
+      "uploading": "Mengunggah…"
+    },
+    "account": {
+      "title": "Akun",
+      "email": "Email",
+      "locale": "Bahasa",
+      "draftVoice": "Gaya draft",
+      "draftVoiceHint": "Cara ringkasan asesmen AI terdengar."
+    },
+    "personal": {
+      "title": "Pribadi",
+      "dob": "Tanggal lahir",
+      "parent": "Orang tua",
+      "parentMissing": "Belum terhubung",
+      "adminOwnedHint": "Tanggal lahir dan tautan orang tua dikelola oleh pelatih. Minta mereka untuk memperbarui."
+    },
+    "notifications": {
+      "title": "Notifikasi",
+      "sessionRemindersTitle": "Pengingat sesi",
+      "sessionRemindersBody": "Dapatkan pengingat sehari sebelum sesi terjadwal.",
+      "monthlyReportTitle": "Laporan bulanan siap",
+      "monthlyReportBody": "Beritahu saat laporan bulanan baru dibuat."
+    },
+    "danger": {
+      "title": "Akun",
+      "deleteHint": "Ingin menghapus akun? Hubungi pelatihmu."
+    }
+  },
+  "draftVoice": {
+    "encouraging": "Suportif",
+    "direct": "Langsung",
+    "warm": "Hangat"
+  },
+  "skills": {
+    "legendOf": "{{assessed}} / {{total}}",
+    "overview": {
+      "title": "Progress",
+      "subtitle": "Perjalanan skill kamu",
+      "radarLabel": "Radar skill antar kategori",
+      "statAria": "Statistik progress",
+      "tier": {
+        "currentToNext": "{{current}} → {{next}}",
+        "remainingPlural": "{{count}} skill lagi menuju {{tier}} — semakin dekat.",
+        "remainingSingular": "1 skill lagi menuju {{tier}} — sedikit lagi.",
+        "topTier": "Tier tertinggi tercapai"
+      },
+      "stat": {
+        "overall": "Rata-rata",
+        "assessed": "Dinilai",
+        "last": "Terakhir"
+      },
+      "radar": {
+        "centerCaption": "rata-rata",
+        "tapHint": "Ketuk kategori untuk lihat detail"
+      },
+      "sectionRecentGains": "Kemajuan terkini",
+      "gainEntry": "{{label}} {{from}}→{{to}}",
+      "focus": {
+        "title": "Fokus ke {{label}}",
+        "body": "Terakhir dinilai level {{current}}. Capai level {{required}} untuk membuka {{tier}}.",
+        "bodyNoNote": "Rekomendasi fokus berikutnya.",
+        "noteQuote": "\"{{note}}\""
+      },
+      "emptyHeroTitle": "Radar terisi seiring kamu berlatih",
+      "emptyHeroBody": "Setelah pelatih menilai, halaman ini hidup.",
+      "emptyTitle": "Radar terisi seiring kamu berlatih.",
+      "emptyBody": "Pelatih belum melakukan asesmen. Setelah selesai, kamu bisa lihat kekuatan dan area fokusmu.",
+      "hint": "Ketuk kategori untuk masuk."
+    },
+    "category": {
+      "radarHint": "{{assessed}} dari {{total}} dinilai",
+      "listTitle": "Skill"
+    },
+    "row": {
+      "blockerDot": "Menahan kenaikan tier",
+      "needs": "Butuh L{{level}}"
+    },
+    "blockers": {
+      "headline_one": "{{count}} dari ini menahan {{tier}}. Fokus di sini.",
+      "headline_other": "{{count}} dari ini menahan {{tier}}. Fokus di sini.",
+      "subline": "Menutup skill ini membuka tier berikutnya."
+    }
+  }
+}

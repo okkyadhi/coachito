@@ -1,0 +1,34 @@
+# Version control
+.git
+.gitignore
+
+# Dependencies (each image installs its own)
+node_modules
+**/node_modules
+.pnpm-store
+
+# Python envs and caches
+**/.venv
+**/__pycache__
+**/*.pyc
+**/.mypy_cache
+**/.ruff_cache
+**/.pytest_cache
+
+# Build output
+dist
+.turbo
+
+# Environment files (injected at runtime)
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+*.log
+.vscode
+.idea
+
+# Docker artifacts
+infra/postgres/init/*.log

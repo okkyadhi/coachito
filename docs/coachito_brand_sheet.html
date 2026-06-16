@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coachito — Brand Sheet v0.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&display=swap&axes=SOFT,WONK&SOFT=100&WONK=1" rel="stylesheet">
+<style>
+  :root {
+    --clay: #C66B47;
+    --clay-deep: #A04E2F;
+    --ink: #1F1B16;
+    --ink-soft: #3A332B;
+    --cream: #F5EBD9;
+    --bone: #FBF6EC;
+    --ball: #D4E157;
+    --stone: #8A8278;
+    --stone-soft: #C9C3B6;
+    --hairline: rgba(31, 27, 22, 0.12);
+    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bone);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: 56px 32px 96px;
+  }
+
+  .sheet { max-width: 920px; margin: 0 auto; }
+
+  /* — header — */
+  .doc-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 20px; margin-bottom: 40px;
+    border-bottom: 0.5px solid var(--hairline);
+  }
+  .doc-head .eyebrow {
+    font-size: 11px; letter-spacing: 0.24em; color: var(--stone);
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .doc-head h1 {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 38px; font-weight: 400; margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .doc-head h1 .ito { color: var(--clay); }
+  .doc-head .tag {
+    font-family: var(--font-display); font-style: italic;
+    color: var(--stone); font-size: 14px; margin-top: 4px;
+  }
+  .doc-head .version {
+    font-family: var(--font-display); font-style: italic;
+    color: var(--stone); font-size: 13px;
+  }
+
+  /* — section header — */
+  .section { margin-bottom: 48px; }
+  .section-label {
+    font-size: 11px; letter-spacing: 0.24em; color: var(--stone);
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+
+  /* — hero — */
+  .hero {
+    background: var(--clay); border-radius: 4px;
+    padding: 80px 32px; display: flex; justify-content: center; align-items: center;
+    margin-bottom: 8px;
+  }
+
+  /* — caption row — */
+  .caption-center {
+    font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--stone); text-align: center; margin-bottom: 28px;
+  }
+
+  /* — variations grid — */
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .tile {
+    aspect-ratio: 1; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tile.clay { background: var(--clay); }
+  .tile.cream { background: var(--cream); border: 0.5px solid var(--hairline); }
+  .tile.ink { background: var(--ink); }
+  .tile.bone { background: var(--bone); border: 0.5px solid var(--hairline); }
+  .tile-labels {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    margin-top: 10px; margin-bottom: 0;
+  }
+  .tile-labels div {
+    font-size: 10px; letter-spacing: 0.18em; color: var(--stone);
+    text-transform: uppercase; text-align: center;
+  }
+
+  /* — rationale split — */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .split p {
+    font-size: 14px; line-height: 1.65; color: var(--ink-soft); margin: 0 0 12px;
+  }
+  .split p:last-child { margin-bottom: 0; }
+  .pull {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 22px; line-height: 1.4; color: var(--ink);
+    border-left: 2px solid var(--clay); padding-left: 16px; margin: 0;
+  }
+  .pull .em { color: var(--clay); }
+
+  /* — color swatches — */
+  .swatch-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+  .swatch {
+    border-radius: 4px; padding: 18px 14px; aspect-ratio: 1;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .swatch .nm {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+    margin-bottom: 2px;
+  }
+  .swatch .hex {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 10px; letter-spacing: 0.04em;
+  }
+  .swatch.s-clay { background: var(--clay); color: var(--cream); }
+  .swatch.s-ink { background: var(--ink); color: var(--cream); }
+  .swatch.s-cream { background: var(--cream); color: var(--ink); border: 0.5px solid var(--hairline); }
+  .swatch.s-bone { background: var(--bone); color: var(--ink); border: 0.5px solid var(--hairline); }
+  .swatch.s-ball { background: var(--ball); color: var(--ink); }
+  .swatch.s-stone { background: var(--stone); color: var(--cream); }
+
+  .color-note {
+    margin-top: 16px; padding: 14px 16px;
+    background: var(--cream); border-radius: 4px;
+    font-size: 13px; line-height: 1.6; color: var(--ink-soft);
+  }
+  .color-note strong { font-weight: 500; color: var(--ink); }
+
+  /* — typography table — */
+  .type-table {
+    border-top: 0.5px solid var(--hairline);
+  }
+  .type-row {
+    display: grid; grid-template-columns: 200px 1fr 110px;
+    padding: 20px 0; border-bottom: 0.5px solid var(--hairline);
+    align-items: baseline;
+  }
+  .type-role { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone); }
+  .type-meta { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); text-align: right; }
+  .type-sample-display {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 28px; font-weight: 400; color: var(--ink);
+  }
+  .type-sample-display.clay { color: var(--clay); }
+  .type-sample-tracked {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.32em;
+    text-transform: uppercase; color: var(--ink);
+  }
+  .type-sample-body {
+    font-size: 16px; font-weight: 400; color: var(--ink);
+  }
+  .type-sample-caption {
+    font-size: 12px; color: var(--stone);
+  }
+
+  /* — voice grid — */
+  .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .voice-card {
+    background: var(--cream); border-radius: 4px; padding: 24px;
+  }
+  .voice-card.ink { background: var(--ink); color: var(--cream); }
+  .voice-card h4 {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 20px; font-weight: 400; margin: 0 0 6px;
+  }
+  .voice-card .ctx {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--stone); margin-bottom: 12px;
+  }
+  .voice-card.ink .ctx { color: var(--stone-soft); }
+  .voice-card .ex {
+    font-size: 14px; line-height: 1.6; margin: 0;
+  }
+  .voice-card .ex em { color: var(--clay); font-family: var(--font-display); font-style: italic; }
+  .voice-card.ink .ex em { color: var(--ball); }
+
+  /* — application mocks — */
+  .apps-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;
+  }
+  .app-card {
+    border-radius: 6px; border: 0.5px solid var(--hairline);
+    overflow: hidden; background: var(--bone);
+  }
+  .app-card .app-label {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--stone); padding: 10px 14px;
+    border-top: 0.5px solid var(--hairline);
+  }
+
+  /* phone mock */
+  .phone-mock {
+    background: var(--bone); height: 280px; padding: 20px 16px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .phone-mock .greet {
+    font-family: var(--font-display); font-size: 26px; font-weight: 400;
+    color: var(--ink); margin-bottom: 4px;
+  }
+  .phone-mock .greet .it { font-style: italic; color: var(--clay); }
+  .phone-mock .greet-sub {
+    font-size: 11px; color: var(--stone); letter-spacing: 0.14em;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .phone-mock .card-quote {
+    background: var(--cream); border-radius: 4px; padding: 12px 14px;
+    font-family: var(--font-display); font-style: italic; font-size: 13px;
+    color: var(--ink-soft); line-height: 1.5; position: relative;
+  }
+  .phone-mock .card-quote::before {
+    content: "\201C"; position: absolute; top: 0; left: 6px;
+    font-family: var(--font-display); font-size: 36px; color: var(--clay);
+    line-height: 1;
+  }
+  .phone-mock .card-quote .q-text { padding-left: 18px; display: block; }
+  .phone-mock .stat-row {
+    display: flex; gap: 8px;
+  }
+  .phone-mock .stat {
+    flex: 1; background: var(--ink); border-radius: 4px; padding: 10px 12px;
+    color: var(--cream);
+  }
+  .phone-mock .stat .num {
+    font-family: var(--font-display); font-size: 22px; font-weight: 400;
+    line-height: 1;
+  }
+  .phone-mock .stat .lbl {
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--stone-soft); margin-top: 4px;
+  }
+
+  /* og card */
+  .og-mock {
+    background: var(--clay); height: 280px; padding: 28px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    color: var(--cream);
+  }
+  .og-mock .top {
+    font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .og-mock .headline {
+    font-family: var(--font-display); font-size: 30px; font-weight: 400;
+    line-height: 1.15; max-width: 84%;
+  }
+  .og-mock .headline em { color: var(--ball); font-style: italic; }
+  .og-mock .foot {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  /* report letterhead */
+  .pdf-mock {
+    background: var(--cream); height: 280px; padding: 22px 20px;
+    display: flex; flex-direction: column;
+  }
+  .pdf-mock .pdf-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 14px; border-bottom: 0.5px solid var(--hairline);
+  }
+  .pdf-mock .pdf-head .left {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--stone);
+  }
+  .pdf-mock .pdf-title {
+    font-family: var(--font-display); font-size: 22px; font-weight: 400;
+    color: var(--ink); margin-top: 22px; line-height: 1.2;
+  }
+  .pdf-mock .pdf-title em { font-style: italic; color: var(--clay); }
+  .pdf-mock .pdf-sub {
+    font-size: 12px; color: var(--stone); margin-top: 6px;
+  }
+  .pdf-mock .pdf-body {
+    font-size: 11px; line-height: 1.6; color: var(--ink-soft);
+    margin-top: 14px; max-width: 220px;
+  }
+
+  /* — footer — */
+  .doc-foot {
+    margin-top: 64px; padding-top: 20px;
+    border-top: 0.5px solid var(--hairline);
+    display: flex; justify-content: space-between;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  /* — guidelines list — */
+  .rules { list-style: none; padding: 0; margin: 0; }
+  .rules li {
+    padding: 12px 0; border-bottom: 0.5px solid var(--hairline);
+    font-size: 14px; line-height: 1.55; color: var(--ink-soft);
+  }
+  .rules li:last-child { border-bottom: none; }
+  .rules li strong {
+    color: var(--ink); font-weight: 500;
+    display: block; font-family: var(--font-display); font-style: italic;
+    font-size: 16px; margin-bottom: 2px;
+  }
+
+  @media (max-width: 720px) {
+    body { padding: 32px 20px 64px; }
+    .doc-head h1 { font-size: 30px; }
+    .split { grid-template-columns: 1fr; }
+    .apps-grid { grid-template-columns: 1fr; }
+    .swatch-row { grid-template-columns: repeat(3, 1fr); }
+    .type-row { grid-template-columns: 1fr; gap: 4px; }
+    .type-meta { text-align: left; }
+    .voice-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <!-- ━━━━━ HEADER ━━━━━ -->
+  <header class="doc-head">
+    <div>
+      <div class="eyebrow">Brand sheet · clay &amp; ball</div>
+      <h1>coach<span class="ito">ito</span></h1>
+      <div class="tag">tu coach, en tu bolsillo</div>
+    </div>
+    <span class="version">v0.1 · MMXXVI</span>
+  </header>
+
+  <!-- ━━━━━ HERO LOGO ━━━━━ -->
+  <section class="section">
+    <div class="hero">
+      <svg viewBox="0 0 520 260" width="100%" style="max-width: 460px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coachito primary lockup">
+        <!-- tracked top eyebrow -->
+        <text x="260" y="42" text-anchor="middle" fill="#F5EBD9" opacity="0.7"
+              style="font-family: Fraunces, Georgia, serif; font-size: 10px; font-weight: 400; letter-spacing: 0.42em;">
+          · EST · MMXXVI · MADE FOR THE COURT ·
+        </text>
+
+        <!-- hairline divider above -->
+        <line x1="120" y1="62" x2="400" y2="62" stroke="#F5EBD9" stroke-width="0.5" opacity="0.4"/>
+
+        <!-- WORDMARK: coach + ıto (dotless i — the ball IS the dot) -->
+        <text x="260" y="160" text-anchor="middle" fill="#F5EBD9"
+              style="font-family: Fraunces, Georgia, serif; font-size: 88px; font-weight: 400; letter-spacing: -0.02em;">
+          <tspan font-style="normal">coach</tspan><tspan font-style="italic" fill="#F5EBD9">&#x0131;to</tspan>
+        </text>
+
+        <!-- The ball sits exactly where the i's dot would have been -->
+        <circle cx="343" cy="98" r="9" fill="#D4E157"/>
+        <!-- subtle seam line on the ball -->
+        <path d="M 335 98 Q 343 93 351 98" fill="none" stroke="#9BAA38" stroke-width="0.5" opacity="0.7"/>
+
+        <!-- hairline divider below -->
+        <line x1="120" y1="190" x2="400" y2="190" stroke="#D4E157" stroke-width="0.5" opacity="0.7"/>
+
+        <!-- tagline -->
+        <text x="260" y="215" text-anchor="middle" fill="#F5EBD9"
+              style="font-family: Fraunces, Georgia, serif; font-size: 14px; font-weight: 400; font-style: italic; letter-spacing: 0.22em;">
+          tu coach, en tu bolsillo
+        </text>
+      </svg>
+    </div>
+    <div class="caption-center">Primary lockup · on clay</div>
+  </section>
+
+  <!-- ━━━━━ LOGO VARIATIONS ━━━━━ -->
+  <section class="section">
+    <div class="section-label">Variations</div>
+
+    <div class="grid-3">
+
+      <!-- App icon: c monogram on clay with ball -->
+      <div class="tile clay" style="border-radius: 22%;">
+        <svg viewBox="0 0 100 100" width="76%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coachito app icon">
+          <!-- lowercase italic c — c+ball group optically centered in the 100×100 tile -->
+          <text x="27.3" y="68.5" fill="#F5EBD9"
+                style="font-family: Fraunces, Georgia, serif; font-size: 80px; font-weight: 400; font-style: italic;">c</text>
+          <!-- ball nestled in the curve -->
+          <circle cx="61.3" cy="52.5" r="9" fill="#D4E157"/>
+          <path d="M 53.3 52.5 Q 61.3 47.5 69.3 52.5" fill="none" stroke="#9BAA38" stroke-width="0.4" opacity="0.6"/>
+        </svg>
+      </div>
+
+      <!-- Wordmark only on cream -->
+      <div class="tile cream">
+        <svg viewBox="0 0 220 100" width="86%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coachito wordmark on cream">
+          <text x="110" y="58" text-anchor="middle" fill="#1F1B16"
+                style="font-family: Fraunces, Georgia, serif; font-size: 32px; font-weight: 400; letter-spacing: -0.01em;">
+            <tspan font-style="normal">coach</tspan><tspan font-style="italic" fill="#C66B47">&#x0131;to</tspan>
+          </text>
+          <circle cx="138" cy="38" r="3.4" fill="#D4E157"/>
+          <line x1="65" y1="70" x2="155" y2="70" stroke="#C66B47" stroke-width="0.3" opacity="0.6"/>
+          <text x="110" y="82" text-anchor="middle" fill="#8A8278"
+                style="font-family: Fraunces, Georgia, serif; font-size: 8px; font-style: italic; letter-spacing: 0.28em;">
+            tu coach, en tu bolsillo
+          </text>
+        </svg>
+      </div>
+
+      <!-- Monogram on ink (favicon scale) -->
+      <div class="tile ink">
+        <svg viewBox="0 0 100 100" width="68%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coachito monogram favicon">
+          <text x="27.3" y="68.5" fill="#F5EBD9"
+                style="font-family: Fraunces, Georgia, serif; font-size: 80px; font-weight: 400; font-style: italic;">c</text>
+          <circle cx="61.3" cy="52.5" r="9" fill="#D4E157"/>
+        </svg>
+      </div>
+
+    </div>
+    <div class="tile-labels">
+      <div>App icon</div>
+      <div>Wordmark · email · social</div>
+      <div>Favicon · in-product mark</div>
+    </div>
+  </section>
+
+  <!-- ━━━━━ RATIONALE ━━━━━ -->
+  <section class="section">
+    <div class="section-label">The thinking</div>
+    <div class="split">
+      <div>
+        <p class="pull">"Where racademy whispered <span class="em">private members' club</span>, Coachito says <span class="em">your trusted coach, in your pocket.</span>"</p>
+      </div>
+      <div>
+        <p><strong style="font-weight: 500; color: var(--ink);">Why the diminutive.</strong> Padel was born in Acapulco and grew up in Madrid and Buenos Aires — it is, before anything else, a Spanish-language sport. The "-ito" suffix is intimate, affectionate, daily: <em style="font-family: var(--font-display); font-style: italic;">un cafecito</em>, <em style="font-family: var(--font-display); font-style: italic;">un momentito</em>, <em style="font-family: var(--font-display); font-style: italic;">mi coachito</em>. The name carries the sport's cultural DNA without trying.</p>
+        <p><strong style="font-weight: 500; color: var(--ink);">Why the ball is the only bright thing.</strong> The whole brand is restrained — clay, cream, ink, stone. One element pops: the yellow ball that <em>is</em> the dot of the "i." Not a decoration above it, the dot itself. It's the brand's sense of humor, used exactly once.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━━ COLOR ━━━━━ -->
+  <section class="section">
+    <div class="section-label">Color system</div>
+    <div class="swatch-row">
+      <div class="swatch s-clay">
+        <div class="nm">Clay</div>
+        <div class="hex">#C66B47</div>
+      </div>
+      <div class="swatch s-ink">
+        <div class="nm">Ink</div>
+        <div class="hex">#1F1B16</div>
+      </div>
+      <div class="swatch s-cream">
+        <div class="nm">Cream</div>
+        <div class="hex">#F5EBD9</div>
+      </div>
+      <div class="swatch s-bone">
+        <div class="nm">Bone</div>
+        <div class="hex">#FBF6EC</div>
+      </div>
+      <div class="swatch s-stone">
+        <div class="nm">Stone</div>
+        <div class="hex">#8A8278</div>
+      </div>
+      <div class="swatch s-ball">
+        <div class="nm">Ball</div>
+        <div class="hex">#D4E157</div>
+      </div>
+    </div>
+
+    <div class="color-note">
+      <strong>Clay</strong> is the new primary (replaces racademy's forest) — warmer, sunnier, references the padel court itself. <strong>Ball</strong> is the wildcard: a true padel-yellow that appears <em>only</em> in the logo dot. Never as a UI accent, never as a button. Its scarcity is what makes the wordmark instantly recognizable. <strong>Ink</strong> replaces forest as the dark surface — same dramatic weight, but with a warmer undertone that sits naturally next to clay.
+    </div>
+  </section>
+
+  <!-- ━━━━━ TYPOGRAPHY ━━━━━ -->
+  <section class="section">
+    <div class="section-label">Typography</div>
+    <div class="type-table">
+      <div class="type-row">
+        <div class="type-role">Display</div>
+        <div class="type-sample-display">A coachito moment.</div>
+        <div class="type-meta">Fraunces · 400 · soft 100</div>
+      </div>
+      <div class="type-row">
+        <div class="type-role">Display italic</div>
+        <div class="type-sample-display clay" style="font-style: italic;">¡Buen partido, Andi!</div>
+        <div class="type-meta">Fraunces italic · 400</div>
+      </div>
+      <div class="type-row">
+        <div class="type-role">Tracked label</div>
+        <div class="type-sample-tracked">est · mmxxvi · clay &amp; ball</div>
+        <div class="type-meta">System · 500 · +0.32em</div>
+      </div>
+      <div class="type-row">
+        <div class="type-role">Body</div>
+        <div class="type-sample-body">After your first session, Coach Novia rates your skills and your tier shows here.</div>
+        <div class="type-meta">System · 400 · 14px</div>
+      </div>
+      <div class="type-row">
+        <div class="type-role">Caption / meta</div>
+        <div class="type-sample-caption">Generated 1 May 2026 · 12 sessions this month</div>
+        <div class="type-meta">System · 400 · 12px</div>
+      </div>
+    </div>
+    <div class="color-note" style="margin-top: 24px;">
+      <strong>Fraunces is the brand voice.</strong> Same family as racademy, but the SOFT axis is pushed to 100 (vs racademy's default) — same letterforms, more warmth in the curves. The italic gets used liberally: any time the brand speaks personally to a trainee, italic. The Spanish-flavored copy reads better in italic anyway.
+    </div>
+  </section>
+
+  <!-- ━━━━━ VOICE ━━━━━ -->
+  <section class="section">
+    <div class="section-label">Voice &amp; tone</div>
+    <div class="voice-grid">
+
+      <div class="voice-card">
+        <div class="ctx">To trainee · warm, personal</div>
+        <h4>Hi Andi, your court is set.</h4>
+        <p class="ex">Novia booked you in for Tuesday at 6. Bring water — it's been hot. <em>¡Nos vemos pronto!</em></p>
+      </div>
+
+      <div class="voice-card ink">
+        <div class="ctx">Achievement · celebratory</div>
+        <h4>Functional forehand — earned.</h4>
+        <p class="ex">Three sessions, three clean wins. Novia bumped you from <em>iniciado</em> to <em>intermedio</em>.</p>
+      </div>
+
+      <div class="voice-card">
+        <div class="ctx">To coach · direct, clinical</div>
+        <h4>4 trainees need scoring.</h4>
+        <p class="ex">Your last session was Tuesday. Tap any name to assess before their next slot.</p>
+      </div>
+
+      <div class="voice-card ink">
+        <div class="ctx">Empty state · calm, patient</div>
+        <h4>Your progress will live here.</h4>
+        <p class="ex">After your first session, Coach Novia will rate your skills and you'll see your tier, radar, and wins build up <em>poco a poco</em>.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ━━━━━ APPLICATIONS ━━━━━ -->
+  <section class="section">
+    <div class="section-label">Applications</div>
+
+    <div class="apps-grid">
+
+      <!-- Phone screen mock -->
+      <div class="app-card">
+        <div class="phone-mock">
+          <div class="greet">Hola, <span class="it">Andi</span></div>
+          <div class="greet-sub">Tu sesión, hoy</div>
+
+          <div class="card-quote">
+            <span class="q-text">Tres sesiones, tres pasos. La derecha está empezando a sentirse natural.</span>
+          </div>
+
+          <div class="stat-row">
+            <div class="stat">
+              <div class="num">12</div>
+              <div class="lbl">Sesiones</div>
+            </div>
+            <div class="stat">
+              <div class="num">4.2</div>
+              <div class="lbl">Promedio</div>
+            </div>
+          </div>
+        </div>
+        <div class="app-label">Trainee home · iOS</div>
+      </div>
+
+      <!-- OG social card -->
+      <div class="app-card">
+        <div class="og-mock">
+          <div class="top">Coachito · made for the court</div>
+          <div class="headline">Tu coach, <em>en tu bolsillo.</em></div>
+          <div class="foot">
+            <span>coachito.app</span>
+            <span>est · MMXXVI</span>
+          </div>
+        </div>
+        <div class="app-label">Open Graph · share card</div>
+      </div>
+
+      <!-- PDF report cover -->
+      <div class="app-card">
+        <div class="pdf-mock">
+          <div class="pdf-head">
+            <div class="left">Coachito · Senayan Padel</div>
+            <svg viewBox="0 0 60 24" width="44" xmlns="http://www.w3.org/2000/svg" aria-label="Coachito small mark">
+              <text x="0" y="18" fill="#1F1B16" style="font-family: Fraunces, Georgia, serif; font-size: 18px; font-weight: 400; letter-spacing: -0.01em;">
+                <tspan font-style="normal">coach</tspan><tspan font-style="italic" fill="#C66B47">&#x0131;to</tspan>
+              </text>
+              <circle cx="44" cy="7.5" r="2.1" fill="#D4E157"/>
+            </svg>
+          </div>
+          <div class="pdf-title">Andi Pratama<br><em>April report</em></div>
+          <div class="pdf-sub">Coached by Novia · 12 sessions</div>
+          <div class="pdf-body">A month of clean reps. The forehand is settling into rhythm, and the backhand is closer than the scorecard suggests…</div>
+        </div>
+        <div class="app-label">Monthly report · PDF</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ━━━━━ RULES ━━━━━ -->
+  <section class="section">
+    <div class="section-label">Six rules</div>
+    <ul class="rules">
+      <li>
+        <strong>The ball is sacred.</strong>
+        That yellow ball IS the dot of the "i" — never just a decoration floating above it. It appears only in the logo. Never as a UI accent, never as a button, never as a chart color. Its scarcity is what makes the wordmark recognizable at a glance.
+      </li>
+      <li>
+        <strong>Italic is for warmth, not emphasis.</strong>
+        Use italic Fraunces when the brand is speaking personally — greetings, achievements, taglines, Spanish flourishes. Don't italicize for stress (use a hairline divider or a tracked-caps label instead).
+      </li>
+      <li>
+        <strong>Spanish is a seasoning, not a requirement.</strong>
+        Sprinkle <em style="font-family: var(--font-display); font-style: italic;">¡Bien hecho!</em>, <em style="font-family: var(--font-display); font-style: italic;">poco a poco</em>, <em style="font-family: var(--font-display); font-style: italic;">tu coach</em> into branded moments — never into UI strings. Save still says "Save."
+      </li>
+      <li>
+        <strong>Clay is the brand. Ink is the night.</strong>
+        Clay for hero surfaces, CTAs, branded moments. Ink for dark mode and PDF body type. Cream and bone for backgrounds. Stone for muted text. That's the whole palette.
+      </li>
+      <li>
+        <strong>No shadows. Hairlines only.</strong>
+        Carried from the original design system. Borders are 0.5px solid var(--hairline). No drop shadows, no glows, no gradients, no Material.
+      </li>
+      <li>
+        <strong>Sentence case, always.</strong>
+        Including in tracked-caps labels — those are stylistic, not semantic. The string itself is sentence case.
+      </li>
+    </ul>
+  </section>
+
+  <!-- ━━━━━ FOOTER ━━━━━ -->
+  <footer class="doc-foot">
+    <span>Coachito · brand sheet</span>
+    <span>v0.1 · mmxxvi · clay &amp; ball</span>
+  </footer>
+
+</div>
+
+</body>
+</html>

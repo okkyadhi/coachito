@@ -1,0 +1,1216 @@
+{
+  "common": {
+    "back": "Back",
+    "cancel": "Cancel",
+    "done": "Done",
+    "edit": "Edit",
+    "signOut": "Sign out",
+    "loading": "Loading…"
+  },
+  "phone": {
+    "invalid": "Enter a valid phone number with country code."
+  },
+  "dob": {
+    "invalid": "Use YYYY-MM-DD."
+  },
+  "name": {
+    "required": "Name is required."
+  },
+  "nav": {
+    "label": "Primary navigation",
+    "today": "Today",
+    "trainees": "Trainees",
+    "sessions": "Sessions",
+    "events": "Events",
+    "reports": "Reports",
+    "settings": "Settings"
+  },
+  "events": {
+    "title": "Events",
+    "subtitle": "Americano, Mexicano, King of the Hill.",
+    "newCta": "New event",
+    "emptyTitle": "No events yet",
+    "emptyBody": "Run an Americano with friends or trainees — picks pairings and tracks the score for you.",
+    "players_one": "{{count}} player",
+    "players_other": "{{count}} players",
+    "courts_one": "{{count}} court",
+    "courts_other": "{{count}} courts",
+    "tagTeam": "Team",
+    "tagMix": "Mix",
+    "tagSoon": "Soon",
+    "family": {
+      "americano": "Americano",
+      "mexicano": "Mexicano",
+      "koth": "King of the Hill"
+    },
+    "format": {
+      "americano": "Americano",
+      "team_americano": "Team Americano",
+      "mix_americano": "Mix Americano",
+      "mexicano": "Mexicano",
+      "team_mexicano": "Team Mexicano",
+      "mixicano": "Mixicano",
+      "koth": "King of the Hill",
+      "team_koth": "Team King of the Hill"
+    },
+    "statusGroup": {
+      "active": "Active",
+      "draft": "Drafts",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "statusPill": {
+      "draft": "Draft",
+      "active": "Active",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "scoring": {
+      "point": "Points",
+      "firstTo": "First to",
+      "totalOf": "Total of",
+      "untimed": "Untimed"
+    },
+    "sort": {
+      "points": "Points",
+      "wins": "Wins"
+    },
+    "create": {
+      "title": "New event",
+      "basicsTitle": "Basics",
+      "titlePlaceholder": "Event name (e.g. Sunday Americano)",
+      "venuePlaceholder": "Venue (optional)",
+      "formatTitle": "Format",
+      "scoringTitle": "Scoring",
+      "scoringHint": "Game-style scoring lands in the next release.",
+      "courtsTitle": "Courts",
+      "pairingTitle": "Within-court pairing",
+      "sortTitle": "Leaderboard sort",
+      "continue": "Save draft",
+      "failed": "Couldn't save the event. Try again."
+    },
+    "detail": {
+      "draftHint": "Draft",
+      "draftBody": "Add at least 4 players, then start the event — we'll handle pairings and scoring from there.",
+      "rosterTitle": "Roster",
+      "rosterEmpty": "No players yet — add some below.",
+      "cancelCta": "Cancel event",
+      "cancelledNote": "This event was cancelled. View only.",
+      "startCta": "Start event",
+      "startNeedFour": "Add at least 4 players to start",
+      "startFailed": "Couldn't start the event. Try again.",
+      "addPlaceholder": "Player name",
+      "addCta": "Add",
+      "roundOfTotal": "Round {{n}} of {{m}}",
+      "roundLabel": "Round {{n}} of {{m}}",
+      "courtN": "Court {{n}}",
+      "vs": "vs",
+      "scored": "Scored",
+      "saveScore": "Save score",
+      "saving": "Saving…",
+      "nextRoundCta": "Finish round → next",
+      "scoreAllFirst": "Score every match first",
+      "completeCta": "Complete event",
+      "noActiveRound": "No active round.",
+      "leaderboardEmpty": "Standings appear after the first score lands.",
+      "withdrewAt": "Withdrew after round {{n}}",
+      "notStarted": "Not started",
+      "tapToScore": "Tap to enter score",
+      "pickWinner": "Winner",
+      "loserScore": "Loser's score (winner gets {{target}})",
+      "renameCourt": "Rename court",
+      "renameCourtPlaceholder": "e.g. Center Court",
+      "renameCourtClear": "Reset to default",
+      "renameSave": "Save",
+      "reshuffleCta": "Reshuffle pairings",
+      "reshuffleHint": "Re-pairs this round. Available until the first score lands.",
+      "reshuffleConfirm": "Reshuffle this round's pairings?",
+      "reshuffleBlocked": "Reshuffle disabled — scores already recorded.",
+      "reshuffleFailed": "Couldn't reshuffle. Try again.",
+      "restingTitle": "Resting this round",
+      "restingNone": "Everyone's playing.",
+      "lbColG": "G",
+      "lbColW": "W",
+      "lbColL": "L",
+      "lbColT": "T",
+      "lbColDiff": "Diff",
+      "lbColComp": "+M",
+      "lbColPts": "Pts"
+    },
+    "tabs": {
+      "courts": "Courts",
+      "leaderboard": "Leaderboard",
+      "roster": "Roster"
+    }
+  },
+  "tiers": {
+    "BEGINNER": "Beginner",
+    "LOWER_BRONZE": "Lower Bronze",
+    "BRONZE": "Bronze",
+    "SILVER": "Silver",
+    "GOLD": "Gold",
+    "PLATINUM": "Platinum",
+    "DIAMOND": "Diamond"
+  },
+  "sessionFocus": {
+    "drilling": "Drilling",
+    "match_play": "Match play",
+    "conditioning": "Conditioning",
+    "mental_training": "Mental training",
+    "technique_focus": "Technique",
+    "general": "General"
+  },
+  "sessionDetails": {
+    "sheetTitle": "Session details",
+    "today": "Today",
+    "dateTime": "Date & time",
+    "duration": "Duration",
+    "minutes_one": "{{count}} min",
+    "minutes_other": "{{count}} min",
+    "court": "Court",
+    "courtPlaceholder": "Court 1",
+    "focus": "Focus",
+    "addCourt": "+ Court",
+    "addFocus": "+ Focus",
+    "save": "Save details"
+  },
+  "today": {
+    "greeting": "Hi, Coach {{name}}",
+    "sessionCount_one": "{{count}} session",
+    "sessionCount_other": "{{count}} sessions",
+    "workspaceCount_one": "{{count}} workspace",
+    "workspaceCount_other": "{{count}} workspaces",
+    "upNext": "Up next",
+    "traineesToday": "Trainees today",
+    "minutes_one": "{{count}} min",
+    "minutes_other": "{{count}} min",
+    "notAssessed": "Not assessed",
+    "emptyTitle": "No sessions today",
+    "emptyBody": "When you schedule sessions with your trainees, they'll show up here.",
+    "scheduleSession": "Schedule session",
+    "addTraineeFirst": "Add a trainee first",
+    "timeOfDay": {
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "evening": "Evening"
+    },
+    "feedbackBadge_one": "{{count}} new feedback",
+    "feedbackBadge_other": "{{count}} new feedback",
+    "toAssessBadge_one": "{{count}} session to assess",
+    "toAssessBadge_other": "{{count}} sessions to assess",
+    "scope": {
+      "mine": "Mine",
+      "all": "All"
+    }
+  },
+  "comingSoon": {
+    "body": "This screen is being built. Check back after the next build."
+  },
+  "assessment": {
+    "placeholderTitle": "New assessment",
+    "title": "New assessment",
+    "save": "Save",
+    "saving": "Saving…",
+    "saved": "Saved",
+    "savedOffline": "Saved offline",
+    "saveDraft": "Save draft",
+    "saveChanges": "Save",
+    "publish": "Publish",
+    "prefillFromLast": "Start from last scores",
+    "savedDraft": "Draft saved",
+    "publishedToast": "Published",
+    "publishedTierToast": "Published · {{tier}}",
+    "publishedToAssessHint_one": "Published · {{count}} more to assess",
+    "publishedToAssessHint_other": "Published · {{count}} more to assess",
+    "editedToast": "Saved",
+    "editedTierToast": "Saved · {{tier}}",
+    "viewHistory": "Edit history",
+    "genericError": "Could not save. Please try again.",
+    "status": {
+      "unsaved": "Unsaved",
+      "saving": "Saving…",
+      "draftDirty": "Draft · unsaved changes",
+      "draftSaved": "Draft saved",
+      "published": "Published {{when}} · Trainee notified",
+      "edited": "Edited {{when}}",
+      "traineeViewed": "Trainee viewed {{when}}",
+      "traineeNotViewed": "Trainee hasn't viewed yet"
+    },
+    "publishConfirm": {
+      "title": "Publish this assessment?",
+      "summary": "{{count}} skills scored · summary {{chars}} chars",
+      "notifyHint": "Trainee and parent will be notified.",
+      "offline": "You're offline. Connect to publish — your draft is saved.",
+      "forceEmpty": "Publish empty (observation-only — no scores or summary).",
+      "diff": {
+        "ups_one": "{{count}} up",
+        "ups_other": "{{count}} up",
+        "downs_one": "{{count}} down",
+        "downs_other": "{{count}} down",
+        "news_one": "{{count}} new",
+        "news_other": "{{count}} new",
+        "unchanged_one": "{{count}} same",
+        "unchanged_other": "{{count}} same"
+      }
+    },
+    "history": {
+      "title": "Edit history",
+      "empty": "No edits yet.",
+      "summary": "Summary",
+      "score": "{{skill}}: {{from}} → {{to}}"
+    },
+    "tierUp": {
+      "title": "{{tier}} unlocked 🎉",
+      "body": "{{name}} just reached {{tier}}. Share the win with the parents.",
+      "shareCta": "Share with parents",
+      "shareTitle": "{{tier}} tier reached",
+      "shareText": "{{name}} just earned {{tier}} on padel — proud moment! 🎉",
+      "dismiss": "Close",
+      "traineeFallback": "Your trainee"
+    },
+    "discardConfirm": "Discard changes?",
+    "discardConfirmBody": "Your edits won't be saved.",
+    "discard": "Discard",
+    "keepEditing": "Keep editing",
+    "ratedCount_one": "{{count}} of {{total}} skill rated",
+    "ratedCount_other": "{{count}} of {{total}} skills rated",
+    "levels": {
+      "1": "Learning",
+      "2": "Developing",
+      "3": "Functional",
+      "4": "Proficient",
+      "5": "Mastery"
+    },
+    "notRated": "Not rated",
+    "showDescriptors": "Show descriptors",
+    "hideDescriptors": "Hide descriptors",
+    "noteLabel": "Note (optional)",
+    "notePlaceholder": "Observation for {{skill}}…",
+    "summary": {
+      "title": "Session summary",
+      "draftFromScores": "Draft from scores",
+      "placeholder": "How did the session go overall?",
+      "visibility": "Visible to trainee and parent"
+    },
+    "draft": {
+      "cta": "Draft with AI",
+      "loading": "Drafting…",
+      "needsScores": "Score at least one skill first.",
+      "saveFirst": "Save the assessment first.",
+      "successPill": "Drafted",
+      "undo": "Undo",
+      "failed": "Couldn't draft right now. Try again.",
+      "notConfigured": "AI drafting isn't enabled for this workspace yet.",
+      "confirmReplaceTitle": "Replace your summary?",
+      "confirmReplaceBody": "Your current summary will be replaced by an AI draft. You can undo for a few seconds.",
+      "confirmReplaceConfirm": "Replace"
+    }
+  },
+  "offline": {
+    "title": "You're offline",
+    "body": "Changes are saved locally and will sync when you're back online.",
+    "allCaughtUp": "All caught up"
+  },
+  "profile": {
+    "backLabel": "Trainees",
+    "joinedDate": "Joined {{date}}",
+    "stats": {
+      "sessions": "Sessions",
+      "hours": "Hours coached",
+      "sinceLast": "Since last"
+    },
+    "tierProgress": {
+      "title": "Tier progress",
+      "met_one": "{{count}} of {{total}} skill met",
+      "met_other": "{{count}} of {{total}} skills met",
+      "blocking_one": "{{count}} skill below threshold for {{tier}}",
+      "blocking_other": "{{count}} skills below threshold for {{tier}}",
+      "topTier": "Top tier for current curriculum — keep refining."
+    },
+    "blockers": {
+      "title": "To reach {{tier}}, focus on",
+      "gap": "{{current}} → {{required}}"
+    },
+    "radar": {
+      "title": "Skill profile"
+    },
+    "categories": {
+      "technical": "Technical",
+      "tactical": "Tactical",
+      "physical": "Physical",
+      "mental": "Mental"
+    },
+    "gains": {
+      "title": "Recent gains",
+      "entry": "{{from}} → {{to}}"
+    },
+    "allSkills": {
+      "title": "All skills",
+      "expandAll": "Expand all",
+      "collapseAll": "Collapse all",
+      "notRated": "Not rated"
+    },
+    "sessions": {
+      "title": "Recent sessions",
+      "skillsUpdated_one": "{{count}} skill updated",
+      "skillsUpdated_other": "{{count}} skills updated"
+    },
+    "actions": {
+      "newAssessment": "New assessment",
+      "schedule": "Schedule",
+      "generateReport": "Generate report"
+    },
+    "empty": {
+      "title": "No assessments yet",
+      "body": "Skills, tier progress, and the radar chart appear after the first session you assess.",
+      "startCta": "Start first assessment"
+    }
+  },
+  "trainees": {
+    "addAction": "Add trainee",
+    "searchPlaceholder": "Search trainees",
+    "noResults": "No trainees match \"{{q}}\".",
+    "emptyTitle": "Add your first trainee",
+    "emptyBody": "Send a WhatsApp invite or save a trainee for later. Takes about 30 seconds.",
+    "addAndInvite": "Add and invite",
+    "addWithoutInvite": "Add without invite",
+    "addTitle": "Add trainee",
+    "detailsSection": "Trainee details",
+    "parentSection": "Parent or guardian",
+    "coachingSection": "Coaching",
+    "nameLabel": "Name",
+    "namePlaceholder": "Andi Pratama",
+    "phoneLabel": "WhatsApp",
+    "phonePlaceholder": "+62 812 3456 7890",
+    "dobLabel": "Date of birth (optional)",
+    "parentPhoneLabel": "Parent WhatsApp (optional)",
+    "startingTierLabel": "Starting tier",
+    "leadCoachLabel": "Lead coach",
+    "defaultCoachName": "You",
+    "defaultWorkspaceName": "Coachito",
+    "fieldsHint": "Only name and WhatsApp are required. The trainee fills in the rest after signing in.",
+    "sendWhatsAppInvite": "Send WhatsApp invite",
+    "saveWithoutInvite": "Save without invite",
+    "createError": "Couldn't add the trainee. Check your inputs and try again.",
+    "inviteMessage": "Hi {{name}}! Coach {{coach}} from {{workspace}} here. You've been invited to track your padel progress with us.\n\nTap the link below to join — takes about 30 seconds:\n{{link}}",
+    "linkedTitle": "Trainee added",
+    "linkedHeadline": "Linked to {{name}}",
+    "linkedBody": "This phone matched an existing Coachito account ({{email}}). They'll see the invite the next time they open the app — no WhatsApp needed."
+  },
+  "pendingInvites": {
+    "title": "Invitations",
+    "subtitle_one": "{{count}} club wants to add you.",
+    "subtitle_other": "{{count}} clubs want to add you.",
+    "inviteFrom": "From {{coach}}",
+    "accept": "Accept",
+    "decline": "Decline",
+    "acceptedToast": "You've joined {{workspace}}.",
+    "declinedToast": "Invitation from {{workspace}} declined.",
+    "acceptError": "Couldn't accept the invite. Try again.",
+    "declineError": "Couldn't decline the invite. Try again.",
+    "asTrainee": "As a trainee",
+    "switcherHint": "Use the workspace switcher at the top to view it."
+  },
+  "signin": {
+    "title": "Sign in to Coachito",
+    "subtitle": "Track your coaching journey.",
+    "continueWithGoogle": "Continue with Google",
+    "continueWithEmail": "Continue with email",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "sendMagicLink": "Send magic link",
+    "checkYourEmail": "Check your email",
+    "checkYourEmailBody": "We sent a sign-in link to {{email}}. Tap the link to continue.",
+    "checkSpam": "Didn't get it? Check spam or try again.",
+    "tryAnotherEmail": "Try another email",
+    "terms": "By continuing you agree to Coachito's Terms and Privacy Policy.",
+    "noAccount": "Don't have an account?",
+    "signUpLink": "Sign up",
+    "googleError": "Couldn't sign in with Google. Try email instead.",
+    "sendError": "Couldn't send the link. Check the email and try again.",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Your password",
+    "signInWithPassword": "Sign in with password",
+    "passwordError": "Couldn't sign in. Check your password and try again.",
+    "forgotPassword": "Forgot password?",
+    "backToPassword": "Back to password sign-in"
+  },
+  "forgot": {
+    "title": "Reset your password",
+    "subtitle": "Enter your email and we'll send a reset link.",
+    "cta": "Send reset link",
+    "sentTitle": "Check your email",
+    "sentBody": "If an account exists for {{email}}, a reset link is on the way.",
+    "checkSpam": "Didn't get it? Check spam or try again.",
+    "tryAnother": "Try another email",
+    "error": "Couldn't send the link. Try again.",
+    "backToSignIn": "Back to sign in"
+  },
+  "reset": {
+    "title": "Set a new password",
+    "subtitle": "Choose a new password for your Coachito account.",
+    "missingToken": "This reset link is missing or invalid. Request a new one.",
+    "requestNew": "Request a new link",
+    "newPasswordLabel": "New password",
+    "newPasswordHint": "At least 8 characters",
+    "confirmLabel": "Confirm new password",
+    "mismatch": "The two passwords don't match.",
+    "cta": "Update password",
+    "error": "Couldn't reset the password. The link may have expired."
+  },
+  "setPassword": {
+    "title": "Set a password",
+    "titleChange": "Change password",
+    "currentPasswordLabel": "Current password",
+    "newPasswordLabel": "New password",
+    "confirmPasswordLabel": "Confirm new password",
+    "hint": "Use at least 8 characters. Mixing words is fine.",
+    "setCta": "Set password",
+    "updateCta": "Update password",
+    "minLengthError": "Password must be at least 8 characters.",
+    "mismatchError": "The new passwords don't match.",
+    "genericError": "Couldn't save the password. Try again."
+  },
+  "onboarding": {
+    "createWorkspaceTitle": "Create your workspace",
+    "createWorkspaceBody": "Set up the space where you'll track trainees and sessions.",
+    "typeLabel": "Workspace type",
+    "typeClub": "Club",
+    "typePersonal": "Solo coach",
+    "typeClubHint": "Multi-coach institution. You'll be the club admin.",
+    "typePersonalHint": "Just you. Simpler setup, smaller plan.",
+    "clubName": "Club name",
+    "clubNamePlaceholder": "Senayan Padel Club",
+    "coachName": "Display name",
+    "coachNamePlaceholder": "Coach Novia",
+    "cityLabel": "City (optional)",
+    "cityPlaceholder": "Jakarta",
+    "localeLabel": "Primary language",
+    "createCta": "Create workspace",
+    "createError": "Couldn't create the workspace. Try again.",
+    "signedInAs": "Signed in as {{email}}"
+  },
+  "signup": {
+    "title": "Create your Coachito account",
+    "subtitle": "Pick the kind of account you'd like to start with.",
+    "alreadyHave": "Already have an account?",
+    "signInLink": "Sign in",
+    "genericError": "Couldn't create the account. Try again.",
+    "roleCoach": {
+      "title": "I'm a solo coach",
+      "subtitle": "I teach privately or freelance, just for myself."
+    },
+    "roleClub": {
+      "title": "I run a club",
+      "subtitle": "I'm the owner or admin of a padel or tennis club."
+    },
+    "coach": {
+      "title": "Start as a solo coach",
+      "subtitle": "We'll set up a personal workspace named after you.",
+      "cta": "Create account"
+    },
+    "club": {
+      "title": "Set up your club",
+      "subtitle": "You'll be the admin of a fresh club workspace.",
+      "cta": "Create club"
+    },
+    "fields": {
+      "displayName": "Full name",
+      "displayNamePlaceholder": "e.g. Okky Adhi",
+      "passwordLabel": "Password",
+      "passwordHint": "At least 8 characters",
+      "clubName": "Club name",
+      "clubNamePlaceholder": "e.g. Senayan Padel Club",
+      "cityOptional": "City (optional)",
+      "cityPlaceholder": "e.g. Jakarta",
+      "sportLabel": "Primary sport",
+      "sportsLabel": "Sports offered"
+    }
+  },
+  "sports": {
+    "padel": "Padel",
+    "tennis": "Tennis"
+  },
+  "magic": {
+    "signingIn": "Signing you in…",
+    "invalidTitle": "This link is no longer valid",
+    "invalidBody": "Magic links expire after 15 minutes. Request a new one to continue."
+  },
+  "traineeNav": {
+    "home": "Home",
+    "progress": "Progress",
+    "sessions": "Sessions",
+    "events": "Events",
+    "coach": "Coach",
+    "profile": "Profile"
+  },
+  "traineeHome": {
+    "greeting": "Hi, {{name}}",
+    "welcomeName": "Welcome, {{name}}",
+    "welcomeBody": "Let's get you started.",
+    "notifications": "Notifications",
+    "tracking": "How you're tracking",
+    "wins": "Wins this month",
+    "achievement": {
+      "tag": "New badge",
+      "viewSkill": "View skill",
+      "share": "Share"
+    },
+    "tier": {
+      "skillsToGo_one": "{{count}} skill to go",
+      "skillsToGo_other": "{{count}} skills to go",
+      "topTier": "Top tier — keep refining."
+    },
+    "upcoming": {
+      "title": "Up next",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "noneTitle": "No session scheduled",
+      "noneBody": "Ask your coach to schedule one."
+    },
+    "coachNote": {
+      "title": "Latest from {{coach}}",
+      "after": "After your session {{date}}"
+    },
+    "rhythm": {
+      "title": "Your rhythm",
+      "count_one": "{{count}} session in 14 days",
+      "count_other": "{{count}} sessions in 14 days",
+      "body": "Your most consistent stretch yet.",
+      "footer": "Tomorrow keeps the rhythm going."
+    },
+    "emptyRadar": {
+      "title": "Your skills will appear here",
+      "body": "After your first session, Coach will rate your skills and you'll see them here."
+    },
+    "whatNext": {
+      "title": "What happens next",
+      "s1": "Show up to your first session.",
+      "s2": "Coach rates your skills during the session.",
+      "s3": "Open the app after to see your progress and tier."
+    },
+    "firstRunFooter": "We'll show you your radar and tier the moment your coach finishes the first assessment."
+  },
+  "inviteWelcome": {
+    "greetingGeneric": "You're invited",
+    "greetingWithName": "You're invited, {{name}}",
+    "subtitle": "Coach {{coach}} invited you to track your padel progress with {{workspace}}.",
+    "invitedBy": "Invited by Coach {{coach}}",
+    "yourCoach": "your coach",
+    "expiredTitle": "This invite has expired",
+    "expiredBody": "Ask your coach to send a new one.",
+    "invalidTitle": "Invite not found",
+    "invalidBody": "The link may be mistyped, or the invite was revoked.",
+    "signInLink": "I already have an account",
+    "signedInAs": "Signed in as {{email}}",
+    "acceptCta": "Accept invite",
+    "useDifferentAccount": "Use a different account",
+    "acceptError": "Couldn't accept the invite. Try again."
+  },
+  "inviteSignup": {
+    "title": "Create your account",
+    "subtitleWithWorkspace": "Join {{workspace}} as a trainee.",
+    "subtitle": "Join as a trainee.",
+    "displayNameLabel": "Your name",
+    "displayNamePlaceholder": "First and last name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "At least 8 characters",
+    "submit": "Create account",
+    "submitting": "Creating account…",
+    "alreadyHave": "Already have an account?",
+    "signInLink": "Sign in",
+    "genericError": "Couldn't create the account. Check the form and try again.",
+    "emailTakenError": "An account with this email already exists. Sign in instead.",
+    "inviteInvalidError": "This invite isn't valid anymore. Ask your coach to send a new one."
+  },
+  "publicLanding": {
+    "heroGeneric": "You're invited to Coachito",
+    "heroWithName": "Hi {{name}} — you're invited",
+    "description": "Track your padel progress with {{workspace}}. See your skills, follow your tier journey, and read your coach's notes after every session.",
+    "invitedYou": "Invited you",
+    "osIos": "We detected you're on iPhone — here's the easy way.",
+    "osAndroid": "We detected you're on Android — here's the easy way.",
+    "getOnAppStore": "Get the app on the App Store",
+    "getOnPlay": "Get the app on Google Play",
+    "alsoIos": "Or download for iPhone",
+    "alsoAndroid": "Or download for Android",
+    "continueInBrowser": "Continue in browser",
+    "expiresInDays_one": "This invite expires in {{count}} day",
+    "expiresInDays_other": "This invite expires in {{count}} days",
+    "notMe": "Not {{name}}? This isn't for me",
+    "poweredBy": "Powered by Coachito"
+  },
+  "settings": {
+    "title": {
+      "club": "Workspace",
+      "personal": "My workspace"
+    },
+    "savePill": {
+      "saving": "Saving…",
+      "saved": "Saved",
+      "failed": "Failed · Retry"
+    },
+    "preview": {
+      "tag": "Live preview",
+      "placeholder": "Your workspace",
+      "soloCoach": "Solo coach",
+      "coachCount_one": "{{count}} coach",
+      "coachCount_other": "{{count}} coaches",
+      "traineeCount_one": "{{count}} trainee",
+      "traineeCount_other": "{{count}} trainees",
+      "sampleCta": "Generate report",
+      "footer": "This is what coaches, trainees, and parents see across the app and reports."
+    },
+    "branding": {
+      "title": "Branding",
+      "clubName": "Club name",
+      "clubNamePlaceholder": "Senayan Padel Club",
+      "displayName": "Display name",
+      "displayNamePlaceholder": "Coach Novia",
+      "city": "City",
+      "cityPlaceholder": "Jakarta",
+      "accent": "Accent color",
+      "custom": "Custom",
+      "logoLabel": "Club logo",
+      "logoHint": "Square, at least 200×200 px",
+      "profilePhotoLabel": "Profile photo",
+      "profilePhotoHint": "Optional. Trainees see this in the app.",
+      "change": "Change",
+      "add": "Add",
+      "uploading": "Uploading {{pct}}%"
+    },
+    "tiers": {
+      "title": "Tiers & curriculum",
+      "naming": "Tier naming",
+      "options": {
+        "game": "Game",
+        "skill": "Skill",
+        "custom": "Custom"
+      },
+      "namingHint": {
+        "game": "Game uses Bronze, Silver, Gold.",
+        "skill": "Skill uses Beginner, Intermediate, Advanced.",
+        "custom": "Custom lets you name each tier yourself."
+      },
+      "list": "Tier names",
+      "tierNumber": "Tier {{n}}",
+      "empty": "No tiers configured.",
+      "footnote": "These names appear on trainee profiles, PDF reports, and parent-facing screens.",
+      "curriculum": "Default curriculum",
+      "allowOverrides": "Allow coach overrides"
+    },
+    "curriculum": {
+      "title": "Curriculum",
+      "search": "Search skills",
+      "addCustom": "Add custom skill",
+      "addCustomSoon": "Coming soon",
+      "managedByAdmin": "Managed by your club admin.",
+      "viewOnly": "View only",
+      "proRequired": "Customizing the curriculum requires Club Pro.",
+      "upgrade": "Upgrade plan",
+      "enabledOfTotal": "{{count}} of {{total}} enabled",
+      "skillCount_one": "{{count}} skill",
+      "skillCount_other": "{{count}} skills",
+      "disabledLabel": "Disabled",
+      "disabledSection_one": "{{count}} skill disabled by admin",
+      "disabledSection_other": "{{count}} skills disabled by admin",
+      "updatedBadge": "Updated",
+      "disable": {
+        "title": "Disable {{skill}}?",
+        "body_one": "{{count}} trainee has an active assessment using this skill. Disabling will:",
+        "body_other": "{{count}} trainees have active assessments using this skill. Disabling will:",
+        "bodyNone": "No trainees are currently being assessed on this skill. Disabling will:",
+        "effect1": "Hide it from future assessments.",
+        "effect2": "Keep existing scores on trainee profiles.",
+        "effect3": "Pause tier progression for trainees who need it.",
+        "confirm": "Disable"
+      },
+      "skill": {
+        "descriptors": "Level descriptors",
+        "tapExpand": "Tap to expand",
+        "level": "Level {{level}}",
+        "noDescriptors": "No descriptors loaded for this skill.",
+        "edit": "Edit descriptor",
+        "editStubTitle": "Edit {{skill}} · level {{level}}",
+        "editSoon": "Descriptor editing ships in the next release. Save your wording in a doc for now and we'll import it.",
+        "disabledNote": "This skill is disabled for your workspace.",
+        "requiredFor": "Required for",
+        "requiredForHint": "Trainees need this skill at the level shown to reach each tier.",
+        "minLevel": "L{{level}}"
+      },
+      "feedback": {
+        "title": "Curriculum feedback",
+        "titleAbout": "Feedback about {{skill}}",
+        "sendAbout": "Send feedback about {{skill}}",
+        "send": "Send feedback to admin",
+        "placeholder": "What would you change, add, or split?",
+        "hint": "Your club admin gets this and can update the descriptor or skill.",
+        "submit": "Send",
+        "sent": "Sent. Admin will see it in settings.",
+        "error": "Couldn't send. Try again.",
+        "inboxTitle": "Coach feedback",
+        "emptyTitle": "No feedback yet",
+        "emptyBody": "When coaches send notes about the curriculum, they show up here.",
+        "about": "About {{skill}}",
+        "unread": "Unread",
+        "unreadCount_one": "{{count}} unread",
+        "unreadCount_other": "{{count}} unread",
+        "seen": "Seen",
+        "adminOnly": "Only the workspace admin can read curriculum feedback.",
+        "mySentCount_one": "{{count}} sent",
+        "mySentCount_other": "{{count}} sent",
+        "mineTitle": "My feedback",
+        "mineEmptyTitle": "You haven't sent any feedback yet",
+        "mineEmptyBody": "Send a note from any skill detail screen — the admin sees it in their inbox.",
+        "mineEmptyOwner": "You own this workspace, so there's no admin above you to send curriculum feedback to.",
+        "general": "General feedback",
+        "seenByAdmin": "Seen by admin",
+        "awaitingRead": "Awaiting read"
+      }
+    },
+    "plan": {
+      "title": "Plan & billing",
+      "manage": "Manage",
+      "renews": "Renews {{date}}",
+      "trial": "Free trial"
+    },
+    "plans": {
+      "free_trial": "Free trial",
+      "free_trial_price": "No card",
+      "solo_coach": "Solo Coach",
+      "solo_coach_price": "Rp 100k / month",
+      "club_starter": "Club Starter",
+      "club_starter_price": "Rp 500k / month",
+      "club_pro": "Club Pro",
+      "club_pro_price": "Rp 1.5jt / month"
+    },
+    "upsell": {
+      "title": "Coaching with a team?",
+      "body": "Upgrade to a Club workspace to invite other coaches, share trainees, and manage them together."
+    },
+    "members": {
+      "title": "Members",
+      "coaches": "Coaches",
+      "trainees": "Trainees",
+      "activeTrainees": "Active trainees"
+    },
+    "danger": {
+      "title": "Danger zone",
+      "delete": "Delete workspace"
+    },
+    "account": {
+      "title": "Account",
+      "setPassword": "Set a password",
+      "changePassword": "Change password",
+      "passwordSaved": "Password saved."
+    }
+  },
+  "switcher": {
+    "pillLabel": "Switch workspace",
+    "sheetTitle": "Your workspaces",
+    "fallback": "Workspace",
+    "error": "Could not switch workspace. Try again.",
+    "type": {
+      "club": "Club",
+      "personal": "Personal"
+    }
+  },
+  "multisport": {
+    "title": "Sports",
+    "switcherLabel": "Switch sport",
+    "switcherTitle": "Sport",
+    "curriculumLabel": "Curriculum: {{code}}",
+    "addNamed": "Add {{name}}",
+    "removeCta": "Remove sport",
+    "addFailed": "Couldn't add the sport. Try again.",
+    "removeFailed": "Couldn't remove the sport. Try again."
+  },
+  "coaches": {
+    "title": "Coaches",
+    "loadError": "Could not load coaches. Try again.",
+    "you": "you",
+    "readOnlyHint": "Only the workspace admin can invite or remove coaches.",
+    "inviteCta": "Invite coach",
+    "active": {
+      "title_one": "{{count}} active coach",
+      "title_other": "{{count}} active coaches"
+    },
+    "pending": {
+      "title_one": "{{count}} pending invite",
+      "title_other": "{{count}} pending invites",
+      "label": "Invited — awaiting sign-in",
+      "copyLabel": "Copy invite link",
+      "revokeLabel": "Revoke invite"
+    },
+    "role": {
+      "club_admin": "Admin",
+      "head_coach": "Head coach",
+      "coach": "Coach"
+    },
+    "menu": {
+      "label": "Actions for {{name}}",
+      "promoteHead": "Promote to head coach",
+      "demoteCoach": "Change to coach",
+      "remove": "Remove from workspace"
+    },
+    "invite": {
+      "title": "Invite a coach",
+      "successTitle": "Invite ready",
+      "nameLabel": "Full name",
+      "emailLabel": "Email",
+      "roleLabel": "Role",
+      "coachHint": "Can assess trainees and log sessions.",
+      "headHint": "Coach permissions plus team oversight (V1.5).",
+      "submitCta": "Create invite",
+      "shareCta": "Share invite",
+      "copyCta": "Copy link",
+      "copied": "Link copied",
+      "linkLabel": "Invite link",
+      "shareTitle": "Join our padel coaching workspace",
+      "shareBody": "Hi {{name}}, click this link to join the workspace.",
+      "successBody": "An invite has been created for {{email}}. Share the link below — the invite is valid for 7 days.",
+      "successHint": "We don't email coaches automatically yet. Send the link via WhatsApp, email, or however you usually reach them.",
+      "genericError": "Could not create invite. Please try again."
+    },
+    "actions": {
+      "genericError": "That didn't work. Please try again."
+    },
+    "remove": {
+      "title": "Remove coach?",
+      "body": "{{name}} will lose access to this workspace. Their sessions and assessments stay intact.",
+      "confirmCta": "Remove"
+    },
+    "revoke": {
+      "title": "Revoke invite?",
+      "body": "The link sent to {{email}} will stop working.",
+      "confirmCta": "Revoke"
+    }
+  },
+  "trainee": {
+    "reports": {
+      "title": "Reports",
+      "subtitle": "Monthly progress, signed by your coach.",
+      "viewCta": "View PDF",
+      "emptyTitle": "No reports yet",
+      "emptyBody": "Reports drop on the 1st of each month — and your coach can generate one anytime.",
+      "viewCountLabel_one": "Opened {{count}} time",
+      "viewCountLabel_other": "Opened {{count}} times",
+      "byCoach": "By {{name}}",
+      "perSessionTag": "Per-session",
+      "monthlyTag": "Monthly"
+    },
+    "home": {
+      "newReportBanner": "New report — {{label}}"
+    },
+    "feedback": {
+      "title": "How was the session?",
+      "context": "From {{coach}} · {{date}}",
+      "body": "Share quick feedback about your session on {{date}}.",
+      "cta": "Share feedback",
+      "viewSession": "View this session",
+      "sharedAnon": "(submitted anonymously)",
+      "edit": "Edit",
+      "withdraw": {
+        "cta": "Withdraw",
+        "title": "Withdraw feedback?",
+        "body": "Your coach won't see this feedback anymore.",
+        "confirm": "Withdraw"
+      },
+      "sheet": {
+        "title": "Share feedback",
+        "overallLabel": "Overall, how did the session feel?",
+        "overallRequired": "Pick a rating before sending.",
+        "fairnessLabel": "Did the scoring feel fair?",
+        "commentLabel": "Anything you want to add? (optional)",
+        "anonymousLabel": "Submit anonymously",
+        "anonymousHint": "Your coach sees your name unless this is on. The platform always knows it's you so we can keep things safe.",
+        "submitCta": "Send",
+        "updateCta": "Update",
+        "genericError": "Could not send feedback. Try again.",
+        "rating": {
+          "1": "Not great",
+          "2": "Below expectations",
+          "3": "Okay",
+          "4": "Good",
+          "5": "Loved it"
+        }
+      }
+    }
+  },
+  "traineeSession": {
+    "title": "Session detail",
+    "minutes_one": "{{count}} min",
+    "minutes_other": "{{count}} min",
+    "coachNote": "Note from {{coach}}",
+    "scoredSkills_one": "{{count}} skill scored",
+    "scoredSkills_other": "{{count}} skills scored",
+    "noScores": "No skills were scored in this session — observation only.",
+    "editedNote": "This assessment was updated by the coach."
+  },
+  "traineeSessions": {
+    "title": "My sessions",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "emptyTitle": "No sessions yet",
+    "emptyBody": "Sessions show up here when your coach schedules them.",
+    "scored_one": "{{count}} skill",
+    "scored_other": "{{count}} skills",
+    "feedbackGiven": "Feedback given",
+    "viewable": "Notes ready",
+    "awaitingNotes": "Awaiting notes"
+  },
+  "calendar": {
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "jumpToday": "Jump to today",
+    "weekStartsSunday": "Week starts on Sunday"
+  },
+  "sessions": {
+    "title": "Sessions",
+    "scheduleCta": "Schedule",
+    "upcoming_one": "Upcoming · {{count}}",
+    "upcoming_other": "Upcoming · {{count}}",
+    "past_one": "Past · {{count}}",
+    "past_other": "Past · {{count}}",
+    "pastEmpty": "Past sessions show up here once they're completed or skipped.",
+    "emptyUpcomingTitle": "Nothing on the schedule",
+    "emptyUpcomingBody": "Block out your next session so it shows up on Today.",
+    "emptyToAssess": "No sessions waiting to be assessed.",
+    "emptyDrafts": "No drafts in progress.",
+    "emptyPublished": "Published assessments show up here.",
+    "emptyCancelled": "No cancelled sessions.",
+    "emptyDay": "No sessions on this day.",
+    "agendaCount_one": "{{count}} session",
+    "agendaCount_other": "{{count}} sessions",
+    "legend": {
+      "upcoming": "Upcoming",
+      "toAssess": "To assess",
+      "done": "Done"
+    },
+    "menu": {
+      "label": "Actions for {{name}}",
+      "notAssignedHint": "Only {{coach}} can edit this session."
+    },
+    "status": {
+      "scheduled": "Scheduled",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "noShow": "No-show",
+      "draft": "Draft",
+      "published": "Published",
+      "toAssess": "To assess"
+    },
+    "funnel": {
+      "upcoming": "Upcoming",
+      "toAssess": "To assess",
+      "draft": "Drafts",
+      "published": "Published",
+      "cancelled": "Cancelled"
+    },
+    "complete": {
+      "cta": "Mark completed"
+    },
+    "noShow": {
+      "cta": "Mark no-show"
+    },
+    "conflicts": {
+      "coach": "You have another session that overlaps this time.",
+      "trainee": "{{name}} has another session that overlaps this time."
+    },
+    "readonly": {
+      "banner": "Read only — assessed by {{coach}} on {{date}}.",
+      "draftBanner": "{{coach}} is currently drafting this assessment."
+    },
+    "cancel": {
+      "cta": "Cancel",
+      "title": "Cancel this session?",
+      "body": "The session with {{name}} won't appear in your schedule anymore. Any draft assessment will be deleted.",
+      "confirm": "Cancel session"
+    },
+    "sheet": {
+      "title": "Schedule a session",
+      "editTitle": "Edit session",
+      "athleteLabel": "Trainee",
+      "athletePick": "Pick a trainee",
+      "athletePlaceholder": "Search trainee",
+      "athleteEmpty": "No trainee matches",
+      "athleteRecent": "Recent",
+      "athleteAddNew": "Add a new trainee",
+      "athleteRequired": "Pick a trainee first.",
+      "whenLabel": "When",
+      "durationLabel": "Duration",
+      "courtLabel": "Court",
+      "focusLabel": "Focus",
+      "focusHint": "Pick up to 4.",
+      "notesLabel": "Notes (private)",
+      "notesPlaceholder": "Anything you want to remember about this session…",
+      "scheduleCta": "Schedule",
+      "saveCta": "Save changes",
+      "genericError": "Could not save. Try again.",
+      "coachLabel": "Assign to",
+      "coachSelf": "you"
+    },
+    "scope": {
+      "mine": "Mine",
+      "all": "All coaches"
+    }
+  },
+  "category": {
+    "technical": "Technical",
+    "tactical": "Tactical",
+    "physical": "Physical",
+    "mental": "Mental"
+  },
+  "feedback": {
+    "inbox": {
+      "title": "Feedback",
+      "emptyTitle": "No feedback yet",
+      "emptyBody": "After you publish an assessment, trainees can share how the session felt."
+    },
+    "anon": {
+      "trainee": "Anonymous trainee",
+      "parent": "Anonymous parent"
+    },
+    "fairness": "Fairness: {{score}}/5",
+    "markRead": "Thanks · seen",
+    "seen": "Seen"
+  },
+  "reports": {
+    "emptyTitle": "No reports yet",
+    "emptyBody": "Monthly reports generate automatically on the 1st. You can also create one anytime.",
+    "create": "Create report manually",
+    "generating": "Generating…",
+    "generatedOn": "Generated {{date}}",
+    "sheet": {
+      "title": "Create report",
+      "modeLabel": "Report scope",
+      "mode_monthly": "Monthly",
+      "mode_session": "Per session",
+      "trainee": "Trainee",
+      "forTrainee": "For {{name}}",
+      "period": "Period",
+      "session": "Session",
+      "pickTraineeFirst": "Pick a trainee first to see their sessions.",
+      "noSessions": "This trainee has no sessions yet.",
+      "noTrainees": "Add a trainee first.",
+      "generate": "Generate"
+    }
+  },
+  "coach": {
+    "list": {
+      "title": "Your coaches",
+      "subtitle": "Everyone who has coached you, most recent first.",
+      "upcomingDot": "Has a session with you soon",
+      "sessionCount_one": "{{count}} session",
+      "sessionCount_other": "{{count}} sessions",
+      "lastCoached": "last coached {{ago}}",
+      "emptyTitle": "No coaches yet",
+      "emptyBody": "You'll see your coaches here after your first session."
+    },
+    "bio": {
+      "backLabel": "Coaches",
+      "memberSince": "Member since {{date}}",
+      "aboutTitle": "About",
+      "readMore": "Read more",
+      "readLess": "Read less",
+      "credentialsTitle": "Credentials",
+      "yearsCoaching_one": "year coaching",
+      "yearsCoaching_other": "years coaching",
+      "specialtiesTitle": "Specialties",
+      "coachedCount_one": "Coached {{count}} trainee in this workspace.",
+      "coachedCount_other": "Coached {{count}} trainees in this workspace."
+    }
+  },
+  "me": {
+    "title": "Profile",
+    "identity": {
+      "title": "You",
+      "displayNameLabel": "Display name",
+      "changeAvatar": "Change photo",
+      "edit": "Edit",
+      "uploading": "Uploading…"
+    },
+    "account": {
+      "title": "Account",
+      "email": "Email",
+      "locale": "Language",
+      "draftVoice": "Draft voice",
+      "draftVoiceHint": "How AI-drafted assessment summaries sound."
+    },
+    "personal": {
+      "title": "Personal",
+      "dob": "Date of birth",
+      "parent": "Parent",
+      "parentMissing": "Not linked",
+      "adminOwnedHint": "Date of birth and parent link are managed by your coach. Ask them to update."
+    },
+    "notifications": {
+      "title": "Notifications",
+      "sessionRemindersTitle": "Session reminders",
+      "sessionRemindersBody": "Get a nudge the day before a scheduled session.",
+      "monthlyReportTitle": "Monthly report ready",
+      "monthlyReportBody": "Notify me when a new monthly report is generated."
+    },
+    "danger": {
+      "title": "Account",
+      "deleteHint": "Want to delete your account? Contact your coach."
+    }
+  },
+  "draftVoice": {
+    "encouraging": "Encouraging",
+    "direct": "Direct",
+    "warm": "Warm"
+  },
+  "skills": {
+    "legendOf": "{{assessed}} / {{total}}",
+    "overview": {
+      "title": "Progress",
+      "subtitle": "Your skill journey",
+      "radarLabel": "Skill radar across categories",
+      "statAria": "Progress stats",
+      "tier": {
+        "currentToNext": "{{current}} → {{next}}",
+        "remainingPlural": "{{count}} skills to {{tier}} — closer than ever.",
+        "remainingSingular": "1 skill to {{tier}} — almost there.",
+        "topTier": "Top tier reached"
+      },
+      "stat": {
+        "overall": "Overall",
+        "assessed": "Assessed",
+        "last": "Last"
+      },
+      "radar": {
+        "centerCaption": "overall",
+        "tapHint": "Tap a category to explore"
+      },
+      "sectionRecentGains": "Recent gains",
+      "gainEntry": "{{label}} {{from}}→{{to}}",
+      "focus": {
+        "title": "Focus on {{label}}",
+        "body": "Last assessed at level {{current}}. Reach level {{required}} to unlock {{tier}}.",
+        "bodyNoNote": "Recommended next focus.",
+        "noteQuote": "\"{{note}}\""
+      },
+      "emptyHeroTitle": "Your radar fills in as you train",
+      "emptyHeroBody": "Once your coach scores you, this page lights up.",
+      "emptyTitle": "Your radar fills in as you train.",
+      "emptyBody": "Your coach hasn't assessed you yet. Once they do, you'll see your strengths and where to focus.",
+      "hint": "Tap a category to drill in."
+    },
+    "category": {
+      "radarHint": "{{assessed}} of {{total}} assessed",
+      "listTitle": "Skills"
+    },
+    "row": {
+      "blockerDot": "Blocking next tier",
+      "needs": "Needs L{{level}}"
+    },
+    "blockers": {
+      "headline_one": "{{count}} of these is blocking {{tier}}. Focus here.",
+      "headline_other": "{{count}} of these are blocking {{tier}}. Focus here.",
+      "subline": "Closing these unlocks your next tier."
+    }
+  }
+}

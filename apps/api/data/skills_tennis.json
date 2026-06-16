@@ -1,0 +1,34 @@
+[
+  { "code": "TENNIS_TECH_FH_DRIVE", "category": "technical", "name_en": "Forehand drive", "name_id": "Forehand drive", "short_label_en": "Forehand", "short_label_id": "Forehand", "display_order": 1 },
+  { "code": "TENNIS_TECH_BH_DRIVE", "category": "technical", "name_en": "Backhand drive", "name_id": "Backhand drive", "short_label_en": "Backhand", "short_label_id": "Backhand", "display_order": 2 },
+  { "code": "TENNIS_TECH_FH_SLICE", "category": "technical", "name_en": "Forehand slice", "name_id": "Forehand slice", "short_label_en": "FH slice", "short_label_id": "Slice FH", "display_order": 3 },
+  { "code": "TENNIS_TECH_BH_SLICE", "category": "technical", "name_en": "Backhand slice", "name_id": "Backhand slice", "short_label_en": "BH slice", "short_label_id": "Slice BH", "display_order": 4 },
+  { "code": "TENNIS_TECH_FH_VOLLEY", "category": "technical", "name_en": "Forehand volley", "name_id": "Voli forehand", "short_label_en": "FH volley", "short_label_id": "Voli FH", "display_order": 5 },
+  { "code": "TENNIS_TECH_BH_VOLLEY", "category": "technical", "name_en": "Backhand volley", "name_id": "Voli backhand", "short_label_en": "BH volley", "short_label_id": "Voli BH", "display_order": 6 },
+  { "code": "TENNIS_TECH_HALF_VOLLEY", "category": "technical", "name_en": "Half-volley", "name_id": "Half-volley", "short_label_en": "Half-volley", "short_label_id": "Half-volley", "display_order": 7 },
+  { "code": "TENNIS_TECH_SERVE_FLAT", "category": "technical", "name_en": "Flat / first serve", "name_id": "Servis pertama", "short_label_en": "First serve", "short_label_id": "Servis 1", "display_order": 8 },
+  { "code": "TENNIS_TECH_SERVE_SPIN", "category": "technical", "name_en": "Spin serve (kick / slice)", "name_id": "Servis spin", "short_label_en": "Spin serve", "short_label_id": "Servis spin", "display_order": 9 },
+  { "code": "TENNIS_TECH_RETURN", "category": "technical", "name_en": "Return of serve", "name_id": "Pengembalian servis", "short_label_en": "Return", "short_label_id": "Return", "display_order": 10 },
+  { "code": "TENNIS_TECH_SMASH", "category": "technical", "name_en": "Overhead smash", "name_id": "Smash", "short_label_en": "Smash", "short_label_id": "Smash", "display_order": 11 },
+  { "code": "TENNIS_TECH_LOB", "category": "technical", "name_en": "Lob (offensive + defensive)", "name_id": "Lob", "short_label_en": "Lob", "short_label_id": "Lob", "display_order": 12 },
+  { "code": "TENNIS_TECH_DROP", "category": "technical", "name_en": "Drop shot", "name_id": "Drop shot", "short_label_en": "Drop shot", "short_label_id": "Drop shot", "display_order": 13 },
+  { "code": "TENNIS_TECH_APPROACH", "category": "technical", "name_en": "Approach shot", "name_id": "Approach shot", "short_label_en": "Approach", "short_label_id": "Approach", "display_order": 14 },
+
+  { "code": "TENNIS_TACT_SERVE_PATTERNS", "category": "tactical", "name_en": "Serve patterns", "name_id": "Pola servis", "short_label_en": "Serve patterns", "short_label_id": "Pola servis", "display_order": 15 },
+  { "code": "TENNIS_TACT_RETURN_PATTERNS", "category": "tactical", "name_en": "Return patterns", "name_id": "Pola pengembalian", "short_label_en": "Return patterns", "short_label_id": "Pola return", "display_order": 16 },
+  { "code": "TENNIS_TACT_BASELINE", "category": "tactical", "name_en": "Baseline rally play", "name_id": "Rally baseline", "short_label_en": "Baseline play", "short_label_id": "Baseline", "display_order": 17 },
+  { "code": "TENNIS_TACT_NET_PLAY", "category": "tactical", "name_en": "Net play & approach", "name_id": "Permainan net", "short_label_en": "Net play", "short_label_id": "Net", "display_order": 18 },
+  { "code": "TENNIS_TACT_DEFENSE", "category": "tactical", "name_en": "Defensive play", "name_id": "Bertahan", "short_label_en": "Defense", "short_label_id": "Bertahan", "display_order": 19 },
+  { "code": "TENNIS_TACT_DOUBLES", "category": "tactical", "name_en": "Doubles tactics", "name_id": "Taktik ganda", "short_label_en": "Doubles", "short_label_id": "Ganda", "display_order": 20 },
+  { "code": "TENNIS_TACT_READING", "category": "tactical", "name_en": "Reading the game", "name_id": "Membaca permainan", "short_label_en": "Reading game", "short_label_id": "Baca permainan", "display_order": 21 },
+
+  { "code": "TENNIS_PHYS_FOOTWORK", "category": "physical", "name_en": "Footwork & court coverage", "name_id": "Footwork & cakupan lapangan", "short_label_en": "Footwork", "short_label_id": "Footwork", "display_order": 22 },
+  { "code": "TENNIS_PHYS_SPLIT", "category": "physical", "name_en": "Split step & reaction", "name_id": "Split step & reaksi", "short_label_en": "Split step", "short_label_id": "Split step", "display_order": 23 },
+  { "code": "TENNIS_PHYS_ENDURANCE", "category": "physical", "name_en": "Endurance", "name_id": "Stamina", "short_label_en": "Endurance", "short_label_id": "Stamina", "display_order": 24 },
+  { "code": "TENNIS_PHYS_POWER", "category": "physical", "name_en": "Power & explosiveness", "name_id": "Power & eksplosivitas", "short_label_en": "Power", "short_label_id": "Power", "display_order": 25 },
+
+  { "code": "TENNIS_MENT_FOCUS", "category": "mental", "name_en": "Focus & concentration", "name_id": "Fokus & konsentrasi", "short_label_en": "Focus", "short_label_id": "Fokus", "display_order": 26 },
+  { "code": "TENNIS_MENT_COMPOSURE", "category": "mental", "name_en": "Composure under pressure", "name_id": "Ketenangan di bawah tekanan", "short_label_en": "Composure", "short_label_id": "Ketenangan", "display_order": 27 },
+  { "code": "TENNIS_MENT_DECISION", "category": "mental", "name_en": "Decision-making speed", "name_id": "Kecepatan keputusan", "short_label_en": "Decisions", "short_label_id": "Keputusan", "display_order": 28 },
+  { "code": "TENNIS_MENT_RESILIENCE", "category": "mental", "name_en": "Resilience after errors", "name_id": "Bangkit dari kesalahan", "short_label_en": "Resilience", "short_label_id": "Resiliensi", "display_order": 29 }
+]

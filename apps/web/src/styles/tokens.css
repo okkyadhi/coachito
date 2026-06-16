@@ -1,0 +1,66 @@
+:root {
+  /* ── Coachito palette ───────────────────────────────────────────────
+   *
+   * Clay is the primary (replaces coachito's blue) — warmer, sunnier,
+   * references the padel court itself.  Ball (yellow) is reserved for the
+   * logo only — never as a UI accent.  Ink replaces near-black as the
+   * dark surface; cream + bone are the warm light backgrounds.  Hairlines
+   * carry over: 0.5px borders, no shadows.
+   */
+
+  /* ── Brand & accent ─────────────────────────────── */
+  --accent: #C66B47;              /* Clay */
+  --accent-deep: #A04E2F;         /* Clay-deep (hover / pressed) */
+  --accent-rgb: 198, 107, 71;
+  --accent-bg: rgba(198, 107, 71, 0.12);
+
+  /* Logo-only — kept scarce so the wordmark stays recognisable. */
+  --ball: #D4E157;
+  --ball-deep: #9BAA38;
+
+  /* Named brand surfaces (use these directly when a token isn't enough). */
+  --ink: #1F1B16;
+  --ink-soft: #3A332B;
+  --cream: #F5EBD9;
+  --bone: #FBF6EC;
+  --stone: #8A8278;
+  --stone-soft: #C9C3B6;
+
+  /* ── Backgrounds (mapped to brand surfaces) ─────── */
+  --color-background-primary: #FBF6EC;    /* bone — cards / primary surface */
+  --color-background-secondary: #F5EBD9;  /* cream — secondary fills, chips */
+  --color-background-tertiary: #ECE2CE;   /* deeper cream — shell canvas */
+
+  /* ── Text ───────────────────────────────────────── */
+  --color-text-primary: #1F1B16;          /* ink */
+  --color-text-secondary: #3A332B;        /* ink-soft */
+  --color-text-tertiary: #8A8278;         /* stone */
+
+  /* ── Borders (0.5px hairlines) ──────────────────── */
+  --color-border-tertiary: rgba(31, 27, 22, 0.12);
+  --color-border-secondary: rgba(31, 27, 22, 0.2);
+
+  /* ── Semantic: success (level-up, synced) ───────── */
+  --color-text-success: #1a7f4b;
+  --color-background-success: rgba(26, 127, 75, 0.1);
+
+  /* ── Semantic: warning (offline, stale) ─────────── */
+  --color-text-warning: #92600a;
+  --color-background-warning: rgba(146, 96, 10, 0.1);
+
+  /* ── Semantic: danger (destructive, server error) ── */
+  --color-text-danger: #c0392b;
+  --color-background-danger: rgba(192, 57, 43, 0.1);
+
+  /* ── Semantic: info (= accent family) ───────────── */
+  --color-text-info: var(--accent);
+  --color-background-info: var(--accent-bg);
+
+  /* ── Typography ─────────────────────────────────── */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, 'Segoe UI', Roboto,
+    'Helvetica Neue', sans-serif;
+  /* Display: Fraunces (SOFT=100) — warmth in the curves.  Loaded in
+     index.html.  Falls back to Georgia which sits nicely against the
+     warm palette while Fraunces is fetching. */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+}

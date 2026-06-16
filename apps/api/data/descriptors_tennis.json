@@ -1,0 +1,872 @@
+[
+  {
+    "skill_code": "TENNIS_TECH_FH_DRIVE",
+    "level": 1,
+    "description_en": "Inconsistent contact, no swing structure, ball direction unpredictable",
+    "description_id": "Kontak tidak konsisten, tidak ada struktur ayunan, arah bola tak terduga"
+  },
+  {
+    "skill_code": "TENNIS_TECH_FH_DRIVE",
+    "level": 2,
+    "description_en": "Repeatable swing on fed balls, struggles with depth and timing in rallies",
+    "description_id": "Ayunan bisa diulang pada bola umpan, kesulitan kedalaman dan timing saat rally"
+  },
+  {
+    "skill_code": "TENNIS_TECH_FH_DRIVE",
+    "level": 3,
+    "description_en": "Reliable cross-court and down-the-line in steady rallies, moderate topspin",
+    "description_id": "Andal silang dan lurus pada rally stabil, topspin sedang"
+  },
+  {
+    "skill_code": "TENNIS_TECH_FH_DRIVE",
+    "level": 4,
+    "description_en": "Heavy topspin, controls depth and angle under pace, can hit on the run",
+    "description_id": "Topspin berat, mengontrol kedalaman dan sudut di bawah tekanan, bisa pukul sambil lari"
+  },
+  {
+    "skill_code": "TENNIS_TECH_FH_DRIVE",
+    "level": 5,
+    "description_en": "Weapon — dictates points, redirects pace, finishes from any court position",
+    "description_id": "Senjata — mengatur poin, mengubah tempo, menyelesaikan dari posisi mana pun"
+  },
+  {
+    "skill_code": "TENNIS_TECH_BH_DRIVE",
+    "level": 1,
+    "description_en": "Late preparation, weak contact, frequently mis-hits",
+    "description_id": "Persiapan terlambat, kontak lemah, sering salah pukul"
+  },
+  {
+    "skill_code": "TENNIS_TECH_BH_DRIVE",
+    "level": 2,
+    "description_en": "Stable on fed balls, breaks down under pace or wide balls",
+    "description_id": "Stabil pada bola umpan, runtuh saat ditekan tempo atau bola lebar"
+  },
+  {
+    "skill_code": "TENNIS_TECH_BH_DRIVE",
+    "level": 3,
+    "description_en": "Consistent in rallies, can change direction, manages medium pace",
+    "description_id": "Konsisten saat rally, bisa ubah arah, mengelola tempo sedang"
+  },
+  {
+    "skill_code": "TENNIS_TECH_BH_DRIVE",
+    "level": 4,
+    "description_en": "Solid under pressure, drives with depth and topspin, handles high balls",
+    "description_id": "Kokoh di bawah tekanan, memukul dalam dengan topspin, mengatasi bola tinggi"
+  },
+  {
+    "skill_code": "TENNIS_TECH_BH_DRIVE",
+    "level": 5,
+    "description_en": "Reliable second weapon — attacks short balls, redirects, no exploitable weakness",
+    "description_id": "Senjata kedua yang andal — menyerang bola pendek, mengubah arah, tanpa kelemahan"
+  },
+  {
+    "skill_code": "TENNIS_TECH_FH_SLICE",
+    "level": 1,
+    "description_en": "Chops at the ball, no underspin control, sits up short",
+    "description_id": "Memotong bola, tanpa kontrol underspin, bola naik dan pendek"
+  },
+  {
+    "skill_code": "TENNIS_TECH_FH_SLICE",
+    "level": 2,
+    "description_en": "Some underspin on fed balls, inconsistent depth and float",
+    "description_id": "Ada underspin pada bola umpan, kedalaman dan laju tidak konsisten"
+  },
+  {
+    "skill_code": "TENNIS_TECH_FH_SLICE",
+    "level": 3,
+    "description_en": "Functional defensive slice, keeps it low in neutral rallies",
+    "description_id": "Slice bertahan fungsional, menjaga bola rendah pada rally netral"
+  },
+  {
+    "skill_code": "TENNIS_TECH_FH_SLICE",
+    "level": 4,
+    "description_en": "Controls depth and stays low, uses it to approach and change rhythm",
+    "description_id": "Mengontrol kedalaman dan tetap rendah, dipakai untuk approach dan ubah ritme"
+  },
+  {
+    "skill_code": "TENNIS_TECH_FH_SLICE",
+    "level": 5,
+    "description_en": "Precise — knifes low, disguises, transitions and neutralizes pace at will",
+    "description_id": "Presisi — menusuk rendah, menyamarkan, transisi dan menetralkan tempo sesuka hati"
+  },
+  {
+    "skill_code": "TENNIS_TECH_BH_SLICE",
+    "level": 1,
+    "description_en": "Unstable face, ball floats or nets, no consistent underspin",
+    "description_id": "Permukaan raket tidak stabil, bola melayang atau nyangkut, underspin tak konsisten"
+  },
+  {
+    "skill_code": "TENNIS_TECH_BH_SLICE",
+    "level": 2,
+    "description_en": "Blocks fed balls back, depth and height vary widely",
+    "description_id": "Memblok bola umpan kembali, kedalaman dan ketinggian sangat bervariasi"
+  },
+  {
+    "skill_code": "TENNIS_TECH_BH_SLICE",
+    "level": 3,
+    "description_en": "Reliable chip return and rally slice, stays reasonably low",
+    "description_id": "Chip return dan slice rally yang andal, cukup rendah"
+  },
+  {
+    "skill_code": "TENNIS_TECH_BH_SLICE",
+    "level": 4,
+    "description_en": "Penetrating low slice, controls depth, effective approach and defense",
+    "description_id": "Slice rendah menusuk, mengontrol kedalaman, efektif untuk approach dan bertahan"
+  },
+  {
+    "skill_code": "TENNIS_TECH_BH_SLICE",
+    "level": 5,
+    "description_en": "Go-to shot — bites low, varies pace, sets up the point off both wings",
+    "description_id": "Pukulan andalan — menggigit rendah, variasi tempo, menyiapkan poin dari kedua sisi"
+  },
+  {
+    "skill_code": "TENNIS_TECH_FH_VOLLEY",
+    "level": 1,
+    "description_en": "Swings at volleys, late, struggles to make clean contact",
+    "description_id": "Mengayun saat voli, terlambat, sulit kontak bersih"
+  },
+  {
+    "skill_code": "TENNIS_TECH_FH_VOLLEY",
+    "level": 2,
+    "description_en": "Punch on fed balls, breaks down on low or fast balls",
+    "description_id": "Memukul pendek pada bola umpan, runtuh pada bola rendah atau cepat"
+  },
+  {
+    "skill_code": "TENNIS_TECH_FH_VOLLEY",
+    "level": 3,
+    "description_en": "Compact block, controls direction on medium-pace balls",
+    "description_id": "Blok ringkas, mengontrol arah pada bola tempo sedang"
+  },
+  {
+    "skill_code": "TENNIS_TECH_FH_VOLLEY",
+    "level": 4,
+    "description_en": "Firm punch with depth, handles low balls, volleys with intent",
+    "description_id": "Pukulan tegas dan dalam, mengatasi bola rendah, voli dengan tujuan"
+  },
+  {
+    "skill_code": "TENNIS_TECH_FH_VOLLEY",
+    "level": 5,
+    "description_en": "Crisp and angled, finishes points, half-step volleys under pressure",
+    "description_id": "Tajam dan menyudut, menyelesaikan poin, voli setengah langkah di bawah tekanan"
+  },
+  {
+    "skill_code": "TENNIS_TECH_BH_VOLLEY",
+    "level": 1,
+    "description_en": "Weak grip and frame, no control, ball sits up",
+    "description_id": "Pegangan dan bingkai lemah, tanpa kontrol, bola naik"
+  },
+  {
+    "skill_code": "TENNIS_TECH_BH_VOLLEY",
+    "level": 2,
+    "description_en": "Blocks fed balls, unstable on pace or low contact",
+    "description_id": "Memblok bola umpan, tidak stabil pada tempo atau kontak rendah"
+  },
+  {
+    "skill_code": "TENNIS_TECH_BH_VOLLEY",
+    "level": 3,
+    "description_en": "Compact and steady on medium balls, controls direction",
+    "description_id": "Ringkas dan stabil pada bola sedang, mengontrol arah"
+  },
+  {
+    "skill_code": "TENNIS_TECH_BH_VOLLEY",
+    "level": 4,
+    "description_en": "Firm with depth and angle, handles low and fast balls",
+    "description_id": "Tegas dengan kedalaman dan sudut, mengatasi bola rendah dan cepat"
+  },
+  {
+    "skill_code": "TENNIS_TECH_BH_VOLLEY",
+    "level": 5,
+    "description_en": "Sharp, disguised, finishes and defends the net with equal ease",
+    "description_id": "Tajam, tersamar, menyelesaikan dan bertahan di net dengan mudah"
+  },
+  {
+    "skill_code": "TENNIS_TECH_HALF_VOLLEY",
+    "level": 1,
+    "description_en": "Cannot time the pickup, ball nets or pops up",
+    "description_id": "Tidak bisa timing pickup, bola nyangkut atau melambung"
+  },
+  {
+    "skill_code": "TENNIS_TECH_HALF_VOLLEY",
+    "level": 2,
+    "description_en": "Occasional clean pickup, very inconsistent in transition",
+    "description_id": "Sesekali pickup bersih, sangat tidak konsisten saat transisi"
+  },
+  {
+    "skill_code": "TENNIS_TECH_HALF_VOLLEY",
+    "level": 3,
+    "description_en": "Manages the half-volley in the transition zone with soft hands",
+    "description_id": "Mengelola half-volley di zona transisi dengan tangan lembut"
+  },
+  {
+    "skill_code": "TENNIS_TECH_HALF_VOLLEY",
+    "level": 4,
+    "description_en": "Reliable pickup under pressure, controls depth coming forward",
+    "description_id": "Pickup andal di bawah tekanan, mengontrol kedalaman saat maju"
+  },
+  {
+    "skill_code": "TENNIS_TECH_HALF_VOLLEY",
+    "level": 5,
+    "description_en": "Effortless — absorbs pace, redirects low pickups, never rushed in transition",
+    "description_id": "Mulus — menyerap tempo, mengarahkan pickup rendah, tak pernah terburu saat transisi"
+  },
+  {
+    "skill_code": "TENNIS_TECH_SERVE_FLAT",
+    "level": 1,
+    "description_en": "No throwing motion, double-faults often, no rhythm",
+    "description_id": "Tidak ada gerakan lempar, sering double-fault, tanpa ritme"
+  },
+  {
+    "skill_code": "TENNIS_TECH_SERVE_FLAT",
+    "level": 2,
+    "description_en": "Gets first serve in slowly, inconsistent toss and contact point",
+    "description_id": "Servis pertama masuk pelan, lambungan dan titik kontak tak konsisten"
+  },
+  {
+    "skill_code": "TENNIS_TECH_SERVE_FLAT",
+    "level": 3,
+    "description_en": "Reliable first serve with moderate pace, hits to a side",
+    "description_id": "Servis pertama andal dengan tempo sedang, bisa arahkan ke satu sisi"
+  },
+  {
+    "skill_code": "TENNIS_TECH_SERVE_FLAT",
+    "level": 4,
+    "description_en": "Good pace and placement, hits all three locations (wide/body/T)",
+    "description_id": "Tempo dan penempatan bagus, bisa ketiga lokasi (lebar/badan/T)"
+  },
+  {
+    "skill_code": "TENNIS_TECH_SERVE_FLAT",
+    "level": 5,
+    "description_en": "Free points — heavy pace, pinpoint placement, holds easily under pressure",
+    "description_id": "Poin gratis — tempo berat, penempatan presisi, mudah menahan game di bawah tekanan"
+  },
+  {
+    "skill_code": "TENNIS_TECH_SERVE_SPIN",
+    "level": 1,
+    "description_en": "No spin imparted, second serve is just a soft flat ball",
+    "description_id": "Tidak ada spin, servis kedua hanya bola flat pelan"
+  },
+  {
+    "skill_code": "TENNIS_TECH_SERVE_SPIN",
+    "level": 2,
+    "description_en": "Some kick or slice but unreliable, still double-faults under pressure",
+    "description_id": "Ada kick atau slice tapi tak andal, masih double-fault saat ditekan"
+  },
+  {
+    "skill_code": "TENNIS_TECH_SERVE_SPIN",
+    "level": 3,
+    "description_en": "Dependable second serve with margin, consistent spin and placement",
+    "description_id": "Servis kedua andal dengan margin, spin dan penempatan konsisten"
+  },
+  {
+    "skill_code": "TENNIS_TECH_SERVE_SPIN",
+    "level": 4,
+    "description_en": "Heavy kick or biting slice, varies placement, rarely double-faults",
+    "description_id": "Kick berat atau slice menggigit, variasi penempatan, jarang double-fault"
+  },
+  {
+    "skill_code": "TENNIS_TECH_SERVE_SPIN",
+    "level": 5,
+    "description_en": "Aggressive second serve — kicks high or slices wide, weaponized on big points",
+    "description_id": "Servis kedua agresif — kick tinggi atau slice lebar, jadi senjata di poin penting"
+  },
+  {
+    "skill_code": "TENNIS_TECH_RETURN",
+    "level": 1,
+    "description_en": "Mistimes the serve, frames returns, no plan",
+    "description_id": "Salah timing servis, frame return, tanpa rencana"
+  },
+  {
+    "skill_code": "TENNIS_TECH_RETURN",
+    "level": 2,
+    "description_en": "Blocks first serves back occasionally, attacks second serve weakly",
+    "description_id": "Sesekali memblok servis pertama, menyerang servis kedua lemah"
+  },
+  {
+    "skill_code": "TENNIS_TECH_RETURN",
+    "level": 3,
+    "description_en": "Gets most returns in play, neutral depth, splits first and second tactics",
+    "description_id": "Sebagian besar return masuk, kedalaman netral, beda taktik servis 1 dan 2"
+  },
+  {
+    "skill_code": "TENNIS_TECH_RETURN",
+    "level": 4,
+    "description_en": "Aggressive on second serve, blocks first serve deep, varies placement",
+    "description_id": "Agresif pada servis kedua, blok servis pertama dalam, variasi penempatan"
+  },
+  {
+    "skill_code": "TENNIS_TECH_RETURN",
+    "level": 5,
+    "description_en": "Return is an offensive weapon — steps in, takes time away, returns big serves deep",
+    "description_id": "Return jadi senjata menyerang — melangkah masuk, mencuri waktu, return servis besar dalam"
+  },
+  {
+    "skill_code": "TENNIS_TECH_SMASH",
+    "level": 1,
+    "description_en": "Misjudges the lob, frames or misses the overhead entirely",
+    "description_id": "Salah baca lob, frame atau gagal total pada overhead"
+  },
+  {
+    "skill_code": "TENNIS_TECH_SMASH",
+    "level": 2,
+    "description_en": "Makes contact on easy lobs, inconsistent power and direction",
+    "description_id": "Kontak pada lob mudah, daya dan arah tidak konsisten"
+  },
+  {
+    "skill_code": "TENNIS_TECH_SMASH",
+    "level": 3,
+    "description_en": "Puts away comfortable overheads, manages footwork on most lobs",
+    "description_id": "Mematikan overhead nyaman, mengelola footwork pada sebagian besar lob"
+  },
+  {
+    "skill_code": "TENNIS_TECH_SMASH",
+    "level": 4,
+    "description_en": "Reliable under deep lobs, scissor-kick when needed, places the smash",
+    "description_id": "Andal pada lob dalam, scissor-kick bila perlu, menempatkan smash"
+  },
+  {
+    "skill_code": "TENNIS_TECH_SMASH",
+    "level": 5,
+    "description_en": "Finishes any lob — explosive, accurate, hits backhand overheads when forced",
+    "description_id": "Menyelesaikan lob apa pun — eksplosif, akurat, smash backhand saat terpaksa"
+  },
+  {
+    "skill_code": "TENNIS_TECH_LOB",
+    "level": 1,
+    "description_en": "No touch — lobs land short or sail long, no control",
+    "description_id": "Tanpa sentuhan — lob jatuh pendek atau melayang keluar, tanpa kontrol"
+  },
+  {
+    "skill_code": "TENNIS_TECH_LOB",
+    "level": 2,
+    "description_en": "Defensive lob sometimes resets the point, height and depth vary",
+    "description_id": "Lob bertahan kadang mereset poin, ketinggian dan kedalaman bervariasi"
+  },
+  {
+    "skill_code": "TENNIS_TECH_LOB",
+    "level": 3,
+    "description_en": "Functional defensive lob, occasional topspin lob attempt",
+    "description_id": "Lob bertahan fungsional, sesekali mencoba topspin lob"
+  },
+  {
+    "skill_code": "TENNIS_TECH_LOB",
+    "level": 4,
+    "description_en": "Controls defensive lob depth, offensive topspin lob clears reliably",
+    "description_id": "Mengontrol kedalaman lob bertahan, topspin lob menyerang melewati lawan andal"
+  },
+  {
+    "skill_code": "TENNIS_TECH_LOB",
+    "level": 5,
+    "description_en": "Both lobs are weapons — disguised topspin lob and pinpoint defensive reset",
+    "description_id": "Kedua lob jadi senjata — topspin lob tersamar dan reset bertahan presisi"
+  },
+  {
+    "skill_code": "TENNIS_TECH_DROP",
+    "level": 1,
+    "description_en": "No feel, drop shot sits up or nets, telegraphed",
+    "description_id": "Tanpa feeling, drop shot naik atau nyangkut, mudah terbaca"
+  },
+  {
+    "skill_code": "TENNIS_TECH_DROP",
+    "level": 2,
+    "description_en": "Occasional good drop, mostly poor disguise and depth",
+    "description_id": "Sesekali drop bagus, sebagian besar penyamaran dan kedalaman buruk"
+  },
+  {
+    "skill_code": "TENNIS_TECH_DROP",
+    "level": 3,
+    "description_en": "Functional drop off short balls, decent disguise in neutral",
+    "description_id": "Drop fungsional pada bola pendek, penyamaran lumayan saat netral"
+  },
+  {
+    "skill_code": "TENNIS_TECH_DROP",
+    "level": 4,
+    "description_en": "Soft, low-bouncing drop with disguise off both wings",
+    "description_id": "Drop lembut, pantulan rendah, tersamar dari kedua sisi"
+  },
+  {
+    "skill_code": "TENNIS_TECH_DROP",
+    "level": 5,
+    "description_en": "Lethal touch — drops with backspin off any ball, disguised until the last moment",
+    "description_id": "Sentuhan mematikan — drop dengan backspin dari bola apa pun, tersamar sampai detik akhir"
+  },
+  {
+    "skill_code": "TENNIS_TECH_APPROACH",
+    "level": 1,
+    "description_en": "Approaches off any ball, no setup, gets passed easily",
+    "description_id": "Approach dari bola apa pun, tanpa setup, mudah dilewati"
+  },
+  {
+    "skill_code": "TENNIS_TECH_APPROACH",
+    "level": 2,
+    "description_en": "Recognizes some short balls, weak approach gives up net position",
+    "description_id": "Mengenali sebagian bola pendek, approach lemah menyerahkan posisi net"
+  },
+  {
+    "skill_code": "TENNIS_TECH_APPROACH",
+    "level": 3,
+    "description_en": "Approaches off the right ball, keeps it deep, follows in",
+    "description_id": "Approach dari bola tepat, menjaga kedalaman, mengikuti maju"
+  },
+  {
+    "skill_code": "TENNIS_TECH_APPROACH",
+    "level": 4,
+    "description_en": "Penetrating approach to a corner, splits well, controls the net entry",
+    "description_id": "Approach menusuk ke sudut, split baik, mengontrol masuk ke net"
+  },
+  {
+    "skill_code": "TENNIS_TECH_APPROACH",
+    "level": 5,
+    "description_en": "Surgical approach — slice or drive deep, takes time away, near-impossible to pass",
+    "description_id": "Approach bedah — slice atau drive dalam, mencuri waktu, hampir mustahil dilewati"
+  },
+  {
+    "skill_code": "TENNIS_TACT_SERVE_PATTERNS",
+    "level": 1,
+    "description_en": "Serves with no target, same ball every time",
+    "description_id": "Servis tanpa target, bola sama setiap kali"
+  },
+  {
+    "skill_code": "TENNIS_TACT_SERVE_PATTERNS",
+    "level": 2,
+    "description_en": "Aims for a side occasionally, no follow-up plan",
+    "description_id": "Sesekali mengarah ke satu sisi, tanpa rencana lanjutan"
+  },
+  {
+    "skill_code": "TENNIS_TACT_SERVE_PATTERNS",
+    "level": 3,
+    "description_en": "Hits to chosen locations, beginning to use serve+1 on the forehand",
+    "description_id": "Servis ke lokasi pilihan, mulai pakai serve+1 ke forehand"
+  },
+  {
+    "skill_code": "TENNIS_TACT_SERVE_PATTERNS",
+    "level": 4,
+    "description_en": "Sets up the next ball deliberately, varies wide/body/T by situation",
+    "description_id": "Menyiapkan bola berikut secara sengaja, variasi lebar/badan/T sesuai situasi"
+  },
+  {
+    "skill_code": "TENNIS_TACT_SERVE_PATTERNS",
+    "level": 5,
+    "description_en": "Plays the score — serve patterns by opponent and pressure, serve+1 is automatic",
+    "description_id": "Bermain sesuai skor — pola servis menurut lawan dan tekanan, serve+1 otomatis"
+  },
+  {
+    "skill_code": "TENNIS_TACT_RETURN_PATTERNS",
+    "level": 1,
+    "description_en": "No return position or intent, reacts blindly",
+    "description_id": "Tanpa posisi atau niat return, bereaksi asal"
+  },
+  {
+    "skill_code": "TENNIS_TACT_RETURN_PATTERNS",
+    "level": 2,
+    "description_en": "Stands in one spot, same return regardless of serve",
+    "description_id": "Berdiri di satu titik, return sama tanpa lihat servis"
+  },
+  {
+    "skill_code": "TENNIS_TACT_RETURN_PATTERNS",
+    "level": 3,
+    "description_en": "Adjusts position for first vs second serve, has a basic target",
+    "description_id": "Menyesuaikan posisi servis 1 vs 2, punya target dasar"
+  },
+  {
+    "skill_code": "TENNIS_TACT_RETURN_PATTERNS",
+    "level": 4,
+    "description_en": "Return-and-attack on second serve, neutralizes first serve deep",
+    "description_id": "Return-and-attack pada servis kedua, menetralkan servis pertama dalam"
+  },
+  {
+    "skill_code": "TENNIS_TACT_RETURN_PATTERNS",
+    "level": 5,
+    "description_en": "Reads the toss, varies position and target, breaks serve with clear patterns",
+    "description_id": "Membaca lambungan, variasi posisi dan target, mematahkan servis dengan pola jelas"
+  },
+  {
+    "skill_code": "TENNIS_TACT_BASELINE",
+    "level": 1,
+    "description_en": "Hits randomly, no rally direction or shape",
+    "description_id": "Memukul acak, tanpa arah atau bentuk rally"
+  },
+  {
+    "skill_code": "TENNIS_TACT_BASELINE",
+    "level": 2,
+    "description_en": "Keeps the ball in cross-court but loses depth under pressure",
+    "description_id": "Menjaga bola silang tapi kehilangan kedalaman saat ditekan"
+  },
+  {
+    "skill_code": "TENNIS_TACT_BASELINE",
+    "level": 3,
+    "description_en": "Sustains cross-court rhythm, changes direction at the right time",
+    "description_id": "Mempertahankan ritme silang, ubah arah pada saat tepat"
+  },
+  {
+    "skill_code": "TENNIS_TACT_BASELINE",
+    "level": 4,
+    "description_en": "Controls depth and height, opens the court, hurts the short ball",
+    "description_id": "Mengontrol kedalaman dan ketinggian, membuka lapangan, menghukum bola pendek"
+  },
+  {
+    "skill_code": "TENNIS_TACT_BASELINE",
+    "level": 5,
+    "description_en": "Constructs points — moves the opponent, changes pace and shape, dictates baseline",
+    "description_id": "Membangun poin — menggerakkan lawan, ubah tempo dan bentuk, mengatur baseline"
+  },
+  {
+    "skill_code": "TENNIS_TACT_NET_PLAY",
+    "level": 1,
+    "description_en": "Avoids the net, no positioning when there",
+    "description_id": "Menghindari net, tanpa posisi saat di sana"
+  },
+  {
+    "skill_code": "TENNIS_TACT_NET_PLAY",
+    "level": 2,
+    "description_en": "Comes in occasionally, poor first-volley position, gets passed",
+    "description_id": "Sesekali maju, posisi voli pertama buruk, mudah dilewati"
+  },
+  {
+    "skill_code": "TENNIS_TACT_NET_PLAY",
+    "level": 3,
+    "description_en": "Closes behind a decent approach, covers most passes and lobs",
+    "description_id": "Menutup di belakang approach lumayan, menutup sebagian besar passing dan lob"
+  },
+  {
+    "skill_code": "TENNIS_TACT_NET_PLAY",
+    "level": 4,
+    "description_en": "Good net coverage, anticipates the pass, finishes the first chance",
+    "description_id": "Cakupan net bagus, mengantisipasi passing, menyelesaikan peluang pertama"
+  },
+  {
+    "skill_code": "TENNIS_TACT_NET_PLAY",
+    "level": 5,
+    "description_en": "Owns the net — splits, closes angles, finishes early, rarely beaten",
+    "description_id": "Menguasai net — split, menutup sudut, menyelesaikan lebih awal, jarang dikalahkan"
+  },
+  {
+    "skill_code": "TENNIS_TACT_DEFENSE",
+    "level": 1,
+    "description_en": "Gives up on tough balls, no defensive shape",
+    "description_id": "Menyerah pada bola sulit, tanpa bentuk bertahan"
+  },
+  {
+    "skill_code": "TENNIS_TACT_DEFENSE",
+    "level": 2,
+    "description_en": "Gets some balls back but with no depth or purpose",
+    "description_id": "Mengembalikan sebagian bola tapi tanpa kedalaman atau tujuan"
+  },
+  {
+    "skill_code": "TENNIS_TACT_DEFENSE",
+    "level": 3,
+    "description_en": "Resets with a lob or deep ball, neutralizes some pressure",
+    "description_id": "Mereset dengan lob atau bola dalam, menetralkan sebagian tekanan"
+  },
+  {
+    "skill_code": "TENNIS_TACT_DEFENSE",
+    "level": 4,
+    "description_en": "Defends actively — lobs, slices deep, turns defense into neutral",
+    "description_id": "Bertahan aktif — lob, slice dalam, mengubah bertahan jadi netral"
+  },
+  {
+    "skill_code": "TENNIS_TACT_DEFENSE",
+    "level": 5,
+    "description_en": "Elite defense — scrambles, resets, counterpunches, turns defense into offense",
+    "description_id": "Pertahanan elit — berlari, reset, counter, mengubah bertahan jadi menyerang"
+  },
+  {
+    "skill_code": "TENNIS_TACT_DOUBLES",
+    "level": 1,
+    "description_en": "Unaware of partner or formation, stands flat-footed",
+    "description_id": "Tidak sadar pasangan atau formasi, berdiri kaku"
+  },
+  {
+    "skill_code": "TENNIS_TACT_DOUBLES",
+    "level": 2,
+    "description_en": "Knows basic up-and-back, no poaching or movement",
+    "description_id": "Tahu dasar depan-belakang, tanpa poaching atau pergerakan"
+  },
+  {
+    "skill_code": "TENNIS_TACT_DOUBLES",
+    "level": 3,
+    "description_en": "Moves with partner, poaches the obvious ball, covers own side",
+    "description_id": "Bergerak bersama pasangan, poaching bola jelas, menutup sisinya"
+  },
+  {
+    "skill_code": "TENNIS_TACT_DOUBLES",
+    "level": 4,
+    "description_en": "Uses I-formation/Australian, poaches actively, communicates well",
+    "description_id": "Pakai I-formation/Australian, poaching aktif, komunikasi baik"
+  },
+  {
+    "skill_code": "TENNIS_TACT_DOUBLES",
+    "level": 5,
+    "description_en": "Orchestrates doubles — formations, fakes, switches, controls net as a unit",
+    "description_id": "Mengatur ganda — formasi, gertakan, switch, menguasai net sebagai satu tim"
+  },
+  {
+    "skill_code": "TENNIS_TACT_READING",
+    "level": 1,
+    "description_en": "Reacts only after the ball is hit, no anticipation",
+    "description_id": "Bereaksi baru setelah bola dipukul, tanpa antisipasi"
+  },
+  {
+    "skill_code": "TENNIS_TACT_READING",
+    "level": 2,
+    "description_en": "Occasionally guesses right, mostly caught off-balance",
+    "description_id": "Sesekali menebak benar, sebagian besar tertangkap tidak seimbang"
+  },
+  {
+    "skill_code": "TENNIS_TACT_READING",
+    "level": 3,
+    "description_en": "Reads obvious cues (open stance, contact point), starts moving early",
+    "description_id": "Membaca petunjuk jelas (kuda-kuda terbuka, titik kontak), mulai bergerak lebih awal"
+  },
+  {
+    "skill_code": "TENNIS_TACT_READING",
+    "level": 4,
+    "description_en": "Anticipates direction from setup and position, rarely wrong-footed",
+    "description_id": "Mengantisipasi arah dari setup dan posisi, jarang salah langkah"
+  },
+  {
+    "skill_code": "TENNIS_TACT_READING",
+    "level": 5,
+    "description_en": "Reads the game two shots ahead — patterns, body language, court geometry",
+    "description_id": "Membaca permainan dua pukulan ke depan — pola, bahasa tubuh, geometri lapangan"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_FOOTWORK",
+    "level": 1,
+    "description_en": "Flat-footed, reaches for balls, poor recovery",
+    "description_id": "Kaki kaku, menjangkau bola, recovery buruk"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_FOOTWORK",
+    "level": 2,
+    "description_en": "Moves to easy balls, slow recovery, crosses feet inefficiently",
+    "description_id": "Bergerak ke bola mudah, recovery lambat, langkah menyilang tidak efisien"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_FOOTWORK",
+    "level": 3,
+    "description_en": "Side-shuffles and recovers on most balls, adequate court coverage",
+    "description_id": "Side-shuffle dan recovery pada sebagian besar bola, cakupan lapangan memadai"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_FOOTWORK",
+    "level": 4,
+    "description_en": "Efficient first step, recovers to optimal position, covers the court well",
+    "description_id": "Langkah pertama efisien, recovery ke posisi optimal, cakupan lapangan baik"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_FOOTWORK",
+    "level": 5,
+    "description_en": "Elite movement — explosive first step, balanced on the stretch, always recovered",
+    "description_id": "Pergerakan elit — langkah pertama eksplosif, seimbang saat meregang, selalu recovery"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_SPLIT",
+    "level": 1,
+    "description_en": "No split step, stands still as opponent hits",
+    "description_id": "Tanpa split step, diam saat lawan memukul"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_SPLIT",
+    "level": 2,
+    "description_en": "Splits late or inconsistently, often caught flat",
+    "description_id": "Split terlambat atau tidak konsisten, sering tertangkap kaku"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_SPLIT",
+    "level": 3,
+    "description_en": "Splits on most balls, timing roughly matches opponent contact",
+    "description_id": "Split pada sebagian besar bola, timing kira-kira sesuai kontak lawan"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_SPLIT",
+    "level": 4,
+    "description_en": "Split timed to opponent contact, loads and pushes off cleanly",
+    "description_id": "Split timing sesuai kontak lawan, memuat dan mendorong bersih"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_SPLIT",
+    "level": 5,
+    "description_en": "Perfect split timing — lands as the ball is struck, explodes in any direction",
+    "description_id": "Timing split sempurna — mendarat saat bola dipukul, meledak ke segala arah"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_ENDURANCE",
+    "level": 1,
+    "description_en": "Tires within a few games, quality drops sharply",
+    "description_id": "Lelah dalam beberapa game, kualitas turun tajam"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_ENDURANCE",
+    "level": 2,
+    "description_en": "Holds up one set, noticeable decline after",
+    "description_id": "Bertahan satu set, penurunan terasa setelahnya"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_ENDURANCE",
+    "level": 3,
+    "description_en": "Maintains quality through two sets in most matches",
+    "description_id": "Mempertahankan kualitas hingga dua set di sebagian besar pertandingan"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_ENDURANCE",
+    "level": 4,
+    "description_en": "Strong across three sets, recovers between points and games",
+    "description_id": "Kuat sepanjang tiga set, pulih antar poin dan game"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_ENDURANCE",
+    "level": 5,
+    "description_en": "Relentless — same intensity in the third set, recovery is a weapon",
+    "description_id": "Tanpa henti — intensitas sama di set ketiga, recovery jadi senjata"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_POWER",
+    "level": 1,
+    "description_en": "Little pace on serve or groundstrokes, no explosiveness",
+    "description_id": "Tempo servis dan groundstroke kecil, tanpa eksplosivitas"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_POWER",
+    "level": 2,
+    "description_en": "Some pace on setup balls, cannot generate under pressure",
+    "description_id": "Ada tempo pada bola setup, tak bisa hasilkan saat ditekan"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_POWER",
+    "level": 3,
+    "description_en": "Functional power on serve and groundstrokes from balanced positions",
+    "description_id": "Power fungsional pada servis dan groundstroke dari posisi seimbang"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_POWER",
+    "level": 4,
+    "description_en": "Generates pace from defense and offense, explosive first step",
+    "description_id": "Menghasilkan tempo dari bertahan dan menyerang, langkah pertama eksplosif"
+  },
+  {
+    "skill_code": "TENNIS_PHYS_POWER",
+    "level": 5,
+    "description_en": "Elite power — heavy serve, pace on the run, explosive in every direction",
+    "description_id": "Power elit — servis berat, tempo sambil lari, eksplosif ke segala arah"
+  },
+  {
+    "skill_code": "TENNIS_MENT_FOCUS",
+    "level": 1,
+    "description_en": "Easily distracted, loses concentration between points",
+    "description_id": "Mudah terganggu, hilang konsentrasi antar poin"
+  },
+  {
+    "skill_code": "TENNIS_MENT_FOCUS",
+    "level": 2,
+    "description_en": "Focuses in patches, drifts after errors or long rallies",
+    "description_id": "Fokus sepotong-sepotong, melayang setelah kesalahan atau rally panjang"
+  },
+  {
+    "skill_code": "TENNIS_MENT_FOCUS",
+    "level": 3,
+    "description_en": "Holds focus through most games, recovers attention with routines",
+    "description_id": "Menjaga fokus sepanjang sebagian besar game, memulihkan perhatian dengan rutinitas"
+  },
+  {
+    "skill_code": "TENNIS_MENT_FOCUS",
+    "level": 4,
+    "description_en": "Stays present point-to-point, strong between-point routines",
+    "description_id": "Tetap hadir poin demi poin, rutinitas antar poin kuat"
+  },
+  {
+    "skill_code": "TENNIS_MENT_FOCUS",
+    "level": 5,
+    "description_en": "Locked in for whole matches — no lapses, routines are automatic under fatigue",
+    "description_id": "Terkunci sepanjang pertandingan — tanpa lengah, rutinitas otomatis saat lelah"
+  },
+  {
+    "skill_code": "TENNIS_MENT_COMPOSURE",
+    "level": 1,
+    "description_en": "Falls apart on break points, visible frustration",
+    "description_id": "Runtuh pada break point, frustrasi terlihat jelas"
+  },
+  {
+    "skill_code": "TENNIS_MENT_COMPOSURE",
+    "level": 2,
+    "description_en": "Tightens up in big moments, errors spike under pressure",
+    "description_id": "Tegang di momen penting, kesalahan melonjak saat ditekan"
+  },
+  {
+    "skill_code": "TENNIS_MENT_COMPOSURE",
+    "level": 3,
+    "description_en": "Holds reasonable composure, occasional wobble on key points",
+    "description_id": "Menjaga ketenangan cukup baik, sesekali goyah pada poin kunci"
+  },
+  {
+    "skill_code": "TENNIS_MENT_COMPOSURE",
+    "level": 4,
+    "description_en": "Calm on break points and tiebreaks, plays the big points well",
+    "description_id": "Tenang pada break point dan tiebreak, bermain baik di poin penting"
+  },
+  {
+    "skill_code": "TENNIS_MENT_COMPOSURE",
+    "level": 5,
+    "description_en": "Thrives under pressure — clutch on deciding points, composure never cracks",
+    "description_id": "Berkembang di bawah tekanan — tajam di poin penentu, ketenangan tak pernah retak"
+  },
+  {
+    "skill_code": "TENNIS_MENT_DECISION",
+    "level": 1,
+    "description_en": "Hesitates or panics, wrong shot at the wrong time",
+    "description_id": "Ragu atau panik, pukulan salah di saat salah"
+  },
+  {
+    "skill_code": "TENNIS_MENT_DECISION",
+    "level": 2,
+    "description_en": "Decides slowly, often commits to the low-percentage shot",
+    "description_id": "Memutuskan lambat, sering memilih pukulan persentase rendah"
+  },
+  {
+    "skill_code": "TENNIS_MENT_DECISION",
+    "level": 3,
+    "description_en": "Makes reasonable choices in neutral, slows down under pressure",
+    "description_id": "Membuat pilihan wajar saat netral, melambat saat ditekan"
+  },
+  {
+    "skill_code": "TENNIS_MENT_DECISION",
+    "level": 4,
+    "description_en": "Quick, high-percentage decisions, adapts shot selection mid-rally",
+    "description_id": "Keputusan cepat dan persentase tinggi, menyesuaikan pilihan pukulan saat rally"
+  },
+  {
+    "skill_code": "TENNIS_MENT_DECISION",
+    "level": 5,
+    "description_en": "Instant optimal choices — reads the situation and picks the right shot every time",
+    "description_id": "Pilihan optimal seketika — membaca situasi dan memilih pukulan tepat setiap kali"
+  },
+  {
+    "skill_code": "TENNIS_MENT_RESILIENCE",
+    "level": 1,
+    "description_en": "Spirals after errors, body language collapses",
+    "description_id": "Terpuruk setelah kesalahan, bahasa tubuh runtuh"
+  },
+  {
+    "skill_code": "TENNIS_MENT_RESILIENCE",
+    "level": 2,
+    "description_en": "Carries errors into the next point, slow to reset",
+    "description_id": "Membawa kesalahan ke poin berikut, lambat reset"
+  },
+  {
+    "skill_code": "TENNIS_MENT_RESILIENCE",
+    "level": 3,
+    "description_en": "Resets after most errors, body language stays neutral",
+    "description_id": "Reset setelah sebagian besar kesalahan, bahasa tubuh tetap netral"
+  },
+  {
+    "skill_code": "TENNIS_MENT_RESILIENCE",
+    "level": 4,
+    "description_en": "Bounces back quickly, uses errors as information, stays constructive",
+    "description_id": "Bangkit cepat, memakai kesalahan sebagai informasi, tetap konstruktif"
+  },
+  {
+    "skill_code": "TENNIS_MENT_RESILIENCE",
+    "level": 5,
+    "description_en": "Unshakeable — errors don't linger, raises level after setbacks, leads body language",
+    "description_id": "Tak tergoyahkan — kesalahan tak berlama, menaikkan level setelah kemunduran, memimpin bahasa tubuh"
+  }
+]
