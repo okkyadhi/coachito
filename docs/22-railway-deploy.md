@@ -1,169 +1,147 @@
-# Railway deploy walkthrough
+# Railway deploy (1-service, all-in-one)
 
-Step-by-step to get Coachito running on Railway with a `*.up.railway.app`
-subdomain. Comes in three Railway "services" inside one project:
+The whole app — FastAPI, the Vite FE bundle, and the RQ worker — ships
+as a single container ([infra/Dockerfile.allinone](../infra/Dockerfile.allinone)).
+FastAPI serves the FE static files itself; the worker runs as a daemon
+thread inside the same process.
 
-| Service | Image                       | Notes                              |
-|---------|-----------------------------|------------------------------------|
-| `api`   | `infra/api/Dockerfile.prod` | FastAPI + alembic                  |
-| `worker`| `infra/api/Dockerfile.prod` | RQ — same image, different command |
-| `web`   | `infra/web/Dockerfile.prod` | Vite build served by nginx-alpine  |
-
-Plus two Railway **plugins** (managed services in the same project):
+Two Railway plugins back the container:
 - **Postgres** — exposes `DATABASE_URL`
 - **Redis** — exposes `REDIS_URL`
 
----
-
-## 1. One-time prerequisites
-
-You'll need accounts on:
-- **Railway** — https://railway.app (free dev tier, hobby plan $5/mo for prod)
-- **Cloudflare R2** — https://dash.cloudflare.com (free 10 GB)
-- **Resend** — https://resend.com (free 100 emails/day)
-- **Google AI Studio** — https://aistudio.google.com/apikey (free Gemini key)
-- *(optional)* **Sentry** — https://sentry.io (free 5k errors/mo)
-
-Tooling:
-- `railway` CLI: `brew install railway` (or `npm i -g @railway/cli`)
-- `railway login` → opens browser
+Per Railway billing this means **3 boxes total** (Postgres + Redis + app),
+not 5. Plenty for MVP scale; split into separate services later if
+worker pressure or web traffic actually demand it.
 
 ---
 
-## 2. Create the Railway project
+## 1. Prerequisites
 
-```bash
-railway init                     # in repo root
-# Pick: "Empty project" → name it "coachito"
-railway link                     # if you already created via dashboard
-```
+Accounts:
+- **Railway** — https://railway.app  *(login pakai GitHub)*
+- *(optional, when needed)* Cloudflare R2, Resend, Google AI Studio, Sentry
 
-From the dashboard, **add the plugins**:
-- "+ New" → Database → Postgres
-- "+ New" → Database → Redis
-
-Postgres + Redis spin up with their own `DATABASE_URL` / `REDIS_URL`
-variables. We'll wire them into the api + worker services next.
+CLI:
+- `brew install railway`
+- `railway login`
 
 ---
 
-## 3. Create the three services
+## 2. Bikin Railway project + plugin
 
-For each of `api`, `worker`, `web` — in the Railway dashboard:
-
-1. **+ New** → **GitHub Repo** → pick `okkyadhi/coachito` → branch `main`.
-2. Open the service settings → **Root Directory** = repo root (`/`).
-3. **Build** → set "Config Path" to `infra/railway/<service>.json`:
-   - api    → `infra/railway/api.json`
-   - worker → `infra/railway/worker.json`
-   - web    → `infra/railway/web.json`
-4. **Networking** → for `api` and `web`, click "Generate Domain". You'll get:
-   - `coachito-api.up.railway.app`
-   - `coachito-web.up.railway.app`
-   The `worker` doesn't need a public domain.
+1. Buka dashboard → **New Project** → **Empty Project** → kasih nama `coachito`.
+2. Di project: **+ Create** → **Database** → **Add PostgreSQL**.
+3. **+ Create** → **Database** → **Add Redis**.
 
 ---
 
-## 4. Set environment variables
+## 3. Tambah satu service `app` dari repo
 
-Copy [`.env.prod.example`](../.env.prod.example) and fill in the values.
-Then in each service's "Variables" tab on Railway:
+1. **+ Create** → **GitHub Repo** → pilih `okkyadhi/coachito` → branch `main`.
+2. Service muncul dengan nama random — klik nama-nya di atas panel kanan,
+   ganti jadi `app`.
+3. Tab **Settings**:
+   - Section **Build** → ganti Builder ke **Dockerfile** → field
+     **Dockerfile Path** = `infra/Dockerfile.allinone`
+   - Section **Deploy** → field **Healthcheck Path** = `/healthz`
+   - Section **Networking** → klik **Generate Domain** → catat URL-nya
+     (tipe `app-production-xxxx.up.railway.app`).
 
-### `api` service
-| Var | Value |
+Start command tidak perlu di-isi — Dockerfile sudah punya `CMD` yang
+menjalankan `alembic upgrade head` lalu uvicorn.
+
+---
+
+## 4. Isi environment variables
+
+Tab **Variables** di service `app`, tambahkan baris-baris ini.
+`${{Postgres.X}}` adalah syntax referensi Railway — dia substitusi
+nilainya otomatis dari plugin Postgres.
+
+| Variable | Value |
 |---|---|
-| `DATABASE_URL` | `${{Postgres.DATABASE_URL}}` (reference syntax — Railway substitutes) |
-| `REDIS_URL`    | `${{Redis.REDIS_URL}}` |
-| `JWT_SECRET`   | random 64+ char string (`openssl rand -hex 48`) |
-| `WEB_URL`      | `https://coachito-web.up.railway.app` |
-| `ALLOWED_ORIGINS` | `https://coachito-web.up.railway.app` |
-| `S3_ENDPOINT` / `S3_BUCKET` / `S3_ACCESS_KEY` / `S3_SECRET_KEY` / `S3_PUBLIC_HOST` | from Cloudflare R2 |
-| `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASSWORD` / `SMTP_FROM` | from Resend |
-| `GEMINI_API_KEY` | from Google AI Studio |
-| `SENTRY_DSN`     | optional, from Sentry project setup |
-| `ENVIRONMENT`    | `production` |
+| `DATABASE_URL` | `${{Postgres.DATABASE_URL}}` |
+| `REDIS_URL` | `${{Redis.REDIS_URL}}` |
+| `JWT_SECRET` | jalankan `openssl rand -hex 48` di terminal lokal, paste hasilnya |
+| `WEB_URL` | `https://<domain-app-Anda>.up.railway.app` |
+| `ENVIRONMENT` | `production` |
 
-### `worker` service
-Same as `api` (it shares the image and most env). The `${{Postgres.*}}`
-and `${{Redis.*}}` references mean both services see the live URLs.
+> `ALLOWED_ORIGINS` **tidak perlu** diisi — FE & API satu origin.
+>
+> `VITE_API_BASE_URL` **tidak perlu** diisi — Dockerfile default-nya
+> sudah string kosong, jadi FE pakai relative path ke origin yang sama.
 
-### `web` service (build-time vars)
-Web reads Vite vars at **build time**, so they have to be set BEFORE the
-first deploy. Use Railway "Variables" with the `VITE_` prefix:
+Service-nya pernah-pernah dibutuhkan (boleh skip dulu sampai fitur dipakai):
 
-| Var | Value |
+| Variable | Untuk |
 |---|---|
-| `VITE_API_BASE_URL` | `https://coachito-api.up.railway.app` |
-| `VITE_SENTRY_DSN`   | optional |
-| `VITE_GOOGLE_CLIENT_ID` | optional |
-
-> ⚠ If you change a `VITE_` var later, you must **redeploy** `web` for the
-> new value to bake into the bundle.
+| `S3_ENDPOINT` / `S3_BUCKET` / `S3_ACCESS_KEY` / `S3_SECRET_KEY` / `S3_PUBLIC_HOST` | Upload logo, foto trainee → Cloudflare R2 |
+| `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASSWORD` / `SMTP_FROM` | Magic-link, welcome email → Resend |
+| `GEMINI_API_KEY` | AI draft summary → Google AI Studio |
+| `SENTRY_DSN` | Error tracking |
 
 ---
 
-## 5. First deploy
+## 5. Deploy
 
-Each service auto-deploys on push to `main`. To trigger the first build:
+Begitu env terisi, Railway auto-trigger build dari `main`. Pantau log
+di tab **Deployments**. Sequence yang diharapkan:
 
-```bash
-git push origin main
-```
+1. `[stage web-build]` Vite build → `dist/`
+2. `[stage final]` `uv sync` install Python deps
+3. Container start → `alembic upgrade 0033 -> 0034`
+4. `uvicorn` listen di `$PORT`
+5. Healthcheck `/healthz` → 200
 
-Watch the build logs in the Railway dashboard. Expected sequence:
-
-1. **postgres** plugin: provisions DB.
-2. **api**: builds image → runs `alembic upgrade head` → starts uvicorn.
-3. **worker**: builds image → starts `rq worker`.
-4. **web**: builds Vite bundle → nginx serves on `$PORT`.
-
-Smoke test once green:
+Smoke test:
 
 ```bash
-curl -fsS https://coachito-api.up.railway.app/healthz
-curl -fsS https://coachito-web.up.railway.app/
+curl -fsS https://<domain-app-Anda>.up.railway.app/healthz
+open https://<domain-app-Anda>.up.railway.app
 ```
 
 ---
 
-## 6. Seed default data
+## 6. Seed data default
 
-The first deploy creates an empty DB — run the seed once to load sports,
-curricula, descriptors, tiers:
+DB pertama kali masih kosong — load skills/curricula/descriptors/tiers:
 
 ```bash
-railway run --service api python -m scripts.seed
+railway link        # link folder lokal ke project Railway
+railway run --service app python -m scripts.seed
 ```
 
 ---
 
-## 7. Promote yourself to platform admin
+## 7. Promote akun jadi platform admin
 
-Once you've signed up at `https://coachito-web.up.railway.app/signup/club`
-(or `/signup/coach`), promote your user so you can hit the `/admin/*`
-endpoints:
+Setelah signup via `/signup/club` (atau `/signup/coach`) di URL deploy-nya,
+promote akun Anda biar bisa akses `/admin/*`:
 
 ```bash
 railway connect Postgres
-# inside psql:
+# Di psql:
 UPDATE users SET is_platform_admin = TRUE WHERE email = 'you@example.com';
 \q
 ```
 
 ---
 
-## 8. Known gaps (post-MVP)
+## 8. Known gaps untuk MVP
 
-- **RLS bypass on Railway**: Railway's default Postgres user has
-  `BYPASSRLS = true`, so RLS policies are NOT enforced. Defense-in-depth
-  drops to "application-layer scoping only". To restore RLS, create a
-  dedicated `coachito_api` role *without* BYPASSRLS and point
-  `DATABASE_URL` at it (keep `ALEMBIC_DATABASE_URL` on the superuser for
-  migrations). Track this in [Decision log](../CLAUDE.md) — not blocking
-  MVP launch but worth fixing before any real customer data lands.
-- **Custom domain**: when you're ready, point a CNAME to
-  `coachito-web.up.railway.app` and add it under Web → Settings → Domains.
-  Update `WEB_URL` + `ALLOWED_ORIGINS` + `VITE_API_BASE_URL` accordingly.
-- **No CI**: Railway builds straight from `main`. Once tests + lint are
-  stable, add a GitHub Action that gates merges; Railway only deploys
-  what's on `main`.
+- **RLS bypass**: Railway's default Postgres user punya `BYPASSRLS = true`,
+  jadi policies RLS **tidak ter-enforce**. Defense-in-depth turun ke
+  "application-layer scoping only". Untuk restore RLS, bikin role
+  `coachito_api` tanpa BYPASSRLS dan point `DATABASE_URL` ke role itu
+  (simpan `ALEMBIC_DATABASE_URL` di superuser supaya migrations tetap
+  jalan). Tidak blocking untuk MVP launch tapi wajib di-fix sebelum
+  ada customer beneran.
+- **Worker pressure**: PDF generation jalan di thread yang sama dengan
+  uvicorn. Kalau >50 PDF di-generate bareng-bareng, request API
+  bisa lambat. Pecah jadi worker service terpisah saat itu mulai
+  jadi masalah.
+- **Custom domain**: kalau sudah ready, CNAME ke `<app>.up.railway.app`
+  dan tambah domain di service Settings → Networking → Custom Domain.
+  Update `WEB_URL` setelah itu.
+- **No CI**: Railway build straight dari `main`. Setelah test+lint
+  stable, tambah GitHub Action sebagai gate sebelum merge ke main.

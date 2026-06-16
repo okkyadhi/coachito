@@ -1,0 +1,72 @@
+# Single-container production image — FastAPI serves both the API and the
+# Vite-built FE.  RQ worker spawns as an in-process thread via lifespan
+# (gate it with RUN_WORKER_INPROCESS=1 so dev compose's dedicated worker
+# container isn't doubled up).
+#
+# Layout inside the image:
+#   /app/apps/api   — Python venv + source
+#   /app/dist       — static FE bundle (Vite output)
+
+# ── 1) Build the FE bundle ───────────────────────────────────────
+FROM node:20-alpine AS web-build
+
+RUN corepack enable && corepack prepare pnpm@9.6.0 --activate
+
+WORKDIR /app
+
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml tsconfig.base.json ./
+COPY packages/types/ ./packages/types/
+COPY apps/web/package.json apps/web/tsconfig.json ./apps/web/
+
+RUN pnpm install --frozen-lockfile
+
+COPY apps/web/ ./apps/web/
+
+# Same-origin in allinone mode: FE calls relative paths and the API serves
+# them on the same port.  Empty string disables the /api prefix.
+ARG VITE_API_BASE_URL=""
+ARG VITE_SENTRY_DSN=""
+ARG VITE_GOOGLE_CLIENT_ID=""
+ENV VITE_API_BASE_URL=${VITE_API_BASE_URL} \
+    VITE_SENTRY_DSN=${VITE_SENTRY_DSN} \
+    VITE_GOOGLE_CLIENT_ID=${VITE_GOOGLE_CLIENT_ID}
+
+RUN pnpm --filter @coachito/web build
+
+
+# ── 2) Final runtime image ───────────────────────────────────────
+FROM python:3.12-slim
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        curl \
+        libpango-1.0-0 \
+        libpangoft2-1.0-0 \
+        libcairo2 \
+        libgdk-pixbuf-2.0-0 \
+        libharfbuzz-subset0 \
+        libffi8 \
+        shared-mime-info \
+        fonts-dejavu-core \
+        fonts-liberation \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+WORKDIR /app/apps/api
+
+COPY apps/api/ ./
+RUN uv sync --frozen --no-dev
+
+# Drop the FE bundle into a known path; main.py reads STATIC_DIR env.
+COPY --from=web-build /app/apps/web/dist /app/dist
+
+ENV PATH="/app/apps/api/.venv/bin:$PATH" \
+    PYTHONUNBUFFERED=1 \
+    STATIC_DIR=/app/dist \
+    RUN_WORKER_INPROCESS=1 \
+    PORT=8000
+
+EXPOSE 8000
+
+CMD ["sh", "-c", "alembic upgrade head && uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"]

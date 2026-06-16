@@ -1,10 +1,13 @@
 import os
+import threading
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from src.middleware.request_id import RequestIdMiddleware
 from src.observability.health import collect as collect_health
@@ -47,9 +50,34 @@ from src.workspaces.settings import router as workspaces_settings_router
 from src.admin.router import router as admin_router
 
 
+def _start_inprocess_worker() -> None:
+    """Spawn an RQ SimpleWorker on a daemon thread so the single-container
+    deploy can process the small number of background jobs we have (PDF
+    report generation) without a dedicated worker container.
+
+    SimpleWorker (no fork) is required: standard RQ Worker forks per job,
+    which is incompatible with asyncio/uvicorn in the same process.
+    """
+    from redis import Redis as SyncRedis
+    from rq import Queue, SimpleWorker
+
+    from src.config import settings
+
+    def _run() -> None:
+        conn = SyncRedis.from_url(settings.redis_url)
+        worker = SimpleWorker(
+            [Queue("default", connection=conn)], connection=conn
+        )
+        worker.work(with_scheduler=False)
+
+    threading.Thread(target=_run, name="rq-inprocess", daemon=True).start()
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     init_sentry("api")
+    if os.environ.get("RUN_WORKER_INPROCESS") == "1":
+        _start_inprocess_worker()
     yield
     await close_redis()
     await close_ai_http_client()
@@ -126,3 +154,32 @@ async def debug_boom() -> None:
     """Deliberate-failure endpoint for Sentry verification.  Not exposed in
     OpenAPI; only meaningful when SENTRY_DSN is set."""
     raise RuntimeError("intentional Sentry probe")
+
+
+# ── Static FE (single-container deploy) ──────────────────────────
+# When STATIC_DIR points at a Vite build, FastAPI serves the SPA on the
+# same origin as the API.  Hashed assets get a long cache; any other
+# unmatched path falls back to index.html so React Router can take over.
+# In dev compose, STATIC_DIR isn't set → these routes are inert and the
+# FE is served by the separate `web` container.
+_STATIC_DIR = Path(os.environ.get("STATIC_DIR", ""))
+if _STATIC_DIR.is_dir() and (_STATIC_DIR / "index.html").exists():
+    _ASSETS_DIR = _STATIC_DIR / "assets"
+    if _ASSETS_DIR.is_dir():
+        app.mount(
+            "/assets", StaticFiles(directory=_ASSETS_DIR), name="assets"
+        )
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def _spa_fallback(full_path: str) -> FileResponse:
+        # Serve a top-level static file (favicon, manifest, sw.js, …) if
+        # it actually exists; otherwise fall back to index.html so the
+        # SPA router handles the path on the client.
+        candidate = _STATIC_DIR / full_path if full_path else None
+        if (
+            candidate is not None
+            and candidate.is_file()
+            and _STATIC_DIR.resolve() in candidate.resolve().parents
+        ):
+            return FileResponse(candidate)
+        return FileResponse(_STATIC_DIR / "index.html")
