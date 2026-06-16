@@ -66,7 +66,24 @@ def _start_inprocess_worker() -> None:
 
     from src.config import settings
 
+    class _NoopDeathPenalty:
+        """Replaces UnixSignalDeathPenalty (SIGALRM) which only works in the
+        main thread.  Job-level timeouts are handled instead via asyncio.wait_for
+        inside the job function itself."""
+        def __init__(self, timeout: int, exception: type, job_id: str | None = None) -> None:
+            pass
+        def __enter__(self) -> "_NoopDeathPenalty":
+            return self
+        def __exit__(self, *_: object) -> bool:
+            return False
+        def cancel(self) -> None:
+            pass
+        def handle_death_penalty(self, *_: object) -> None:
+            pass
+
     class _ThreadSafeWorker(SimpleWorker):
+        death_penalty_class = _NoopDeathPenalty
+
         def _install_signal_handlers(self) -> None:
             pass  # cannot install signal handlers from a non-main thread
 
