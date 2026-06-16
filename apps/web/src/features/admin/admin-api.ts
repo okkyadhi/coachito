@@ -13,6 +13,7 @@ export interface AdminWorkspaceRow {
   city: string | null;
   owner_email: string | null;
   owner_display_name: string;
+  owner_phone_e164: string | null;
   trial_ends_at: string | null;
   paid_until: string | null;
   archived_at: string | null;

@@ -24,6 +24,7 @@ class AdminWorkspaceRow(BaseModel):
     owner_user_id: str
     owner_email: str | None
     owner_display_name: str
+    owner_phone_e164: str | None = None
     trial_ends_at: datetime | None
     paid_until: datetime | None
     archived_at: datetime | None

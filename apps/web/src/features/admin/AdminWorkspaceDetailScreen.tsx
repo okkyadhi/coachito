@@ -157,6 +157,18 @@ export function AdminWorkspaceDetailScreen() {
           <p className="mt-1 text-body text-text-color-secondary">
             {ws.owner_email ?? ws.owner_display_name} · {ws.type === 'club' ? 'Club' : 'Personal'} · Created {fmtDate(ws.created_at)}
           </p>
+          {ws.owner_phone_e164 ? (
+            <p className="mt-0.5 text-caption text-text-color-secondary">
+              <a
+                href={`https://wa.me/${ws.owner_phone_e164.replace(/\D+/g, '')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-700 hover:underline"
+              >
+                WhatsApp {ws.owner_phone_e164}
+              </a>
+            </p>
+          ) : null}
         </div>
       </div>
 
