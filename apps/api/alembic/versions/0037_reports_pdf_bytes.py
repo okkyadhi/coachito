@@ -15,7 +15,7 @@ depends_on = None
 
 
 def upgrade() -> None:
-    op.add_column("reports", sa.Column("pdf_bytes", sa.LargeBinary(), nullable=True))
+    op.execute(sa.text("ALTER TABLE reports ADD COLUMN IF NOT EXISTS pdf_bytes BYTEA"))
 
 
 def downgrade() -> None:
