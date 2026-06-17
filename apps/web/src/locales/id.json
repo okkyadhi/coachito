@@ -206,6 +206,22 @@
   "comingSoon": {
     "body": "Layar ini sedang dibangun. Cek lagi setelah build berikutnya."
   },
+  "notifications": {
+    "title": "Notifikasi",
+    "emptyTitle": "Belum ada notifikasi",
+    "emptyBody": "Kamu akan tahu di sini saat ada sesi baru, penilaian, catatan dari coach, atau laporan.",
+    "unreadCount_one": "{{count}} belum dibaca",
+    "unreadCount_other": "{{count}} belum dibaca",
+    "titles": {
+      "sessionScheduled": "Sesi baru terjadwal",
+      "sessionScheduledWithCoach": "Sesi baru dengan Coach {{coach}}",
+      "coachNote": "Ada catatan dari coach",
+      "coachNoteFromCoach": "Catatan baru dari Coach {{coach}}",
+      "assessment": "Penilaian baru",
+      "assessmentFromCoach": "Penilaian baru dari Coach {{coach}}",
+      "reportReady": "Laporan bulanan siap"
+    }
+  },
   "assessment": {
     "placeholderTitle": "Penilaian baru",
     "title": "Penilaian baru",

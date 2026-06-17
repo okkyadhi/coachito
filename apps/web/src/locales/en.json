@@ -206,6 +206,22 @@
   "comingSoon": {
     "body": "This screen is being built. Check back after the next build."
   },
+  "notifications": {
+    "title": "Notifications",
+    "emptyTitle": "Nothing new yet",
+    "emptyBody": "You'll see new sessions, assessments, coach notes, and reports here.",
+    "unreadCount_one": "{{count}} unread",
+    "unreadCount_other": "{{count}} unread",
+    "titles": {
+      "sessionScheduled": "New session scheduled",
+      "sessionScheduledWithCoach": "New session with Coach {{coach}}",
+      "coachNote": "Coach left a note",
+      "coachNoteFromCoach": "New note from Coach {{coach}}",
+      "assessment": "New assessment",
+      "assessmentFromCoach": "New assessment from Coach {{coach}}",
+      "reportReady": "Monthly report ready"
+    }
+  },
   "assessment": {
     "placeholderTitle": "New assessment",
     "title": "New assessment",

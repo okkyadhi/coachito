@@ -2,10 +2,18 @@ import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { enUS, id as idLocale } from 'date-fns/locale';
 import { ArrowUp, Bell, Flame } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { useAuthStore } from '@/features/auth/auth-store';
+import { NotificationSheet } from '@/features/notifications/NotificationSheet';
+import {
+  fetchMyNotifications,
+  getLastSeenAt,
+  setLastSeenAt,
+  unreadCount,
+} from '@/features/notifications/notifications-api';
 import { PendingInvitesBanner } from '@/features/onboarding/PendingInvitesBanner';
 import { SportTabs } from '@/features/sports/SportTabs';
 import { useCurrentSport } from '@/features/sports/useCurrentSport';
@@ -31,6 +39,33 @@ export function TraineeHomeScreen() {
     queryKey: ['trainee-home', currentSportId],
     queryFn: () => fetchTraineeHome(currentSportId),
   });
+
+  const { data: notifications = [], isLoading: notifLoading } = useQuery({
+    queryKey: ['trainee', 'notifications'],
+    queryFn: fetchMyNotifications,
+    staleTime: 60_000,
+  });
+
+  // Bell sheet + unread tracking.
+  const [notifOpen, setNotifOpen] = useState(false);
+  const [lastSeenAt, setLastSeenAtState] = useState<number>(() =>
+    getLastSeenAt(user?.id ?? null),
+  );
+  // Re-read once the user becomes available (in case it wasn't on first render).
+  useEffect(() => {
+    setLastSeenAtState(getLastSeenAt(user?.id ?? null));
+  }, [user?.id]);
+  const unread = useMemo(
+    () => unreadCount(notifications, lastSeenAt),
+    [notifications, lastSeenAt],
+  );
+  const openNotifications = () => {
+    setNotifOpen(true);
+    // Mark everything currently in the list as seen as soon as the sheet opens.
+    const now = Date.now();
+    setLastSeenAt(user?.id ?? null, now);
+    setLastSeenAtState(now);
+  };
 
   if (isPending || !home) return <Skeleton />;
 
@@ -66,17 +101,27 @@ export function TraineeHomeScreen() {
         <button
           type="button"
           aria-label={t('traineeHome.notifications')}
-          className="relative flex size-9 items-center justify-center rounded-full border-[0.5px] border-border-hairline bg-bg-primary"
+          onClick={openNotifications}
+          className="relative flex size-9 items-center justify-center rounded-full border-[0.5px] border-border-hairline bg-bg-primary active:bg-bg-secondary"
         >
           <Bell size={18} strokeWidth={1.75} className="text-text-color-secondary" aria-hidden />
-          {home.coachNote ? (
+          {unread > 0 ? (
             <span
-              aria-hidden
-              className="absolute right-1.5 top-1.5 size-1.5 rounded-full bg-accent"
-            />
+              aria-label={t('notifications.unreadCount', { count: unread })}
+              className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-medium leading-none text-white"
+            >
+              {unread > 9 ? '9+' : unread}
+            </span>
           ) : null}
         </button>
       </header>
+
+      <NotificationSheet
+        open={notifOpen}
+        items={notifications}
+        loading={notifLoading}
+        onClose={() => setNotifOpen(false)}
+      />
 
       <PendingInvitesBanner />
       <NewReportBanner />

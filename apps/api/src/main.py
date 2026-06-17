@@ -30,6 +30,7 @@ from src.athletes.router import router as athletes_router
 from src.coaches.router import router as coaches_router
 from src.match_maker.router import router as match_maker_router
 from src.trainees.coaches_router import router as trainee_coaches_router
+from src.trainees.notifications_router import router as trainee_notifications_router
 from src.trainees.reports_router import router as trainee_reports_router
 from src.auth.router import router as auth_router
 from src.deps import close_redis
@@ -193,6 +194,7 @@ app.include_router(uploads_avatar_router)      # POST /uploads/avatar/sign
 app.include_router(users_me_router)            # GET/PATCH /users/me
 app.include_router(trainee_me_router)         # GET /trainees/me/home (must precede /trainees/{id})
 app.include_router(trainee_coaches_router)    # GET /trainees/me/coaches
+app.include_router(trainee_notifications_router)  # GET /trainees/me/notifications
 app.include_router(trainee_reports_router)    # GET /trainees/me/reports
 app.include_router(coaches_router)            # GET /coaches/{id}
 app.include_router(trainee_profile_router)    # GET /trainees/{id}/profile
