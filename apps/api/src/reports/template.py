@@ -89,11 +89,37 @@ async def build_report_context(
             "tagline": "Monthly progress",
         }
 
+    # Split skill_detail into "fully unrated" (pending) vs "has at least one
+    # rated skill" (rated_groups, the ones that print).  Mockup leads with
+    # rated categories then namechecks the rest with a one-line "Not yet
+    # assessed: ..." footnote — keeps the page editorial, not exhaustive.
+    rated_groups: list[dict[str, Any]] = []
+    pending_categories: list[str] = []
+    for group in skill_detail:
+        rated_skills = [s for s in group["skills"] if s.get("level")]
+        if rated_skills:
+            rated_groups.append({"category": group["category"], "skills": rated_skills})
+        else:
+            pending_categories.append(group["category"].capitalize())
+
+    total_sessions = int(athlete["total_sessions"] or 0)
+    if total_sessions == 0:
+        total_sessions_label = "no sessions yet"
+    elif total_sessions == 1:
+        total_sessions_label = "first session"
+    else:
+        total_sessions_label = f"{total_sessions} sessions to date"
+
+    # First session reads "Starting levels"; later reports read "Current
+    # levels" — the same data, framed for where the trainee is in their arc.
+    levels_heading = "Starting levels" if total_sessions <= 1 else "Current levels"
+
     return {
         "workspace": {
             "name": ws["workspace_name"],
             "logo_url": ws["logo_url"],
             "city": ws["city"],
+            "sport_name": ws.get("sport_name"),
             "accent": accent,
             "accent_bg": _hex_with_alpha(accent, 0.12),
         },
@@ -102,17 +128,20 @@ async def build_report_context(
         "trainee": {
             "display_name": athlete["display_name"],
             "joined_at_label": athlete["joined_at"].strftime("%B %Y"),
-            "total_sessions": athlete["total_sessions"],
+            "total_sessions": total_sessions,
+            "total_sessions_label": total_sessions_label,
         },
         "coach": coach,
         "coach_note": coach_note,
         "tier_progress": tier,
         "stats": stats,
         "category_averages": category_averages,
-        "radar_svg": _build_radar_svg(category_averages, accent=accent),
         "recent_gains": gains,
         "sessions": sessions,
         "skill_detail": skill_detail,
+        "rated_groups": rated_groups,
+        "pending_categories": pending_categories,
+        "levels_heading": levels_heading,
         "generated_at": datetime.utcnow().strftime("%-d %B %Y"),
     }
 
@@ -132,8 +161,11 @@ def render_report_pdf(context: dict[str, Any]) -> bytes:
 async def _fetch_workspace(conn: asyncpg.Connection, workspace_id: str) -> dict[str, Any]:
     row = await conn.fetchrow(
         """
-        SELECT name AS workspace_name, brand_color, logo_url, city
-        FROM workspaces WHERE id = $1
+        SELECT w.name AS workspace_name, w.brand_color, w.logo_url, w.city,
+               s.name_en AS sport_name
+        FROM workspaces w
+        LEFT JOIN sports s ON s.id = w.sport_id
+        WHERE w.id = $1
         """,
         workspace_id,
     )

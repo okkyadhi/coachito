@@ -5,180 +5,137 @@
   <title>{{ trainee.display_name }} — {{ period.label }}</title>
 </head>
 <body>
+<div class="page">
 
-  <header class="letterhead">
-    <div class="left">
-      <div class="club-mark">
-        {% if workspace.logo_url %}
-        <img src="{{ workspace.logo_url }}" alt="" />
-        {% else %}
-        <span class="initial">{{ workspace.name[:1] | upper }}</span>
-        {% endif %}
+  <header class="lethead">
+    <div class="mark">
+      <div class="sq">
+        {% if workspace.logo_url %}<img src="{{ workspace.logo_url }}" alt="" />{% else %}<span class="initial">{{ workspace.name[:1] | upper }}</span>{% endif %}
       </div>
       <div>
-        <p class="club-name">{{ workspace.name }}</p>
-        <p class="club-tagline">{% if workspace.city %}{{ workspace.city }} · {% endif %}{{ period.tagline }}</p>
+        <div class="club">{{ workspace.name }}</div>
+        <div class="sub">{% if workspace.sport_name %}{{ workspace.sport_name }}{% else %}Padel{% endif %}{% if workspace.city %} · {{ workspace.city }}{% endif %}</div>
       </div>
     </div>
     <div class="right">
-      <p class="period-tag">{{ period.tagline }}</p>
-      <p class="period-label">{{ period.label }}</p>
+      <div class="small-caps">{{ period.tagline }}</div>
+      <div class="date">{{ period.label }}</div>
     </div>
   </header>
 
-  {% if is_session_report %}
-  <p class="session-banner">This report covers one coaching session.</p>
-  {% endif %}
-
-  <section class="trainee-hero">
+  <section class="hero">
     <div>
       <h1>{{ trainee.display_name }}</h1>
-      <p class="meta">Joined {{ trainee.joined_at_label }} · {{ trainee.total_sessions }} sessions to date</p>
+      <div class="meta">Joined {{ trainee.joined_at_label }} · {{ trainee.total_sessions_label }}</div>
     </div>
-    <span class="tier-pill">{{ tier_progress.current_name }}</span>
+    <span class="pill">{{ tier_progress.current_name }}</span>
   </section>
 
   {% if coach_note %}
-  <section class="section">
-    <h2 class="section-label">Coach's note</h2>
-    <div class="note-card">
-      <p class="quote">{{ coach_note }}</p>
-      <p class="byline">— {{ coach.display_name }}{% if coach.byline %} · {{ coach.byline }}{% endif %}</p>
+  <section class="note">
+    <div class="q">“{{ coach_note }}”</div>
+    <div class="by">
+      <div class="av">{{ coach.display_name[:1] | upper }}</div>
+      <div class="who"><b>{{ coach.display_name }}</b>{% if coach.byline %} · <span>{{ coach.byline }}</span>{% endif %}</div>
     </div>
   </section>
   {% endif %}
 
-  <section class="section">
-    <h2 class="section-label">Tier progress</h2>
-    <div class="tier-progress">
-      {% if tier_progress.is_top_tier %}
-      <p class="tier-current">{{ tier_progress.current_name }}</p>
-      <p class="tier-foot">Top tier for current curriculum — keep refining.</p>
-      {% else %}
-      <div class="tier-header">
-        <span class="tier-current">{{ tier_progress.current_name }}</span>
-        <span class="tier-pct">{{ tier_progress.pct }}% to {{ tier_progress.next_name }}</span>
-      </div>
-      <div class="tier-bar"><span style="width: {{ tier_progress.pct }}%;"></span></div>
-      <p class="tier-foot">{{ tier_progress.met_count }} of {{ tier_progress.total }} skills meet the {{ tier_progress.next_name }} threshold</p>
-      {% endif %}
+  {% if not tier_progress.is_top_tier %}
+  <section class="blk">
+    <span class="small-caps">Tier progress</span>
+    <div class="tier-row">
+      <div class="name">{{ tier_progress.current_name }}</div>
+      <div class="pct">{{ tier_progress.pct }}% to {{ tier_progress.next_name }}</div>
+    </div>
+    <div class="bar"><i style="width: {{ tier_progress.pct }}%;"></i></div>
+    <div class="tier-foot">{{ tier_progress.met_count }} of {{ tier_progress.total }} skills meet the {{ tier_progress.next_name }} threshold</div>
+  </section>
+  {% else %}
+  <section class="blk">
+    <span class="small-caps">Tier progress</span>
+    <div class="tier-row">
+      <div class="name">{{ tier_progress.current_name }}</div>
+      <div class="pct">Top tier — keep refining</div>
     </div>
   </section>
+  {% endif %}
 
-  <section class="section">
-    <h2 class="section-label">By the numbers</h2>
-    <div class="stats-grid">
-      <div class="stat">
-        <p class="stat-num">{{ stats.sessions }}</p>
-        <p class="stat-label">Sessions</p>
-      </div>
-      <div class="stat">
-        <p class="stat-num">{{ stats.hours_coached }}</p>
-        <p class="stat-label">Hours coached</p>
-      </div>
-      <div class="stat">
-        <p class="stat-num">{{ recent_gains | length }}</p>
-        <p class="stat-label">Skills leveled up</p>
-      </div>
-      <div class="stat">
-        <p class="stat-num">{{ stats.attendance_pct }}%</p>
-        <p class="stat-label">Attendance</p>
-      </div>
-    </div>
-  </section>
+  <div class="snap">
+    <div class="cell"><div class="n">{{ stats.sessions }}</div><div class="l">{% if stats.sessions == 1 %}Session{% else %}Sessions{% endif %}</div></div>
+    <div class="cell"><div class="n">{{ stats.hours_coached }}</div><div class="l">{% if stats.hours_coached == 1 %}Hour{% else %}Hours{% endif %} coached</div></div>
+    <div class="cell"><div class="n">{{ stats.skills_assessed }}</div><div class="l">Skills assessed</div></div>
+    <div class="cell"><div class="n">{{ stats.attendance_pct }}%</div><div class="l">Attendance</div></div>
+  </div>
 
-  <section class="section">
-    <h2 class="section-label">Skill profile</h2>
-    <div class="radar-block">
-      <div class="radar-svg">{{ radar_svg | safe }}</div>
-      <ul class="radar-legend">
-        {% for c in category_averages %}
-        <li>
-          <span class="cat">{{ c.category | capitalize }}</span>
-          <span class="avg">{% if c.skills_rated == 0 %}—{% else %}{{ '%.1f' | format(c.average) }}{% endif %}</span>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-  </section>
+  {% if rated_groups %}
+    {% for group in rated_groups %}
+    <section class="blk">
+      <span class="small-caps">{{ levels_heading }} · {{ group.category | capitalize }}</span>
+      <div class="grp">
+        <div class="skl">
+          {% for s in group.skills %}
+          <div class="s">
+            <span class="nm">{{ s.name }}</span>
+            <span class="lv">
+              <span class="lx">L{{ s.level }}</span>
+              <span class="tag">{{ s.level_label }}</span>
+            </span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endfor %}
+  {% endif %}
+
+  {% if pending_categories %}
+  <p class="pending"><b>Not yet assessed:</b> {{ pending_categories | join(', ') }} — coming in upcoming sessions.</p>
+  {% endif %}
 
   {% if recent_gains %}
-  <section class="section">
-    <h2 class="section-label">Wins this month</h2>
-    <ul class="wins">
-      {% for g in recent_gains %}
-      <li>
-        <span class="arrow">↑</span>
-        <span class="skill">{{ g.skill_name }}</span>
-        <span class="delta">{% if g.from_level %}L{{ g.from_level }} → {% endif %}L{{ g.to_level }}</span>
-        <span class="when">{{ g.date_label }}</span>
-      </li>
-      {% endfor %}
-    </ul>
-  </section>
-  {% endif %}
-
-  {% if skill_detail %}
-  <section class="section page-break-before">
-    <h2 class="section-label">Skill detail</h2>
-    <div class="skill-detail">
-      {% for group in skill_detail %}
-      <div class="skill-group">
-        <h3 class="cat-heading">{{ group.category | capitalize }}</h3>
-        <ul class="skills">
-          {% for s in group.skills %}
-          <li>
-            <span class="skill-name">{{ s.name }}</span>
-            {% if s.level %}
-            <span class="level-bar" aria-hidden>
-              {% for n in range(1, 6) %}
-              <span class="seg {% if n <= s.level %}on{% endif %}"></span>
-              {% endfor %}
-            </span>
-            <span class="level-text">L{{ s.level }} · {{ s.level_label }}</span>
-            {% else %}
-            <span class="level-bar" aria-hidden>
-              {% for n in range(1, 6) %}<span class="seg"></span>{% endfor %}
-            </span>
-            <span class="level-text muted">Not rated</span>
-            {% endif %}
-          </li>
-          {% endfor %}
-        </ul>
+  <section class="blk">
+    <span class="small-caps">Level-ups this period</span>
+    <div class="grp">
+      <div class="wins">
+        {% for g in recent_gains %}
+        <div class="win">
+          <span class="arrow">↑</span>
+          <span class="skill">{{ g.skill_name }}</span>
+          <span class="delta">{% if g.from_level %}L{{ g.from_level }} → {% endif %}L{{ g.to_level }}</span>
+          <span class="when">{{ g.date_label }}</span>
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
   </section>
   {% endif %}
 
   {% if sessions %}
-  <section class="section">
-    <h2 class="section-label">Session log</h2>
-    <ul class="sessions">
+  <section class="blk">
+    <span class="small-caps">Session log</span>
+    <div class="log">
       {% for s in sessions %}
-      <li>
-        <div class="row">
-          <span class="when">{{ s.date_label }}</span>
-          <span class="focus-pill">{{ s.focus }}</span>
+      <div class="row">
+        <div class="when">{{ s.date_label }}</div>
+        <div class="entry">
+          <span class="focus">{{ s.focus }}</span>
+          {% if s.summary %}<div class="txt">{{ s.summary }}</div>{% endif %}
         </div>
-        {% if s.summary %}
-        <p class="summary">{{ s.summary }}</p>
-        {% endif %}
-      </li>
+      </div>
       {% endfor %}
-    </ul>
+    </div>
   </section>
   {% endif %}
 
-  <footer class="report-footer">
-    <div>
-      <p>{{ workspace.name }}{% if workspace.city %} · {{ workspace.city }}{% endif %}</p>
-      <p class="muted">Generated {{ generated_at }} by Coachito · tu coach, en tu bolsillo</p>
-    </div>
-    <div class="right">
-      <p>For {{ trainee.display_name }} and parent / guardian</p>
+  <footer class="foot">
+    <div class="l">{{ workspace.name }}{% if workspace.city %} · {{ workspace.city }}{% endif %}<br/>Generated {{ generated_at }} by Coachito</div>
+    <div class="r">
+      <div class="sign">— {{ coach.display_name }}</div>
+      For {{ trainee.display_name }} and parent / guardian
     </div>
   </footer>
 
+</div>
 </body>
 </html>
