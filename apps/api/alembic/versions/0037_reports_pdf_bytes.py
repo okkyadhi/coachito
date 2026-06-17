@@ -8,8 +8,8 @@ authenticated GET /reports/{id}/pdf endpoint.
 from alembic import op
 import sqlalchemy as sa
 
-revision = "0036"
-down_revision = "0035"
+revision = "0037"
+down_revision = "0036"
 branch_labels = None
 depends_on = None
 
