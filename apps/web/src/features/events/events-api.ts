@@ -258,6 +258,12 @@ export async function reshuffleCurrentRound(
   );
 }
 
+export async function extendRounds(eventId: string): Promise<EventSummary> {
+  return fromSummary(
+    await api.post<ApiSummary>(`/events/${eventId}/rounds/extend`),
+  );
+}
+
 export async function renameCourt(
   eventId: string,
   courtNumber: number,

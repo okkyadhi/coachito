@@ -116,6 +116,7 @@
       "nextRoundCta": "Finish round → next",
       "scoreAllFirst": "Score every match first",
       "completeCta": "Complete event",
+      "extendRoundsCta": "Add more rounds",
       "noActiveRound": "No active round.",
       "leaderboardEmpty": "Standings appear after the first score lands.",
       "withdrewAt": "Withdrew after round {{n}}",

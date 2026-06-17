@@ -1181,6 +1181,113 @@ async def advance_round(
     return out
 
 
+async def extend_americano_rounds(
+    db: AsyncSession, *, workspace_id: UUID, event_id: UUID
+) -> EventOut:
+    """Add another batch of Americano rounds when the original schedule is
+    exhausted.  The current (final) round is marked complete, a new batch
+    of rounds is appended, and the event advances to the first new round.
+
+    Only callable when: format=americano, status=active,
+    current_round==total_rounds, all scores recorded (enforced in the
+    router/FE — the service just checks the boundary conditions).
+    """
+    row = (
+        await db.execute(
+            text(
+                """
+                SELECT status, current_round, total_rounds, format, court_count
+                FROM match_events WHERE id = :eid AND workspace_id = :wid
+                """
+            ),
+            {"eid": event_id, "wid": workspace_id},
+        )
+    ).first()
+    if row is None:
+        raise EventNotFoundError
+    status_val, current_round, total_rounds, fmt, court_count = row
+
+    if status_val != "active":
+        raise EventStateError(f"Event is {status_val}, not active.")
+    if fmt != "americano":
+        raise EventStateError(
+            "Extend rounds is only available for Americano events."
+        )
+    if current_round < total_rounds:
+        raise EventStateError(
+            f"Round {current_round} of {total_rounds} is not the final round."
+        )
+
+    participant_ids = await _load_active_participant_ids(
+        db, workspace_id=workspace_id, event_id=event_id
+    )
+    n = len(participant_ids)
+    extra = total_rounds_for(n)
+
+    # Re-run the pairing engine for another batch and offset round numbers
+    # so they continue from where the existing schedule ended.
+    schedule = build_americano_schedule(
+        player_count=n,
+        court_count=int(court_count),
+        total_rounds=extra,
+    )
+    new_total = total_rounds + extra
+
+    for rnd in schedule:
+        offset = PairedRound(
+            round_number=rnd.round_number + total_rounds,
+            matches=rnd.matches,
+            resters=rnd.resters,
+        )
+        await _persist_paired_round(
+            db,
+            workspace_id=workspace_id,
+            event_id=event_id,
+            paired=offset,
+            participant_ids=participant_ids,
+            mark_started=False,
+        )
+
+    # Mark the current (final) round done and stamp the next one started.
+    new_round = current_round + 1
+    await db.execute(
+        text(
+            "UPDATE match_event_rounds SET completed_at = NOW() "
+            "WHERE event_id = :eid AND round_number = :cr"
+        ),
+        {"eid": event_id, "cr": current_round},
+    )
+    await db.execute(
+        text(
+            "UPDATE match_event_rounds SET started_at = NOW() "
+            "WHERE event_id = :eid AND round_number = :nr"
+        ),
+        {"eid": event_id, "nr": new_round},
+    )
+    await db.execute(
+        text(
+            """
+            UPDATE match_events
+               SET total_rounds = :new_total,
+                   current_round = :nr,
+                   updated_at = NOW()
+             WHERE id = :eid AND workspace_id = :wid
+            """
+        ),
+        {
+            "new_total": new_total,
+            "nr": new_round,
+            "eid": event_id,
+            "wid": workspace_id,
+        },
+    )
+
+    out = await fetch_event_summary(db, workspace_id=workspace_id, event_id=event_id)
+    await db.commit()
+    assert out is not None
+    return out
+
+
 async def complete_event(
     db: AsyncSession, *, workspace_id: UUID, event_id: UUID
 ) -> EventOut:

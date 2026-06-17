@@ -116,6 +116,7 @@
       "nextRoundCta": "Selesai babak → lanjut",
       "scoreAllFirst": "Isi semua skor dulu",
       "completeCta": "Selesaikan event",
+      "extendRoundsCta": "Tambah ronde",
       "noActiveRound": "Belum ada babak aktif.",
       "leaderboardEmpty": "Klasemen muncul setelah skor pertama masuk.",
       "withdrewAt": "Mundur setelah babak {{n}}",

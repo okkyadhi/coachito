@@ -25,6 +25,7 @@ import {
   cancelEvent,
   completeEvent,
   courtDisplayName,
+  extendRounds,
   getEvent,
   getLeaderboard,
   listRounds,
@@ -334,6 +335,14 @@ function CourtsTab({
       qc.invalidateQueries({ queryKey: ['events', eventId, 'rounds'] });
     },
   });
+  const extend = useMutation({
+    mutationFn: () => extendRounds(eventId),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['events', 'detail', eventId] });
+      qc.invalidateQueries({ queryKey: ['events', eventId, 'rounds'] });
+      qc.invalidateQueries({ queryKey: ['events', eventId, 'leaderboard'] });
+    },
+  });
 
   const [sheetMatch, setSheetMatch] = useState<Match | null>(null);
 
@@ -429,12 +438,22 @@ function CourtsTab({
 
       {isLive ? (
         isFinalRound ? (
-          <PrimaryButton
-            onClick={() => complete.mutate()}
-            disabled={!allScored || complete.isPending}
-          >
-            {t('events.detail.completeCta')}
-          </PrimaryButton>
+          <div className="flex flex-col gap-2">
+            <PrimaryButton
+              onClick={() => complete.mutate()}
+              disabled={!allScored || complete.isPending}
+            >
+              {t('events.detail.completeCta')}
+            </PrimaryButton>
+            {event.format === 'americano' ? (
+              <SecondaryButton
+                onClick={() => extend.mutate()}
+                disabled={!allScored || extend.isPending}
+              >
+                {t('events.detail.extendRoundsCta')}
+              </SecondaryButton>
+            ) : null}
+          </div>
         ) : (
           <PrimaryButton
             onClick={() => advance.mutate()}

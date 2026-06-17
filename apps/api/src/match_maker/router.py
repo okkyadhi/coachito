@@ -450,6 +450,26 @@ async def reshuffle_current_round(
         raise _map_state_error(e) from None
 
 
+@router.post("/{event_id}/rounds/extend", response_model=EventOut)
+async def extend_rounds(
+    event_id: UUID,
+    user_id: Annotated[UUID, Depends(get_current_user_id)],  # noqa: ARG001
+    workspace_id: Annotated[UUID | None, Depends(get_current_workspace_id)],
+    db: Annotated[AsyncSession, Depends(db_with_rls)],
+) -> EventOut:
+    wid = _need_workspace(workspace_id)
+    try:
+        return await service.extend_americano_rounds(
+            db, workspace_id=wid, event_id=event_id,
+        )
+    except service.EventNotFoundError:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Event not found."
+        ) from None
+    except service.EventStateError as e:
+        raise _map_state_error(e) from None
+
+
 @router.patch(
     "/{event_id}/courts/{court_number}", response_model=EventOut
 )
