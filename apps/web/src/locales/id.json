@@ -1125,14 +1125,21 @@
   },
   "coach": {
     "list": {
-      "title": "Pelatihmu",
-      "subtitle": "Semua yang pernah melatihmu, terbaru di atas.",
+      "title": "Pelatih",
+      "subtitle": "Klub kamu dan pelatih-pelatihnya.",
+      "coachesHeader": "Pelatih di klubmu",
+      "clubLabel": "Club",
+      "personalLabel": "Personal",
+      "roleClubAdmin": "Admin",
+      "roleHeadCoach": "Head coach",
+      "roleCoach": "Pelatih",
       "upcomingDot": "Ada sesi denganmu sebentar lagi",
       "sessionCount_one": "{{count}} sesi",
       "sessionCount_other": "{{count}} sesi",
       "lastCoached": "terakhir melatih {{ago}}",
+      "notYetCoached": "Belum pernah melatihmu",
       "emptyTitle": "Belum ada pelatih",
-      "emptyBody": "Pelatihmu akan muncul di sini setelah sesi pertamamu."
+      "emptyBody": "Klub ini belum punya pelatih aktif."
     },
     "bio": {
       "backLabel": "Pelatih",
@@ -1237,5 +1244,10 @@
       "headline_other": "{{count}} dari ini menahan {{tier}}. Fokus di sini.",
       "subline": "Menutup skill ini membuka tier berikutnya."
     }
+  },
+  "trial": {
+    "expiredTitle": "Trial berakhir.",
+    "expiredBody": "Pilih paket untuk melanjutkan coaching.",
+    "seePlans": "Lihat paket"
   }
 }

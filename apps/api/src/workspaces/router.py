@@ -47,6 +47,7 @@ async def _to_workspace_out(db: AsyncSession, ws: Workspace) -> WorkspaceOut:
         primary_locale=ws.primary_locale,
         plan=ws.plan,
         trial_ends_at=ws.trial_ends_at,
+        paid_until=ws.paid_until,
         active_trainee_quota=ws.active_trainee_quota,
         owner_user_id=str(ws.owner_user_id),
         created_at=ws.created_at,

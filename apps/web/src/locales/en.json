@@ -1125,14 +1125,21 @@
   },
   "coach": {
     "list": {
-      "title": "Your coaches",
-      "subtitle": "Everyone who has coached you, most recent first.",
+      "title": "Coaches",
+      "subtitle": "Your club and the coaches who work there.",
+      "coachesHeader": "Coaches at your club",
+      "clubLabel": "Club",
+      "personalLabel": "Personal",
+      "roleClubAdmin": "Admin",
+      "roleHeadCoach": "Head coach",
+      "roleCoach": "Coach",
       "upcomingDot": "Has a session with you soon",
       "sessionCount_one": "{{count}} session",
       "sessionCount_other": "{{count}} sessions",
       "lastCoached": "last coached {{ago}}",
+      "notYetCoached": "Hasn't coached you yet",
       "emptyTitle": "No coaches yet",
-      "emptyBody": "You'll see your coaches here after your first session."
+      "emptyBody": "This club has no active coaches yet."
     },
     "bio": {
       "backLabel": "Coaches",
@@ -1237,5 +1244,10 @@
       "headline_other": "{{count}} of these are blocking {{tier}}. Focus here.",
       "subline": "Closing these unlocks your next tier."
     }
+  },
+  "trial": {
+    "expiredTitle": "Trial ended.",
+    "expiredBody": "Choose a plan to keep coaching.",
+    "seePlans": "See plans"
   }
 }

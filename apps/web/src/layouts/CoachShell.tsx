@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { BottomTabBar } from '@/components/BottomTabBar';
 import { Logo } from '@/components/Logo';
 import { OfflineBanner } from '@/components/OfflineBanner';
+import { TrialExpiredBanner } from '@/components/TrialExpiredBanner';
 import { WorkspaceSwitcher } from '@/features/workspaces/WorkspaceSwitcher';
 
 // Wraps every authenticated coach screen: a thin top strip with the brand
@@ -17,6 +18,7 @@ export function CoachShell() {
       </header>
 
       <OfflineBanner />
+      <TrialExpiredBanner />
 
       <main className="flex-1 overflow-y-auto">
         <Outlet />

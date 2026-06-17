@@ -34,7 +34,8 @@ export interface WorkspaceSettings {
   curriculumName: string; // resolved label (currently a static placeholder)
   coachCount: number;
   traineeCount: number;
-  renewsAt: string | null; // ISO date
+  renewsAt: string | null;  // ISO date — maps to trial_ends_at
+  paidUntil: string | null; // ISO date — maps to paid_until
 }
 
 interface ApiWorkspace {
@@ -50,6 +51,7 @@ interface ApiWorkspace {
   plan: string;
   active_trainee_quota: number;
   trial_ends_at: string | null;
+  paid_until: string | null;
 }
 
 interface ApiMineRow {
@@ -80,6 +82,7 @@ function toSettings(ws: ApiWorkspace): WorkspaceSettings {
     coachCount: 0,
     traineeCount: 0,
     renewsAt: ws.trial_ends_at,
+    paidUntil: ws.paid_until,
   };
 }
 
@@ -131,6 +134,24 @@ export function isTrial(
   if (!settings.renewsAt) return false;
   const end = new Date(settings.renewsAt);
   return !Number.isNaN(end.getTime()) && end.getTime() > Date.now();
+}
+
+/** True when a trial that was once active has now expired and no paid
+ *  subscription covers the current date.  This is the trigger for the
+ *  soft-gate banner. */
+export function isTrialLapsed(
+  settings: Pick<WorkspaceSettings, 'plan' | 'renewsAt' | 'paidUntil'>,
+): boolean {
+  // Still on an active trial → not lapsed.
+  if (isTrial(settings)) return false;
+  // Plan was never given a trial date → nothing to lapse.
+  if (!settings.renewsAt) return false;
+  // Trial has ended — check whether a paid subscription is active.
+  if (settings.paidUntil) {
+    const paidEnd = new Date(settings.paidUntil).getTime();
+    if (!Number.isNaN(paidEnd) && paidEnd > Date.now()) return false;
+  }
+  return true;
 }
 
 export function trialDaysLeft(renewsAt: string | null): number | null {

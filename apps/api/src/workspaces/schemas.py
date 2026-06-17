@@ -42,6 +42,7 @@ class WorkspaceOut(BaseModel):
     primary_locale: str
     plan: str
     trial_ends_at: datetime | None
+    paid_until: datetime | None = None
     active_trainee_quota: int
     owner_user_id: str
     created_at: datetime
