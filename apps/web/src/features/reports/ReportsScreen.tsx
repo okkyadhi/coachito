@@ -50,15 +50,18 @@ export function ReportsScreen() {
     sessionId?: string;
     periodStart?: string;
     periodEnd?: string;
+    coachNote?: string;
   }) => {
-    await generateReport(
+    const base =
       args.mode === 'session' && args.sessionId
         ? { traineeId: args.traineeId, sessionId: args.sessionId }
         : {
             traineeId: args.traineeId,
             periodStart: args.periodStart ?? '',
             periodEnd: args.periodEnd ?? '',
-          },
+          };
+    await generateReport(
+      args.coachNote ? { ...base, coachNote: args.coachNote } : base,
     );
     setSheetOpen(false);
     // Refetch immediately so the new pending row shows up; the

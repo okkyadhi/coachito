@@ -44,6 +44,7 @@ async def build_report_context(
     period_start: date,
     period_end: date,
     session_id: str | None = None,
+    coach_note_override: str | None = None,
 ) -> dict[str, Any]:
     """One asyncpg roundtrip per logical section.  Caller passes the result
     straight to ``render_report_pdf``.
@@ -67,7 +68,14 @@ async def build_report_context(
         else:
             sessions = await _fetch_sessions(conn, athlete_id, period_start, period_end)
         skill_detail = await _fetch_skill_detail(conn, athlete_id, workspace_id)
-        coach_note = sessions[0]["summary"] if sessions and sessions[0]["summary"] else None
+        # Coach-authored override at generation time wins; otherwise fall back
+        # to the most recent session summary so the hero block still renders.
+        if coach_note_override and coach_note_override.strip():
+            coach_note = coach_note_override.strip()
+        elif sessions and sessions[0]["summary"]:
+            coach_note = sessions[0]["summary"]
+        else:
+            coach_note = None
     finally:
         await conn.close()
 
@@ -213,8 +221,16 @@ async def _fetch_lead_coach(
             """,
             workspace_id,
         )
+    raw_name = (row["display_name"] if row else "") or "Coach"
+    # Prefix "Coach " in the PDF byline so the report reads with the right
+    # professional register, even when the user typed only their given name
+    # at signup.  Idempotent — already-prefixed names pass through.
+    if not raw_name.lower().startswith("coach"):
+        display_name = f"Coach {raw_name}"
+    else:
+        display_name = raw_name
     return {
-        "display_name": row["display_name"] if row else "Coach",
+        "display_name": display_name,
         "byline": "",
     }
 

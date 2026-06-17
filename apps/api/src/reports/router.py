@@ -57,6 +57,10 @@ class ReportCreateIn(BaseModel):
     session_id: UUID | None = None
     period_start: date | None = None
     period_end: date | None = None
+    # Optional parent-facing note from the coach.  Lands as the hero quote
+    # of the rendered PDF when set; otherwise the template falls back to
+    # the most recent session summary.
+    coach_note: str | None = None
 
 
 class ReportCreateOut(BaseModel):
@@ -220,16 +224,17 @@ async def create_report(
         )
 
     report_id = uuid4()
+    note = (body.coach_note or "").strip() or None
     await db.execute(
         text(
             """
             INSERT INTO reports (
                 id, workspace_id, athlete_id, coach_id, session_id,
                 period_start, period_end, status,
-                generation_type, generated_by_id
+                generation_type, generated_by_id, coach_note
             )
             VALUES (:id, :wid, :aid, :uid, :sid, :ps, :pe,
-                    'pending', 'manual', :uid)
+                    'pending', 'manual', :uid, :note)
             """
         ),
         {
@@ -240,6 +245,7 @@ async def create_report(
             "sid": body.session_id,
             "ps": period_start,
             "pe": period_end,
+            "note": note,
         },
     )
     await db.commit()

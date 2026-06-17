@@ -140,14 +140,16 @@ export function TraineeProfileScreen() {
         initialTraineeName={data.trainee.displayName}
         onClose={() => setReportOpen(false)}
         onConfirm={async (args) => {
-          await generateReport(
+          const base =
             args.mode === 'session' && args.sessionId
               ? { traineeId: args.traineeId, sessionId: args.sessionId }
               : {
                   traineeId: args.traineeId,
                   periodStart: args.periodStart ?? '',
                   periodEnd: args.periodEnd ?? '',
-                },
+                };
+          await generateReport(
+            args.coachNote ? { ...base, coachNote: args.coachNote } : base,
           );
           setReportOpen(false);
           void queryClient.invalidateQueries({ queryKey: ['reports'] });

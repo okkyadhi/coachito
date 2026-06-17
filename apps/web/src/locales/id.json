@@ -1142,6 +1142,9 @@
       "pickTraineeFirst": "Pilih trainee dulu untuk melihat sesinya.",
       "noSessions": "Trainee ini belum punya sesi.",
       "noTrainees": "Tambah trainee dulu.",
+      "coachNoteLabel": "Catatan untuk orang tua (opsional)",
+      "coachNoteHint": "Akan jadi quote pembuka di PDF. Kosongkan untuk pakai ringkasan sesi terakhir.",
+      "coachNotePlaceholder": "Kesan pertama dan langkah berikutnya untuk dia…",
       "generate": "Buat"
     }
   },

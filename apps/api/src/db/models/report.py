@@ -27,3 +27,7 @@ class Report(Base):
     status: Mapped[str] = mapped_column(String(20), nullable=False, default="pending")
     error_message: Mapped[str | None] = mapped_column(Text, nullable=True)
     session_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), ForeignKey("sessions.id", ondelete="SET NULL"), nullable=True)
+    # Optional parent-facing note written by the coach at report-generation
+    # time.  When set, overrides the auto-pulled session summary in the PDF
+    # hero block.  See migration 0040.
+    coach_note: Mapped[str | None] = mapped_column(Text, nullable=True)

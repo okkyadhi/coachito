@@ -69,6 +69,8 @@ export interface GenerateReportInput {
   sessionId?: string;
   periodStart?: string;
   periodEnd?: string;
+  /** Optional parent-facing note that lands as the PDF hero quote. */
+  coachNote?: string;
 }
 
 export async function generateReport(input: GenerateReportInput): Promise<Report> {
@@ -76,6 +78,7 @@ export async function generateReport(input: GenerateReportInput): Promise<Report
   if (input.sessionId) body.session_id = input.sessionId;
   if (input.periodStart) body.period_start = input.periodStart;
   if (input.periodEnd) body.period_end = input.periodEnd;
+  if (input.coachNote) body.coach_note = input.coachNote;
   const res = await api.post<ApiCreateOut>('/reports', body);
   return toReport(res.report);
 }

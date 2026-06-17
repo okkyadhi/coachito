@@ -29,6 +29,7 @@ interface Props {
     sessionId?: string;
     periodStart?: string;
     periodEnd?: string;
+    coachNote?: string;
   }) => void;
 }
 
@@ -67,6 +68,7 @@ export function GenerateReportSheet({
   const [mode, setMode] = useState<'monthly' | 'session'>('monthly');
   const [monthValue, setMonthValue] = useState<string>(months[0]?.value ?? '');
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const [coachNote, setCoachNote] = useState<string>('');
 
   // Only fetch the trainee list when we need it to render a picker.  Coming
   // in from a trainee profile, we already know who the report is for —
@@ -93,6 +95,7 @@ export function GenerateReportSheet({
     const displayName = lockedToTrainee
       ? (initialTraineeName ?? '')
       : (trainees.find((t) => t.id === traineeId)?.displayName ?? '');
+    const note = coachNote.trim();
     if (mode === 'monthly') {
       const period = months.find((m) => m.value === monthValue);
       if (!period) return;
@@ -102,6 +105,7 @@ export function GenerateReportSheet({
         mode: 'monthly',
         periodStart: period.start,
         periodEnd: period.end,
+        ...(note ? { coachNote: note } : {}),
       });
     } else {
       if (!sessionId) return;
@@ -110,10 +114,12 @@ export function GenerateReportSheet({
         traineeName: displayName,
         mode: 'session',
         sessionId,
+        ...(note ? { coachNote: note } : {}),
       });
     }
     if (!lockedToTrainee) setTraineeId(null);
     setSessionId(null);
+    setCoachNote('');
   };
 
   if (!open) return null;
@@ -330,6 +336,24 @@ export function GenerateReportSheet({
               </div>
             </>
           )}
+          {/* Coach note — optional override of the auto-pulled session
+              summary that lands as the hero quote in the PDF.  Parents read
+              this first; a fresh, personal line beats reusing the courtside
+              shorthand. */}
+          <h3 className="mt-5 px-1 text-section uppercase tracking-wide text-text-color-secondary">
+            {t('reports.sheet.coachNoteLabel')}
+          </h3>
+          <p className="mt-1 px-1 text-footnote text-text-color-tertiary">
+            {t('reports.sheet.coachNoteHint')}
+          </p>
+          <textarea
+            value={coachNote}
+            onChange={(e) => setCoachNote(e.target.value)}
+            placeholder={t('reports.sheet.coachNotePlaceholder')}
+            rows={4}
+            maxLength={1000}
+            className="mt-2 w-full resize-y rounded-md border-[0.5px] border-border-hairline bg-bg-primary p-3 text-body text-text-color-primary placeholder:text-text-color-tertiary focus:border-accent focus:outline-none"
+          />
         </div>
 
         <footer className="flex flex-col gap-2 border-t-[0.5px] border-border-hairline px-4 py-3">

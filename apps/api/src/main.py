@@ -59,6 +59,38 @@ _STATIC_DIR = Path(os.environ.get("STATIC_DIR", ""))
 _SPA_ACTIVE = _STATIC_DIR.is_dir() and (_STATIC_DIR / "index.html").exists()
 
 
+class _ApiPrefixMiddleware:
+    """Strip a leading ``/api`` from incoming request paths.
+
+    The FE's default ``BASE_URL`` is ``/api`` (see apps/web/src/lib/api.ts),
+    but routers here are mounted without that prefix.  In single-container
+    production the unprefixed and prefixed paths are the same backend, so
+    requests to ``/api/reports`` would fall through to the SPA fallback and
+    silently return ``index.html`` (HTTP 200 HTML — the symptom: list calls
+    appearing to succeed but returning no data).
+
+    Rewriting the path here keeps the FE host-agnostic: whether it was built
+    with ``VITE_API_BASE_URL=""`` (allinone) or left to default to ``/api``,
+    the same backend serves both.  We never strip ``/api`` from paths that
+    are explicitly meant to land on the SPA (none start with ``/api`` today).
+    """
+
+    def __init__(self, app: ASGIApp) -> None:
+        self.app = app
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] == "http":
+            path: str = scope.get("path", "")
+            if path == "/api" or path.startswith("/api/"):
+                stripped = path[4:] or "/"
+                scope = dict(scope)
+                scope["path"] = stripped
+                raw_path = scope.get("raw_path")
+                if isinstance(raw_path, (bytes, bytearray)):
+                    scope["raw_path"] = bytes(raw_path)[4:] or b"/"
+        await self.app(scope, receive, send)
+
+
 class _SPABrowserMiddleware:
     """In single-container prod the browser hard-refreshing a SPA route (e.g.
     /reports) sends GET /reports with no Authorization header.  FastAPI
@@ -183,6 +215,12 @@ if _SPA_ACTIVE:
         _SPABrowserMiddleware,
         index_html=str(_STATIC_DIR / "index.html"),
     )
+
+# /api path rewrite — registered last so it runs first.  Production FE built
+# with the default BASE_URL ("/api") calls "/api/reports"; the routers are
+# mounted bare ("/reports"), so without this shim every API request would
+# fall through to the SPA fallback and silently return index.html.
+app.add_middleware(_ApiPrefixMiddleware)
 
 app.include_router(auth_router)
 app.include_router(workspaces_router)

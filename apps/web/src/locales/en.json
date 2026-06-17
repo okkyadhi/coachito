@@ -1142,6 +1142,9 @@
       "pickTraineeFirst": "Pick a trainee first to see their sessions.",
       "noSessions": "This trainee has no sessions yet.",
       "noTrainees": "Add a trainee first.",
+      "coachNoteLabel": "Note for parents (optional)",
+      "coachNoteHint": "Lands as the opening quote in the PDF. Leave blank to use the latest session summary instead.",
+      "coachNotePlaceholder": "First look and what's next for them…",
       "generate": "Generate"
     }
   },

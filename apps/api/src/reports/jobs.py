@@ -50,7 +50,8 @@ async def _run(report_id: str) -> dict[str, Any]:
             """
             SELECT workspace_id::text, athlete_id::text,
                    session_id::text AS session_id,
-                   period_start, period_end, generation_type
+                   period_start, period_end, generation_type,
+                   coach_note
             FROM reports WHERE id = $1
             """,
             report_id,
@@ -93,6 +94,7 @@ async def _run(report_id: str) -> dict[str, Any]:
                 period_start=report["period_start"],
                 period_end=report["period_end"],
                 session_id=report["session_id"],
+                coach_note_override=report["coach_note"],
             ),
             timeout=30,
         )
