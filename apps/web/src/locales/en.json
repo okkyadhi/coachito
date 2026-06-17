@@ -204,6 +204,33 @@
     "feedbackBadge_other": "{{count}} new feedback",
     "toAssessBadge_one": "{{count}} session to assess",
     "toAssessBadge_other": "{{count}} sessions to assess",
+    "inbox": {
+      "feedback": "Trainee feedback",
+      "feedbackEmpty": "All caught up",
+      "toAssess": "Sessions to assess",
+      "toAssessEmpty": "Nothing pending"
+    },
+    "thisWeek": {
+      "title": "This week",
+      "sessions": "Sessions",
+      "hours": "Hours",
+      "published": "Published",
+      "trainees": "Trainees"
+    },
+    "recent": {
+      "title": "Recent activity",
+      "viewAll": "All trainees",
+      "assessment_published": "Published assessment for {{name}}",
+      "session_coached": "Coached {{name}}",
+      "report_generated": "Generated report for {{name}}",
+      "joined": "{{name}} joined"
+    },
+    "quickActions": {
+      "title": "Quick actions",
+      "schedule": "Schedule session",
+      "addTrainee": "Add trainee",
+      "report": "Create report"
+    },
     "scope": {
       "mine": "Mine",
       "all": "All"

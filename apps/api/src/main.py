@@ -28,6 +28,7 @@ from src.athletes.me import router as trainee_me_router
 from src.athletes.profile import router as trainee_profile_router
 from src.athletes.router import router as athletes_router
 from src.coaches.router import router as coaches_router
+from src.coaches.today_extras import router as coaches_today_extras_router
 from src.match_maker.router import router as match_maker_router
 from src.trainees.coaches_router import router as trainee_coaches_router
 from src.trainees.notifications_router import router as trainee_notifications_router
@@ -234,6 +235,7 @@ app.include_router(trainee_me_router)         # GET /trainees/me/home (must prec
 app.include_router(trainee_coaches_router)    # GET /trainees/me/coaches
 app.include_router(trainee_notifications_router)  # GET /trainees/me/notifications
 app.include_router(trainee_reports_router)    # GET /trainees/me/reports
+app.include_router(coaches_today_extras_router)  # GET /coaches/me/today-extras (must precede /coaches/{id})
 app.include_router(coaches_router)            # GET /coaches/{id}
 app.include_router(trainee_profile_router)    # GET /trainees/{id}/profile
 app.include_router(athletes_router)

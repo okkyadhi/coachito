@@ -204,6 +204,33 @@
     "feedbackBadge_other": "{{count}} masukan baru",
     "toAssessBadge_one": "{{count}} sesi perlu dinilai",
     "toAssessBadge_other": "{{count}} sesi perlu dinilai",
+    "inbox": {
+      "feedback": "Masukan trainee",
+      "feedbackEmpty": "Semua sudah dibaca",
+      "toAssess": "Sesi yang perlu dinilai",
+      "toAssessEmpty": "Tidak ada antrian"
+    },
+    "thisWeek": {
+      "title": "Minggu ini",
+      "sessions": "Sesi",
+      "hours": "Jam",
+      "published": "Dipublish",
+      "trainees": "Trainee"
+    },
+    "recent": {
+      "title": "Aktivitas terbaru",
+      "viewAll": "Semua trainee",
+      "assessment_published": "Publish penilaian untuk {{name}}",
+      "session_coached": "Melatih {{name}}",
+      "report_generated": "Buat laporan untuk {{name}}",
+      "joined": "{{name}} bergabung"
+    },
+    "quickActions": {
+      "title": "Aksi cepat",
+      "schedule": "Jadwalkan sesi",
+      "addTrainee": "Tambah trainee",
+      "report": "Buat laporan"
+    },
     "scope": {
       "mine": "Saya",
       "all": "Semua"
