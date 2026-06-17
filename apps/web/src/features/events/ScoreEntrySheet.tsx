@@ -1,11 +1,10 @@
 /**
  * Compact score-entry sheet.  Two modes:
  *
- * - Point-target events (e.g. "race to 21"): pick the winning side first,
- *   then tap the loser's score from a 0..(target-1) grid.  The winner
- *   auto-gets the target.
+ * - Point-target events (e.g. "total 21"): enter one side's score; the
+ *   other auto-derives as (target - entered).  A=15 → B=6 for target 21.
  * - Open events (untimed point, normal scoring): two number inputs side
- *   by side — same as the inline editor.
+ *   by side.
  *
  * Returns through ``onSubmit`` so the parent does the actual persistence
  * (lets the caller decide whether to invalidate caches, show toasts etc.).
@@ -47,8 +46,7 @@ export function ScoreEntrySheet({
     event.scoringMode === 'point' && event.scoringTarget != null;
   const target = event.scoringTarget ?? 0;
 
-  const [winner, setWinner] = useState<'A' | 'B' | null>(null);
-  const [loserScore, setLoserScore] = useState<number | null>(null);
+  // targetMode: one editable input (side A); side B = target - sideA.
   const [a, setA] = useState<string>('');
   const [b, setB] = useState<string>('');
   const [saving, setSaving] = useState(false);
@@ -57,24 +55,13 @@ export function ScoreEntrySheet({
   useEffect(() => {
     if (!open || !match) return;
     if (match.scoreA != null && match.scoreB != null) {
-      if (targetMode) {
-        if (match.scoreA === target) {
-          setWinner('A');
-          setLoserScore(match.scoreB);
-        } else if (match.scoreB === target) {
-          setWinner('B');
-          setLoserScore(match.scoreA);
-        }
-      }
       setA(String(match.scoreA));
       setB(String(match.scoreB));
     } else {
-      setWinner(null);
-      setLoserScore(null);
       setA('');
       setB('');
     }
-  }, [open, match, target, targetMode]);
+  }, [open, match]);
 
   const courtLabel = useMemo(() => {
     if (!match) return '';
@@ -87,8 +74,12 @@ export function ScoreEntrySheet({
 
   if (!open || !match) return null;
 
+  // For targetMode: A is editable, B derives from (target - A).
+  const parsedA = parseInt(a, 10);
+  const derivedB = targetMode && !Number.isNaN(parsedA) ? target - parsedA : null;
+
   const canSubmit = targetMode
-    ? winner != null && loserScore != null
+    ? a !== '' && !Number.isNaN(parsedA) && parsedA >= 0 && parsedA <= target
     : a !== '' && b !== '' && !Number.isNaN(parseInt(a, 10)) && !Number.isNaN(parseInt(b, 10));
 
   const submit = async () => {
@@ -96,9 +87,7 @@ export function ScoreEntrySheet({
     setSaving(true);
     try {
       if (targetMode) {
-        const sa = winner === 'A' ? target : (loserScore ?? 0);
-        const sb = winner === 'B' ? target : (loserScore ?? 0);
-        await onSubmit(sa, sb);
+        await onSubmit(parsedA, target - parsedA);
       } else {
         await onSubmit(parseInt(a, 10), parseInt(b, 10));
       }
@@ -132,47 +121,26 @@ export function ScoreEntrySheet({
         </header>
 
         {targetMode ? (
-          <>
-            <p className="mb-2 text-section uppercase tracking-wide text-text-color-secondary">
-              {t('events.detail.pickWinner')}
-            </p>
-            <div className="mb-4 flex gap-2">
-              <SideButton
-                label={nameA}
-                active={winner === 'A'}
-                onClick={() => setWinner('A')}
-              />
-              <SideButton
-                label={nameB}
-                active={winner === 'B'}
-                onClick={() => setWinner('B')}
-              />
-            </div>
-
-            <p className="mb-2 text-section uppercase tracking-wide text-text-color-secondary">
-              {t('events.detail.loserScore', { target })}
-            </p>
-            <div className="grid grid-cols-6 gap-2">
-              {Array.from({ length: target }, (_, i) => i).map((n) => (
-                <button
-                  key={n}
-                  type="button"
-                  onClick={() => setLoserScore(n)}
-                  disabled={winner == null}
-                  className={[
-                    'flex aspect-square items-center justify-center rounded-lg border-[0.5px] text-body font-medium tabular-nums transition-colors',
-                    winner == null
-                      ? 'border-border-hairline bg-bg-secondary text-text-color-tertiary opacity-50'
-                      : loserScore === n
-                        ? 'border-accent bg-accent text-white'
-                        : 'border-border-hairline bg-bg-secondary text-text-color-primary',
-                  ].join(' ')}
-                >
-                  {n}
-                </button>
-              ))}
-            </div>
-          </>
+          <div className="flex flex-col gap-3">
+            <SideInput
+              label={nameA}
+              value={a}
+              onChange={(v) => {
+                setA(v);
+                // Keep the open-mode input in sync so seeding still works.
+                setB(v !== '' && !Number.isNaN(parseInt(v, 10)) ? String(target - parseInt(v, 10)) : '');
+              }}
+              max={target}
+              placeholder="0"
+            />
+            <SideInput
+              label={nameB}
+              value={derivedB != null ? String(derivedB) : ''}
+              onChange={() => {/* derived — not editable */}}
+              readOnly
+              placeholder={String(target)}
+            />
+          </div>
         ) : (
           <div className="flex flex-col gap-3">
             <SideInput label={nameA} value={a} onChange={setA} />
@@ -191,51 +159,47 @@ export function ScoreEntrySheet({
   );
 }
 
-function SideButton({
-  label,
-  active,
-  onClick,
-}: {
-  label: string;
-  active: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={[
-        'flex-1 rounded-lg border-[0.5px] px-3 py-3 text-body font-medium transition-colors',
-        active
-          ? 'border-accent bg-accent text-white'
-          : 'border-border-hairline bg-bg-secondary text-text-color-primary',
-      ].join(' ')}
-    >
-      {label}
-    </button>
-  );
-}
-
 function SideInput({
   label,
   value,
   onChange,
+  max = 999,
+  placeholder,
+  readOnly = false,
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
+  max?: number;
+  placeholder?: string;
+  readOnly?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between gap-3 rounded-md border-[0.5px] border-border-hairline bg-bg-secondary px-3 py-2">
-      <span className="text-body text-text-color-primary">{label}</span>
+    <div className={[
+      'flex items-center justify-between gap-3 rounded-md border-[0.5px] px-3 py-2',
+      readOnly
+        ? 'border-border-hairline bg-bg-secondary/60'
+        : 'border-border-hairline bg-bg-secondary',
+    ].join(' ')}>
+      <span className={[
+        'text-body',
+        readOnly ? 'text-text-color-secondary' : 'text-text-color-primary',
+      ].join(' ')}>{label}</span>
       <input
         type="number"
         inputMode="numeric"
         min={0}
-        max={999}
+        max={max}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-16 rounded-md border-[0.5px] border-border-hairline bg-bg-primary px-2 py-1 text-right text-body font-medium tabular-nums text-text-color-primary focus:outline-none"
+        placeholder={placeholder}
+        readOnly={readOnly}
+        onChange={(e) => !readOnly && onChange(e.target.value)}
+        className={[
+          'w-16 rounded-md border-[0.5px] border-border-hairline px-2 py-1 text-right text-body font-medium tabular-nums focus:outline-none',
+          readOnly
+            ? 'bg-bg-tertiary text-text-color-secondary cursor-default'
+            : 'bg-bg-primary text-text-color-primary',
+        ].join(' ')}
       />
     </div>
   );
