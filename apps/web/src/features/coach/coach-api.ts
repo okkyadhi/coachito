@@ -2,8 +2,9 @@ import { api } from '@/lib/api';
 
 import type {
   CoachBio,
-  CoachListEntry,
+  CoachListResult,
   CoachProfile,
+  CoachRole,
 } from './coach-types';
 
 interface ApiBio {
@@ -21,12 +22,23 @@ interface ApiListEntry {
   display_name: string;
   avatar_url: string | null;
   headline: string | null;
+  role: string;
   session_count: number;
   last_coached_at: string | null;
   next_session_at: string | null;
 }
 
+interface ApiWorkspaceBrief {
+  id: string;
+  name: string;
+  type: string;
+  city: string | null;
+  logo_url: string | null;
+  brand_color: string | null;
+}
+
 interface ApiList {
+  workspace: ApiWorkspaceBrief;
   coaches: ApiListEntry[];
 }
 
@@ -51,17 +63,28 @@ function fromBio(b: ApiBio): CoachBio {
   };
 }
 
-export async function fetchMyCoaches(): Promise<CoachListEntry[]> {
+export async function fetchMyCoaches(): Promise<CoachListResult> {
   const r = await api.get<ApiList>('/trainees/me/coaches');
-  return r.coaches.map((c) => ({
-    coachId: c.coach_id,
-    displayName: c.display_name,
-    avatarUrl: c.avatar_url,
-    headline: c.headline,
-    sessionCount: c.session_count,
-    lastCoachedAt: c.last_coached_at,
-    nextSessionAt: c.next_session_at,
-  }));
+  return {
+    workspace: {
+      id: r.workspace.id,
+      name: r.workspace.name,
+      type: r.workspace.type === 'personal' ? 'personal' : 'club',
+      city: r.workspace.city,
+      logoUrl: r.workspace.logo_url,
+      brandColor: r.workspace.brand_color,
+    },
+    coaches: r.coaches.map((c) => ({
+      coachId: c.coach_id,
+      displayName: c.display_name,
+      avatarUrl: c.avatar_url,
+      headline: c.headline,
+      role: (c.role as CoachRole) ?? 'coach',
+      sessionCount: c.session_count,
+      lastCoachedAt: c.last_coached_at,
+      nextSessionAt: c.next_session_at,
+    })),
+  };
 }
 
 export async function fetchCoachProfile(coachId: string): Promise<CoachProfile> {

@@ -38,6 +38,13 @@ export function CoachListRow({ entry, onTap }: Props) {
           <p className="truncate text-body text-text-color-primary">
             {entry.displayName}
           </p>
+          {entry.role === 'club_admin' || entry.role === 'head_coach' ? (
+            <span className="shrink-0 rounded-full bg-accent-bg px-1.5 py-0.5 text-caption font-medium text-accent">
+              {entry.role === 'club_admin'
+                ? t('coach.list.roleClubAdmin')
+                : t('coach.list.roleHeadCoach')}
+            </span>
+          ) : null}
           {upcomingSoon ? (
             <span
               className="size-1.5 shrink-0 rounded-full bg-accent"
@@ -51,8 +58,11 @@ export function CoachListRow({ entry, onTap }: Props) {
           </p>
         ) : null}
         <p className="text-footnote text-text-color-tertiary">
-          {t('coach.list.sessionCount', { count: entry.sessionCount })}
-          {last ? ` · ${t('coach.list.lastCoached', { ago: last })}` : ''}
+          {entry.sessionCount > 0
+            ? `${t('coach.list.sessionCount', { count: entry.sessionCount })}${
+                last ? ` · ${t('coach.list.lastCoached', { ago: last })}` : ''
+              }`
+            : t('coach.list.notYetCoached')}
         </p>
       </div>
       <ChevronRight
