@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { Building2, User } from 'lucide-react';
 
-import { Logo } from '@/components/Logo';
+import { EditorialHeader } from '@/components/EditorialHeader';
 
 // Role-chooser screen.  Two cards: solo coach vs club admin → respective signup
 // forms.  Trainees join via invite (not surfaced here).
@@ -13,15 +13,11 @@ export function SignUpScreen() {
   return (
     <main className="flex min-h-screen flex-col bg-bg-tertiary">
       <div className="mx-auto flex w-full max-w-sm flex-1 flex-col px-6 pb-8 pt-16">
-        <div className="flex flex-col items-center gap-4 text-center">
-          <Logo size={72} />
-          <h1 className="text-large-title text-text-color-primary">
-            {t('signup.title')}
-          </h1>
-          <p className="text-body text-text-color-secondary">
-            {t('signup.subtitle')}
-          </p>
-        </div>
+        <EditorialHeader
+          title={t('signup.title')}
+          subtitle={t('signup.subtitle')}
+          logoSize={68}
+        />
 
         <div className="mt-10 flex flex-col gap-3">
           <button
@@ -29,7 +25,7 @@ export function SignUpScreen() {
             onClick={() => navigate('/signup/coach')}
             className="flex min-h-tap items-start gap-4 rounded-lg border-[0.5px] border-border-hairline bg-bg-primary p-5 text-left transition-colors hover:bg-bg-secondary"
           >
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
+            <div className="bg-accent/10 flex size-10 shrink-0 items-center justify-center rounded-full text-accent">
               <User size={20} strokeWidth={1.5} />
             </div>
             <div className="flex-1">
@@ -47,7 +43,7 @@ export function SignUpScreen() {
             onClick={() => navigate('/signup/club')}
             className="flex min-h-tap items-start gap-4 rounded-lg border-[0.5px] border-border-hairline bg-bg-primary p-5 text-left transition-colors hover:bg-bg-secondary"
           >
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
+            <div className="bg-accent/10 flex size-10 shrink-0 items-center justify-center rounded-full text-accent">
               <Building2 size={20} strokeWidth={1.5} />
             </div>
             <div className="flex-1">

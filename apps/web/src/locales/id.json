@@ -1,4 +1,9 @@
 {
+  "brand": {
+    "name": "Coachito",
+    "tagline": "pelatihmu, di sakumu",
+    "microcopy": "· EST · MMXXVI · MADE FOR THE COURT ·"
+  },
   "common": {
     "back": "Kembali",
     "cancel": "Batal",
@@ -428,8 +433,8 @@
     "switcherHint": "Pakai switcher workspace di atas untuk melihatnya."
   },
   "signin": {
-    "title": "Masuk ke Coachito",
-    "subtitle": "Lacak perjalanan coaching kamu.",
+    "title": "Selamat datang kembali",
+    "subtitle": "Pelatihmu, di sakumu.",
     "continueWithGoogle": "Lanjut dengan Google",
     "continueWithEmail": "Lanjut dengan email",
     "emailLabel": "Email",
@@ -507,8 +512,8 @@
     "signedInAs": "Masuk sebagai {{email}}"
   },
   "signup": {
-    "title": "Buat akun Coachito",
-    "subtitle": "Pilih jenis akun yang ingin kamu buat.",
+    "title": "Mulai dengan Coachito",
+    "subtitle": "Pilih cara kamu akan melatih.",
     "alreadyHave": "Sudah punya akun?",
     "signInLink": "Masuk",
     "genericError": "Gagal membuat akun. Coba lagi.",
@@ -629,7 +634,7 @@
   "inviteWelcome": {
     "greetingGeneric": "Kamu diundang",
     "greetingWithName": "Kamu diundang, {{name}}",
-    "subtitle": "Coach {{coach}} mengundangmu untuk track progres padel bersama {{workspace}}.",
+    "subtitle": "Coach {{coach}} mengajakmu ke {{workspace}} untuk track setiap rally dan setiap kemajuan.",
     "invitedBy": "Diundang oleh Coach {{coach}}",
     "yourCoach": "coach kamu",
     "expiredTitle": "Undangan ini sudah kedaluwarsa",

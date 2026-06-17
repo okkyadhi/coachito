@@ -59,9 +59,9 @@ export function TierUpSheet({
       role="dialog"
       aria-modal="true"
       aria-label={t('assessment.tierUp.title', { tier: tierName })}
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 sm:items-center"
+      className="animate-overlay fixed inset-0 z-50 flex items-end justify-center bg-black/40 sm:items-center"
     >
-      <div className="flex w-full max-w-md flex-col items-center rounded-t-2xl bg-bg-primary px-4 py-6 sm:rounded-2xl">
+      <div className="animate-celebrate flex w-full max-w-md flex-col items-center rounded-t-2xl bg-bg-primary px-4 py-6 sm:rounded-2xl">
         <button
           type="button"
           onClick={onClose}
@@ -75,7 +75,10 @@ export function TierUpSheet({
           <PartyPopper size={32} strokeWidth={1.5} aria-hidden />
         </div>
 
-        <h2 className="mb-1 text-center text-h2 text-text-color-primary">
+        <h2
+          className="mb-1 text-center font-display text-[26px] font-normal leading-tight text-text-color-primary"
+          style={{ letterSpacing: '-0.3px' }}
+        >
           {t('assessment.tierUp.title', { tier: tierName })}
         </h2>
         <p className="mb-5 max-w-[280px] text-center text-body text-text-color-secondary">

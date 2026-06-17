@@ -42,22 +42,14 @@ export function CoachNoteCard({ note, onOpen }: Props) {
         <div className="relative mt-2 pl-7">
           <span
             aria-hidden
-            className="absolute -left-1 top-0 select-none text-accent"
-            style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
-              fontSize: '54px',
-              lineHeight: '0.85',
-            }}
+            className="animate-fade-in absolute -left-1 top-0 select-none font-display text-accent"
+            style={{ fontSize: '54px', lineHeight: '0.85' }}
           >
             “
           </span>
           <p
-            className="text-body text-text-color-primary"
-            style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
-              fontStyle: 'italic',
-              lineHeight: 1.5,
-            }}
+            className="font-display text-body italic text-text-color-primary"
+            style={{ lineHeight: 1.5 }}
           >
             {note.summary}
           </p>

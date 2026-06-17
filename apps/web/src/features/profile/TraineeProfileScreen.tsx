@@ -128,7 +128,7 @@ function ReportsLink({
       <button
         type="button"
         onClick={onTap}
-        className="flex w-full min-h-tap items-center gap-3 rounded-xl border-[0.5px] border-border-hairline bg-bg-primary p-4 text-left active:bg-bg-secondary"
+        className="flex min-h-tap w-full items-center gap-3 rounded-xl border-[0.5px] border-border-hairline bg-bg-primary p-4 text-left active:bg-bg-secondary"
       >
         <span
           className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent-bg text-accent"

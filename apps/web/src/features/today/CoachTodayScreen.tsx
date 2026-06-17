@@ -4,8 +4,10 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { EmptyState as SharedEmptyState } from '@/components/EmptyState';
 import { GroupedTable } from '@/components/GroupedTable';
 import { PrimaryButton } from '@/components/PrimaryButton';
+import { SkeletonList } from '@/components/Skeleton';
 import { useAuthStore } from '@/features/auth/auth-store';
 import { getFeedbackInbox } from '@/features/assessment/feedback-api';
 import { getFunnelCounts } from '@/features/sessions/sessions-api';
@@ -90,7 +92,7 @@ export function CoachTodayScreen() {
         <button
           type="button"
           onClick={() => navigate('/sessions?stage=to_assess')}
-          className="border-accent/40 bg-accent/5 mb-3 flex w-full items-center gap-3 rounded-xl border-[0.5px] px-4 py-3 text-left"
+          className="animate-fade-in border-accent/40 bg-accent/5 hover:bg-accent/10 mb-3 flex w-full items-center gap-3 rounded-xl border-[0.5px] px-4 py-3 text-left transition-colors"
         >
           <ClipboardCheck
             size={18}
@@ -113,7 +115,7 @@ export function CoachTodayScreen() {
         <button
           type="button"
           onClick={() => navigate('/feedback')}
-          className="border-accent/40 bg-accent/5 mb-5 flex w-full items-center gap-3 rounded-xl border-[0.5px] px-4 py-3 text-left"
+          className="animate-fade-in border-accent/40 bg-accent/5 hover:bg-accent/10 mb-5 flex w-full items-center gap-3 rounded-xl border-[0.5px] px-4 py-3 text-left transition-colors"
         >
           <MessageCircle
             size={18}
@@ -131,9 +133,9 @@ export function CoachTodayScreen() {
       ) : null}
 
       {isPending ? (
-        <SkeletonList />
+        <SkeletonList rows={3} />
       ) : sessions.length === 0 ? (
-        <EmptyState onSchedule={() => navigate('/sessions')} onAddTrainee={() => navigate('/trainees')} />
+        <TodayEmpty onSchedule={() => navigate('/sessions')} onAddTrainee={() => navigate('/trainees')} />
       ) : (
         <div className="space-y-5">
           {upNext ? <UpNextCard session={upNext} locale={locale} sports={sports} isMultiSport={isMultiSport} /> : null}
@@ -165,46 +167,23 @@ export function CoachTodayScreen() {
   );
 }
 
-function SkeletonList() {
-  return (
-    <div className="rounded-xl border-[0.5px] border-border-hairline bg-bg-primary">
-      {[0, 1, 2].map((i) => (
-        <div
-          key={i}
-          className={[
-            'flex items-center gap-3 p-3',
-            i > 0 ? 'border-t-[0.5px] border-border-hairline' : '',
-          ].join(' ')}
-        >
-          <div className="size-10 rounded-full bg-bg-tertiary" />
-          <div className="flex-1 space-y-1.5">
-            <div className="h-3 w-2/5 rounded bg-bg-tertiary" />
-            <div className="h-2.5 w-3/5 rounded bg-bg-tertiary" />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-interface EmptyStateProps {
+interface TodayEmptyProps {
   onSchedule: () => void;
   onAddTrainee: () => void;
 }
 
-function EmptyState({ onSchedule, onAddTrainee }: EmptyStateProps) {
+function TodayEmpty({ onSchedule, onAddTrainee }: TodayEmptyProps) {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col items-center gap-3 pt-12 text-center">
-      <div className="flex size-[60px] items-center justify-center rounded-full border-[0.5px] border-border-hairline bg-bg-secondary">
-        <CalendarOff aria-hidden size={26} strokeWidth={1.5} className="text-text-color-tertiary" />
-      </div>
-      <h2 className="mt-2 text-h3 text-text-color-primary">{t('today.emptyTitle')}</h2>
-      <p className="max-w-[260px] text-caption text-text-color-secondary">
-        {t('today.emptyBody')}
-      </p>
-      <div className="mt-2 flex w-full max-w-[240px] flex-col gap-2">
+    <SharedEmptyState
+      icon={CalendarOff}
+      title={t('today.emptyTitle')}
+      body={t('today.emptyBody')}
+      className="pt-10"
+      primaryAction={
         <PrimaryButton onClick={onSchedule}>{t('today.scheduleSession')}</PrimaryButton>
+      }
+      secondaryAction={
         <button
           type="button"
           onClick={onAddTrainee}
@@ -212,7 +191,7 @@ function EmptyState({ onSchedule, onAddTrainee }: EmptyStateProps) {
         >
           {t('today.addTraineeFirst')}
         </button>
-      </div>
-    </div>
+      }
+    />
   );
 }

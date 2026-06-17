@@ -34,7 +34,7 @@ function ResetPasswordModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
       <div className="w-full max-w-sm rounded-2xl border-[0.5px] border-border-hairline bg-bg-primary p-6 shadow-lg">
-        <h2 className="mb-1 text-headline text-text-color-primary">Reset password</h2>
+        <h2 className="text-headline mb-1 text-text-color-primary">Reset password</h2>
         <p className="mb-4 text-body text-text-color-secondary">
           {user.display_name} · {user.email ?? 'no email'}
         </p>

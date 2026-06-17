@@ -7,7 +7,7 @@ import {
   stashPendingInvite,
 } from '@/features/onboarding/invite-claim';
 
-import { Logo } from '@/components/Logo';
+import { EditorialHeader } from '@/components/EditorialHeader';
 import { PrimaryButton } from '@/components/PrimaryButton';
 import { SecondaryButton } from '@/components/SecondaryButton';
 import { TextInput } from '@/components/TextInput';
@@ -77,19 +77,15 @@ export function SignInScreen() {
   return (
     <main className="flex min-h-screen flex-col bg-bg-tertiary">
       <div className="mx-auto flex w-full max-w-sm flex-1 flex-col px-6 pb-8 pt-16">
-        <div className="flex flex-col items-center gap-4 text-center">
-          <Logo size={72} />
-          <h1 className="text-large-title text-text-color-primary">
-            {view === 'magic-sent'
-              ? t('signin.checkYourEmail')
-              : t('signin.title')}
-          </h1>
-          <p className="text-body text-text-color-secondary">
-            {view === 'magic-sent'
+        <EditorialHeader
+          title={view === 'magic-sent' ? t('signin.checkYourEmail') : t('signin.title')}
+          subtitle={
+            view === 'magic-sent'
               ? t('signin.checkYourEmailBody', { email })
-              : t('signin.subtitle')}
-          </p>
-        </div>
+              : t('signin.subtitle')
+          }
+          logoSize={68}
+        />
 
         {view === 'magic-sent' ? (
           <div className="mt-10 flex flex-col gap-3">

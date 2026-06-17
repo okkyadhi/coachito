@@ -39,7 +39,7 @@ function StatCard({
       className={`rounded-xl border-[0.5px] border-border-hairline bg-bg-primary p-5 ${onClick ? 'cursor-pointer hover:bg-bg-tertiary' : ''}`}
     >
       <div className="flex items-start justify-between">
-        <div className={`flex h-10 w-10 items-center justify-center rounded-full ${alert ? 'bg-red-50 text-red-600' : 'bg-accent/10 text-accent'}`}>
+        <div className={`flex size-10 items-center justify-center rounded-full ${alert ? 'bg-red-50 text-red-600' : 'bg-accent/10 text-accent'}`}>
           <Icon size={20} strokeWidth={1.5} />
         </div>
         {alert ? (
@@ -48,7 +48,7 @@ function StatCard({
           </span>
         ) : null}
       </div>
-      <p className="mt-3 text-title-3 font-medium text-text-color-primary">{value}</p>
+      <p className="text-title-3 mt-3 font-medium text-text-color-primary">{value}</p>
       <p className="text-body text-text-color-secondary">{label}</p>
       {sub ? <p className="mt-0.5 text-caption text-text-color-tertiary">{sub}</p> : null}
     </div>
@@ -112,7 +112,7 @@ export function AdminOverviewScreen() {
 
           {/* By plan breakdown */}
           <div className="rounded-xl border-[0.5px] border-border-hairline bg-bg-primary p-5">
-            <h2 className="mb-4 text-headline text-text-color-primary">Workspaces by plan</h2>
+            <h2 className="text-headline mb-4 text-text-color-primary">Workspaces by plan</h2>
             <div className="space-y-2">
               {Object.entries(PLAN_LABELS).map(([plan, label]) => {
                 const count = data.workspaces_by_plan[plan] ?? 0;

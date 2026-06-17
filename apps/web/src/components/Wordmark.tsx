@@ -14,6 +14,8 @@ interface WordmarkProps {
   variant?: 'ink' | 'cream';
   /** Whether to render the tagline underneath.  Default false. */
   tagline?: boolean;
+  /** Tagline override.  Defaults to English brand tagline. */
+  taglineText?: string;
   className?: string;
 }
 
@@ -27,6 +29,7 @@ export function Wordmark({
   size = 22,
   variant = 'ink',
   tagline = false,
+  taglineText = 'your coach, in your pocket',
   className,
 }: WordmarkProps) {
   const onInk = variant === 'cream';
@@ -86,7 +89,7 @@ export function Wordmark({
           letterSpacing="0.18em"
           fill={captionColor}
         >
-          tu coach, en tu bolsillo
+          {taglineText}
         </text>
       ) : null}
     </svg>

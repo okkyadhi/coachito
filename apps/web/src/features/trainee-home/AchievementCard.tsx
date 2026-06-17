@@ -35,10 +35,10 @@ export function AchievementCard({ achievement, onViewSkill, onShare }: Props) {
         {t('traineeHome.achievement.tag')}
       </p>
       <h2
-        className="mt-1 pr-12 text-[22px] font-medium text-text-color-primary"
-        style={{ fontFamily: 'Georgia, "Times New Roman", serif', letterSpacing: '-0.2px' }}
+        className="mt-1 pr-12 font-display text-[24px] font-normal leading-tight text-text-color-primary"
+        style={{ letterSpacing: '-0.2px' }}
       >
-        {achievement.skillNameEn} · {t(achievement.levelLabelKey)}
+        {achievement.skillNameEn} · <span className="italic">{t(achievement.levelLabelKey)}</span>
       </h2>
       <p className="mt-1.5 text-caption text-text-color-secondary">{body}</p>
 

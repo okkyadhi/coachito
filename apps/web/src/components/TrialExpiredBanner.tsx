@@ -35,7 +35,7 @@ export function TrialExpiredBanner() {
           <span className="text-[13px] font-medium text-warning-text">
             {t('trial.expiredTitle')}
           </span>
-          <span className="ml-1 text-footnote text-warning-text/85">
+          <span className="text-warning-text/85 ml-1 text-footnote">
             {t('trial.expiredBody')}
           </span>
         </div>

@@ -109,7 +109,7 @@ export function AddTraineeScreen() {
           <div className="size-10" />
         </header>
         <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
-          <div className="flex size-16 items-center justify-center rounded-full bg-accent/10 text-accent">
+          <div className="bg-accent/10 flex size-16 items-center justify-center rounded-full text-accent">
             <Link2 size={28} strokeWidth={1.5} aria-hidden />
           </div>
           <h2 className="mt-4 text-large-title text-text-color-primary">

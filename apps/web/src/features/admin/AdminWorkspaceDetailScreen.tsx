@@ -47,7 +47,7 @@ function fmtDate(iso: string | null) {
 function StatCard({ icon: Icon, label, value }: { icon: typeof Users; label: string; value: string }) {
   return (
     <div className="flex items-center gap-3 rounded-xl border-[0.5px] border-border-hairline bg-bg-primary p-4">
-      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 text-accent">
+      <div className="bg-accent/10 flex size-10 items-center justify-center rounded-full text-accent">
         <Icon size={20} strokeWidth={1.5} />
       </div>
       <div>
@@ -180,13 +180,13 @@ export function AdminWorkspaceDetailScreen() {
       </div>
 
       {/* Tabs */}
-      <div className="mb-4 flex gap-1 rounded-lg border-[0.5px] border-border-hairline bg-bg-tertiary p-1 w-fit">
+      <div className="mb-4 flex w-fit gap-1 rounded-lg border-[0.5px] border-border-hairline bg-bg-tertiary p-1">
         {(['billing', 'members'] as Tab[]).map((t) => (
           <button
             key={t}
             type="button"
             onClick={() => setTab(t)}
-            className={`rounded-md px-4 py-1.5 text-body transition-colors capitalize ${
+            className={`rounded-md px-4 py-1.5 text-body capitalize transition-colors ${
               tab === t
                 ? 'bg-bg-primary text-text-color-primary shadow-sm'
                 : 'text-text-color-secondary hover:text-text-color-primary'
@@ -199,7 +199,7 @@ export function AdminWorkspaceDetailScreen() {
 
       {tab === 'billing' ? (
         <div className="rounded-xl border-[0.5px] border-border-hairline bg-bg-primary p-5">
-          <h2 className="mb-4 text-headline text-text-color-primary">Billing & settings</h2>
+          <h2 className="text-headline mb-4 text-text-color-primary">Billing & settings</h2>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="mb-1 block text-caption text-text-color-secondary">Plan</label>
@@ -249,7 +249,7 @@ export function AdminWorkspaceDetailScreen() {
                 type="checkbox"
                 checked={archived ?? false}
                 onChange={(e) => setArchived(e.target.checked)}
-                className="h-4 w-4 rounded border-border-hairline accent-accent"
+                className="size-4 rounded border-border-hairline accent-accent"
               />
               Archived
             </label>

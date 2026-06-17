@@ -1,7 +1,7 @@
 import { Suspense, lazy, type ReactElement } from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
-import { Logo } from '@/components/Logo';
+import { SplashScreen } from '@/components/SplashScreen';
 import { ForgotPasswordScreen } from '@/features/auth/ForgotPasswordScreen';
 import { GoogleCallback } from '@/features/auth/GoogleCallback';
 import { MagicLinkLanding } from '@/features/auth/MagicLinkLanding';
@@ -158,11 +158,7 @@ const CreateWorkspaceScreen = lazy(() =>
 );
 
 function RouteFallback() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-bg-tertiary">
-      <Logo size={56} />
-    </main>
-  );
+  return <SplashScreen variant="compact" />;
 }
 
 function RequireAuth({ children }: { children: ReactElement }) {

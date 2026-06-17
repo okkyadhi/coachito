@@ -1,4 +1,9 @@
 {
+  "brand": {
+    "name": "Coachito",
+    "tagline": "your coach, in your pocket",
+    "microcopy": "· EST · MMXXVI · MADE FOR THE COURT ·"
+  },
   "common": {
     "back": "Back",
     "cancel": "Cancel",
@@ -428,8 +433,8 @@
     "switcherHint": "Use the workspace switcher at the top to view it."
   },
   "signin": {
-    "title": "Sign in to Coachito",
-    "subtitle": "Track your coaching journey.",
+    "title": "Welcome back",
+    "subtitle": "Your coach, in your pocket.",
     "continueWithGoogle": "Continue with Google",
     "continueWithEmail": "Continue with email",
     "emailLabel": "Email",
@@ -507,8 +512,8 @@
     "signedInAs": "Signed in as {{email}}"
   },
   "signup": {
-    "title": "Create your Coachito account",
-    "subtitle": "Pick the kind of account you'd like to start with.",
+    "title": "Start with Coachito",
+    "subtitle": "Pick how you'll be coaching.",
     "alreadyHave": "Already have an account?",
     "signInLink": "Sign in",
     "genericError": "Couldn't create the account. Try again.",
@@ -611,7 +616,7 @@
   "inviteWelcome": {
     "greetingGeneric": "You're invited",
     "greetingWithName": "You're invited, {{name}}",
-    "subtitle": "Coach {{coach}} invited you to track your padel progress with {{workspace}}.",
+    "subtitle": "Coach {{coach}} brought you to {{workspace}} to track every rally and every win.",
     "invitedBy": "Invited by Coach {{coach}}",
     "yourCoach": "your coach",
     "expiredTitle": "This invite has expired",

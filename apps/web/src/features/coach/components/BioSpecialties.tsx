@@ -36,7 +36,7 @@ export function BioSpecialties({ specialties }: Props) {
           return (
             <span
               key={code}
-              className="rounded-full border-[0.5px] border-accent/40 bg-accent/10 px-3 py-1 text-pill text-accent"
+              className="border-accent/40 bg-accent/10 rounded-full border-[0.5px] px-3 py-1 text-pill text-accent"
             >
               {label}
             </span>

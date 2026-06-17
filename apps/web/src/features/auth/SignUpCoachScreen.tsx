@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Logo } from '@/components/Logo';
+import { EditorialHeader } from '@/components/EditorialHeader';
 import { PhoneInput } from '@/components/PhoneInput';
 import { PrimaryButton } from '@/components/PrimaryButton';
 import { TextInput } from '@/components/TextInput';
@@ -61,15 +61,11 @@ export function SignUpCoachScreen() {
   return (
     <main className="flex min-h-screen flex-col bg-bg-tertiary">
       <div className="mx-auto flex w-full max-w-sm flex-1 flex-col px-6 pb-8 pt-12">
-        <div className="flex flex-col items-center gap-3 text-center">
-          <Logo size={56} />
-          <h1 className="text-large-title text-text-color-primary">
-            {t('signup.coach.title')}
-          </h1>
-          <p className="text-body text-text-color-secondary">
-            {t('signup.coach.subtitle')}
-          </p>
-        </div>
+        <EditorialHeader
+          title={t('signup.coach.title')}
+          subtitle={t('signup.coach.subtitle')}
+          logoSize={56}
+        />
 
         <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-3">
           <TextInput
@@ -124,9 +120,9 @@ export function SignUpCoachScreen() {
                     role="radio"
                     aria-checked={active}
                     onClick={() => setSportCode(code)}
-                    className={`flex-1 min-h-tap rounded-md border-[0.5px] px-4 py-2 text-body transition-colors ${
+                    className={`min-h-tap flex-1 rounded-md border-[0.5px] px-4 py-2 text-body transition-colors ${
                       active
-                        ? 'border-accent bg-accent/10 text-accent'
+                        ? 'bg-accent/10 border-accent text-accent'
                         : 'border-border-hairline bg-bg-primary text-text-color-primary'
                     }`}
                   >

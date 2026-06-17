@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { EmptyState as SharedEmptyState } from '@/components/EmptyState';
 import { GroupedTable } from '@/components/GroupedTable';
 import { PrimaryButton } from '@/components/PrimaryButton';
-import { SecondaryButton } from '@/components/SecondaryButton';
+import { SkeletonList } from '@/components/Skeleton';
 import { TextInput } from '@/components/TextInput';
 import { useAuthStore } from '@/features/auth/auth-store';
 
@@ -41,7 +42,7 @@ export function TraineesScreen() {
           type="button"
           onClick={() => navigate('/trainees/new')}
           aria-label={t('trainees.addAction')}
-          className="flex size-9 items-center justify-center rounded-full bg-accent text-white"
+          className="flex size-9 items-center justify-center rounded-full bg-accent text-white transition-transform hover:scale-105 active:scale-95"
         >
           <Plus size={20} strokeWidth={2} aria-hidden />
         </button>
@@ -62,9 +63,12 @@ export function TraineesScreen() {
 
       {/* List */}
       {isPending ? (
-        <SkeletonList />
+        <SkeletonList rows={4} />
       ) : showEmptyState ? (
-        <EmptyState onAddAndInvite={() => navigate('/trainees/new?intent=invite')} onAddWithout={() => navigate('/trainees/new?intent=save')} />
+        <TraineesEmpty
+          onAddAndInvite={() => navigate('/trainees/new?intent=invite')}
+          onAddWithout={() => navigate('/trainees/new?intent=save')}
+        />
       ) : trainees.length === 0 ? (
         <p className="px-1 text-caption text-text-color-secondary">
           {t('trainees.noResults', { q: trimmedQ })}
@@ -80,54 +84,33 @@ export function TraineesScreen() {
   );
 }
 
-function SkeletonList() {
-  return (
-    <div className="rounded-xl border-[0.5px] border-border-hairline bg-bg-primary">
-      {[0, 1, 2, 3].map((i) => (
-        <div
-          key={i}
-          className={[
-            'flex items-center gap-3 p-3',
-            i > 0 ? 'border-t-[0.5px] border-border-hairline' : '',
-          ].join(' ')}
-        >
-          <div className="size-10 rounded-full bg-bg-tertiary" />
-          <div className="flex-1 space-y-1.5">
-            <div className="h-3 w-2/5 rounded bg-bg-tertiary" />
-            <div className="h-2.5 w-3/5 rounded bg-bg-tertiary" />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-interface EmptyStateProps {
+interface TraineesEmptyProps {
   onAddAndInvite: () => void;
   onAddWithout: () => void;
 }
 
-function EmptyState({ onAddAndInvite, onAddWithout }: EmptyStateProps) {
+function TraineesEmpty({ onAddAndInvite, onAddWithout }: TraineesEmptyProps) {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col items-center gap-3 pt-12 text-center">
-      <div className="flex size-[60px] items-center justify-center rounded-full border-[0.5px] border-border-hairline bg-bg-secondary">
-        <UserPlus aria-hidden size={26} strokeWidth={1.5} className="text-text-color-tertiary" />
-      </div>
-      <h2 className="mt-2 text-h3 text-text-color-primary">
-        {t('trainees.emptyTitle')}
-      </h2>
-      <p className="max-w-[260px] text-caption text-text-color-secondary">
-        {t('trainees.emptyBody')}
-      </p>
-      <div className="mt-2 flex w-full max-w-[240px] flex-col gap-2">
+    <SharedEmptyState
+      icon={UserPlus}
+      title={t('trainees.emptyTitle')}
+      body={t('trainees.emptyBody')}
+      className="pt-10"
+      primaryAction={
         <PrimaryButton onClick={onAddAndInvite}>
           {t('trainees.addAndInvite')}
         </PrimaryButton>
-        <SecondaryButton onClick={onAddWithout}>
+      }
+      secondaryAction={
+        <button
+          type="button"
+          onClick={onAddWithout}
+          className="min-h-tap text-caption text-accent underline-offset-2 hover:underline"
+        >
           {t('trainees.addWithoutInvite')}
-        </SecondaryButton>
-      </div>
-    </div>
+        </button>
+      }
+    />
   );
 }

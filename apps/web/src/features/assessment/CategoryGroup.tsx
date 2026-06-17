@@ -33,6 +33,8 @@ export function CategoryGroup({
 }: Props) {
   const { t } = useTranslation();
   const ratedCount = skills.filter((s) => scores[s.skillCode] != null).length;
+  const allRated = ratedCount === skills.length;
+  const noneRated = ratedCount === 0;
 
   return (
     <div className="overflow-hidden rounded-xl border-[0.5px] border-border-hairline bg-bg-primary">
@@ -42,7 +44,18 @@ export function CategoryGroup({
         aria-expanded={isOpen}
         className="flex min-h-tap w-full items-center justify-between gap-2 px-4 py-3 text-left"
       >
-        <span className="text-h3 text-text-color-primary">
+        <span className="flex items-center gap-2 text-h3 text-text-color-primary">
+          <span
+            aria-hidden
+            className={[
+              'inline-block size-1.5 rounded-full transition-colors',
+              allRated
+                ? 'bg-success-text'
+                : noneRated
+                  ? 'bg-stone-soft'
+                  : 'bg-accent',
+            ].join(' ')}
+          />
           {t(`profile.categories.${category}`)}
         </span>
         <div className="flex items-center gap-2">

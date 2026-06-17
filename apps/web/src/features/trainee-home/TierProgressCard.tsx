@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { TraineeTierProgress } from './trainee-home-api';
@@ -17,6 +18,14 @@ export function TierProgressCard({ progress }: Props) {
   const pct = progress.totalRequirements
     ? Math.round((progress.metCount / progress.totalRequirements) * 100)
     : 0;
+
+  // Animate the progress bar from 0 → pct on mount so the achievement
+  // feels earned each time the screen renders.
+  const [animatedPct, setAnimatedPct] = useState(0);
+  useEffect(() => {
+    const t = window.setTimeout(() => setAnimatedPct(pct), 120);
+    return () => window.clearTimeout(t);
+  }, [pct]);
 
   // Top-tier ceiling: at MVP only Bronze+ is shipped.  When nextTier is null
   // we show a refining-tone treatment instead of a 100% bar.
@@ -46,8 +55,8 @@ export function TierProgressCard({ progress }: Props) {
       </div>
       <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-bg-tertiary">
         <div
-          className="h-full rounded-full bg-accent transition-all"
-          style={{ width: `${pct}%` }}
+          className="h-full rounded-full bg-accent transition-[width] duration-[900ms] ease-out"
+          style={{ width: `${animatedPct}%` }}
         />
       </div>
       <p className="mt-3 text-caption text-text-color-secondary">{encouragement}</p>

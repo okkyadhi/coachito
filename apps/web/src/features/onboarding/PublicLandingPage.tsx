@@ -81,8 +81,8 @@ export function PublicLandingPage() {
             )}
           </div>
           <h1
-            className="mt-2 text-[26px] font-medium text-text-color-primary"
-            style={{ fontFamily: 'Georgia, "Times New Roman", serif', letterSpacing: '-0.3px' }}
+            className="mt-2 font-display text-[28px] font-normal leading-tight text-text-color-primary"
+            style={{ letterSpacing: '-0.3px' }}
           >
             {meta.traineeFirstName
               ? t('publicLanding.heroWithName', { name: meta.traineeFirstName })

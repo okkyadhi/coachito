@@ -67,7 +67,7 @@ export function AdminUpgradeRequestsScreen() {
         </div>
       </div>
 
-      <div className="mb-4 flex gap-1 w-fit rounded-lg border-[0.5px] border-border-hairline bg-bg-tertiary p-1">
+      <div className="mb-4 flex w-fit gap-1 rounded-lg border-[0.5px] border-border-hairline bg-bg-tertiary p-1">
         {(['pending', 'resolved', 'dismissed', 'all'] as Filter[]).map((f) => (
           <button
             key={f}

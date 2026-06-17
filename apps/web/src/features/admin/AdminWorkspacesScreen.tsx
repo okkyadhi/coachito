@@ -118,7 +118,7 @@ export function AdminWorkspacesScreen() {
             type="checkbox"
             checked={showArchived}
             onChange={(e) => setShowArchived(e.target.checked)}
-            className="h-4 w-4 rounded border-border-hairline accent-accent"
+            className="size-4 rounded border-border-hairline accent-accent"
           />
           Show archived
         </label>
@@ -152,7 +152,7 @@ export function AdminWorkspacesScreen() {
                       <p className="text-body font-medium text-text-color-primary">{ws.name}</p>
                       <p className="text-caption text-text-color-secondary">{ws.owner_email ?? ws.owner_display_name}</p>
                     </td>
-                    <td className="px-4 py-3 text-body text-text-color-secondary capitalize">{ws.type}</td>
+                    <td className="px-4 py-3 text-body capitalize text-text-color-secondary">{ws.type}</td>
                     <td className="px-4 py-3 text-body text-text-color-secondary">{PLAN_LABELS[ws.plan]}</td>
                     <td className="px-4 py-3 text-body text-text-color-primary">{ws.coach_count}</td>
                     <td className="px-4 py-3 text-body text-text-color-primary">{ws.trainee_count}</td>

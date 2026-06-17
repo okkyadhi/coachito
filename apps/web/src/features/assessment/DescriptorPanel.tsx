@@ -22,7 +22,7 @@ export function DescriptorPanel({
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col gap-3 px-3 pb-3">
+    <div className="animate-fade-in flex flex-col gap-3 px-3 pb-3">
       <div className="flex flex-col gap-2">
         {descriptors.descriptions.map((text, idx) => {
           const level = idx + 1;

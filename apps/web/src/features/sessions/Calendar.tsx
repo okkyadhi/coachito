@@ -51,7 +51,7 @@ export function MonthNavigator({ month, onPrev, onNext, onToday }: MonthNavigato
       <button
         type="button"
         onClick={onToday}
-        className="flex-1 truncate rounded-md px-2 py-2 text-center text-h3 text-text-color-primary hover:bg-bg-secondary"
+        className="flex-1 truncate rounded-md p-2 text-center text-h3 text-text-color-primary hover:bg-bg-secondary"
         title={t('calendar.jumpToday')}
       >
         {monthLabel.charAt(0).toUpperCase() + monthLabel.slice(1)}

@@ -24,10 +24,10 @@ export function SegmentedScore({ value, onChange, ariaLabel }: Props) {
             aria-label={`Level ${n}`}
             onClick={() => onChange(selected ? null : n)}
             className={[
-              'flex-1 min-h-tap rounded-sm text-[15px] font-medium transition-colors duration-100',
+              'flex-1 min-h-tap rounded-sm text-[15px] font-medium transition-all duration-150 ease-out active:scale-95',
               selected
-                ? 'bg-bg-primary text-accent border-[0.5px] border-accent'
-                : 'bg-transparent text-text-color-secondary',
+                ? 'bg-bg-primary text-accent border-[0.5px] border-accent shadow-sm scale-[1.02]'
+                : 'bg-transparent text-text-color-tertiary hover:text-text-color-secondary',
             ].join(' ')}
           >
             {n}

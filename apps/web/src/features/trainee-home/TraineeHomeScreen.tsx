@@ -131,7 +131,19 @@ export function TraineeHomeScreen() {
         <AchievementCard
           achievement={home.achievement}
           onViewSkill={() => navigate('/progress')}
-          onShare={() => {/* native share – wired in V1.5 */}}
+          onShare={() => {
+            const a = home.achievement;
+            if (!a) return;
+            const text = `I just levelled up: ${a.skillNameEn} — ${t(a.levelLabelKey)} 📈`;
+            const url = window.location.origin;
+            const nav: Navigator | undefined =
+              typeof navigator !== 'undefined' ? navigator : undefined;
+            if (nav?.share) {
+              void nav.share({ title: t('brand.name'), text, url }).catch(() => {});
+            } else if (nav?.clipboard?.writeText) {
+              void nav.clipboard.writeText(`${text}\n${url}`);
+            }
+          }}
         />
       ) : null}
 
@@ -238,11 +250,18 @@ export function TraineeHomeScreen() {
 
 function Skeleton() {
   return (
-    <div className="mx-auto flex w-full max-w-md flex-col gap-4 px-4 pt-6">
-      <div className="h-6 w-40 rounded bg-bg-primary" />
-      <div className="h-32 rounded-xl bg-bg-primary" />
-      <div className="h-20 rounded-xl bg-bg-primary" />
-      <div className="h-24 rounded-xl bg-bg-primary" />
+    <div className="mx-auto flex w-full max-w-md flex-col gap-5 px-4 pb-8 pt-4">
+      <header className="flex items-start justify-between">
+        <div className="flex flex-col gap-1.5">
+          <div className="animate-shimmer h-6 w-44 rounded-full" />
+          <div className="animate-shimmer h-3 w-32 rounded-full" />
+        </div>
+        <div className="animate-shimmer size-9 rounded-full" />
+      </header>
+      <div className="animate-shimmer h-32 rounded-xl" />
+      <div className="animate-shimmer h-20 rounded-xl" />
+      <div className="animate-shimmer h-28 rounded-xl" />
+      <div className="animate-shimmer h-24 rounded-xl" />
     </div>
   );
 }
