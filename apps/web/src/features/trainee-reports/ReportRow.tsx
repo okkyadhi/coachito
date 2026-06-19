@@ -3,6 +3,8 @@ import { enUS, id as idLocale } from 'date-fns/locale';
 import { ExternalLink, FileText } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+import { openReportPdf } from '@/features/reports/reports-api';
+
 import type { TraineeReport } from './reports-api';
 
 interface Props {
@@ -49,15 +51,14 @@ export function ReportRow({ report, borderTop }: Props) {
           </p>
         ) : null}
       </div>
-      <a
-        href={report.pdfUrl}
-        target="_blank"
-        rel="noopener noreferrer"
+      <button
+        type="button"
+        onClick={() => void openReportPdf(report.pdfUrl)}
         className="inline-flex min-h-tap items-center gap-1 rounded-md bg-accent px-3 py-2 text-caption font-medium text-white"
       >
         {t('trainee.reports.viewCta')}
         <ExternalLink size={14} strokeWidth={1.75} aria-hidden />
-      </a>
+      </button>
     </div>
   );
 }
