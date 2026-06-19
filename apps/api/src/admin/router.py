@@ -17,7 +17,7 @@ from datetime import UTC, datetime
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
 from sqlalchemy import select, text
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -43,7 +43,16 @@ from .schemas import (
     AdminWorkspacesListOut,
 )
 
-router = APIRouter(prefix="/admin", tags=["admin"])
+async def _no_store(response: Response) -> None:
+    """Admin reads are operator data that must never be served from a stale
+    browser/proxy cache (a cached empty list looked like 'No users found').
+    Applied to every /admin/* response via the router-level dependency."""
+    response.headers["Cache-Control"] = "no-store"
+
+
+router = APIRouter(
+    prefix="/admin", tags=["admin"], dependencies=[Depends(_no_store)]
+)
 
 
 # ── helpers ──────────────────────────────────────────────────────

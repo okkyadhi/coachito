@@ -106,7 +106,7 @@ export function AdminUsersScreen() {
     },
   });
 
-  const { data, isPending } = useQuery({
+  const { data, isPending, isError, error } = useQuery({
     queryKey: ['admin', 'users', trimmedQ],
     queryFn: () => {
       const params: Parameters<typeof listAdminUsers>[0] = {};
@@ -142,6 +142,12 @@ export function AdminUsersScreen() {
       <div className="overflow-hidden rounded-xl border-[0.5px] border-border-hairline bg-bg-primary">
         {isPending ? (
           <div className="px-6 py-12 text-center text-body text-text-color-secondary">Loading…</div>
+        ) : isError ? (
+          <div className="px-6 py-12 text-center text-body text-danger-text">
+            {error instanceof ApiError
+              ? `Failed to load users (${error.status}): ${error.message}`
+              : 'Failed to load users. Please try again.'}
+          </div>
         ) : users.length === 0 ? (
           <div className="px-6 py-12 text-center text-body text-text-color-secondary">No users found.</div>
         ) : (
