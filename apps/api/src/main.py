@@ -122,7 +122,13 @@ class _SPABrowserMiddleware:
                 # takes over client-side.
                 if "text/html" in accept and not auth:
                     from starlette.responses import FileResponse as _FR
-                    await _FR(self._index)(scope, receive, send)
+                    # no-store: the app shell must stay fresh (autoUpdate PWA)
+                    # and must never be reused from cache for an API fetch to
+                    # the same URL (e.g. /admin/users is both a SPA route and
+                    # an API path) — that would feed HTML to a JSON parser.
+                    await _FR(
+                        self._index, headers={"Cache-Control": "no-store"}
+                    )(scope, receive, send)
                     return
         await self.app(scope, receive, send)
 
@@ -303,4 +309,8 @@ if _SPA_ACTIVE:
             and _STATIC_DIR.resolve() in candidate.resolve().parents
         ):
             return FileResponse(candidate)
-        return FileResponse(_STATIC_DIR / "index.html")
+        # no-store on the shell — keep it fresh and never let it be reused
+        # from cache for an API fetch to a colliding URL (see middleware).
+        return FileResponse(
+            _STATIC_DIR / "index.html", headers={"Cache-Control": "no-store"}
+        )

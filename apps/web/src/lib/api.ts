@@ -100,7 +100,11 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
     if (token) finalHeaders.set('Authorization', `Bearer ${token}`);
   }
 
-  const init: RequestInit = { method, headers: finalHeaders };
+  // cache: 'no-store' — never read/write the HTTP disk cache for API calls.
+  // In the single-container prod build BASE_URL is "" so an API path like
+  // /admin/users collides with the SPA document URL; without this the browser
+  // could serve a cached index.html to the fetch and JSON parsing would fail.
+  const init: RequestInit = { method, headers: finalHeaders, cache: 'no-store' };
   if (body !== undefined) init.body = JSON.stringify(body);
   const res = await fetch(`${BASE_URL}${path}`, init);
 
@@ -136,6 +140,7 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
 export async function fetchAuthBlob(path: string): Promise<Blob> {
   const state = useAuthStore.getState();
   const res = await fetch(`${BASE_URL}${path}`, {
+    cache: 'no-store',
     headers: state.token ? { Authorization: `Bearer ${state.token}` } : {},
   });
   if (!res.ok) {
