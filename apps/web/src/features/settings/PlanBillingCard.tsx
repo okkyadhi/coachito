@@ -38,7 +38,9 @@ export function PlanBillingCard({ settings, onManage }: Props) {
           date: format(new Date(settings.renewsAt), 'd MMM', { locale }),
         })
       : t('settings.plans.free_trial_price')
-    : `${t(`settings.plans.${settings.plan}_price`)} · ${t('settings.plan.activeStatus')}`;
+    // Price intentionally omitted while plan pricing is hidden ("coming
+    // soon") — show only the active status here.
+    : t('settings.plan.activeStatus');
 
   return (
     <section className="flex flex-col gap-2">

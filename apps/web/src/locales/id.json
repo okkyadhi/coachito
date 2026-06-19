@@ -834,13 +834,13 @@
       "free_trial": "Trial",
       "free_trial_price": "Gratis 30 hari",
       "solo_coach": "Personal",
-      "solo_coach_price": "Rp 75rb / bulan",
+      "solo_coach_price": "Segera hadir",
       "solo_coach_unlimited": "Personal Unlimited",
-      "solo_coach_unlimited_price": "Rp 129rb / bulan",
+      "solo_coach_unlimited_price": "Segera hadir",
       "club_starter": "Club",
-      "club_starter_price": "Rp 200rb / bulan",
+      "club_starter_price": "Segera hadir",
       "club_pro": "Club Annual",
-      "club_pro_price": "Rp 1,9jt / tahun"
+      "club_pro_price": "Segera hadir"
     },
     "picker": {
       "title": "Pilih paket",
@@ -859,8 +859,8 @@
       "features": {
         "soloCoach": ["20 trainee aktif", "Assessment + report", "1 sport"],
         "soloCoachUnlimited": ["Trainee unlimited", "Assessment + report", "1 sport", "Priority support"],
-        "clubStarter": ["3 coach termasuk", "+ Rp 49rb / coach tambahan", "Trainee unlimited", "Multi-sport (Padel + Tennis)"],
-        "clubPro": ["Semua fitur Club", "Bayar tahunan", "Hemat Rp 500rb/thn", "Priority support"]
+        "clubStarter": ["3 coach termasuk", "Trainee unlimited", "Multi-sport (Padel + Tennis)"],
+        "clubPro": ["Semua fitur Club", "Bayar tahunan", "Priority support"]
       }
     },
     "members": {

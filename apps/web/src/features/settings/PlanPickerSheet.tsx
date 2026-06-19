@@ -37,8 +37,9 @@ const PERSONAL_PLANS: PlanCardData[] = [
 const CLUB_PLANS: PlanCardData[] = [
   { code: 'club_starter', featuresKey: 'settings.picker.features.clubStarter' },
   {
+    // 'savings' badge intentionally omitted while pricing is hidden — it
+    // showed a "Save Rp …/yr" amount.  Restore when prices go live.
     code: 'club_pro',
-    badge: 'savings',
     featuresKey: 'settings.picker.features.clubPro',
   },
 ];
