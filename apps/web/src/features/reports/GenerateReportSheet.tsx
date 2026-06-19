@@ -33,11 +33,14 @@ interface Props {
   }) => void;
 }
 
-// Last 6 months including the previous full month (default selection).
+// Current month (default selection) + the previous 5 full months.  The
+// current month must be selectable — a coach who assesses today and generates
+// a report immediately would otherwise land on last month, whose period
+// captures none of today's assessments (skills assessed reads 0).
 function monthOptions(): { value: string; label: string; start: string; end: string }[] {
   const out: { value: string; label: string; start: string; end: string }[] = [];
   const now = new Date();
-  for (let i = 1; i <= 6; i += 1) {
+  for (let i = 0; i <= 5; i += 1) {
     const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - i, 1));
     const next = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0));
     const value = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`;

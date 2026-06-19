@@ -64,16 +64,17 @@ html, body {
   gap: 11px;
 }
 .lethead .mark .sq {
-  width: 34px;
-  height: 34px;
-  border-radius: 7px;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
   background: var(--accent);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 24px;
   overflow: hidden;
 }
 .lethead .mark .sq img {
@@ -124,12 +125,14 @@ html, body {
   margin-top: 4px;
 }
 .pill {
+  display: inline-block;
+  line-height: 1;
   font-size: 10px;
   letter-spacing: 0.04em;
   font-weight: 500;
   color: var(--accent-deep);
   background: var(--accent-bg);
-  padding: 5px 11px;
+  padding: 6px 11px;
   border-radius: 999px;
   white-space: nowrap;
 }
