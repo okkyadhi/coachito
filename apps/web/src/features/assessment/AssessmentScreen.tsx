@@ -33,8 +33,9 @@ import {
 } from '@/features/sessions/sessions-api';
 import { fetchTraineeProfile } from '@/features/trainee-profile/profile-api';
 import { SportTabs } from '@/features/sports/SportTabs';
-import { sportLabel } from '@/features/sports/sports-api';
+import { SportTag } from '@/features/sports/SportTag';
 import { useCurrentSport } from '@/features/sports/useCurrentSport';
+import { TierPill } from '@/components/TierPill';
 import type { ScoreDiffEntry } from './PublishConfirmSheet';
 import { SKILL_DESCRIPTORS, getDescriptors, type SkillDescriptors } from './descriptors';
 import { listSkills } from './skills-api';
@@ -43,7 +44,7 @@ import { useAssessmentDraft } from './use-assessment-draft';
 const CATEGORIES: SkillCategory[] = ['technical', 'tactical', 'physical', 'mental'];
 
 export function AssessmentScreen() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const online = useOnlineStatus();
   const { id: athleteId } = useParams<{ id: string }>();
@@ -465,6 +466,11 @@ export function AssessmentScreen() {
       .filter((d): d is ScoreDiffEntry => d !== null);
   }, [draft.scores, profileForDiff, skillIdByCode, skills]);
 
+  // Trainee identity shown in the assessment header — name + current tier.
+  // Falls back to the generic title until the profile query resolves.
+  const traineeName = profileForDiff?.trainee.displayName ?? t('assessment.title');
+  const traineeTier = profileForDiff?.tierProgress.currentTier.code ?? null;
+
   return (
     <main className="flex h-screen flex-col bg-bg-tertiary">
       <header className="flex items-center border-b-[0.5px] border-border-hairline bg-bg-primary px-2 py-1.5">
@@ -518,10 +524,10 @@ export function AssessmentScreen() {
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto flex w-full max-w-md flex-col gap-5 px-4 pb-32 pt-4">
           <div className="flex items-center gap-3">
-            <Avatar name="Trainee" size={44} />
+            <Avatar name={traineeName} size={44} />
             <div className="min-w-0 flex-1">
               <p className="truncate text-h2 text-text-color-primary">
-                {t('assessment.title')}
+                {traineeName}
               </p>
               <div className="mt-0.5 flex flex-wrap items-center gap-2">
                 <p className="text-caption text-text-color-secondary">
@@ -530,11 +536,8 @@ export function AssessmentScreen() {
                     total: skills?.length ?? SKILL_DESCRIPTORS.length,
                   })}
                 </p>
-                {isMultiSport && currentSport ? (
-                  <span className="rounded-full border-[0.5px] border-border-hairline bg-bg-secondary px-2 py-0.5 text-footnote text-text-color-secondary">
-                    {sportLabel(currentSport, i18n.language)}
-                  </span>
-                ) : null}
+                <SportTag sport={currentSport} />
+                {traineeTier ? <TierPill tier={traineeTier} /> : null}
               </div>
             </div>
           </div>

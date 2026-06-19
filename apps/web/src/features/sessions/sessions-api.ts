@@ -60,6 +60,13 @@ export interface SessionWorkspace {
   brandColor: string | null;
 }
 
+export interface SessionSport {
+  id: string;
+  code: string;  // 'padel' | 'tennis'
+  nameEn: string;
+  nameId: string;
+}
+
 export type FunnelStage =
   | 'upcoming'
   | 'to_assess'
@@ -85,6 +92,7 @@ export interface Session {
   funnelStage: FunnelStage;
   createdAt: string;
   sportId: string | null;
+  sport: SessionSport | null;
 }
 
 export interface FunnelCounts {
@@ -141,6 +149,12 @@ interface ApiSession {
   funnel_stage: FunnelStage;
   created_at: string;
   sport_id: string | null;
+  sport: {
+    id: string;
+    code: string;
+    name_en: string;
+    name_id: string;
+  } | null;
 }
 
 function toSession(s: ApiSession): Session {
@@ -184,6 +198,14 @@ function toSession(s: ApiSession): Session {
     funnelStage: s.funnel_stage,
     createdAt: s.created_at,
     sportId: s.sport_id ?? null,
+    sport: s.sport
+      ? {
+          id: s.sport.id,
+          code: s.sport.code,
+          nameEn: s.sport.name_en,
+          nameId: s.sport.name_id,
+        }
+      : null,
   };
 }
 

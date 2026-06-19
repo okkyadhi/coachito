@@ -26,6 +26,7 @@ from .schemas import (
     SessionCreateIn,
     SessionFocus,
     SessionOut,
+    SessionSportBrief,
     SessionTodayOut,
     SessionTraineeBrief,
     SessionUpdateIn,
@@ -64,7 +65,7 @@ def _build_today_out(r: dict, focuses_map: dict) -> SessionTodayOut:
         court=r["court"],
         focuses=focuses_map.get(r["id"], _legacy_focuses(r["focus"])),
         status=r["status"],
-        sport_id=r.get("sport_id"),
+        sport_id=str(r["sport_id"]) if r.get("sport_id") else None,
         coach=CoachBrief(
             id=str(r["coach_id"]),
             display_name=r["coach_name"],
@@ -122,13 +123,16 @@ _BASE_SELECT = """
            lat.last_at AS last_assessed_at,
            tier.id AS tier_id, tier.code AS tier_code,
            tier.name_game_en, tier.name_game_id,
-           a.id AS assessment_id, a.status AS assessment_status
+           a.id AS assessment_id, a.status AS assessment_status,
+           s.sport_id AS sport_id, sp.code AS sport_code,
+           sp.name_en AS sport_name_en, sp.name_id AS sport_name_id
 """
 
 _BASE_FROM = """
     FROM sessions s
     JOIN athletes ath ON ath.id = s.athlete_id
     JOIN users cu     ON cu.id = s.coach_id
+    LEFT JOIN sports sp ON sp.id = s.sport_id
     LEFT JOIN tiers tier ON tier.id = ath.current_tier_id
     LEFT JOIN LATERAL (
         SELECT MAX(COALESCE(edited_at, published_at)) AS last_at
@@ -137,6 +141,18 @@ _BASE_FROM = """
     ) lat ON TRUE
     LEFT JOIN assessments a ON a.session_id = s.id
 """
+
+
+def _sport_brief(r: dict) -> SessionSportBrief | None:
+    """Build the sport tag from a session row, when the join matched."""
+    if not r.get("sport_id") or not r.get("sport_code"):
+        return None
+    return SessionSportBrief(
+        id=str(r["sport_id"]),
+        code=r["sport_code"],
+        name_en=r["sport_name_en"],
+        name_id=r["sport_name_id"],
+    )
 
 
 def _legacy_focuses(value: str | None) -> list[str]:
@@ -254,6 +270,7 @@ def _row_to_session_out(r: dict, focuses: list[str]) -> SessionOut:
             assessment_status=r["assessment_status"],
         ),
         created_at=r["created_at"],
+        sport=_sport_brief(r),
     )
 
 
@@ -590,11 +607,14 @@ _CROSS_SELECT = """
            tier.name_game_en, tier.name_game_id,
            a.id AS assessment_id, a.status AS assessment_status,
            w.id AS workspace_id, w.name AS workspace_name,
-           w.type AS workspace_type, w.brand_color AS workspace_brand_color
+           w.type AS workspace_type, w.brand_color AS workspace_brand_color,
+           s.sport_id AS sport_id, sp.code AS sport_code,
+           sp.name_en AS sport_name_en, sp.name_id AS sport_name_id
     FROM sessions s
     JOIN athletes ath  ON ath.id = s.athlete_id
     JOIN users cu      ON cu.id = s.coach_id
     JOIN workspaces w  ON w.id = s.workspace_id
+    LEFT JOIN sports sp ON sp.id = s.sport_id
     LEFT JOIN tiers tier ON tier.id = ath.current_tier_id
     LEFT JOIN assessments a ON a.session_id = s.id
 """
@@ -644,6 +664,7 @@ def _cross_row_to_session_out(r: dict) -> SessionOut:
             assessment_status=r["assessment_status"],
         ),
         created_at=r["created_at"],
+        sport=_sport_brief(r),
     )
 
 

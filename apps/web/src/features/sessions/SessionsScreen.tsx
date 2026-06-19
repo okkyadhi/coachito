@@ -30,6 +30,8 @@ import {
   dayKey,
   navigateMonth,
 } from './Calendar';
+import { SportTag } from '@/features/sports/SportTag';
+
 import { FocusList } from './FocusList';
 import { ScheduleSessionSheet } from './ScheduleSessionSheet';
 import { SessionActionsSheet } from './SessionActionsSheet';
@@ -322,6 +324,7 @@ function SessionCard({ session: s, locale, onOpen, onMenu }: SessionCardProps) {
               ) : null}
               <FocusList focuses={s.focuses} />
               <StatusPill session={s} />
+              <SportTag sport={s.sport} />
               <WorkspaceBadge workspace={s.workspace} />
             </div>
           </div>

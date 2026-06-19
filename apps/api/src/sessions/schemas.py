@@ -34,6 +34,17 @@ class CoachBrief(BaseModel):
     display_name: str
 
 
+class SessionSportBrief(BaseModel):
+    """Sport a session is for — drives the padel/tennis tag on session rows.
+    Carried per-row (not derived client-side) so the cross-workspace coach
+    view labels each session with its own workspace's sport correctly."""
+
+    id: str
+    code: str  # 'padel' | 'tennis'
+    name_en: str
+    name_id: str
+
+
 class SessionWorkspaceBrief(BaseModel):
     """Workspace context surfaced on every session row — drives the
     Personal-vs-Club badge on the coach Sessions calendar so multi-workspace
@@ -112,6 +123,7 @@ class SessionOut(BaseModel):
     assessment_status: str | None  # 'draft' | 'published' | 'edited' | None
     funnel_stage: FunnelStage
     created_at: datetime
+    sport: SessionSportBrief | None = None
 
 
 class FunnelCountsOut(BaseModel):
