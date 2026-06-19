@@ -27,7 +27,7 @@ export function BottomTabBar() {
   return (
     <nav
       aria-label={t('nav.label')}
-      className="border-t-[0.5px] border-border-hairline bg-bg-primary"
+      className="border-t-[0.5px] border-border-hairline bg-bg-primary pb-[env(safe-area-inset-bottom)]"
     >
       <div className="flex">
         {tabs.map(({ path, labelKey, Icon }) => (

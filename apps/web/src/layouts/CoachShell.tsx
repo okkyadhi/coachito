@@ -11,7 +11,7 @@ import { WorkspaceSwitcher } from '@/features/workspaces/WorkspaceSwitcher';
 // Nested routes render into <Outlet />.
 export function CoachShell() {
   return (
-    <div className="flex h-screen flex-col bg-bg-tertiary">
+    <div className="flex h-dvh flex-col bg-bg-tertiary">
       <header className="flex items-center gap-3 border-b-[0.5px] border-border-hairline bg-bg-primary px-4 py-2.5">
         <Logo size={24} />
         <WorkspaceSwitcher />

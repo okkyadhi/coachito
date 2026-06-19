@@ -20,6 +20,17 @@
   /* Hairline border utility: border-[0.5px] via Tailwind arbitrary values */
 }
 
+/* iOS Safari fix: the app shell uses h-dvh (100dvh) so it tracks the visible
+ * viewport and the bottom tab bar isn't hidden behind Safari's collapsing
+ * toolbar.  For browsers without dvh support (Safari < 15.4), fall back to
+ * 100vh.  Scoped via @supports so it never overrides dvh where supported —
+ * order-independent, unlike stacking h-screen + h-dvh utilities. */
+@supports not (height: 100dvh) {
+  .h-dvh {
+    height: 100vh;
+  }
+}
+
 /* ── Splash screen animations ───────────────────────────────────────────
  * Editorial reveal sequence pulled from the brand sheet. Wordmark rises,
  * ball drops + bounces, hairlines stroke across, tagline + microcopy fade

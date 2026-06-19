@@ -12,7 +12,7 @@ import { WorkspaceSwitcher } from '@/features/workspaces/WorkspaceSwitcher';
 // Sessions / Coach / Profile) per docs/05-trainee-home.md.
 export function TraineeShell() {
   return (
-    <div className="flex h-screen flex-col bg-bg-tertiary">
+    <div className="flex h-dvh flex-col bg-bg-tertiary">
       <header className="flex items-center justify-between gap-3 border-b-[0.5px] border-border-hairline bg-bg-primary px-4 py-2.5">
         <div className="flex items-center gap-2">
           <Logo size={24} />
@@ -48,7 +48,7 @@ function TraineeTabBar() {
   return (
     <nav
       aria-label={t('nav.label')}
-      className="border-t-[0.5px] border-border-hairline bg-bg-primary"
+      className="border-t-[0.5px] border-border-hairline bg-bg-primary pb-[env(safe-area-inset-bottom)]"
     >
       <div className="flex">
         {TABS.map(({ path, labelKey, Icon }) => (
