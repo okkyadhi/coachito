@@ -263,11 +263,13 @@ html, body {
 .skl .s .nm { font-size: 12.5px; }
 .skl .s .lv { display: flex; align-items: center; gap: 7px; }
 .skl .s .lv .lx {
+  display: inline-block;
+  line-height: 1;
   font-size: 10px;
   font-weight: 500;
   color: var(--accent-deep);
   background: var(--accent-bg);
-  padding: 2px 6px;
+  padding: 4px 6px;
   border-radius: 5px;
 }
 .skl .s .lv .tag {
@@ -304,10 +306,12 @@ html, body {
 }
 .win .skill { flex: 1; }
 .win .delta {
+  display: inline-block;
+  line-height: 1;
   font-size: 11px;
   color: var(--accent-deep);
   background: var(--accent-bg);
-  padding: 2px 7px;
+  padding: 4px 7px;
   border-radius: 5px;
 }
 .win .when {
@@ -336,11 +340,13 @@ html, body {
   min-width: 96px;
 }
 .log .focus {
+  display: inline-block;
+  line-height: 1;
   font-size: 10px;
   font-weight: 500;
   color: var(--accent-deep);
   background: var(--accent-bg);
-  padding: 2px 8px;
+  padding: 4px 8px;
   border-radius: 999px;
 }
 .log .entry { flex: 1; }
