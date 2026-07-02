@@ -104,7 +104,7 @@ class _SPABrowserMiddleware:
     API calls always carry Authorization: Bearer, so they are unaffected.
     """
 
-    _SKIP = ("/healthz", "/_debug/", "/assets/")
+    _SKIP = ("/healthz", "/_debug/", "/assets/", "/i/")
 
     def __init__(self, app: ASGIApp, index_html: str) -> None:
         self.app = app
